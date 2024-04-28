@@ -1,8 +1,10 @@
 import Link from "next/link";
 import NavItems from "./NavItem";
 import { FaFacebookF, FaLinkedinIn, FaMobileAlt } from "react-icons/fa";
-import { MdOutlineLocationOn } from "react-icons/md";
+import { HiOutlineMail } from "react-icons/hi";
 import { AiOutlineYoutube } from "react-icons/ai";
+import Image from "next/image";
+import logo from "@/assets/image/logo/Screenshot 2024-04-28 182723.png";
 
 const Navbar2 = () => {
   return (
@@ -12,18 +14,17 @@ const Navbar2 = () => {
         <div className="flex  justify-between items-center ">
           <div className="flex items-center text-sm ">
             <div className="flex justify-center items-center lg:gap-2 gap-1">
-              <FaMobileAlt /> <p> +880-1706060647</p>
+              <FaMobileAlt /> <p>+88 01916016099</p>
             </div>
             <div className="divider divider-horizontal  m-0 p-0 "></div>
             <div className="flex justify-center items-center lg:gap-2 gap-1">
-              <MdOutlineLocationOn className="size-5" />{" "}
-              <p>House- 22, Tograihat, Rajarhat, Kurigram-5600</p>
+              <HiOutlineMail className="size-5" /> <p>info@ad-doha.org​</p>
             </div>
           </div>
 
           <div className="flex ">
             <div className="divider divider-horizontal  m-0 p-0 w-0"></div>
-            <Link href="/">
+            <Link href="https://www.facebook.com/addoha.org" target="_blank">
               <div className="w-8 h-8 flex justify-center items-center hover:bg-primary hover:text-white">
                 <FaFacebookF />
               </div>
@@ -31,15 +32,18 @@ const Navbar2 = () => {
 
             <div className="divider divider-horizontal  m-0 p-0 w-0"></div>
 
-            <Link href="/">
+            {/* <Link href="/">
               <div className="w-8 h-8 flex justify-center items-center hover:bg-primary hover:text-white">
                 <FaLinkedinIn />
               </div>
             </Link>
 
-            <div className="divider divider-horizontal  m-0 p-0 w-0"></div>
+            <div className="divider divider-horizontal  m-0 p-0 w-0"></div> */}
 
-            <Link href="/">
+            <Link
+              href="https://www.youtube.com/channel/UC6m__rWQY4zybxI3r14mPVg"
+              target="_blank"
+            >
               <div className="w-8 h-8 flex justify-center items-center hover:bg-primary hover:text-white">
                 <AiOutlineYoutube />
               </div>
@@ -52,9 +56,11 @@ const Navbar2 = () => {
 
       {/* header */}
       <header className=" sticky top-0 z-50 bg-white border-b border-t">
-        <div className="flex bg-white  m-0 justify-between items-center h-14 max-w-7xl mx-auto px-4 lg:gap-5 gap-2 ">
+        <div className="flex bg-white  m-0 justify-between items-center  max-w-7xl mx-auto px-4 lg:gap-5 gap-2 ">
           <div className="flex-1 text-4xl font-semibold">
-            <Link href="/">Mobassher</Link>
+            <Link href="/">
+              <Image src={logo} width={250} height={50} alt="logo" />
+            </Link>
           </div>
           <NavItems />
         </div>

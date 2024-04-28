@@ -1,4 +1,4 @@
-# Next.js Project Template
+# Ad-Doha Institute
 
 ## Technologies Used
 
