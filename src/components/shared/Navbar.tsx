@@ -25,7 +25,7 @@ const Navbar2 = () => {
           <div className="flex ">
             <div className="divider divider-horizontal  m-0 p-0 w-0"></div>
             <Link href="https://www.facebook.com/addoha.org" target="_blank">
-              <div className="w-8 h-8 flex justify-center items-center hover:bg-primary hover:text-white">
+              <div className="w-8 h-8 flex justify-center items-center hover:bg-green-500 hover:text-white">
                 <FaFacebookF />
               </div>
             </Link>
@@ -44,7 +44,7 @@ const Navbar2 = () => {
               href="https://www.youtube.com/channel/UC6m__rWQY4zybxI3r14mPVg"
               target="_blank"
             >
-              <div className="w-8 h-8 flex justify-center items-center hover:bg-primary hover:text-white">
+              <div className="w-8 h-8 flex justify-center items-center hover:bg-green-500 hover:text-white">
                 <AiOutlineYoutube />
               </div>
             </Link>

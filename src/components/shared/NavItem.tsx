@@ -7,19 +7,39 @@ import Link from "next/link";
 const navItem = (
   <>
     <Link className="rounded-lg" href="/">
-      <div className="bg-white px-5 py-2 rounded text-md font-semibold text-black hover:bg-blue-500 hover:text-white">
+      <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
         Home
       </div>
     </Link>
 
     <Link className="rounded-lg" href="/about">
-      <div className="bg-white px-5 py-2 rounded text-md font-semibold text-black hover:bg-blue-500 hover:text-white">
+      <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
         About
+      </div>
+    </Link>
+    <Link className="rounded-lg" href="/courses">
+      <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
+        Courses
+      </div>
+    </Link>
+    <Link className="rounded-lg" href="/services">
+      <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
+        Services
+      </div>
+    </Link>
+    <Link className="rounded-lg" href="/registration">
+      <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
+        Registration
+      </div>
+    </Link>
+    <Link className="rounded-lg" href="/resourses">
+      <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
+        Resourses
       </div>
     </Link>
 
     <Link className="rounded-lg" href="/contact">
-      <div className="bg-white px-5 py-2 rounded text-md font-semibold text-black hover:bg-blue-500 hover:text-white">
+      <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
         Contact
       </div>
     </Link>
@@ -46,11 +66,11 @@ const NavItems = () => {
             aria-expanded={isOpen ? "true" : "false"}
           >
             {isOpen ? (
-              <div className="p-1 border rounded-md hover:bg-blue-500 hover:text-white">
+              <div className="p-1 border rounded-md hover:bg-green-500 hover:text-white">
                 <RxCross2 className="size-8" />
               </div>
             ) : (
-              <div className="p-1 border rounded-md hover:bg-blue-500 hover:text-white">
+              <div className="p-1 border rounded-md hover:bg-green-500 hover:text-white">
                 <GiHamburgerMenu className="size-8" />
               </div>
             )}
