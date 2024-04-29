@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Card = ({ img, title, details, btn, href }: TCardProps) => {
   return (
-    <div className="card max-w-[380px] card-compact  bg-base-100 shadow-xl mx-auto">
+    <div className="card  card-compact  bg-base-100 shadow-xl mx-auto">
       <figure>
         <Image
           src={img}

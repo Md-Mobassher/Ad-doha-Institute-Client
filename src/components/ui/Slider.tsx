@@ -1,6 +1,7 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
+
 import Card from "./Card";
 import { TCardProps, TSliderProps } from "@/type";
 
