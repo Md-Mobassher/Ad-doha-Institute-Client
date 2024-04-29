@@ -13,10 +13,11 @@ const Card = ({ img, title, details, btn, href }: TCardProps) => {
           className="bg-slate-100"
         />
       </figure>
-      <div className="p-5 pb-8 ">
+      <div className="p-5 ">
         {title && <h2 className="card-title font-bold">{title}</h2>}
         {details && <p className=" mt-3">{details}</p>}
-        {btn && <button className="btn btn-outline mt-5">{btn}</button>}
+
+        <button className="btn btn-outline mt-5">{btn || "Details"}</button>
       </div>
     </div>
   );

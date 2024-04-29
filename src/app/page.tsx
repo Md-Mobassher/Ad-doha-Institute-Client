@@ -5,6 +5,7 @@ import slide3 from "@/assets/image/banner/দাওয়াহ-প্রশি�
 import slide4 from "@/assets/image/banner/বয়স্কদের-দোহা-মক্তব.png.webp";
 import slide5 from "@/assets/image/courses/running-course.jpg";
 import Activities from "./home/Activities";
+import Services from "./home/Services";
 
 const slides = [
   { imageUrl: slide5 },
@@ -19,6 +20,7 @@ const HomePage = () => {
     <div className="max-w-7xl mx-auto px-4 ">
       <Banner slides={slides} />
       <Activities />
+      <Services />
     </div>
   );
 };

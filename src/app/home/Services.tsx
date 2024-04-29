@@ -4,7 +4,7 @@ import service from "@/assets/image/projects/services.jpg";
 import education from "@/assets/image/projects/education.jpg";
 import Slider from "@/components/ui/Slider";
 
-const projects = [
+const services = [
   {
     id: "1",
     title: "Dawah",
@@ -35,15 +35,15 @@ const projects = [
   },
 ];
 
-const Activities = () => {
+const Services = () => {
   return (
     <div>
-      <Title title="Our Activities" />
+      <Title title="Our Services" />
       <div>
-        <Slider items={projects} slidesPerView={5} />
+        <Slider items={services} slidesPerView={4} />
       </div>
     </div>
   );
 };
 
-export default Activities;
+export default Services;
