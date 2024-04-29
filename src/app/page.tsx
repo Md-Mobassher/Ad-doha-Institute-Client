@@ -6,6 +6,7 @@ import slide4 from "@/assets/image/banner/বয়স্কদের-দোহ�
 import slide5 from "@/assets/image/courses/running-course.jpg";
 import Activities from "./home/Activities";
 import Services from "./home/Services";
+import Courses from "./home/Courses";
 
 const slides = [
   { imageUrl: slide5 },
@@ -21,6 +22,7 @@ const HomePage = () => {
       <Banner slides={slides} />
       <Activities />
       <Services />
+      <Courses />
     </div>
   );
 };

@@ -3,6 +3,8 @@ import dawah from "@/assets/image/projects/dawah.png";
 import service from "@/assets/image/projects/services.jpg";
 import education from "@/assets/image/projects/education.jpg";
 import Slider from "@/components/ui/Slider";
+import Button from "@/components/ui/Button";
+import Container from "@/components/ui/Container";
 
 const services = [
   {
@@ -37,12 +39,16 @@ const services = [
 
 const Services = () => {
   return (
-    <div>
-      <Title title="Our Services" />
+    <Container>
+      <div className="flex justify-between items-center lg:px-3 mb-7 ">
+        <Title title="Our Services" />
+        <Button title="View All " />
+      </div>
+
       <div>
         <Slider items={services} slidesPerView={4} />
       </div>
-    </div>
+    </Container>
   );
 };
 

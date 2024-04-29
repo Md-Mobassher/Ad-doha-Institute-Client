@@ -3,10 +3,10 @@ import dawah from "@/assets/image/projects/dawah.png";
 import service from "@/assets/image/projects/services.jpg";
 import education from "@/assets/image/projects/education.jpg";
 import Slider from "@/components/ui/Slider";
-import Container from "@/components/ui/Container";
+import { FaArrowRight } from "react-icons/fa";
 import Button from "@/components/ui/Button";
 
-const projects = [
+const courses = [
   {
     id: "1",
     title: "Dawah",
@@ -37,19 +37,19 @@ const projects = [
   },
 ];
 
-const Activities = () => {
+const Courses = () => {
   return (
-    <Container>
+    <div className="lg:mt-20 md:mt-16 mt-10 lg:mb-8 md:mb-8 mb-6">
       <div className="flex justify-between items-center lg:px-3 mb-7 ">
-        <Title title="Our Activities" />
+        <Title title="Our Courses" />
         <Button title="View All " />
       </div>
 
       <div>
-        <Slider items={projects} slidesPerView={5} />
+        <Slider items={courses} slidesPerView={4} />
       </div>
-    </Container>
+    </div>
   );
 };
 
-export default Activities;
+export default Courses;
