@@ -8,9 +8,13 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
+type TSlide = {
+  imageUrl: string;
+};
+
 const Banner = ({ slides }: any) => {
   return (
-    <div className="mt-3 mb-5 px-4 min-h-screen">
+    <div className="mt-3 mb-5 px-4 ">
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
@@ -35,8 +39,8 @@ const Banner = ({ slides }: any) => {
         modules={[Autoplay, Pagination, EffectCoverflow]}
         className="w-full h-full rounded-lg mySwiper"
       >
-        {slides.map((slide, index) => (
-          <SwiperSlide key={slide} virtualIndex={index} className="w-full">
+        {slides.map((slide: TSlide, index: number) => (
+          <SwiperSlide key={index} virtualIndex={index} className="w-full">
             <Image
               src={slide.imageUrl}
               alt={`Slide ${index + 1}`}
