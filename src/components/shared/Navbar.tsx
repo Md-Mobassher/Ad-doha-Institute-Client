@@ -1,10 +1,10 @@
 import Link from "next/link";
 import NavItems from "./NavItem";
-import { FaFacebookF, FaLinkedinIn, FaMobileAlt } from "react-icons/fa";
+import { FaFacebookF, FaMobileAlt } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { AiOutlineYoutube } from "react-icons/ai";
 import Image from "next/image";
-import logo from "@/assets/image/logo/Screenshot 2024-04-28 182723.png";
+import logo from "@/assets/images/logo/Screenshot 2024-04-28 182723.png";
 
 const Navbar2 = () => {
   return (

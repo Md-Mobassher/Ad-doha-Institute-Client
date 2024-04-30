@@ -40,7 +40,7 @@ const Slider = ({ items, spaceBetween, slidesPerView }: TSliderProps) => {
       className="w-full h-full "
     >
       {items.map((item: TCardProps) => (
-        <SwiperSlide className="flex visible h-full mb-12" key={item.id}>
+        <SwiperSlide className=" mb-12" key={item.id}>
           <Card {...item} />
         </SwiperSlide>
       ))}

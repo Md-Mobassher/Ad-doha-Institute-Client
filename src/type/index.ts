@@ -1,6 +1,6 @@
 export type TCardProps = {
   id: string;
-  img?: any;
+  image?: string | any;
   title?: string;
   details?: string;
   btn?: string;

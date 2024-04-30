@@ -1,9 +1,8 @@
 import Title from "@/components/ui/Title";
-import dawah from "@/assets/image/projects/dawah.png";
-import service from "@/assets/image/projects/services.jpg";
-import education from "@/assets/image/projects/education.jpg";
+import dawah from "@/assets/images/projects/dawah.png";
+import service from "@/assets/images/projects/services.jpg";
+import education from "@/assets/images/projects/education.jpg";
 import Slider from "@/components/ui/Slider";
-import { FaArrowRight } from "react-icons/fa";
 import Button from "@/components/ui/Button";
 
 const courses = [
