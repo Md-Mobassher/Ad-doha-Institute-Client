@@ -1,5 +1,9 @@
 # Ad-Doha Institute
 
+## Deployment
+
+- **Live Link**: [Ad-Doha Institute](https://ad-doha-institute.vercel.app)
+
 ## Technologies Used
 
 - **Next.js**: React framework for building server-side rendered and static web applications.

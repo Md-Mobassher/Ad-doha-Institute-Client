@@ -11,7 +11,7 @@ const Slider = ({ items, spaceBetween, slidesPerView }: TSliderProps) => {
       spaceBetween={spaceBetween || 30}
       slidesPerView={slidesPerView || 3}
       autoplay={{
-        delay: 3000,
+        delay: 4000,
       }}
       loop={true}
       pagination={{
@@ -39,11 +39,13 @@ const Slider = ({ items, spaceBetween, slidesPerView }: TSliderProps) => {
       }}
       className="w-full h-full "
     >
-      {items.map((item: TCardProps) => (
-        <SwiperSlide className=" mb-12" key={item.id}>
-          <Card {...item} />
-        </SwiperSlide>
-      ))}
+      <div className="flex justify-center items-stretch">
+        {items.map((item: TCardProps) => (
+          <SwiperSlide className=" mb-12" key={item.id}>
+            <Card {...item} />
+          </SwiperSlide>
+        ))}
+      </div>
     </Swiper>
   );
 };

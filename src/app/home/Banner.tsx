@@ -17,7 +17,7 @@ const Banner = ({ slides }: any) => {
         centeredSlides={true}
         slidesPerView={2}
         coverflowEffect={{
-          rotate: 80,
+          rotate: 60,
           stretch: 0,
           depth: 100,
           modifier: 1,
@@ -36,13 +36,17 @@ const Banner = ({ slides }: any) => {
         className="w-full h-full rounded-lg mySwiper"
       >
         {slides.map((slide: TSlide, index: number) => (
-          <SwiperSlide key={index} virtualIndex={index} className="w-full">
+          <SwiperSlide
+            key={index}
+            virtualIndex={index}
+            className="w-full mb-12"
+          >
             <Image
               src={slide.imageUrl}
               alt={`Slide ${index + 1}`}
               className="rounded-md w-full"
-              width={800}
-              height={800}
+              width={1200}
+              height={1000}
             />
           </SwiperSlide>
         ))}

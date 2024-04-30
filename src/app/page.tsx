@@ -9,11 +9,10 @@ import Services from "./home/Services";
 import Courses from "./home/Courses";
 
 const slides = [
-  { imageUrl: slide5 },
-  { imageUrl: slide5 },
-  { imageUrl: slide5 },
-  { imageUrl: slide5 },
-  { imageUrl: slide5 },
+  { imageUrl: slide4 },
+  { imageUrl: slide4 },
+  { imageUrl: slide4 },
+  { imageUrl: slide4 },
 ];
 
 const HomePage = () => {

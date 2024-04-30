@@ -1,6 +1,6 @@
 import Title from "@/components/ui/Title";
 import dawah from "@/assets/images/projects/dawah.png";
-import service from "@/assets/images/projects/services.jpg";
+import service from "@/assets/images/projects/services.png";
 import education from "@/assets/images/projects/education.jpg";
 import Slider from "@/components/ui/Slider";
 import Button from "@/components/ui/Button";
