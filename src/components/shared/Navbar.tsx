@@ -6,7 +6,7 @@ import { AiOutlineYoutube } from "react-icons/ai";
 import Image from "next/image";
 import logo from "@/assets/images/logo/Screenshot 2024-04-28 182723.png";
 
-const Navbar2 = () => {
+const Navbar = () => {
   return (
     <>
       {/* header top */}
@@ -69,4 +69,4 @@ const Navbar2 = () => {
   );
 };
 
-export default Navbar2;
+export default Navbar;
