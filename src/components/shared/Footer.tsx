@@ -1,6 +1,3 @@
-import { FaFacebookF } from "react-icons/fa";
-import { FaLinkedinIn } from "react-icons/fa";
-import { AiOutlineYoutube } from "react-icons/ai";
 import Link from "next/link";
 
 const Footer = () => {
@@ -13,14 +10,14 @@ const Footer = () => {
         </p>
         <p className="text-center">
           Design & Developed by Developer{" "}
-          <a
+          <Link
             href="https://dev-mobassher.web.app"
             target="_blank"
             rel="noreferrer"
             className="text-green-500"
           >
             Md Mobassher Hossain
-          </a>
+          </Link>
         </p>
       </div>
     </footer>

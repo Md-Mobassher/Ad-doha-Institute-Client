@@ -1,36 +1,34 @@
 import Title from "@/components/ui/Title";
-import dawah from "@/assets/images/projects/dawah.png";
-import service from "@/assets/images/projects/services.png";
-import education from "@/assets/images/projects/education.jpg";
 import Slider from "@/components/ui/Slider";
 import Button from "@/components/ui/Button";
+import assets from "@/assets";
 
 const courses = [
   {
     id: "1",
     title: "Dawah",
-    image: dawah,
+    image: assets.banner.dawah,
     details:
       "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
   },
   {
     id: "2",
     title: "Service",
-    image: service,
+    image: assets.banner.dawah,
     details:
       "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
   },
   {
     id: "3",
     title: "Education",
-    image: education,
+    image: assets.banner.dawah,
     details:
       "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
   },
   {
     id: "4",
     title: "Education",
-    image: education,
+    image: assets.banner.dawah,
     details:
       "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
   },

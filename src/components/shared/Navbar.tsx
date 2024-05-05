@@ -4,7 +4,7 @@ import { FaFacebookF, FaMobileAlt } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { AiOutlineYoutube } from "react-icons/ai";
 import Image from "next/image";
-import logo from "@/assets/images/logo/Screenshot 2024-04-28 182723.png";
+import assets from "@/assets";
 
 const Navbar = () => {
   return (
@@ -32,14 +32,6 @@ const Navbar = () => {
 
             <div className="divider divider-horizontal  m-0 p-0 w-0"></div>
 
-            {/* <Link href="/">
-              <div className="w-8 h-8 flex justify-center items-center hover:bg-primary hover:text-white">
-                <FaLinkedinIn />
-              </div>
-            </Link>
-
-            <div className="divider divider-horizontal  m-0 p-0 w-0"></div> */}
-
             <Link
               href="https://www.youtube.com/channel/UC6m__rWQY4zybxI3r14mPVg"
               target="_blank"
@@ -59,7 +51,12 @@ const Navbar = () => {
         <div className="flex bg-white  m-0 justify-between items-center  max-w-7xl mx-auto px-4 lg:gap-5 gap-2 ">
           <div className="flex-1 text-4xl font-semibold">
             <Link href="/">
-              <Image src={logo} width={250} height={50} alt="logo" />
+              <Image
+                src={assets.logo.headerlogo}
+                width={250}
+                height={50}
+                alt="logo"
+              />
             </Link>
           </div>
           <NavItems />

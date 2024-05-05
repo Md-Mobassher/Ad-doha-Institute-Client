@@ -2,19 +2,20 @@ import Title from "@/components/ui/Title";
 import Slider from "@/components/ui/Slider";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
+import assets from "@/assets";
 
 const services = [
   {
     id: "1",
     title: "Assistance in housing construction",
-    image: "https://i.ibb.co/VwkQfC4/home.jpg",
+    image: assets.services.home,
     details:
       "Ad-Doha Institute provides conditional housing assistance to non-Muslims, helpless, destitute and poor Muslims.",
   },
   {
     id: "2",
     title: "Employment",
-    image: "https://i.ibb.co/JkQPgYj/employment.jpg",
+    image: assets.services.employment,
     details:
       "Ad-Doha Institute provides employment for non-Muslims according to their merit and makes them self-reliant by providing rickshaws/vans subject to conditions.",
   },
