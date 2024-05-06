@@ -3,7 +3,7 @@ import { assets } from "@/assets";
 export const servicesData = [
   {
     id: "1",
-    title: "Assistance in Housing Construction",
+    title: "Assistance in Housing",
     image: assets.services.home,
     details:
       "Ad-Doha Institute provides conditional housing assistance to non-Muslims, helpless, destitute and poor Muslims.",
@@ -13,7 +13,7 @@ export const servicesData = [
     title: "Employment",
     image: assets.services.employment,
     details:
-      "Ad-Doha Institute provides employment for non-Muslims according to their merit and makes them self-reliant by providing rickshaws/vans subject to conditions.",
+      "We provides employment for non-Muslims according to their merit and makes them self-reliant by providing rickshaws/vans etc..",
   },
   {
     id: "3",
@@ -34,14 +34,14 @@ export const servicesData = [
     title: "Korze Hasanah",
     image: assets.services.korjeHasana,
     details:
-      "Ad-Doha Institute provides Korze Hasanah subject to conditions to help non-Muslims, destitute, poor and needy Muslims and make them self-reliant.",
+      "We provides Korze Hasanah subject to conditions to help non-Muslims, destitute, poor and needy Muslims and make them self-reliant.",
   },
   {
     id: "6",
     title: "Legal Aid",
     image: assets.services.low,
     details:
-      "Ad-Doha Institute provides all types of legal assistance to non-Muslims. Especially making affidavit, help in correction of ID card, case etc.",
+      "We provides all types of legal assistance to non-Muslims. Especially making affidavit, help in correction of ID card, case etc.",
   },
   {
     id: "7",

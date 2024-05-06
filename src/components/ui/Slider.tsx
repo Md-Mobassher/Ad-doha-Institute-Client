@@ -14,7 +14,7 @@ const Slider = ({
 }: TSliderProps) => {
   return (
     <Swiper
-      spaceBetween={spaceBetween || 30}
+      spaceBetween={spaceBetween || 25}
       slidesPerView={slidesPerView || 3}
       autoplay={{
         delay: 4000,
@@ -43,15 +43,13 @@ const Slider = ({
           slidesPerView: 5,
         },
       }}
-      className="w-full h-full "
+      className=""
     >
-      <div className="">
-        {items.map((item: TCardProps) => (
-          <SwiperSlide className=" mb-12" key={item.id}>
-            <Card {...item} btnTitle={btnTitle} navigate={navigate} />
-          </SwiperSlide>
-        ))}
-      </div>
+      {items.map((item: TCardProps) => (
+        <SwiperSlide className=" mb-12 h-full " key={item.id}>
+          <Card {...item} btnTitle={btnTitle} navigate={navigate} />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 };

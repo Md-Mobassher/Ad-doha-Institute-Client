@@ -13,7 +13,7 @@ const Projects = () => {
       </div>
 
       <div>
-        <Slider items={projectsData} slidesPerView={3} />
+        <Slider items={projectsData} slidesPerView={3} navigate="projects" />
       </div>
     </Container>
   );

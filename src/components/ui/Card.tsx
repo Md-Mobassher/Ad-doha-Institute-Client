@@ -16,8 +16,8 @@ const Card = ({
         <Image
           src={image}
           alt={title || "card image"}
-          width={350}
-          height={250}
+          width={300}
+          height={200}
           className="bg-white rounded-t-lg"
         />
       </div>
@@ -25,7 +25,9 @@ const Card = ({
         {title && (
           <h2 className="card-title text-primary font-bold">{title}</h2>
         )}
-        {details && <p className=" my-3">{details}</p>}
+        {details && (
+          <p className=" my-3 text-justify">{details.slice(0, 120)}...</p>
+        )}
 
         <Button title={btnTitle || "Details"} id={id} navigate={navigate} />
       </div>
