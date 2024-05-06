@@ -17,12 +17,14 @@ const Button = ({ title, id, navigate }: TButtonProps) => {
 
   return (
     <>
-      <button
-        className="btn btn-outline bg-primary text-white hover:bg-secondary transition-all duration-300 rounded-3xl px-6 "
-        onClick={handleClick}
-      >
-        {title} <FaArrowRight className="lg:ml-2 md:ml-2 ml-1" />
-      </button>
+      {title && (
+        <button
+          className="btn btn-outline bg-primary text-white hover:bg-secondary transition-all duration-300 rounded-3xl px-6 "
+          onClick={handleClick}
+        >
+          {title} <FaArrowRight className="lg:ml-2 md:ml-2 ml-1" />
+        </button>
+      )}
     </>
   );
 };

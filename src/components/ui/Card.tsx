@@ -11,7 +11,7 @@ const Card = ({
   navigate,
 }: TCardProps) => {
   return (
-    <div className="rounded-lg bg-base-100 shadow-xl mx-auto border border-primary">
+    <div className="rounded-lg w-full h-full bg-base-100 shadow-xl mx-auto border border-primary">
       <div className=" border-b border-b-primary flex justify-center items-center">
         <Image
           src={image}
@@ -29,7 +29,9 @@ const Card = ({
           <p className=" my-3 text-justify">{details.slice(0, 120)}...</p>
         )}
 
-        <Button title={btnTitle || "Details"} id={id} navigate={navigate} />
+        {btnTitle && (
+          <Button title={btnTitle || "Details"} id={id} navigate={navigate} />
+        )}
       </div>
     </div>
   );

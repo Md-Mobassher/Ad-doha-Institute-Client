@@ -3,24 +3,47 @@ import { assets } from "@/assets";
 export const coursesData = [
   {
     id: "1",
-    title: "Dawah",
-    image: assets.projects.dawah,
-    details:
-      "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
+    title: "নওমুসলিম মৌলিক শিক্ষা",
+    image: assets.courses.newMuslim,
   },
 
   {
     id: "2",
-    title: "Education",
-    image: assets.projects.education,
-    details:
-      "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
+    title: "শিশুদের দোহা মক্তব",
+    image: assets.courses.childMoktob,
   },
   {
     id: "3",
-    title: "Service",
-    image: assets.projects.services,
-    details:
-      "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
+    title: "বয়স্কদের দোহা মক্তব",
+    image: assets.courses.oldMoktob,
+  },
+  {
+    id: "4",
+    title: "মহিলাদের দোহা মক্তব",
+    image: assets.courses.ladyMoktob,
+  },
+];
+
+export const coursesDataEn = [
+  {
+    id: "1",
+    title: "Neo-Muslim basic education",
+    image: assets.courses.newMuslim,
+  },
+
+  {
+    id: "2",
+    title: "Children's Doha Maktab",
+    image: assets.courses.childMoktob,
+  },
+  {
+    id: "3",
+    title: "Doha Maktab for the elderly",
+    image: assets.courses.oldMoktob,
+  },
+  {
+    id: "4",
+    title: "Women's Doha Maktab",
+    image: assets.courses.ladyMoktob,
   },
 ];

@@ -24,4 +24,10 @@ export const assets = {
     sunnateKhotna: require("../assets/services/sunnate-khatna.jpg"),
     marriage: require("../assets/services/marriage.jpg"),
   },
+  courses: {
+    newMuslim: require("../assets/courses/new-muslim.jpg"),
+    childMoktob: require("../assets/courses/child-maktab.jpg"),
+    oldMoktob: require("../assets/courses/old-maktab.jpg"),
+    ladyMoktob: require("../assets/courses/lady-makab.jpg"),
+  },
 };
