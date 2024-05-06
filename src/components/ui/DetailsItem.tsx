@@ -4,6 +4,7 @@ type detailItemProps = {
   index: number;
   item: string;
 };
+
 const DetailsItem = ({ item, index }: detailItemProps) => {
   return (
     <>

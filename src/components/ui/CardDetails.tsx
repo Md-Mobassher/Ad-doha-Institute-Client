@@ -1,17 +1,10 @@
-import { TProject } from "@/type";
-import Container from "../Container";
+import Container from "./Container";
 import Image from "next/image";
-import Title from "../Title";
-import { FaHandPointRight } from "react-icons/fa";
-import DetailsItem from "../DetailsItem";
+import Title from "./Title";
+import DetailsItem from "./DetailsItem";
+import { TCardDetails } from "@/type";
 
-const ProjectDetails = ({
-  id,
-  image,
-  description,
-  details,
-  title,
-}: TProject) => {
+const CardDetails = ({ image, description, title }: TCardDetails) => {
   return (
     <div className="lg:-mt-12 -mt-5 mb-20">
       <Container>
@@ -32,4 +25,4 @@ const ProjectDetails = ({
   );
 };
 
-export default ProjectDetails;
+export default CardDetails;

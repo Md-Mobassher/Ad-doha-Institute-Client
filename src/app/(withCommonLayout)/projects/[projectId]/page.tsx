@@ -1,7 +1,5 @@
-import ProjectDetails from "@/components/ui/Projects/ProjectDetails";
-import Title from "@/components/ui/Title";
+import CardDetails from "@/components/ui/CardDetails";
 import { projectsData } from "@/data/projects";
-import { TProject } from "@/type";
 
 type TParamsProps = {
   params: {
@@ -18,7 +16,7 @@ const ProjectDetailsPage = ({ params }: TParamsProps) => {
     <div className="mt-8">
       {projectData ? (
         <>
-          <ProjectDetails {...projectData} />
+          <CardDetails {...projectData} />
         </>
       ) : (
         <p>No Project Found</p>

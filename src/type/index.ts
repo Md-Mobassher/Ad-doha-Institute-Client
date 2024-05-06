@@ -22,7 +22,7 @@ export type TButtonProps = {
   navigate?: string;
 };
 
-export type TProject = {
+export type TCardDetails = {
   id: string;
   title: string;
   image: any;
