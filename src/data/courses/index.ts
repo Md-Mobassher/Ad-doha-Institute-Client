@@ -3,23 +3,23 @@ import { v4 as uuidv4 } from "uuid";
 
 export const coursesData = [
   {
-    id: uuidv4(),
+    id: "1",
     title: "নওমুসলিম মৌলিক শিক্ষা",
     image: assets.courses.newMuslim,
   },
 
   {
-    id: uuidv4(),
+    id: "2",
     title: "শিশুদের দোহা মক্তব",
     image: assets.courses.childMoktob,
   },
   {
-    id: uuidv4(),
+    id: "3",
     title: "বয়স্কদের দোহা মক্তব",
     image: assets.courses.oldMoktob,
   },
   {
-    id: uuidv4(),
+    id: "4",
     title: "মহিলাদের দোহা মক্তব",
     image: assets.courses.ladyMoktob,
   },
@@ -27,23 +27,23 @@ export const coursesData = [
 
 export const coursesDataEn = [
   {
-    id: uuidv4(),
+    id: "1",
     title: "Neo-Muslim basic education",
     image: assets.courses.newMuslim,
   },
 
   {
-    id: uuidv4(),
+    id: "2",
     title: "Children's Doha Maktab",
     image: assets.courses.childMoktob,
   },
   {
-    id: uuidv4(),
+    id: "3",
     title: "Doha Maktab for the elderly",
     image: assets.courses.oldMoktob,
   },
   {
-    id: uuidv4(),
+    id: "4",
     title: "Women's Doha Maktab",
     image: assets.courses.ladyMoktob,
   },

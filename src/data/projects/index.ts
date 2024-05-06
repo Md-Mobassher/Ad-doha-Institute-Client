@@ -1,9 +1,8 @@
 import assets from "@/assets";
-import { v4 as uuidv4 } from "uuid";
 
 export const projectsData = [
   {
-    id: uuidv4(),
+    id: "1",
     title: "দাওয়াহ",
     image: assets.projects.dawah,
     details:
@@ -19,7 +18,7 @@ export const projectsData = [
     ],
   },
   {
-    id: uuidv4(),
+    id: "2",
     title: "সেবা",
     image: assets.projects.services,
     details:
@@ -36,7 +35,7 @@ export const projectsData = [
     ],
   },
   {
-    id: uuidv4(),
+    id: "3",
     title: "শিক্ষা",
     image: assets.projects.education,
     details:
@@ -54,21 +53,21 @@ export const projectsData = [
 
 export const projectsDataEn = [
   {
-    id: uuidv4(),
+    id: "1",
     title: "Dawah",
     image: assets.projects.dawah,
     details:
       "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
   },
   {
-    id: uuidv4(),
+    id: "2",
     title: "Service",
     image: assets.projects.services,
     details:
       "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
   },
   {
-    id: uuidv4(),
+    id: "3",
     title: "Education",
     image: assets.projects.education,
     details:
