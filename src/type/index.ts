@@ -12,6 +12,8 @@ export type TSliderProps = {
   items: TCardProps[];
   slidesPerView?: number;
   spaceBetween?: number;
+  btnTitle?: string;
+  navigate?: string;
 };
 
 export type TButtonProps = {

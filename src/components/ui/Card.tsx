@@ -25,7 +25,7 @@ const Card = ({
         {title && (
           <h2 className="card-title text-primary font-bold">{title}</h2>
         )}
-        {details && <p className=" mt-3">{details}</p>}
+        {details && <p className=" my-3">{details}</p>}
 
         <Button title={btnTitle || "Details"} id={id} navigate={navigate} />
       </div>

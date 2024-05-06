@@ -5,7 +5,13 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import Card from "./Card";
 import { TCardProps, TSliderProps } from "@/type";
 
-const Slider = ({ items, spaceBetween, slidesPerView }: TSliderProps) => {
+const Slider = ({
+  items,
+  spaceBetween,
+  slidesPerView,
+  btnTitle,
+  navigate,
+}: TSliderProps) => {
   return (
     <Swiper
       spaceBetween={spaceBetween || 30}
@@ -42,7 +48,7 @@ const Slider = ({ items, spaceBetween, slidesPerView }: TSliderProps) => {
       <div className="">
         {items.map((item: TCardProps) => (
           <SwiperSlide className=" mb-12" key={item.id}>
-            <Card {...item} btnTitle="Details" navigate="projects" />
+            <Card {...item} btnTitle={btnTitle} navigate={navigate} />
           </SwiperSlide>
         ))}
       </div>

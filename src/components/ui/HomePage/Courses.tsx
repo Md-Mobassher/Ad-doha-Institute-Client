@@ -39,11 +39,16 @@ const Courses = () => {
     <div className="lg:mt-20 md:mt-16 mt-10 lg:mb-8 md:mb-8 mb-6">
       <div className="flex justify-between items-center lg:px-3 mb-7 ">
         <Title title="Our Courses" />
-        <Button title="View All " />
+        <Button title="View All " navigate="courses" />
       </div>
 
       <div>
-        <Slider items={courses} slidesPerView={4} />
+        <Slider
+          items={courses}
+          slidesPerView={4}
+          btnTitle="Course Details"
+          navigate="courses"
+        />
       </div>
     </div>
   );
