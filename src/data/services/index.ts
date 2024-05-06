@@ -1,8 +1,9 @@
-import { assets } from "@/assets";
+import assets from "@/assets";
+import { v4 as uuidv4 } from "uuid";
 
 export const servicesData = [
   {
-    id: "1",
+    id: uuidv4(),
     title: "বাসস্থান নির্মাণে সহায়তা",
     image: assets.services.home,
     details:
@@ -13,7 +14,7 @@ export const servicesData = [
     ],
   },
   {
-    id: "2",
+    id: uuidv4(),
     title: "কর্মসংস্থান",
     image: assets.services.employment,
     details:
@@ -24,7 +25,7 @@ export const servicesData = [
     ],
   },
   {
-    id: "3",
+    id: uuidv4(),
     title: "চিকিৎসা সেবা",
     image: assets.services.treatment,
     details:
@@ -35,7 +36,7 @@ export const servicesData = [
     ],
   },
   {
-    id: "4",
+    id: uuidv4(),
     title: "শিক্ষা সহায়তা",
     image: assets.services.educanalHelp,
     details:
@@ -46,7 +47,7 @@ export const servicesData = [
     ],
   },
   {
-    id: "5",
+    id: uuidv4(),
     title: "কর্জে হাসানাহ",
     image: assets.services.korjeHasana,
     details:
@@ -57,7 +58,7 @@ export const servicesData = [
     ],
   },
   {
-    id: "6",
+    id: uuidv4(),
     title: "আইনী সহায়তা",
     image: assets.services.low,
     details:
@@ -68,7 +69,7 @@ export const servicesData = [
     ],
   },
   {
-    id: "7",
+    id: uuidv4(),
     title: "বিয়ে",
     image: assets.services.marriage,
     details:
@@ -79,7 +80,7 @@ export const servicesData = [
     ],
   },
   {
-    id: "8",
+    id: uuidv4(),
     title: "সুন্নাতে খাৎনা",
     image: assets.services.sunnateKhotna,
     details:
@@ -93,56 +94,56 @@ export const servicesData = [
 
 export const servicesDataEn = [
   {
-    id: "1",
+    id: uuidv4(),
     title: "Assistance in Housing",
     image: assets.services.home,
     details:
       "Ad-Doha Institute provides conditional housing assistance to non-Muslims, helpless, destitute and poor Muslims.",
   },
   {
-    id: "2",
+    id: uuidv4(),
     title: "Employment",
     image: assets.services.employment,
     details:
       "We provides employment for non-Muslims according to their merit and makes them self-reliant by providing rickshaws/vans etc..",
   },
   {
-    id: "3",
+    id: uuidv4(),
     title: "Medical Care",
     image: assets.services.treatment,
     details:
       "Ad-Doha Institute provides conditional treatment for non-Muslims and poor Muslims who are unable to afford medical expenses.",
   },
   {
-    id: "4",
+    id: uuidv4(),
     title: "Educational Assistance",
     image: assets.services.educanalHelp,
     details:
       "Ad-Doha Institute provides educational support to non-Muslim and poor students at various levels.",
   },
   {
-    id: "5",
+    id: uuidv4(),
     title: "Korze Hasanah",
     image: assets.services.korjeHasana,
     details:
       "We provides Korze Hasanah subject to conditions to help non-Muslims, destitute, poor and needy Muslims and make them self-reliant.",
   },
   {
-    id: "6",
+    id: uuidv4(),
     title: "Legal Aid",
     image: assets.services.low,
     details:
       "We provides all types of legal assistance to non-Muslims. Especially making affidavit, help in correction of ID card, case etc.",
   },
   {
-    id: "7",
+    id: uuidv4(),
     title: "Marriage",
     image: assets.services.marriage,
     details:
       "Under the initiative of Ad-Doha Institute, non-Muslim marriages are arranged.",
   },
   {
-    id: "8",
+    id: uuidv4(),
     title: "Sunnah Circumcision",
     image: assets.services.sunnateKhotna,
     details:

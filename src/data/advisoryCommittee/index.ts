@@ -1,30 +1,33 @@
+import assets from "@/assets";
+import { v4 as uuidv4 } from "uuid";
+
 export const advisoryCommitteData = [
   {
-    id: 1,
+    id: uuidv4(),
     name: "মাওলানা মুহাম্মদ সালমান",
-    image: require("../../assets/advisoryCommittee/মাওলানা-মুহাম্মদ-সালমান.webp"),
+    image: assets.advisoryCommittees.muhammadSalman,
     designation:
       "প্রধান উপদেষ্টা - আদ-দোহা ইনস্টিটিউট, বিশিষ্ট খলিফা, সাইয়েদ আবুল হাসান আলী নদভী (রহ.) ও মুহতামিম, মাদ্রাসা দারুল রাশাদ, মিরপুর, ঢাকা।",
     details: "",
   },
   {
-    id: 2,
+    id: uuidv4(),
     name: "শাইখ আবু হুরায়রা আজহারী",
-    image: require("../../assets/advisoryCommittee/শাইখ-আবু-হুরায়রা-আজহারী.webp"),
+    image: assets.advisoryCommittees.abuHurayra,
     designation: "উপদেষ্টা - আদ-দোহা ইনস্টিটিউট",
     details: "",
   },
   {
-    id: 1,
+    id: uuidv4(),
     name: "মাওলানা রুহুল আমিন সাদী",
-    image: require("../../assets/advisoryCommittee/মাওলানা রুহুল আমিন সাদী.webp"),
+    image: assets.advisoryCommittees.ruhulamin,
     designation: "উপদেষ্টা - আদ-দোহা ইনস্টিটিউট",
     details: "",
   },
   {
-    id: 1,
+    id: uuidv4(),
     name: "মুফতি সাইফুল ইসলাম",
-    image: require("../../assets/advisoryCommittee/মুফতি সাইফুল ইসলাম.webp"),
+    image: assets.advisoryCommittees.saifulIslam,
     designation: "খতিব মসজিদ উত তাকওয়া, ধানমন্ডি",
     details: "",
   },

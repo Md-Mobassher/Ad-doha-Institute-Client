@@ -1,5 +1,4 @@
 import Title from "@/components/ui/Title";
-import Slider from "@/components/ui/Slider";
 import Button from "@/components/ui/Button";
 import Container from "../Container";
 import { coursesData } from "@/data/courses";
@@ -10,7 +9,7 @@ const Courses = () => {
     <Container>
       <div className="flex justify-between items-center lg:px-3 mb-7">
         <Title title="Our Courses" />
-        <Button title="View All" navigate="courses" />
+        <Button btnTitle="View All" navigate="courses" />
       </div>
 
       <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-8 gap-5 mt-8">

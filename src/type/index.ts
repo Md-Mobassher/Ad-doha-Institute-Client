@@ -31,7 +31,7 @@ export type TCardDetails = {
 };
 
 export type TBook = {
-  id: number;
+  id: string;
   title: string;
   image: any;
   link: string;

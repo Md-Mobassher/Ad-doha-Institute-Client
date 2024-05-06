@@ -1,24 +1,25 @@
-import { assets } from "@/assets";
+import assets from "@/assets";
+import { v4 as uuidv4 } from "uuid";
 
 export const coursesData = [
   {
-    id: "1",
+    id: uuidv4(),
     title: "নওমুসলিম মৌলিক শিক্ষা",
     image: assets.courses.newMuslim,
   },
 
   {
-    id: "2",
+    id: uuidv4(),
     title: "শিশুদের দোহা মক্তব",
     image: assets.courses.childMoktob,
   },
   {
-    id: "3",
+    id: uuidv4(),
     title: "বয়স্কদের দোহা মক্তব",
     image: assets.courses.oldMoktob,
   },
   {
-    id: "4",
+    id: uuidv4(),
     title: "মহিলাদের দোহা মক্তব",
     image: assets.courses.ladyMoktob,
   },
@@ -26,23 +27,23 @@ export const coursesData = [
 
 export const coursesDataEn = [
   {
-    id: "1",
+    id: uuidv4(),
     title: "Neo-Muslim basic education",
     image: assets.courses.newMuslim,
   },
 
   {
-    id: "2",
+    id: uuidv4(),
     title: "Children's Doha Maktab",
     image: assets.courses.childMoktob,
   },
   {
-    id: "3",
+    id: uuidv4(),
     title: "Doha Maktab for the elderly",
     image: assets.courses.oldMoktob,
   },
   {
-    id: "4",
+    id: uuidv4(),
     title: "Women's Doha Maktab",
     image: assets.courses.ladyMoktob,
   },

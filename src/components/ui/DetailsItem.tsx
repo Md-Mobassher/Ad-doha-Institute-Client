@@ -9,7 +9,7 @@ const DetailsItem = ({ item, index }: detailItemProps) => {
   return (
     <>
       {index > 0 && <hr className="border-slate-300" />}
-      <div className="flex justify-start items-center gap-4 hover:text-primary my-3">
+      <div className="flex justify-start items-center gap-4 hover:text-primary my-3 hover:font-semibold">
         <div>
           <FaHandPointRight className="lg:size-8 md:size-7 size-5" />
         </div>

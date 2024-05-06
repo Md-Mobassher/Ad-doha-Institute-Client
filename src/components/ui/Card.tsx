@@ -23,10 +23,10 @@ const Card = ({
       </div>
       <div className="p-5 ">
         {title && (
-          <h2 className="card-title text-primary font-bold">{title}</h2>
+          <h2 className="card-title text-primary font-bold mb-3">{title}</h2>
         )}
         {details && (
-          <p className=" my-3 text-justify">{details.slice(0, 120)}...</p>
+          <p className=" mb-3 text-justify">{details.slice(0, 120)}...</p>
         )}
 
         {btnTitle && (
