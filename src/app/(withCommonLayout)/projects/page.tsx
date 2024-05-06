@@ -11,7 +11,12 @@ const ProjectPage = () => {
 
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 mt-8">
           {projectsData.map((project) => (
-            <Card key={project.id} {...project} navigate="projects" />
+            <Card
+              key={project.id}
+              {...project}
+              navigate="projects"
+              btnTitle="Details"
+            />
           ))}
         </div>
       </Container>

@@ -11,7 +11,7 @@ const Card = ({
   navigate,
 }: TCardProps) => {
   return (
-    <div className="rounded-lg w-full h-full bg-base-100 shadow-xl mx-auto border border-primary">
+    <div className="rounded-lg w-full h-full bg-base-100 shadow-xl mx-auto border border-primary hover:shadow-lg hover:shadow-secondary transition-all duration-500">
       <div className=" border-b border-b-primary flex justify-center items-center">
         <Image
           src={image}
@@ -30,7 +30,12 @@ const Card = ({
         )}
 
         {btnTitle && (
-          <Button title={btnTitle || "Details"} id={id} navigate={navigate} />
+          <Button
+            btnTitle={btnTitle || "Details"}
+            id={id}
+            navigate={navigate}
+            title={title}
+          />
         )}
       </div>
     </div>

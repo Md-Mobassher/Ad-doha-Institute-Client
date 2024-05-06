@@ -9,11 +9,16 @@ const Projects = () => {
     <Container>
       <div className="flex justify-between items-center lg:px-3 mb-7">
         <Title title="Our Projects" />
-        <Button title="View All " navigate="projects" />
+        <Button btnTitle="View All " navigate="projects" />
       </div>
 
       <div>
-        <Slider items={projectsData} slidesPerView={3} navigate="projects" />
+        <Slider
+          items={projectsData}
+          slidesPerView={3}
+          btnTitle="Details"
+          navigate="projects"
+        />
       </div>
     </Container>
   );

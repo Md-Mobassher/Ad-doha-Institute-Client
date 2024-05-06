@@ -9,14 +9,14 @@ const Services = () => {
     <Container>
       <div className="flex justify-between items-center lg:px-3 mb-7 ">
         <Title title="Our Services" />
-        <Button title="View All " navigate="services" />
+        <Button btnTitle="View All " navigate="services" />
       </div>
 
       <div>
         <Slider
           items={servicesData}
           slidesPerView={3}
-          btnTitle="Service Details"
+          btnTitle="Details"
           navigate="services"
         />
       </div>

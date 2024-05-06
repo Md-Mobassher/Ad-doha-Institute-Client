@@ -1,10 +1,9 @@
 export type TCardProps = {
   id: string;
   image?: string | any;
-  title?: string;
+  title: string;
   details?: string;
   btnTitle?: string;
-  href?: string;
   navigate?: string;
 };
 
@@ -17,7 +16,16 @@ export type TSliderProps = {
 };
 
 export type TButtonProps = {
-  title: string;
+  btnTitle: string;
+  title?: string;
   id?: string;
   navigate?: string;
+};
+
+export type TProject = {
+  id: string;
+  title: string;
+  image: any;
+  details: string;
+  description: string[] | undefined;
 };
