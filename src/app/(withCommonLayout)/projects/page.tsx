@@ -7,7 +7,7 @@ const ProjectPage = () => {
   return (
     <div className="lg:-mt-12 -mt-5 mb-20">
       <Container>
-        <Title title="Our Activities" />
+        <Title title="Our Projects" />
 
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 mt-8">
           {projectsData.map((project) => (

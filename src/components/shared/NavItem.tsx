@@ -17,9 +17,9 @@ const navItem = (
         About
       </div>
     </Link>
-    <Link className="rounded-lg" href="/courses">
+    <Link className="rounded-lg" href="/projects">
       <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
-        Courses
+        Projects
       </div>
     </Link>
     <Link className="rounded-lg" href="/services">
@@ -27,11 +27,11 @@ const navItem = (
         Services
       </div>
     </Link>
-    <Link className="rounded-lg" href="/registration">
+    {/* <Link className="rounded-lg" href="/registration">
       <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
         Registration
       </div>
-    </Link>
+    </Link> */}
     <Link className="rounded-lg" href="/resourses">
       <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
         Resourses
@@ -43,6 +43,11 @@ const navItem = (
         Contact
       </div>
     </Link>
+    {/* <div className="form-control">
+      <label className="cursor-pointer label">
+        <input type="checkbox" className="toggle toggle-accent" checked />
+      </label>
+    </div> */}
   </>
 );
 

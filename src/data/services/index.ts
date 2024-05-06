@@ -17,14 +17,14 @@ export const servicesData = [
   },
   {
     id: "3",
-    title: "Medical care",
+    title: "Medical Care",
     image: assets.services.treatment,
     details:
       "Ad-Doha Institute provides conditional treatment for non-Muslims and poor Muslims who are unable to afford medical expenses.",
   },
   {
     id: "4",
-    title: "Educational assistance",
+    title: "Educational Assistance",
     image: assets.services.educanalHelp,
     details:
       "Ad-Doha Institute provides educational support to non-Muslim and poor students at various levels.",
@@ -38,7 +38,7 @@ export const servicesData = [
   },
   {
     id: "6",
-    title: "Legal aid",
+    title: "Legal Aid",
     image: assets.services.low,
     details:
       "Ad-Doha Institute provides all types of legal assistance to non-Muslims. Especially making affidavit, help in correction of ID card, case etc.",
@@ -52,7 +52,7 @@ export const servicesData = [
   },
   {
     id: "8",
-    title: "Sunnah circumcision",
+    title: "Sunnah Circumcision",
     image: assets.services.sunnateKhotna,
     details:
       "Ad-Doha Institute assists neo-Muslims in undergoing Sunnah circumcision.",

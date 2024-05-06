@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 

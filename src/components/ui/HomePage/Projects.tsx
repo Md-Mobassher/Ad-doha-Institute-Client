@@ -8,7 +8,7 @@ const Projects = () => {
   return (
     <Container>
       <div className="flex justify-between items-center lg:px-3 mb-7">
-        <Title title="Our Activities" />
+        <Title title="Our Projects" />
         <Button title="View All " navigate="projects" />
       </div>
 
