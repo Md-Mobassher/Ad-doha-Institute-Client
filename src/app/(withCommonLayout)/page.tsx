@@ -1,4 +1,4 @@
-import assets from "@/assets";
+import { assets } from "@/assets";
 import Activities from "@/components/ui/HomePage/Activities";
 import Banner from "@/components/ui/HomePage/Banner";
 import Courses from "@/components/ui/HomePage/Courses";

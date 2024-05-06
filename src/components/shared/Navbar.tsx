@@ -4,7 +4,7 @@ import { FaFacebookF, FaMobileAlt } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { AiOutlineYoutube } from "react-icons/ai";
 import Image from "next/image";
-import assets from "@/assets";
+import { assets } from "@/assets";
 
 const Navbar = () => {
   return (

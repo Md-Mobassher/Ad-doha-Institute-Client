@@ -2,7 +2,7 @@ import Title from "@/components/ui/Title";
 import Slider from "@/components/ui/Slider";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
-import assets from "@/assets";
+import { assets } from "@/assets";
 
 const projects = [
   {

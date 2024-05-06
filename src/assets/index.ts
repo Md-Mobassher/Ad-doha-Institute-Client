@@ -1,4 +1,4 @@
-const assets = {
+export const assets = {
   banner: {
     moktob: require("../assets/banner/Moktob.webp"),
     dawah: require("../assets/banner/দাওয়াহ.webp"),
@@ -19,11 +19,9 @@ const assets = {
     educanalHelp: require("../assets/services/education-help.jpg"),
     employment: require("../assets/services/employment.jpg"),
     treatment: require("../assets/services/treatment.jpg"),
-    korjeHasana: require("../assets/services/korje-hasanah.jpg"),
+    korjeHasana: require("../assets/services/korze-hasanah.png"),
     low: require("../assets/services/low.jpg"),
     sunnateKhotna: require("../assets/services/sunnate-khatna.jpg"),
     marriage: require("../assets/services/marriage.jpg"),
   },
 };
-
-export default assets;

@@ -1,7 +1,7 @@
 import Title from "@/components/ui/Title";
 import Slider from "@/components/ui/Slider";
 import Button from "@/components/ui/Button";
-import assets from "@/assets";
+import { assets } from "@/assets";
 
 const courses = [
   {

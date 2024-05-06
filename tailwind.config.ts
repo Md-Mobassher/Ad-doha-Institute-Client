@@ -6,6 +6,23 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  daisyui: {
+    themes: [
+      {
+        light: {
+          ...require("daisyui/src/theming/themes")["light"],
+          primary: "#22C55E",
+          secondary: "#078404",
+          accent: "#37cdbe",
+          neutral: "#ECF0EC",
+          base: "#ffffff",
+        },
+      },
+
+      "dark",
+      "light",
+    ],
+  },
   theme: {
     extend: {
       backgroundImage: {

@@ -1,7 +1,7 @@
 "use client";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-
 import Card from "./Card";
 import { TCardProps, TSliderProps } from "@/type";
 
@@ -39,10 +39,10 @@ const Slider = ({ items, spaceBetween, slidesPerView }: TSliderProps) => {
       }}
       className="w-full h-full "
     >
-      <div className="flex justify-center items-stretch">
+      <div className="">
         {items.map((item: TCardProps) => (
           <SwiperSlide className=" mb-12" key={item.id}>
-            <Card {...item} />
+            <Card {...item} btnTitle="Details" navigate="projects" />
           </SwiperSlide>
         ))}
       </div>

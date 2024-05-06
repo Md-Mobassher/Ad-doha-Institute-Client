@@ -3,12 +3,19 @@ export type TCardProps = {
   image?: string | any;
   title?: string;
   details?: string;
-  btn?: string;
+  btnTitle?: string;
   href?: string;
+  navigate?: string;
 };
 
 export type TSliderProps = {
   items: TCardProps[];
   slidesPerView?: number;
   spaceBetween?: number;
+};
+
+export type TButtonProps = {
+  title: string;
+  id?: string;
+  navigate?: string;
 };
