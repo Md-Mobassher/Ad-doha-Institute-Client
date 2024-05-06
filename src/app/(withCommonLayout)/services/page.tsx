@@ -11,7 +11,12 @@ const ServicesPage = () => {
 
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 mt-8">
           {servicesData.map((service) => (
-            <Card key={service.id} {...service} navigate="services" />
+            <Card
+              key={service.id}
+              {...service}
+              navigate="services"
+              btnTitle="Details"
+            />
           ))}
         </div>
       </Container>

@@ -39,7 +39,7 @@ export const booksData = [
     id: 7,
     title: "আল্লাহর পরিচয়",
     image: require("../../assets/resourses/books/Allahr-Porichoy.webp"),
-    link: "https://drive.google.com/file/d/19C1Lj-KD5yeCya9jnGDzAkTeS0LoQgdI/view?usp=sharing",
+    link: "https://drive.google.com/file/d/1ZnaDyOXqL3OVUdm3uOBuxBog6giJyt8W/view",
   },
   {
     id: 8,
@@ -67,7 +67,7 @@ export const booksData = [
   },
   {
     id: 12,
-    title: "খৃষ্টান ভাইবোনদের প্রতি ভালবাসার বার্তা",
+    title: "খৃষ্টান ভাইদের প্রতি ভালবাসার বার্তা",
     image: require("../../assets/resourses/books/খ্রিস্টান-ভাই-বোনদের-প্রতি-ভালবাসার-বার্তা.webp"),
     link: "https://drive.google.com/file/d/1Zn1lYTuvWawsa8Fdgj6x3IByJi9--QqG/view?usp=sharing",
   },

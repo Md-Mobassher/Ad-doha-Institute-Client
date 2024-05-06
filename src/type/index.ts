@@ -29,3 +29,10 @@ export type TCardDetails = {
   details: string;
   description: string[] | undefined;
 };
+
+export type TBook = {
+  id: number;
+  title: string;
+  image: any;
+  link: string;
+};
