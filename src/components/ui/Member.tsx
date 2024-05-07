@@ -18,7 +18,7 @@ const Member = ({ image, name, designation, navigate }: TMember) => {
         <Image src={image} alt={name} className="rounded-t-lg" />
       </div>
       <div className="p-4">
-        <h3 className="text-md font-bold mb-2">{name}</h3>
+        <h3 className="text-md font-bold mb-2 text-primary">{name}</h3>
         <h5 className="text-sm">{designation}</h5>
       </div>
     </div>
