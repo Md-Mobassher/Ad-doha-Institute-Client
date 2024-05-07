@@ -36,3 +36,7 @@ export type TBook = {
   image: any;
   link: string;
 };
+export type TVideo = {
+  id: string;
+  url: string;
+};

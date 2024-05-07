@@ -4,7 +4,7 @@ import Container from "../Container";
 import { coursesData } from "@/data/courses";
 import Card from "../Card";
 
-const Courses = () => {
+const CoursesSection = () => {
   return (
     <Container>
       <div className="flex justify-between items-center lg:px-3 mb-7">
@@ -21,4 +21,4 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default CoursesSection;

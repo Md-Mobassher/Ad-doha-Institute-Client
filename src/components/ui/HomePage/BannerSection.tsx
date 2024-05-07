@@ -8,7 +8,7 @@ type TSlide = {
   imageUrl: string;
 };
 
-const Banner = ({ slides }: any) => {
+const BannerSection = ({ slides }: any) => {
   return (
     <div className="mt-3 mb-5 px-4">
       <Swiper
@@ -55,4 +55,4 @@ const Banner = ({ slides }: any) => {
   );
 };
 
-export default Banner;
+export default BannerSection;

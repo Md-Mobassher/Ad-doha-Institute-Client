@@ -10,7 +10,7 @@ import { TBook } from "@/type";
 import Image from "next/image";
 import Link from "next/link";
 
-const Books = () => {
+const BooksSection = () => {
   return (
     <Container>
       <div className="flex justify-between items-center lg:px-3 mb-7">
@@ -80,4 +80,4 @@ const Books = () => {
   );
 };
 
-export default Books;
+export default BooksSection;

@@ -4,7 +4,7 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import { servicesData } from "@/data/services";
 
-const Services = () => {
+const ServicesSection = () => {
   return (
     <Container>
       <div className="flex justify-between items-center lg:px-3 mb-7 ">
@@ -24,4 +24,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default ServicesSection;
