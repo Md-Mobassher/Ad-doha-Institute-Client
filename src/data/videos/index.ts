@@ -17,10 +17,10 @@ export const videosData = [
   },
   {
     id: "5",
-    url: "https://www.youtube.com/embed/3wX2iw5u0og?si=eFGeUIKm7RSJ6eBh",
+    url: "https://www.youtube.com/embed/QIBqRyuFN34?si=NVlXpaJh_z_vJlzG",
   },
   {
     id: "6",
-    url: "https://www.youtube.com/embed/QIBqRyuFN34?si=NVlXpaJh_z_vJlzG",
+    url: "https://www.youtube.com/embed/3wX2iw5u0og?si=eFGeUIKm7RSJ6eBh",
   },
 ];
