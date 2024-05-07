@@ -1,6 +1,7 @@
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
 import Sidebar from "@/components/shared/Sidebar";
+import PageTitle from "@/components/ui/PageTitle";
 import Title from "@/components/ui/Title";
 import type { Metadata } from "next";
 
@@ -17,10 +18,8 @@ export default function DashboardLayout({
   return (
     <>
       <Navbar />
-      <div className="py-7">
-        <Title title="About Us" />
-      </div>
-      <div className="min-h-[500px] max-w-7xl mx-auto px-4 my-2  rounded-box bg-green-50 border mb-10">
+      <PageTitle title="About Us" />
+      <div className="min-h-[500px] max-w-7xl mx-auto px-4  rounded-box bg-green-50 border mt-10 mb-20">
         <div className="flex justify-between">
           <div className="w-[18%]">
             <Sidebar />
