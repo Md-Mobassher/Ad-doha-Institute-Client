@@ -8,19 +8,18 @@ type TParamsProps = {
 };
 
 const ServiceDetailsPage = ({ params }: TParamsProps) => {
-  console.log(params);
   const serviceData = servicesData.find(
     (service) => service.id === params.serviceId
   );
 
   return (
-    <div className="mt-8">
+    <div className="">
       {serviceData ? (
         <>
           <CardDetails {...serviceData} />
         </>
       ) : (
-        <p>No Project Found</p>
+        <p>No Service Found</p>
       )}
     </div>
   );

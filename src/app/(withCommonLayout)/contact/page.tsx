@@ -7,7 +7,7 @@ const ContactPage = () => {
   return (
     <>
       <PageTitle title="Contact" />
-      <div className="lg:-mt-12 -mt-5 mb-20">
+      <div className="lg:-mt-8 -mt-3 mb-14">
         <Container>
           <div className="lg:flex md:flex justify-between lg:gap-10 gap-5 lg:mt-10 mt-8">
             <div className=" border hover:border-primary rounded-lg shadow-md lg:p-5 px-2 py-5 lg:w-[50%] md:w-[50%] w-full h-[405px]">

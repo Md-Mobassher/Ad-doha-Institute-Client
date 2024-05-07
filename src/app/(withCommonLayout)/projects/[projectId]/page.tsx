@@ -13,7 +13,7 @@ const ProjectDetailsPage = ({ params }: TParamsProps) => {
   );
 
   return (
-    <div className="mt-8">
+    <div className="">
       {projectData ? (
         <>
           <CardDetails {...projectData} />

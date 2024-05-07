@@ -1,26 +1,27 @@
 import Card from "@/components/ui/Card";
 import Container from "@/components/ui/Container";
-import Title from "@/components/ui/Title";
+import PageTitle from "@/components/ui/PageTitle";
 import { coursesData } from "@/data/courses";
 
 const CoursesPage = () => {
   return (
-    <div className="lg:-mt-12 -mt-5 mb-20">
-      <Container>
-        <Title title="Our Courses" />
-
-        <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-8 mt-8">
-          {coursesData.map((course) => (
-            <Card
-              key={course.id}
-              {...course}
-              navigate="courses"
-              btnTitle="Details"
-            />
-          ))}
-        </div>
-      </Container>
-    </div>
+    <>
+      <PageTitle title="Our Courses" />
+      <div className="lg:-mt-8 -mt-3 mb-14">
+        <Container>
+          <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-8 gap-5">
+            {coursesData.map((course) => (
+              <Card
+                key={course.id}
+                {...course}
+                navigate="courses"
+                // btnTitle="Details"
+              />
+            ))}
+          </div>
+        </Container>
+      </div>
+    </>
   );
 };
 

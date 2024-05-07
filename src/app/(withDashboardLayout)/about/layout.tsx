@@ -19,7 +19,7 @@ export default function DashboardLayout({
     <>
       <Navbar />
       <PageTitle title="About Us" />
-      <div className="min-h-[500px] max-w-7xl mx-auto px-4  rounded-box bg-green-50 border mt-10 mb-20">
+      <div className="min-h-[500px] max-w-7xl mx-auto px-4  rounded-box bg-green-50 border mt-10 mb-14">
         <div className="flex justify-between">
           <div className="w-[18%]">
             <Sidebar />
