@@ -5,7 +5,6 @@ import { videosData } from "@/data/videos";
 import { TVideo } from "@/type";
 
 const VideosSection = () => {
-  //   console.log(videosData);
   return (
     <Container>
       <div className="flex justify-between items-center lg:px-3 mb-7">
