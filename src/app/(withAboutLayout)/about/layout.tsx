@@ -17,7 +17,7 @@ export default function DashboardLayout({
   return (
     <>
       <Navbar />
-      <div className="py-4">
+      <div className="py-7">
         <Title title="About Us" />
       </div>
       <div className="min-h-[500px] max-w-7xl mx-auto px-4 my-2  rounded-box bg-green-50 border mb-10">

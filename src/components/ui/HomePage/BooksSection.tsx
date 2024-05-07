@@ -54,7 +54,7 @@ const BooksSection = () => {
           <SwiperSlide className=" mb-12 h-full " key={book.id}>
             <div key={book.id}>
               <Link href={book.link} target="_blank">
-                <div className="border border-primary rounded-lg shadow-lg hover:shadow-primary p-2 w-full h-full flex flex-col justify-between transition-all duration-500">
+                <div className="border hover:border-primary rounded-lg shadow-md hover:shadow-2xl p-2 w-full h-full flex flex-col justify-between transition-all duration-500">
                   <div>
                     <Image
                       src={book.image}

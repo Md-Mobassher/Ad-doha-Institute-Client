@@ -14,7 +14,7 @@ const VideosSection = () => {
 
       <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5 ">
         {videosData.slice(0, 2).map((video: TVideo) => (
-          <div className="flex justify-center " key={video.id}>
+          <div className="flex justify-center border" key={video.id}>
             <iframe
               width="620"
               height="300"
@@ -29,7 +29,7 @@ const VideosSection = () => {
       </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 mt-5 mb-16">
         {videosData.slice(2, 5).map((video: TVideo) => (
-          <div className="flex justify-center " key={video.id}>
+          <div className="flex justify-center border" key={video.id}>
             <iframe
               width="580"
               height="300"

@@ -11,8 +11,8 @@ const Card = ({
   navigate,
 }: TCardProps) => {
   return (
-    <div className="rounded-lg w-full h-full bg-base-100 shadow-xl mx-auto border border-primary hover:shadow-lg hover:shadow-secondary transition-all duration-500">
-      <div className=" border-b border-b-primary flex justify-center items-center">
+    <div className="rounded-lg w-full h-full bg-base-100 shadow-md mx-auto border hover:border-primary hover:shadow-xl transition-all duration-500">
+      <div className=" border-b flex justify-center items-center">
         <Image
           src={image}
           alt={title || "card image"}
