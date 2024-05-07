@@ -47,7 +47,7 @@ const Navbar = () => {
       </div>
 
       {/* header */}
-      <header className=" sticky top-0 z-50 bg-white border-b border-t">
+      <header className=" sticky top-0 z-50 bg-white border-b border-t shadow-sm">
         <div className="flex bg-white  m-0 justify-between items-center  max-w-7xl mx-auto px-4 lg:gap-5 gap-2 ">
           <div className="flex-1 text-4xl font-semibold">
             <Link href="/">

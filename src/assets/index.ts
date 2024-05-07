@@ -63,6 +63,11 @@ const assets = {
     dayirGunaboli: require("../assets/resourses/books/দায়ীর-গুনাবলি.webp"),
     dawatDeyarPoddhoti: require("../assets/resourses/books/হিন্দু-ভাইদের-দাওয়াত-দেয়ার-পদ্ধতি.webp"),
   },
+  icons: {
+    location: require("../assets/logo/location.png"),
+    email: require("../assets/logo/email.png"),
+    call: require("../assets/logo/call.webp"),
+  },
 };
 
 export default assets;
