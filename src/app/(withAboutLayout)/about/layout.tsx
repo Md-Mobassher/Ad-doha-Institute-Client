@@ -22,11 +22,11 @@ export default function DashboardLayout({
       </div>
       <div className="min-h-[500px] max-w-7xl mx-auto px-4 my-2  rounded-box bg-green-50 border mb-10">
         <div className="flex justify-between">
-          <div className="w-[20%]">
+          <div className="w-[18%]">
             <Sidebar />
           </div>
 
-          <div className="w-[80%]  bg-white my-3 rounded-lg p-2">
+          <div className="w-[82%]  bg-white my-3 rounded-lg p-2">
             {children}
           </div>
         </div>

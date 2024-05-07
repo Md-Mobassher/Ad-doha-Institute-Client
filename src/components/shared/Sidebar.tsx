@@ -9,6 +9,9 @@ const Sidebar = () => {
             <Link href="/about/aims-&-objectives">Aims & Objectives</Link>
           </li>
           <li className="w-full hover:bg-primary text-black hover:text-white rounded-lg py-1 font-semibold">
+            <Link href="/about/futureplan">Our Future Plan</Link>
+          </li>
+          <li className="w-full hover:bg-primary text-black hover:text-white rounded-lg py-1 font-semibold">
             <Link href="/about/board-of-director">Board of Directors </Link>
           </li>
           <li className="w-full hover:bg-primary text-black hover:text-white rounded-lg  py-1 font-semibold">
