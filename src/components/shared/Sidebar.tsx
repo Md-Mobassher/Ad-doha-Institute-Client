@@ -1,25 +1,23 @@
 import Link from "next/link";
+type TSidebarItem = {
+  id: string;
+  title: string;
+  link: string;
+};
 
-const Sidebar = () => {
+const Sidebar = ({ items }: { items: TSidebarItem[] }) => {
   return (
     <div className="">
       <div className="">
         <ul className="menu  min-h-[500px] w-full mt-2">
-          <li className="w-full hover:bg-primary text-black hover:text-white rounded-lg py-1 font-semibold">
-            <Link href="/about/aims-&-objectives">Aims & Objectives</Link>
-          </li>
-          <li className="w-full hover:bg-primary text-black hover:text-white rounded-lg py-1 font-semibold">
-            <Link href="/about/futureplan">Our Future Plan</Link>
-          </li>
-          <li className="w-full hover:bg-primary text-black hover:text-white rounded-lg py-1 font-semibold">
-            <Link href="/about/board-of-director">Board of Directors </Link>
-          </li>
-          <li className="w-full hover:bg-primary text-black hover:text-white rounded-lg  py-1 font-semibold">
-            <Link href="/about/advisory-committee">Advisory Committee </Link>
-          </li>
-          <li className="w-full hover:bg-primary text-black hover:text-white rounded-lg py-1 font-semibold">
-            <Link href="/about/faculty">Faculty </Link>
-          </li>
+          {items.map((item: TSidebarItem) => (
+            <li
+              className="w-full hover:bg-primary text-black hover:text-white rounded-lg py-1 font-semibold"
+              key={item.id}
+            >
+              <Link href={`/${item.link}`}>{item.title}</Link>
+            </li>
+          ))}
         </ul>
       </div>
 
