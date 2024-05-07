@@ -40,3 +40,11 @@ export type TVideo = {
   id: string;
   url: string;
 };
+export type TMember = {
+  id: string;
+  image: any;
+  name: string;
+  designation: string;
+  details: string;
+  navigate?: string;
+};
