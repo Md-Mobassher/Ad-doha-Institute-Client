@@ -5,7 +5,7 @@ import { gallerySidebarLink } from "@/data/gallery";
 const Gallerylayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <PageTitle title="Gallery" />
+      <PageTitle title="ছবি" />
       <div className="min-h-[500px] max-w-7xl mx-auto  rounded-box bg-green-50 border mt-10 mb-14">
         <div className="flex justify-between">
           <div className="w-[18%]">

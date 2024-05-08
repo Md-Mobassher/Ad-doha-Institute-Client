@@ -8,7 +8,7 @@ import { GrGallery } from "react-icons/gr";
 const ResourcesPage = () => {
   return (
     <>
-      <PageTitle title="Resourses" />
+      <PageTitle title="রিসোর্স" />
       <div className="lg:-mt-8 -mt-3 mb-14">
         <Container>
           <div className="grid lg:grid-cols-3 md:grid-cols-3 grid-cols-2 lg:gap-10 gap-5">
@@ -20,7 +20,7 @@ const ResourcesPage = () => {
                 <div>
                   <hr />
                   <p className="text-center my-3 text-primary text-2xl font-bold">
-                    Books
+                    বই
                   </p>
                 </div>
               </div>
@@ -33,7 +33,7 @@ const ResourcesPage = () => {
                 <div>
                   <hr />
                   <p className="text-center my-3 text-primary text-2xl font-bold">
-                    Videos
+                    ভিডিও
                   </p>
                 </div>
               </div>
@@ -46,7 +46,7 @@ const ResourcesPage = () => {
                 <div>
                   <hr />
                   <p className="text-center my-3 text-primary text-2xl font-bold">
-                    Gallery
+                    গ্যালারী
                   </p>
                 </div>
               </div>

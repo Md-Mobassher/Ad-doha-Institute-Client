@@ -1,27 +1,27 @@
 export const aboutSidebarLink = [
   {
     id: "1",
-    title: "Aim & Objectives",
+    title: "লক্ষ্য ও উদ্দেশ্য",
     link: "about/aims-&-objectives",
   },
   {
     id: "2",
-    title: "Future Plan",
+    title: "ভবিষ্যৎ পরিকল্পনা",
     link: "about/futureplan",
   },
   {
     id: "3",
-    title: "Board of Director",
+    title: "পরিচালনা পর্ষদ",
     link: "about/board-of-director",
   },
   {
     id: "4",
-    title: "Advisory Committee",
+    title: "উপদেষ্টা কমিটি",
     link: "about/advisory-committee",
   },
   {
     id: "5",
-    title: "Faculty",
+    title: "শিক্ষক মন্ডলী",
     link: "about/faculty",
   },
 ];

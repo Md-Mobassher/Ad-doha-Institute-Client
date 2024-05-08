@@ -7,7 +7,7 @@ import { projectsData } from "@/data/projects";
 const ProjectPage = () => {
   return (
     <>
-      <PageTitle title="Our Projects" />
+      <PageTitle title="আমাদের কার্যক্রম সমূহ" />
       <div className="lg:-mt-8 -mt-3 mb-14">
         <Container>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 mt-8">
@@ -16,7 +16,7 @@ const ProjectPage = () => {
                 key={project.id}
                 {...project}
                 navigate="projects"
-                btnTitle="Details"
+                btnTitle="বিস্তারিত"
               />
             ))}
           </div>

@@ -14,8 +14,8 @@ const BooksSection = () => {
   return (
     <Container>
       <div className="flex justify-between items-center lg:px-3 mb-7">
-        <Title title="Books" />
-        <Button btnTitle="View All " navigate="resourses/books" />
+        <Title title="বই" />
+        <Button btnTitle="সকল" navigate="resourses/books" />
       </div>
 
       <Swiper

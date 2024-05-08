@@ -8,8 +8,8 @@ const ProjectsSection = () => {
   return (
     <Container>
       <div className="flex justify-between items-center lg:px-3 mb-7">
-        <Title title="Our Projects" />
-        <Button btnTitle="View All " navigate="projects" />
+        <Title title="আমাদের কার্যক্রম" />
+        <Button btnTitle="সকল" navigate="projects" />
       </div>
 
       <div>

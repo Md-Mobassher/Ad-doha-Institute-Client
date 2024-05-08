@@ -8,8 +8,8 @@ const VideosSection = () => {
   return (
     <Container>
       <div className="flex justify-between items-center lg:px-3 mb-7">
-        <Title title="Videos" />
-        <Button btnTitle="View All " navigate="resourses/videos" />
+        <Title title="ভিডিও" />
+        <Button btnTitle="সকল" navigate="resourses/videos" />
       </div>
 
       <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5 ">

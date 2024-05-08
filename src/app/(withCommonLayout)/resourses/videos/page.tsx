@@ -6,7 +6,7 @@ import { TVideo } from "@/type";
 const VideoPages = () => {
   return (
     <>
-      <PageTitle title="Videos" />
+      <PageTitle title="ভিডিও সমূহ" />
       <div className="lg:-mt-8 -mt-5 mb-20">
         <Container>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 mt-8">

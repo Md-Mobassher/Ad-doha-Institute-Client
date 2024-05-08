@@ -8,8 +8,8 @@ const ServicesSection = () => {
   return (
     <Container>
       <div className="flex justify-between items-center lg:px-3 mb-7 ">
-        <Title title="Our Services" />
-        <Button btnTitle="View All " navigate="services" />
+        <Title title="আমাদের সেবাসমূহ" />
+        <Button btnTitle="সকল " navigate="services" />
       </div>
 
       <div>

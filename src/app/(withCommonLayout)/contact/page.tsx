@@ -6,7 +6,7 @@ import Image from "next/image";
 const ContactPage = () => {
   return (
     <>
-      <PageTitle title="Contact" />
+      <PageTitle title="যোগাযোগ" />
       <div className="lg:-mt-8 -mt-3 mb-14">
         <Container>
           <div className="lg:flex md:flex justify-between lg:gap-10 gap-5 lg:mt-10 mt-8">
