@@ -4,49 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
 import Link from "next/link";
 import LanguageToggle from "../ui/LanguageToggle";
-
-const navItem = (
-  <>
-    <Link className="rounded-lg" href="/">
-      <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
-        Home
-      </div>
-    </Link>
-
-    <Link className="rounded-lg" href="/about">
-      <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
-        About
-      </div>
-    </Link>
-    <Link className="rounded-lg" href="/projects">
-      <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
-        Projects
-      </div>
-    </Link>
-    <Link className="rounded-lg" href="/services">
-      <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
-        Services
-      </div>
-    </Link>
-    {/* <Link className="rounded-lg" href="/registration">
-      <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
-        Registration
-      </div>
-    </Link> */}
-    <Link className="rounded-lg" href="/resourses">
-      <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
-        Resourses
-      </div>
-    </Link>
-
-    <Link className="rounded-lg" href="/contact">
-      <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
-        Contact
-      </div>
-    </Link>
-    <LanguageToggle />
-  </>
-);
+import { navbarItemsData } from "@/data/navbar";
 
 const NavItems = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,7 +13,18 @@ const NavItems = () => {
       <div className="flex justify-between max-w-7xl mx-auto items-center">
         {/*  large device menu */}
         <div className="hidden md:block">
-          <div className="flex justify-end items-center">{navItem}</div>
+          <div className="flex justify-end items-center">
+            {navbarItemsData.map((item) => (
+              <Link key={item.id} className="rounded-lg" href={item.link}>
+                <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
+                  {item.title}
+                </div>
+              </Link>
+            ))}
+            <div className="ml-2">
+              <LanguageToggle />
+            </div>
+          </div>
         </div>
 
         {/* Mobile Menu Button (visible on small screens) */}
@@ -77,8 +46,17 @@ const NavItems = () => {
               </div>
             )}
             {isOpen && (
-              <div className="flex flex-col pt-5 w-60 top-8 right-0 shadow-lg rounded-md absolute transition-all duration-500">
-                {navItem}
+              <div className="flex flex-col pb-3 w-60 top-14 right-2 shadow-lg rounded-md absolute transition-all duration-500 border bg-white">
+                {navbarItemsData.map((item) => (
+                  <Link key={item.id} className="rounded-lg" href={item.link}>
+                    <div className=" px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
+                      {item.title}
+                    </div>
+                  </Link>
+                ))}
+                <div className="mt-2">
+                  <LanguageToggle />
+                </div>
               </div>
             )}
           </button>
