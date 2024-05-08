@@ -16,7 +16,7 @@ const NavItems = () => {
           <div className="flex justify-end items-center">
             {navbarItemsData.map((item) => (
               <Link key={item.id} className="rounded-lg" href={item.link}>
-                <div className="bg-white px-4 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
+                <div className="bg-white px-3 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
                   {item.title}
                 </div>
               </Link>

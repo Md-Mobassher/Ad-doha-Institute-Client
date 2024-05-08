@@ -8,11 +8,11 @@ const Gallerylayout = ({ children }: { children: React.ReactNode }) => {
       <PageTitle title="ছবি" />
       <div className="min-h-[500px] max-w-7xl mx-auto  rounded-box bg-green-50 border mt-10 mb-14">
         <div className="flex justify-between">
-          <div className="w-[18%]">
+          <div className="lg:w-[18%] w-[20%] mt-3">
             <Sidebar items={gallerySidebarLink} />
           </div>
 
-          <div className="lg:w-[82%] w-[80%]  bg-white my-3 rounded-lg lg:p-2 p-1">
+          <div className="lg:w-[82%] w-[80%]  bg-white my-5 lg:mr-5 mr-2 rounded-lg lg:p-2 p-0">
             {children}
           </div>
         </div>

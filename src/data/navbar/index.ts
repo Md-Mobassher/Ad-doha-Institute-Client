@@ -1,10 +1,5 @@
 export const navbarItemsData = [
   {
-    id: "1",
-    title: "হোম",
-    link: "home",
-  },
-  {
     id: "2",
     title: "আমাদের সম্পর্কে",
     link: "about",
