@@ -61,15 +61,15 @@ export const projectsDataEn = [
   },
   {
     id: "2",
-    title: "Service",
-    image: assets.projects.services,
+    title: "Education",
+    image: assets.projects.education,
     details:
       "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
   },
   {
     id: "3",
-    title: "Education",
-    image: assets.projects.education,
+    title: "Service",
+    image: assets.projects.services,
     details:
       "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
   },

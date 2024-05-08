@@ -3,6 +3,7 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
 import Link from "next/link";
+import LanguageToggle from "../ui/LanguageToggle";
 
 const navItem = (
   <>
@@ -43,11 +44,7 @@ const navItem = (
         Contact
       </div>
     </Link>
-    {/* <div className="form-control">
-      <label className="cursor-pointer label">
-        <input type="checkbox" className="toggle toggle-accent" checked />
-      </label>
-    </div> */}
+    <LanguageToggle />
   </>
 );
 

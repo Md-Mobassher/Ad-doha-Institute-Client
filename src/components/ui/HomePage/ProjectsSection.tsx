@@ -16,7 +16,7 @@ const ProjectsSection = () => {
         <Slider
           items={projectsData}
           slidesPerView={3}
-          btnTitle="Details"
+          btnTitle="বিস্তারিত"
           navigate="projects"
         />
       </div>

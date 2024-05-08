@@ -19,10 +19,10 @@ const Button = ({ btnTitle, id, navigate }: TButtonProps) => {
     <>
       {btnTitle && (
         <button
-          className="btn btn-outline bg-primary text-white hover:bg-secondary transition-all duration-300 rounded-3xl px-6 "
+          className="btn btn-outline bg-primary text-white hover:bg-secondary transition-all duration-300 rounded-3xl px-5 "
           onClick={handleClick}
         >
-          {btnTitle} <FaArrowRight className="lg:ml-2 md:ml-2 ml-1" />
+          {btnTitle} <FaArrowRight className=" ml-1" />
         </button>
       )}
     </>
