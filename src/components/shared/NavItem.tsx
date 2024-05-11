@@ -5,9 +5,16 @@ import { RxCross2 } from "react-icons/rx";
 import Link from "next/link";
 import LanguageToggle from "../ui/LanguageToggle";
 import { navbarItemsData } from "@/data/navbar";
+import { useRouter } from "next/navigation";
 
 const NavItems = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+
+  const handleNavigate = (link: string) => {
+    router.push(`/${link}`);
+  };
+
   return (
     <>
       <div className="flex justify-between max-w-7xl mx-auto items-center">
@@ -15,11 +22,13 @@ const NavItems = () => {
         <div className="hidden md:block">
           <div className="flex justify-end items-center">
             {navbarItemsData.map((item) => (
-              <Link key={item.id} className="rounded-lg" href={item.link}>
-                <div className="bg-white px-3 py-2 rounded text-md font-semibold text-black hover:bg-green-500 hover:text-white">
-                  {item.title}
-                </div>
-              </Link>
+              <div
+                key={item.id}
+                className="bg-white px-3 py-2 text-md font-semibold text-black hover:bg-green-500 hover:text-white rounded-lg cursor-pointer btn border-0 shadow-none"
+                onClick={() => handleNavigate(item.link)}
+              >
+                {item.title}
+              </div>
             ))}
             <div className="ml-2">
               <LanguageToggle />
