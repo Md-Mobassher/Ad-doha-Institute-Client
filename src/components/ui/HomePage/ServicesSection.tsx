@@ -17,6 +17,7 @@ const ServicesSection = () => {
           items={servicesData}
           slidesPerView={3}
           btnTitle="বিস্তারিত"
+          btnTitle2="সেবা নিন"
           navigate="services"
         />
       </div>

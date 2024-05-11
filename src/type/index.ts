@@ -4,7 +4,9 @@ export type TCardProps = {
   title: string;
   details?: string;
   btnTitle?: string;
+  btnTitle2?: string;
   navigate?: string;
+  link?: string;
 };
 
 export type TSliderProps = {
@@ -12,6 +14,7 @@ export type TSliderProps = {
   slidesPerView?: number;
   spaceBetween?: number;
   btnTitle?: string;
+  btnTitle2?: string;
   navigate?: string;
 };
 

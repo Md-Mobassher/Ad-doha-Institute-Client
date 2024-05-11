@@ -11,12 +11,16 @@ const ServicesPage = () => {
         <Container>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 mt-8">
             {servicesData.map((service) => (
-              <Card
-                key={service.id}
-                {...service}
-                navigate="services"
-                btnTitle="বিস্তারিত"
-              />
+              <>
+                <Card
+                  key={service.id}
+                  {...service}
+                  navigate="services"
+                  btnTitle="বিস্তারিত"
+                  btnTitle2="সেবা নিন"
+                  link={service.link}
+                />
+              </>
             ))}
           </div>
         </Container>

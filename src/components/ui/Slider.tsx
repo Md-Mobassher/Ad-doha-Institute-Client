@@ -10,6 +10,7 @@ const Slider = ({
   spaceBetween,
   slidesPerView,
   btnTitle,
+  btnTitle2,
   navigate,
 }: TSliderProps) => {
   return (
@@ -47,7 +48,13 @@ const Slider = ({
     >
       {items.map((item: TCardProps) => (
         <SwiperSlide className=" mb-12 h-full " key={item.id}>
-          <Card {...item} btnTitle={btnTitle} navigate={navigate} />
+          <Card
+            {...item}
+            btnTitle={btnTitle}
+            navigate={navigate}
+            btnTitle2={btnTitle2}
+            link={item.link}
+          />
         </SwiperSlide>
       ))}
     </Swiper>

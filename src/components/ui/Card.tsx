@@ -1,13 +1,16 @@
 import { TCardProps } from "@/type";
 import Image from "next/image";
 import Button from "./Button";
+import Link from "next/link";
 
 const Card = ({
   image,
   title,
   details,
   btnTitle,
+  btnTitle2,
   id,
+  link,
   navigate,
 }: TCardProps) => {
   return (
@@ -29,14 +32,22 @@ const Card = ({
           <p className=" mb-3 text-justify">{details.slice(0, 120)}...</p>
         )}
 
-        {btnTitle && (
-          <Button
-            btnTitle={btnTitle || "Details"}
-            id={id}
-            navigate={navigate}
-            title={title}
-          />
-        )}
+        <div className="flex justify-between items-center">
+          {btnTitle && (
+            <Button
+              btnTitle={btnTitle || "Details"}
+              id={id}
+              navigate={navigate}
+              title={title}
+            />
+          )}
+
+          {btnTitle2 && link && (
+            <Link href={link as string}>
+              <Button btnTitle={btnTitle2 || "Details"} />
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );
