@@ -31,6 +31,8 @@ export type TCardDetails = {
   image: any;
   details: string;
   description: string[] | undefined;
+  btnTitle?: string;
+  link?: string;
 };
 
 export type TBook = {

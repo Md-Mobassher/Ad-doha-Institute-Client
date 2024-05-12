@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Serif_Bengali } from "next/font/google";
+import { Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-// import {
-//   appWithTranslation,
-//   I18nProvider,
-// } from "next-translate/appWithTranslation";
 
-const inter = Inter({ subsets: ["latin"] });
 const notoSerif = Noto_Serif_Bengali({ subsets: ["bengali"] });
 
 export const metadata: Metadata = {
