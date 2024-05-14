@@ -65,15 +65,24 @@ const LoginPage = () => {
             }}
           >
             <Box>
-              <Image src={assets.logo.logo} width={60} height={60} alt="logo" />
+              <Link href="/">
+                <Image
+                  src={assets.logo.logo}
+                  width={60}
+                  height={60}
+                  alt="logo"
+                />
+              </Link>
             </Box>
             <Box>
-              <Typography variant="h5" fontWeight={600} mt="12px" mb="4px">
-                আদ-দোহা ইনস্টিটিউট
-              </Typography>
-              <Typography component="p" fontWeight={600}>
-                একটি শিক্ষা, গবেষণা, দাওয়াহ ও সেবামূলক প্রতিষ্ঠান
-              </Typography>
+              <Link href="/">
+                <Typography variant="h5" fontWeight={600} mt="12px" mb="4px">
+                  আদ-দোহা ইনস্টিটিউট
+                </Typography>
+                <Typography component="p" fontWeight={600}>
+                  একটি শিক্ষা, গবেষণা, দাওয়াহ ও সেবামূলক প্রতিষ্ঠান
+                </Typography>
+              </Link>
             </Box>
           </Stack>
 
@@ -121,7 +130,13 @@ const LoginPage = () => {
                 </Grid>
               </Grid>
 
-              <Typography mb={1} textAlign="end" component="p" fontWeight={400}>
+              <Typography
+                mb={1}
+                textAlign="end"
+                component="p"
+                fontWeight={400}
+                color="primary"
+              >
                 Forgot Password?
               </Typography>
 
@@ -134,9 +149,11 @@ const LoginPage = () => {
               >
                 Login
               </Button>
-              <Typography component="p" fontWeight={400}>
+              <Typography component="p" fontWeight={500}>
                 Don&apos;t have an account?{" "}
-                <Link href="/register">Create an account</Link>
+                <Link href="/register" className="text-green-500">
+                  Create an account
+                </Link>
               </Typography>
             </DohaForm>
           </Box>
