@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import Provider from "@/lib/Provider/Provider";
+import { Toaster } from "sonner";
 
 const notoSerif = Noto_Serif_Bengali({ subsets: ["bengali"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
       <html lang="en" data-theme="light">
         <body className={notoSerif.className}>
           <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+          <Toaster position="top-center" />
         </body>
       </html>
     </Provider>

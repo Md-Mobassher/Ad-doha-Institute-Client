@@ -8,6 +8,7 @@ const assets = {
   logo: {
     headerlogo: require("../assets/logo/logo.png"),
     footerlogo: require("../assets/logo/logo-footer.webp"),
+    logo: require("../assets/logo/favicon.webp"),
   },
   projects: {
     dawah: require("../assets/projects/dawah.png"),
