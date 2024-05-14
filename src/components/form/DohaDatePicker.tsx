@@ -34,10 +34,10 @@ const DohaDatePicker = ({
             <DesktopDatePicker
               label={label}
               timezone="system"
-              disablePast
+              disableFuture
               {...field}
               onChange={(date) => onChange(date)}
-              value={value || Date.now()}
+              value={value}
               slotProps={{
                 textField: {
                   required: required,

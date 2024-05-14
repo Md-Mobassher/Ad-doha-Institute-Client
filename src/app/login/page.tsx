@@ -3,15 +3,15 @@ import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import assets from "@/assets";
 import Link from "next/link";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues } from "react-hook-form";
 import { userLogin } from "@/services/actions/userLogin";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
-// import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export const validationSchema = z.object({
   email: z.string().email("Please enter a valid email address!"),
@@ -105,7 +105,7 @@ const LoginPage = () => {
           <Box>
             <DohaForm
               onSubmit={handleLogin}
-              // resolver={zodResolver(validationSchema)}
+              resolver={zodResolver(validationSchema)}
               defaultValues={{
                 email: "",
                 password: "",

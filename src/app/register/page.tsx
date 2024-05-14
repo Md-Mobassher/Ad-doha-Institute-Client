@@ -1,15 +1,19 @@
 "use client";
 import assets from "@/assets";
+import DohaDatePicker from "@/components/form/DohaDatePicker";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
 import { BloodGroup, Gender } from "@/type";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { FieldValues } from "react-hook-form";
+import { validationSchema } from "../login/page";
+import { dateFormatter } from "@/utils/dateFormatter";
 
 export const defaultValues = {
   password: "",
@@ -34,10 +38,12 @@ const RegisterPage = () => {
   const router = useRouter();
 
   const handleRegister = async (values: FieldValues) => {
-    // const data = modifyPayload(values);
     console.log(values);
+    values.startDate = dateFormatter(values.startDate);
+    // const data = modifyPayload(values);
+
     // try {
-    //   const res = await registerPatient(data);
+    //   const res = await registerStudent(data);
     //   // console.log(res);
     //   if (res?.data?.id) {
     //     toast.success(res?.message);
@@ -102,7 +108,7 @@ const RegisterPage = () => {
           <Box>
             <DohaForm
               onSubmit={handleRegister}
-              // resolver={zodResolver(validationSchema)}
+              resolver={zodResolver(validationSchema)}
               defaultValues={defaultValues}
             >
               <Grid container spacing={3} my={1}>
@@ -153,6 +159,9 @@ const RegisterPage = () => {
                   />
                 </Grid>
                 <Grid item lg={4} md={6} sm={6} xs={12}>
+                  <DohaDatePicker name="dateOfBirth" label="Date of Birth" />
+                </Grid>
+                <Grid item lg={4} md={6} sm={6} xs={12}>
                   <DohaInput
                     label="Contact Number"
                     type="number"
@@ -177,14 +186,14 @@ const RegisterPage = () => {
                     sx={{ textAlign: "start" }}
                   />
                 </Grid>
-                <Grid item lg={6} md={6} sm={6} xs={12}>
+                <Grid item lg={4} md={6} sm={6} xs={12}>
                   <DohaInput
                     label="Present Address"
                     fullWidth={true}
                     name="student.presentAddress"
                   />
                 </Grid>
-                <Grid item lg={6} md={6} sm={6} xs={12}>
+                <Grid item lg={4} md={6} sm={6} xs={12}>
                   <DohaInput
                     label="Parmanent Address"
                     fullWidth={true}
