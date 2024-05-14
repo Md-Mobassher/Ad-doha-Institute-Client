@@ -5,6 +5,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import Provider from "@/lib/Provider/Provider";
 
 const notoSerif = Noto_Serif_Bengali({ subsets: ["bengali"] });
 
@@ -20,8 +22,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="light">
-      <body className={notoSerif.className}>{children}</body>
-    </html>
+    <Provider>
+      <html lang="en" data-theme="light">
+        <body className={notoSerif.className}>
+          <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+        </body>
+      </html>
+    </Provider>
   );
 }

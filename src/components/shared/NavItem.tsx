@@ -6,6 +6,7 @@ import Link from "next/link";
 import LanguageToggle from "../ui/LanguageToggle";
 import { navbarItemsData } from "@/data/navbar";
 import { useRouter } from "next/navigation";
+import { Box, Hidden, Stack } from "@mui/material";
 
 const NavItems = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,32 +17,44 @@ const NavItems = () => {
   };
 
   return (
-    <>
-      <div className="flex justify-between max-w-7xl mx-auto items-center">
-        {/*  large device menu */}
-        <div className="hidden md:block">
-          <div className="flex justify-end items-center">
-            {navbarItemsData.map((item) => (
-              <div
-                key={item.id}
-                className="bg-white px-3 py-2 text-md font-semibold text-black hover:bg-green-500 hover:text-white rounded-lg cursor-pointer btn border-0 shadow-none"
-                onClick={() => handleNavigate(item.link)}
-              >
-                {item.title}
-              </div>
-            ))}
-            <div className="ml-2">
+    <Box>
+      {/*  large device menu */}
+      <Hidden smDown>
+        {navbarItemsData.map((item) => (
+          <Box
+            key={item.id}
+            className="bg-white px-3 py-2 text-md font-semibold text-black hover:bg-green-500 hover:text-white cursor-pointer btn border-0 shadow-none inline"
+            onClick={() => handleNavigate(item.link)}
+          >
+            {item.title}
+          </Box>
+        ))}
+        {/* <div className="ml-2">
               <LanguageToggle />
-            </div>
+            </div> */}
+        <Link href={"/login"}>
+          <div className="bg-primary text-white px-3 py-2 text-md font-semibold hover:bg-secondary hover:text-white rounded-lg cursor-pointer btn shadow-none hover:border-primary border-primary border inline">
+            লগিন
           </div>
-        </div>
+        </Link>
+        {/* <Link href={"/login"}>
+            <div className="bg-primary text-white px-3 py-2 text-md font-semibold hover:bg-secondary hover:text-white rounded-lg cursor-pointer btn shadow-none hover:border-primary border-primary border inline">
+              লগআউট
+            </div>
+          </Link> */}
+      </Hidden>
 
-        {/* Mobile Menu Button (visible on small screens) */}
-        <div className="-mr-2 flex md:hidden p-2 relative">
+      {/* Mobile Menu Button (visible on small screens) */}
+      <Box
+        sx={{
+          position: "relative",
+        }}
+      >
+        <Hidden smUp>
           <button
             onClick={() => setIsOpen(!isOpen)}
             type="button"
-            className=" text-slate-700  rounded"
+            className=" text-green-500 rounded rounded-primary"
             aria-controls="mobile-menu"
             aria-expanded={isOpen ? "true" : "false"}
           >
@@ -55,25 +68,43 @@ const NavItems = () => {
               </div>
             )}
             {isOpen && (
-              <div className="flex flex-col pb-3 w-60 top-14 right-2 shadow-lg rounded-md absolute transition-all duration-500 border bg-white">
-                {navbarItemsData.map((item) => (
-                  <div
-                    key={item.id}
-                    className="bg-white px-3 py- text-md font-semibold text-black hover:bg-green-500 hover:text-white cursor-pointer btn border-0 shadow-none"
-                    onClick={() => handleNavigate(item.link)}
-                  >
-                    {item.title}
-                  </div>
-                ))}
-                <div className="mt-2">
-                  <LanguageToggle />
-                </div>
-              </div>
+              <Box
+                sx={{
+                  backgroundColor: "white",
+                  position: "absolute",
+                  top: "60px",
+                  right: "0px",
+                  width: "220px",
+                  boxShadow: "0 1px 5px 0px",
+                  borderRadius: "10px",
+                }}
+              >
+                <Stack
+                  direction="column"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  {navbarItemsData.map((item) => (
+                    <Box
+                      key={item.id}
+                      className="bg-white text-md font-semibold text-black hover:bg-green-500    hover:text-white cursor-pointer  shadow-none "
+                      onClick={() => handleNavigate(item.link)}
+                      py="8px"
+                      width="100%"
+                    >
+                      {item.title}
+                    </Box>
+                  ))}
+                  {/* <div className="mt-2">
+                    <LanguageToggle />
+                  </div> */}
+                </Stack>
+              </Box>
             )}
           </button>
-        </div>
-      </div>
-    </>
+        </Hidden>
+      </Box>
+    </Box>
   );
 };
 

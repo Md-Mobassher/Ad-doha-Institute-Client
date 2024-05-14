@@ -5,22 +5,36 @@ import { HiOutlineMail } from "react-icons/hi";
 import { AiOutlineYoutube } from "react-icons/ai";
 import Image from "next/image";
 import assets from "@/assets";
+import { Box, Container, Stack, Typography } from "@mui/material";
 
 const Navbar = () => {
   return (
     <>
       {/* header top */}
-      <div className="bg-primary text-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex  justify-between items-center ">
-            <div className="flex items-center text-sm lg:gap-4 gap-2">
-              <div className="flex justify-center items-center lg:gap-2 gap-1">
+      <Box className="bg-primary text-white">
+        <Container>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <div className="flex justify-between items-center gap-5 text-sm">
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                gap="5px"
+              >
                 <FaMobileAlt /> <p>+88 01916016099</p>
-              </div>
-
-              <div className="flex justify-center items-center lg:gap-2 gap-1">
+              </Stack>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                gap="5px"
+              >
                 <HiOutlineMail className="size-5" /> <p>info@ad-doha.org​</p>
-              </div>
+              </Stack>
             </div>
 
             <div className="flex ">
@@ -39,26 +53,42 @@ const Navbar = () => {
                 </div>
               </Link>
             </div>
-          </div>
-        </div>
-      </div>
+          </Stack>
+        </Container>
+      </Box>
 
-      {/* header */}
-      <header className=" sticky top-0 z-50 bg-white border-b border-t shadow-sm">
-        <div className="flex bg-white  m-0 justify-between items-center  max-w-7xl mx-auto px-4 lg:gap-5 gap-2 ">
-          <div className="flex-1 text-4xl font-semibold">
-            <Link href="/">
+      <Box
+        sx={{
+          backgroundColor: "white",
+          py: "2px",
+          position: "sticky",
+          top: "0px",
+          zIndex: "50",
+          boxShadow: "0 0.5px 5px 0px",
+        }}
+      >
+        <Container>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography
+              component={Link}
+              href="/"
+              className="flex-1 text-4xl font-semibold"
+            >
               <Image
                 src={assets.logo.headerlogo}
                 width={250}
                 height={50}
                 alt="logo"
               />
-            </Link>
-          </div>
-          <NavItems />
-        </div>
-      </header>
+            </Typography>
+            <NavItems />
+          </Stack>
+        </Container>
+      </Box>
     </>
   );
 };
