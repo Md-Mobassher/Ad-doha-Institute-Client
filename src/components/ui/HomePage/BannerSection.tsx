@@ -10,7 +10,7 @@ type TSlide = {
 
 const BannerSection = ({ slides }: any) => {
   return (
-    <div className="mt-3 mb-5 px-4">
+    <div className="mt-3 mb-5 ">
       <Swiper
         effect={"coverflow"}
         grabCursor={true}

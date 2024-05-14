@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import React from "react";
 
 const Container = ({
@@ -6,9 +7,9 @@ const Container = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className="lg:mt-20 md:mt-16 mt-12 lg:mb-8 md:mb-8 mb-6 max-w-7xl mx-auto px-4">
+    <Box className="lg:mt-20 md:mt-16 mt-12 lg:mb-8 md:mb-8 mb-6  px-2">
       {children}
-    </div>
+    </Box>
   );
 };
 
