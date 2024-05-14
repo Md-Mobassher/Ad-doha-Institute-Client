@@ -12,8 +12,34 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { FieldValues } from "react-hook-form";
-import { validationSchema } from "../login/page";
 import { dateFormatter } from "@/utils/dateFormatter";
+import { z } from "zod";
+
+export const nameValidationSchema = z.object({
+  firstName: z.string().min(1, "Please enter your first name!"),
+  middleName: z.string().min(1, "Please enter your middle name!"),
+  lastName: z.string().min(1, "Please enter your last name!"),
+});
+export const studentValidationSchema = z.object({
+  name: nameValidationSchema,
+  email: z.string().email("Please enter a valid email address!"),
+  gender: z.enum(["Male", "Female", "Others"]),
+  dateOfBirth: z.string().email("Please enter a valid Date!"),
+  contactNo: z
+    .string()
+    .regex(/^\d{11}$/, "Please provide a valid phone number!"),
+  emergencyContactNo: z
+    .string()
+    .regex(/^\d{11}$/, "Please provide a valid phone number!"),
+  bloodGroup: z.enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]),
+  presentAddress: z.string().min(1, "Please enter your present address!"),
+  permanentAddress: z.string().min(1, "Please enter your permanent address!"),
+});
+
+export const validationSchema = z.object({
+  password: z.string().min(6, "Must be at least 6 characters"),
+  patient: studentValidationSchema,
+});
 
 export const defaultValues = {
   password: "",
@@ -23,9 +49,9 @@ export const defaultValues = {
       middleName: "",
       lastName: "",
     },
+    email: "",
     gender: "",
     dateOfBirth: "",
-    email: "",
     contactNo: "",
     emergencyContactNo: "",
     bloodGroup: "",
@@ -39,7 +65,8 @@ const RegisterPage = () => {
 
   const handleRegister = async (values: FieldValues) => {
     console.log(values);
-    values.startDate = dateFormatter(values.startDate);
+    values.dateOfBirth = dateFormatter(values.dateOfBirth);
+    console.log(values);
     // const data = modifyPayload(values);
 
     // try {

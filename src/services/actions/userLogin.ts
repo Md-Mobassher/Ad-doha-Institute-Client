@@ -1,8 +1,7 @@
-"use server";
+// "use server";
 
 import { FieldValues } from "react-hook-form";
 import setAccessToken from "./setAccessToken";
-import { toast } from "sonner";
 
 export const userLogin = async (data: FieldValues) => {
   const res = await fetch(
@@ -14,20 +13,20 @@ export const userLogin = async (data: FieldValues) => {
       },
       body: JSON.stringify(data),
       credentials: "include",
-      cache: "no-store",
+      // cache: "no-store",
     }
   );
   const userInfo = await res.json();
   console.log(userInfo);
 
-  //   const passwordChangeRequired = userInfo.data.needsPasswordChange;
+  const passwordChangeRequired = userInfo.data.needsPasswordChange;
 
-  //   if (userInfo.data.accessToken) {
-  //     setAccessToken(userInfo.data.accessToken, {
-  //       redirect: "/dashboard",
-  //       passwordChangeRequired,
-  //     });
-  //   }
+  if (userInfo.data.accessToken) {
+    setAccessToken(userInfo.data.accessToken, {
+      redirect: "/dashboard",
+      passwordChangeRequired,
+    });
+  }
 
   return userInfo;
 };

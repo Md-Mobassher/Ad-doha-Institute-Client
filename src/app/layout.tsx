@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <Provider>
-      <html lang="en" data-theme="light">
+      <html lang="en">
         <body className={notoSerif.className}>
           <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
           <Toaster position="top-center" />
