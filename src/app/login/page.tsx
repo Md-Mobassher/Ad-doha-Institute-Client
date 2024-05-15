@@ -7,23 +7,29 @@ import { FieldValues } from "react-hook-form";
 import { userLogin } from "@/services/actions/userLogin";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { z } from "zod";
+import { z, ZodObject, ZodString } from "zod";
 import { useState } from "react";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { storeUserInfo } from "@/services/auth.services";
 
-export const validationSchema = z.object({
+const validationSchema = z.object({
   email: z.string().email("Please enter a valid email address!"),
   password: z.string().min(6, "Must be at least 6 characters"),
 });
+
+const defaultValues = {
+  email: "",
+  password: "",
+};
 
 const LoginPage = () => {
   const router = useRouter();
   const [error, setError] = useState("");
 
   const handleLogin = async (values: FieldValues) => {
+    console.log(values);
     try {
       const res = await userLogin(values);
       if (res?.data?.accessToken) {
@@ -78,7 +84,13 @@ const LoginPage = () => {
             </Box>
             <Box>
               <Link href="/">
-                <Typography variant="h5" fontWeight={600} mt="12px" mb="4px">
+                <Typography
+                  variant="h5"
+                  fontWeight={600}
+                  mt="12px"
+                  mb="4px"
+                  color="black"
+                >
                   আদ-দোহা ইনস্টিটিউট
                 </Typography>
                 <Typography component="p" fontWeight={600}>
@@ -108,13 +120,10 @@ const LoginPage = () => {
             <DohaForm
               onSubmit={handleLogin}
               resolver={zodResolver(validationSchema)}
-              defaultValues={{
-                email: "",
-                password: "",
-              }}
+              defaultValues={defaultValues}
             >
               <Grid container spacing={2} my={1}>
-                <Grid item md={6}>
+                <Grid item md={6} sm={6} xs={12}>
                   <DohaInput
                     name="email"
                     label="Email"
@@ -122,7 +131,7 @@ const LoginPage = () => {
                     fullWidth={true}
                   />
                 </Grid>
-                <Grid item md={6}>
+                <Grid item md={6} sm={6} xs={12}>
                   <DohaInput
                     name="password"
                     label="Password"

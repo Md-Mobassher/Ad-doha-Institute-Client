@@ -31,7 +31,7 @@ export const theme = createTheme({
 
   typography: {
     body1: {
-      color: "#0B1134CC",
+      color: "#0B1134",
     },
     fontFamily: ["Noto_Serif_Bengali"].join(","),
   },
