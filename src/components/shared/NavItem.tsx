@@ -6,11 +6,19 @@ import Link from "next/link";
 import LanguageToggle from "../ui/LanguageToggle";
 import { navbarItemsData } from "@/data/navbar";
 import { useRouter } from "next/navigation";
-import { Box, Hidden, Stack } from "@mui/material";
+import { Box, Button, Hidden, Stack } from "@mui/material";
+import { logoutUser } from "@/services/actions/logoutUser";
+import useUserInfo from "@/hooks/useUserInfo";
 
 const NavItems = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const userInfo = useUserInfo();
+  console.log(userInfo);
+
+  const handleLogOut = () => {
+    logoutUser(router);
+  };
 
   const handleNavigate = (link: string) => {
     router.push(`/${link}`);
@@ -23,25 +31,22 @@ const NavItems = () => {
         {navbarItemsData.map((item) => (
           <Box
             key={item.id}
-            className="bg-white px-3 py-2 text-md font-semibold text-black hover:bg-green-500 hover:text-white cursor-pointer btn border-0 shadow-none inline"
+            className="bg-white px-3 py-[10px] text-md font-semibold text-black hover:bg-green-500 hover:text-white cursor-pointer btn border-0 rounded-md shadow-none inline"
             onClick={() => handleNavigate(item.link)}
           >
             {item.title}
           </Box>
         ))}
-        {/* <div className="ml-2">
-              <LanguageToggle />
-            </div> */}
-        <Link href={"/login"}>
-          <div className="bg-primary text-white px-3 py-2 text-md font-semibold hover:bg-secondary hover:text-white rounded-lg cursor-pointer btn shadow-none hover:border-primary border-primary border inline">
+
+        {userInfo?.userId ? (
+          <Button color="error" onClick={handleLogOut} sx={{ boxShadow: 0 }}>
+            লগআউট
+          </Button>
+        ) : (
+          <Button component={Link} href="/login">
             লগিন
-          </div>
-        </Link>
-        {/* <Link href={"/login"}>
-            <div className="bg-primary text-white px-3 py-2 text-md font-semibold hover:bg-secondary hover:text-white rounded-lg cursor-pointer btn shadow-none hover:border-primary border-primary border inline">
-              লগআউট
-            </div>
-          </Link> */}
+          </Button>
+        )}
       </Hidden>
 
       {/* Mobile Menu Button (visible on small screens) */}
@@ -95,9 +100,20 @@ const NavItems = () => {
                       {item.title}
                     </Box>
                   ))}
-                  {/* <div className="mt-2">
-                    <LanguageToggle />
-                  </div> */}
+                  {userInfo?.userId ? (
+                    <Button
+                      color="error"
+                      onClick={handleLogOut}
+                      sx={{ boxShadow: 0 }}
+                      fullWidth
+                    >
+                      লগআউট
+                    </Button>
+                  ) : (
+                    <Button fullWidth component={Link} href="/login">
+                      লগিন
+                    </Button>
+                  )}
                 </Stack>
               </Box>
             )}

@@ -12,7 +12,7 @@ import { useState } from "react";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { storeUserInfo } from "@/services/auth.services";
+import { getUserInfo, storeUserInfo } from "@/services/auth.services";
 
 const validationSchema = z.object({
   email: z.string().email("Please enter a valid email address!"),
@@ -35,7 +35,7 @@ const LoginPage = () => {
       if (res?.data?.accessToken) {
         toast.success(res?.message);
         storeUserInfo({ accessToken: res?.data?.accessToken });
-        router.push("/");
+        router.push(`/dashboard`);
       } else {
         setError(res.message);
         toast.error(res?.message);
