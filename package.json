@@ -16,6 +16,7 @@
     "@mui/material": "^5.15.17",
     "@mui/material-nextjs": "^5.15.11",
     "@mui/x-date-pickers": "^7.4.0",
+    "@reduxjs/toolkit": "^2.2.4",
     "axios": "^1.6.8",
     "dayjs": "^1.11.11",
     "jwt-decode": "^4.0.0",

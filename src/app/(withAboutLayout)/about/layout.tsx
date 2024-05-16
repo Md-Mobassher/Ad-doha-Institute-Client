@@ -1,6 +1,6 @@
-import Footer from "@/components/shared/Footer";
-import Navbar from "@/components/shared/Navbar";
-import Sidebar from "@/components/shared/Sidebar";
+import Footer from "@/components/shared/Footer/Footer";
+import Navbar from "@/components/shared/Navbar/Navbar";
+import Sidebar from "@/components/shared/Sidebar/Sidebar";
 import PageTitle from "@/components/ui/PageTitle";
 import { aboutSidebarLink } from "@/data/about";
 import { Container } from "@mui/material";

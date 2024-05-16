@@ -1,4 +1,4 @@
-import Sidebar from "@/components/shared/Sidebar";
+import Sidebar from "@/components/shared/Sidebar/Sidebar";
 import PageTitle from "@/components/ui/PageTitle";
 import { gallerySidebarLink } from "@/data/gallery";
 import { Container } from "@mui/material";

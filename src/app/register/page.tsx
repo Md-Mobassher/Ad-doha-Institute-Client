@@ -29,7 +29,7 @@ export const studentValidationSchema = z.object({
   name: nameValidationSchema,
   email: z.string().email("Please enter a valid email address!"),
   gender: z.string(),
-  dateOfBirth: z.string().date("Please enter a valid Date!"),
+  dateOfBirth: z.string(),
   contactNo: z
     .string()
     .regex(/^\d{11}$/, "Please provide a valid phone number!"),
@@ -42,7 +42,13 @@ export const studentValidationSchema = z.object({
 });
 
 export const validationSchema = z.object({
-  password: z.string().min(6, "Must be at least 6 characters"),
+  password: z
+    .string()
+    .min(6, "Must be at least 6 characters")
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/,
+      "Password must contain at least one uppercase letter, one lowercase letter, and one digit"
+    ),
   student: studentValidationSchema,
 });
 
@@ -153,21 +159,27 @@ const RegisterPage = () => {
                   <DohaInput
                     label="First Name"
                     fullWidth={true}
+                    type="text"
                     name="student.name.firstName"
+                    required={true}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} sm={6} xs={12}>
                   <DohaInput
                     label="Middle Name"
                     fullWidth={true}
+                    type="text"
                     name="student.name.middleName"
+                    required={true}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} sm={6} xs={12}>
                   <DohaInput
                     label="Last Name"
+                    type="text"
                     fullWidth={true}
                     name="student.name.lastName"
+                    required={true}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -176,6 +188,7 @@ const RegisterPage = () => {
                     type="email"
                     fullWidth={true}
                     name="student.email"
+                    required={true}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -184,6 +197,7 @@ const RegisterPage = () => {
                     type="password"
                     fullWidth={true}
                     name="password"
+                    required={true}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -192,6 +206,7 @@ const RegisterPage = () => {
                     label="Gender"
                     fullWidth={true}
                     name="student.gender"
+                    required={true}
                     sx={{ textAlign: "start" }}
                   />
                 </Grid>
@@ -204,6 +219,7 @@ const RegisterPage = () => {
                     type="number"
                     fullWidth={true}
                     name="student.contactNo"
+                    required={true}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -212,6 +228,7 @@ const RegisterPage = () => {
                     type="number"
                     fullWidth={true}
                     name="student.emergencyContactNo"
+                    required={true}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -221,20 +238,25 @@ const RegisterPage = () => {
                     fullWidth={true}
                     name="student.bloodGroup"
                     sx={{ textAlign: "start" }}
+                    required={true}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} sm={6} xs={12}>
                   <DohaInput
                     label="Present Address"
+                    type="text"
                     fullWidth={true}
                     name="student.presentAddress"
+                    required={true}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} sm={6} xs={12}>
                   <DohaInput
                     label="Parmanent Address"
+                    type="text"
                     fullWidth={true}
                     name="student.permanentAddress"
+                    required={true}
                   />
                 </Grid>
               </Grid>

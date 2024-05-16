@@ -1,4 +1,4 @@
-const DoctorPage = () => {
+const FacultyPage = () => {
   return (
     <div>
       <h1>Doctor Dashboard</h1>
@@ -6,4 +6,4 @@ const DoctorPage = () => {
   );
 };
 
-export default DoctorPage;
+export default FacultyPage;
