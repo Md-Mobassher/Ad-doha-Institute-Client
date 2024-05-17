@@ -3,7 +3,6 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
 import Link from "next/link";
-import LanguageToggle from "../ui/LanguageToggle";
 import { navbarItemsData } from "@/data/navbar";
 import { useRouter } from "next/navigation";
 import { Box, Button, Hidden, Stack } from "@mui/material";

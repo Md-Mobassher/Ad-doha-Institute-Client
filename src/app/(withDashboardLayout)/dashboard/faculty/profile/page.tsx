@@ -86,3 +86,13 @@
 // };
 
 // export default Profile;
+
+const FacultyProfilePage = () => {
+  return (
+    <div>
+      <h1>This is FacultyProfilePage component</h1>
+    </div>
+  );
+};
+
+export default FacultyProfilePage;

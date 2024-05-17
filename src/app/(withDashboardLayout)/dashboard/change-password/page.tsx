@@ -3,13 +3,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { z } from "zod";
-import KeyIcon from "@mui/icons-material/Key";
 // import { useChangePasswordMutation } from '@/redux/api/authApi';
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { logoutUser } from "@/services/actions/logoutUser";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
+// import KeyIcon from "@mui/icons-material/Key";
 
 const validationSchema = z.object({
   oldPassword: z.string().min(6, "Must be at least 6 characters long"),
@@ -59,7 +59,7 @@ const ChangePassword = () => {
             },
           }}
         >
-          <KeyIcon sx={{ color: "primary.main" }} />
+          {/** <KeyIcon sx={{ color: "primary.main" }} />  */}
         </Box>
         <Typography variant="h5" fontWeight={600} sx={{ mb: 2, mt: -1.5 }}>
           Change password

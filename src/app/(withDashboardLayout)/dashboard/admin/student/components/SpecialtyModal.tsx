@@ -1,8 +1,7 @@
-import PHFileUploader from "@/components/Forms/PHFileUploader";
-import PHForm from "@/components/Forms/PHForm";
-import PHInput from "@/components/Forms/PHInput";
-import PHModal from "@/components/Shared/PHModal/PHModal";
-import { useCreateSpecialtyMutation } from "@/redux/api/specialtiesApi";
+import DohaFileUploader from "@/components/form/DohaFileUploader";
+import DohaForm from "@/components/form/DohaForm";
+import DohaInput from "@/components/form/DohaInput";
+import DohaModal from "@/components/shared/DohaModal/DohaModal";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { Button, Grid } from "@mui/material";
 
@@ -16,38 +15,37 @@ type TProps = {
 };
 
 const SpecialtyModal = ({ open, setOpen }: TProps) => {
-  const [createSpecialty] = useCreateSpecialtyMutation();
-
   const handleFormSubmit = async (values: FieldValues) => {
-    const data = modifyPayload(values);
-    try {
-      const res = await createSpecialty(data).unwrap();
-      console.log(res);
-      if (res?.id) {
-        toast.success("Specialty created successfully!!");
-        setOpen(false);
-      }
-    } catch (err: any) {
-      console.error(err.message);
-    }
+    console.log(values);
+    // const data = modifyPayload(values);
+    // try {
+    //   const res = await createSpecialty(data).unwrap();
+    //   console.log(res);
+    //   if (res?.id) {
+    //     toast.success("Specialty created successfully!!");
+    //     setOpen(false);
+    //   }
+    // } catch (err: any) {
+    //   console.error(err.message);
+    // }
   };
 
   return (
-    <PHModal open={open} setOpen={setOpen} title="Create A New Specialty">
-      <PHForm onSubmit={handleFormSubmit}>
+    <DohaModal open={open} setOpen={setOpen} title="Create A New Specialty">
+      <DohaForm onSubmit={handleFormSubmit}>
         <Grid container spacing={2}>
           <Grid item md={6}>
-            <PHInput name="title" label="Title" />
+            <DohaInput name="title" label="Title" />
           </Grid>
           <Grid item md={6}>
-            <PHFileUploader name="file" label="Upload File" />
+            <DohaFileUploader name="file" label="Upload File" />
           </Grid>
         </Grid>
         <Button sx={{ mt: 1 }} type="submit">
           Create
         </Button>
-      </PHForm>
-    </PHModal>
+      </DohaForm>
+    </DohaModal>
   );
 };
 
