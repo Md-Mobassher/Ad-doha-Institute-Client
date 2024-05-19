@@ -113,7 +113,6 @@ const RegisterForm = () => {
               fullWidth={true}
               type="text"
               name="student.name.firstName"
-              required={true}
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -122,7 +121,6 @@ const RegisterForm = () => {
               fullWidth={true}
               type="text"
               name="student.name.middleName"
-              required={true}
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -131,7 +129,6 @@ const RegisterForm = () => {
               type="text"
               fullWidth={true}
               name="student.name.lastName"
-              required={true}
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -140,7 +137,6 @@ const RegisterForm = () => {
               type="email"
               fullWidth={true}
               name="student.email"
-              required={true}
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -149,7 +145,6 @@ const RegisterForm = () => {
               type="password"
               fullWidth={true}
               name="password"
-              required={true}
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -158,7 +153,6 @@ const RegisterForm = () => {
               label="Gender"
               fullWidth={true}
               name="student.gender"
-              required={true}
               sx={{ textAlign: "start" }}
             />
           </Grid>
@@ -171,7 +165,6 @@ const RegisterForm = () => {
               type="number"
               fullWidth={true}
               name="student.contactNo"
-              required={true}
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -180,7 +173,6 @@ const RegisterForm = () => {
               type="number"
               fullWidth={true}
               name="student.emergencyContactNo"
-              required={true}
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -190,7 +182,6 @@ const RegisterForm = () => {
               fullWidth={true}
               name="student.bloodGroup"
               sx={{ textAlign: "start" }}
-              required={true}
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -199,7 +190,6 @@ const RegisterForm = () => {
               type="text"
               fullWidth={true}
               name="student.presentAddress"
-              required={true}
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -208,7 +198,6 @@ const RegisterForm = () => {
               type="text"
               fullWidth={true}
               name="student.permanentAddress"
-              required={true}
             />
           </Grid>
         </Grid>

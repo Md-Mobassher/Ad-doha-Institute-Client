@@ -3,16 +3,10 @@ import { USER_ROLE } from "@/constant/role";
 //icons
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
-import MedicalInformationIcon from "@mui/icons-material/MedicalInformation";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import ReviewsIcon from "@mui/icons-material/Reviews";
-import AirlineSeatIndividualSuiteIcon from "@mui/icons-material/AirlineSeatIndividualSuite";
-import TryIcon from "@mui/icons-material/Try";
 import PersonIcon from "@mui/icons-material/Person";
 import KeyIcon from "@mui/icons-material/Key";
 import BookOnlineIcon from "@mui/icons-material/BookOnline";
-import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { DrawerItem, UserRole } from "@/type";
 
 export const drawerItems = (role: UserRole): DrawerItem[] => {
@@ -32,7 +26,7 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
   ];
 
   switch (role) {
-    case USER_ROLE.SUPER_ADMIN:
+    case USER_ROLE.super_admin:
       roleMenus.push(
         {
           title: "Dashboard",
@@ -40,14 +34,54 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           icon: DashboardIcon,
         },
         {
-          title: "Manage Users",
-          path: `${role}/manage-users`,
-          icon: GroupIcon,
+          title: "Admin Management",
+          path: `${role}/admin`,
+          icon: DashboardIcon,
+        },
+
+        {
+          title: "Faculty Mangement",
+          path: `${role}/faculty`,
+          icon: DashboardIcon,
+        },
+
+        {
+          title: "Student Mangement",
+          path: `${role}/student`,
+          icon: DashboardIcon,
         }
       );
       break;
 
-    case USER_ROLE.ADMIN:
+    case USER_ROLE.admin:
+      roleMenus.push(
+        {
+          title: "Dashboard",
+          path: `${role}`,
+          icon: DashboardIcon,
+        },
+
+        {
+          title: "Admin Management",
+          path: `${role}/admin`,
+          icon: DashboardIcon,
+        },
+
+        {
+          title: "Faculty Mangement",
+          path: `${role}/faculty`,
+          icon: DashboardIcon,
+        },
+
+        {
+          title: "Student Mangement",
+          path: `${role}/student`,
+          icon: DashboardIcon,
+        }
+      );
+      break;
+
+    case USER_ROLE.faculty:
       roleMenus.push(
         {
           title: "Dashboard",
@@ -55,71 +89,24 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           icon: DashboardIcon,
         },
         {
-          title: "Specialties",
-          path: `${role}/specialties`,
-          icon: TryIcon,
-        },
-        {
-          title: "Doctors",
-          path: `${role}/doctors`,
-          icon: MedicalInformationIcon,
-        },
-        {
-          title: "Schedules",
-          path: `${role}/schedules`,
+          title: "Student",
+          path: `${role}/student`,
           icon: CalendarMonthIcon,
         },
         {
-          title: "Appointments",
-          path: `${role}/appointments`,
-          icon: BookOnlineIcon,
-        },
-        {
-          title: "Reviews",
-          path: `${role}/reviews`,
-          icon: ReviewsIcon,
-        }
-      );
-      break;
-
-    case USER_ROLE.FACULTY:
-      roleMenus.push(
-        {
-          title: "Dashboard",
-          path: `${role}`,
-          icon: DashboardIcon,
-        },
-        {
-          title: "Schedules",
-          path: `${role}/schedules`,
+          title: "Courses",
+          path: `${role}/courses`,
           icon: CalendarMonthIcon,
-        },
-        {
-          title: "Appointments",
-          path: `${role}/appointment`,
-          icon: BookOnlineIcon,
         }
       );
       break;
 
-    case USER_ROLE.STUDENT:
-      roleMenus.push(
-        {
-          title: "Appointments",
-          path: `${role}/appointments`,
-          icon: BookOnlineIcon,
-        },
-        {
-          title: "Prescriptions",
-          path: `${role}/prescriptions`,
-          icon: ReceiptLongIcon,
-        },
-        {
-          title: "Payment History",
-          path: `${role}/payment-history`,
-          icon: AttachMoneyIcon,
-        }
-      );
+    case USER_ROLE.student:
+      roleMenus.push({
+        title: "Dashboard",
+        path: `${role}/appointments`,
+        icon: BookOnlineIcon,
+      });
       break;
 
     default:

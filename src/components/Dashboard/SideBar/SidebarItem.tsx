@@ -16,6 +16,7 @@ type IProps = {
 const SidebarItem = ({ item }: IProps) => {
   const linkPath = `/dashboard/${item.path}`;
   const pathname = usePathname();
+  console.log(item);
 
   console.log({ pathname, linkPath });
   return (
@@ -25,9 +26,9 @@ const SidebarItem = ({ item }: IProps) => {
         sx={{
           ...(pathname === linkPath
             ? {
-                borderRight: "3px solid #1586FD",
+                borderRight: "3px solid #22C55E",
                 "& svg": {
-                  color: "#1586FD",
+                  color: " #22C55E",
                 },
               }
             : {}),

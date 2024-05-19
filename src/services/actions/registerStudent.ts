@@ -1,7 +1,7 @@
 "use server";
 export const registerStudent = async (formData: FormData) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL_LOCAL}/users/create-student`,
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/users/create-student`,
     {
       method: "POST",
       body: formData,
