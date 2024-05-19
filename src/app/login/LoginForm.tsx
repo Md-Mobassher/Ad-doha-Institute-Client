@@ -70,7 +70,7 @@ const LoginForm = () => {
         resolver={zodResolver(validationSchema)}
         defaultValues={defaultValues}
       >
-        <Grid container spacing={2} my={1}>
+        <Grid container spacing={3} my={1}>
           <Grid item md={6} sm={6} xs={12}>
             <DohaInput
               name="email"
@@ -90,7 +90,7 @@ const LoginForm = () => {
         </Grid>
 
         <Typography
-          mb={1}
+          my={1}
           textAlign="end"
           component="p"
           fontWeight={400}

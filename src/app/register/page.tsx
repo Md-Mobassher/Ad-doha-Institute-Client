@@ -19,7 +19,18 @@ const RegisterPage = () => {
             width: "100%",
             boxShadow: 1,
             borderRadius: 1,
-            p: 4,
+            p: {
+              xs: 3,
+              sm: 3,
+              md: 4,
+              lg: 4,
+            },
+            my: {
+              xs: 2,
+              sm: 2,
+              md: 0,
+              lg: 0,
+            },
             textAlign: "center",
           }}
         >

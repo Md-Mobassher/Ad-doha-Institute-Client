@@ -2,6 +2,10 @@ import { MenuItem, SxProps, TextField } from "@mui/material";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
+interface IItem {
+  label: string;
+  value: string;
+}
 interface ITextField {
   name: string;
   size?: "small" | "medium";
@@ -10,7 +14,7 @@ interface ITextField {
   required?: boolean;
   fullWidth?: boolean;
   sx?: SxProps;
-  items: string[];
+  items: IItem[];
 }
 
 const DohaSelectField = ({
@@ -45,9 +49,9 @@ const DohaSelectField = ({
             isError ? (formState.errors[name]?.message as string) : ""
           }
         >
-          {items.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
+          {items.map((item) => (
+            <MenuItem key={name} value={item.value}>
+              {item.label}
             </MenuItem>
           ))}
         </TextField>

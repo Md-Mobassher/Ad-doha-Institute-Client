@@ -1,8 +1,6 @@
 import { USER_ROLE } from "@/constant/role";
 import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
-export const Gender = ["Male", "Female", "Others"];
-export const BloodGroup = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
 export type TCardProps = {
   id: string;

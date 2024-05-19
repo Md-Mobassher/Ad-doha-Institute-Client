@@ -21,7 +21,12 @@ const LoginPage = () => {
             width: "100%",
             boxShadow: 1,
             borderRadius: 1,
-            p: 4,
+            p: {
+              xs: 3,
+              sm: 3,
+              md: 4,
+              lg: 4,
+            },
             textAlign: "center",
           }}
         >

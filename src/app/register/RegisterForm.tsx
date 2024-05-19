@@ -4,7 +4,6 @@ import DohaDatePicker from "@/components/form/DohaDatePicker";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
-import { BloodGroup, Gender } from "@/type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FieldValues } from "react-hook-form";
@@ -17,6 +16,8 @@ import { registerStudent } from "@/services/actions/registerStudent";
 import { useRouter } from "next/navigation";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Link from "next/link";
+import dayjs from "dayjs";
+import { BloodGroupOptions, genderOptions } from "@/constant/global";
 
 export const nameValidationSchema = z.object({
   firstName: z.string().min(1, "Please enter your first name!"),
@@ -27,7 +28,9 @@ export const studentValidationSchema = z.object({
   name: nameValidationSchema,
   email: z.string().email("Please enter a valid email address!"),
   gender: z.string(),
-  dateOfBirth: z.string(),
+  dateOfBirth: z.string().refine((date) => dayjs(date).isValid(), {
+    message: "Please enter a valid date!",
+  }),
   contactNo: z
     .string()
     .regex(/^\d{11}$/, "Please provide a valid phone number!"),
@@ -35,7 +38,7 @@ export const studentValidationSchema = z.object({
     .string()
     .regex(/^\d{11}$/, "Please provide a valid phone number!"),
   bloodGroup: z.string(),
-  presentAddress: z.string().min(1, "Please enter your present address!"),
+  presentAddress: z.string().min(3, "Please enter your present address!"),
   permanentAddress: z.string().min(1, "Please enter your permanent address!"),
 });
 
@@ -60,7 +63,7 @@ export const defaultValues = {
     },
     email: "",
     gender: "",
-    dateOfBirth: "",
+    dateOfBirth: dayjs().toString(),
     contactNo: "",
     emergencyContactNo: "",
     bloodGroup: "",
@@ -73,8 +76,8 @@ const RegisterForm = () => {
   const router = useRouter();
 
   const handleRegister = async (values: FieldValues) => {
+    values.student.dateOfBirth = dateFormatter(values.student.dateOfBirth);
     console.log(values);
-    values.dateOfBirth = dateFormatter(values.dateOfBirth);
     const data = modifyPayload(values);
 
     try {
@@ -151,7 +154,7 @@ const RegisterForm = () => {
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaSelectField
-              items={Gender}
+              items={genderOptions}
               label="Gender"
               fullWidth={true}
               name="student.gender"
@@ -160,7 +163,7 @@ const RegisterForm = () => {
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaDatePicker name="dateOfBirth" label="Date of Birth" />
+            <DohaDatePicker name="student.dateOfBirth" label="Date of Birth" />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
@@ -182,7 +185,7 @@ const RegisterForm = () => {
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaSelectField
-              items={BloodGroup}
+              items={BloodGroupOptions}
               label="Blood Group"
               fullWidth={true}
               name="student.bloodGroup"

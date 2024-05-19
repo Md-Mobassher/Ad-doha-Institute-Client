@@ -23,21 +23,21 @@ const DohaDatePicker = ({
   sx,
 }: IDatePicker) => {
   const { control } = useFormContext();
+
   return (
     <Controller
       name={name}
       control={control}
-      defaultValue={dayjs(new Date().toDateString())}
+      defaultValue={dayjs()}
       render={({ field: { onChange, value, ...field } }) => {
         return (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DesktopDatePicker
               label={label}
-              timezone="system"
               disableFuture
               {...field}
               onChange={(date) => onChange(date)}
-              value={value}
+              value={value ? dayjs(value) : null}
               slotProps={{
                 textField: {
                   required: required,
