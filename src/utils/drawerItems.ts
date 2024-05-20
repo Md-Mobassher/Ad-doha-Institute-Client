@@ -63,7 +63,7 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
 
         {
           title: "Admin Management",
-          path: `${role}/admin`,
+          path: `${role}/admin-management`,
           icon: DashboardIcon,
         },
 
