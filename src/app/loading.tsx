@@ -1,15 +1,9 @@
-import Image from "next/image";
-
 const LoadingPage = () => {
   return (
-    <div className="w-[80%] mx-auto my-20">
-      <Image
-        src="https://i.stack.imgur.com/hzk6C.gif"
-        width={500}
-        height={500}
-        alt="loading"
-        className="w-96 mx-auto"
-      />
+    <div className="flex justify-center items-center h-[calc(100vh-300px)]">
+      <p className="text-7xl font-bold text-primary">L</p>
+      <div className="w-14 h-14 border-8 border-dashed rounded-full animate-spin mt-2 border-red-500"></div>
+      <p className="text-7xl font-bold text-primary">ading....</p>
     </div>
   );
 };

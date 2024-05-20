@@ -5,7 +5,7 @@ import { RxCross2 } from "react-icons/rx";
 import Link from "next/link";
 import { navbarItemsData } from "@/data/navbar";
 import { useRouter } from "next/navigation";
-import { Box, Button, Hidden, Stack } from "@mui/material";
+import { Box, Button, Hidden, Stack, Typography } from "@mui/material";
 import { logoutUser } from "@/services/actions/logoutUser";
 import useUserInfo from "@/hooks/useUserInfo";
 
@@ -36,6 +36,16 @@ const NavItems = () => {
             {item.title}
           </Box>
         ))}
+
+        {userInfo?.userId ? (
+          <Box
+            className="bg-white px-3 py-[10px] text-md font-semibold text-black hover:bg-green-500 hover:text-white cursor-pointer btn border-0 rounded-md shadow-none inline"
+            component={Link}
+            href="/dashboard"
+          >
+            ড্যাশবোর্ড
+          </Box>
+        ) : null}
 
         {userInfo?.userId ? (
           <Button color="error" onClick={handleLogOut} sx={{ boxShadow: 0 }}>
@@ -99,6 +109,19 @@ const NavItems = () => {
                       {item.title}
                     </Box>
                   ))}
+
+                  {userInfo?.userId ? (
+                    <Box
+                      className="bg-white text-md font-semibold text-black hover:bg-green-500    hover:text-white cursor-pointer  shadow-none "
+                      component={Link}
+                      href="/dashboard"
+                      py="8px"
+                      width="100%"
+                    >
+                      ড্যাশবোর্ড
+                    </Box>
+                  ) : null}
+
                   {userInfo?.userId ? (
                     <Button
                       color="error"
