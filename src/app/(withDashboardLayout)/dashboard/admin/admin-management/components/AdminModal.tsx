@@ -4,23 +4,49 @@ import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
 import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenModal";
 import { BloodGroupOptions, genderOptions } from "@/constant/global";
-import { useCreateAdminMutation } from "@/redux/api/admin/adminManagementApi";
+import { useCreateAdminMutation } from "@/redux/features/admin/adminManagementApi";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Grid } from "@mui/material";
 import dayjs from "dayjs";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
+import { z } from "zod";
 
 type TProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+const Gender = ["male", "female", "other"];
+const BloodGroup = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+
+const updateUserNameValidationSchema = z.object({
+  firstName: z.string().min(3).max(20).optional(),
+  middleName: z.string().min(3).max(20).optional(),
+  lastName: z.string().min(3).max(20).optional(),
+});
+
+export const updateAdminValidationSchema = z.object({
+  admin: z.object({
+    name: updateUserNameValidationSchema.optional(),
+    designation: z.string().max(30).optional(),
+    gender: z.enum([...Gender] as [string, ...string[]]).optional(),
+    dateOfBirth: z.string().optional(),
+    email: z.string().email().optional(),
+    contactNo: z.string().optional(),
+    emergencyContactNo: z.string().optional(),
+    bloodGroup: z.enum([...BloodGroup] as [string, ...string[]]).optional(),
+    presentAddress: z.string().optional(),
+    permanentAddress: z.string().optional(),
+    // profileImg: z.string().optional(),
+  }),
+});
+
 const AdminModal = ({ open, setOpen }: TProps) => {
   const [createAdmin] = useCreateAdminMutation();
   const handleFormSubmit = async (values: FieldValues) => {
-    // console.log(values);
+    console.log(values);
 
     const data = modifyPayload(values);
     try {
@@ -58,7 +84,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
     <DohaFullScreenModal open={open} setOpen={setOpen} title="Create New Admin">
       <DohaForm
         onSubmit={handleFormSubmit}
-        // resolver={zodResolver(validationSchema)}
+        resolver={zodResolver(updateAdminValidationSchema)}
         defaultValues={defaultValues}
       >
         <Grid container spacing={3} my={1}>
@@ -135,7 +161,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               items={BloodGroupOptions}
               label="Blood Group"
               fullWidth={true}
-              name="student.bloodGroup"
+              name="admin.bloodGroup"
               sx={{ textAlign: "start" }}
             />
           </Grid>
@@ -144,7 +170,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               label="Present Address"
               type="text"
               fullWidth={true}
-              name="student.presentAddress"
+              name="admin.presentAddress"
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -152,7 +178,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               label="Parmanent Address"
               type="text"
               fullWidth={true}
-              name="student.permanentAddress"
+              name="admin.permanentAddress"
             />
           </Grid>
         </Grid>
@@ -163,7 +189,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
           fullWidth={true}
           type="submit"
         >
-          Register
+          Create A New Admin
         </Button>
       </DohaForm>
     </DohaFullScreenModal>

@@ -1,11 +1,11 @@
 import { authKey } from "@/constant/authkey";
 import { instance as axiosInstance } from "@/helpers/axios/axiosInstance";
-import { decodedToken } from "@/utils/jwt";
 import {
   getFromLocalStorage,
   removeFromLocalStorage,
   setToLocalStorage,
 } from "@/utils/local-storage";
+import { verifyToken } from "@/utils/verifyToken";
 
 export const storeUserInfo = ({ accessToken }: { accessToken: string }) => {
   //   console.log(accessToken);
@@ -16,7 +16,7 @@ export const getUserInfo = () => {
   const authToken = getFromLocalStorage(authKey);
   //   console.log(authToken);
   if (authToken) {
-    const decodedData: any = decodedToken(authToken);
+    const decodedData: any = verifyToken(authToken);
     return {
       ...decodedData,
       role: decodedData?.role?.toLowerCase(),

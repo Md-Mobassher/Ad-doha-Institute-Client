@@ -4,10 +4,6 @@ import { Avatar, Button, IconButton, Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import AdminModal from "./components/AdminModal";
-import {
-  useDeleteAdminMutation,
-  useGetAllAdminQuery,
-} from "@/redux/api/admin/adminManagementApi";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -15,6 +11,10 @@ import Link from "next/link";
 import Image from "next/image";
 import LoadingPage from "@/app/loading";
 import { toast } from "sonner";
+import {
+  useDeleteAdminMutation,
+  useGetAllAdminQuery,
+} from "@/redux/features/admin/adminManagementApi";
 
 const AdminManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

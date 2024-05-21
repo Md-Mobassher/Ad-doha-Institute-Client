@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { getFromLocalStorage } from "@/utils/local-storage";
-import { decodedToken } from "@/utils/jwt";
 import { authKey } from "@/constant/authkey";
 import { JwtPayload } from "jwt-decode";
+import { verifyToken } from "@/utils/verifyToken";
 
 const useUserInfo = (): any | string => {
   const [userInfo, setUserInfo] = useState<any | string>("");
@@ -11,7 +11,7 @@ const useUserInfo = (): any | string => {
     const fetchUserInfo = () => {
       const authToken = getFromLocalStorage(authKey);
       if (authToken) {
-        const decodedData: JwtPayload & { role: any } = decodedToken(
+        const decodedData: JwtPayload & { role: any } = verifyToken(
           authToken
         ) as JwtPayload & {
           role: any;

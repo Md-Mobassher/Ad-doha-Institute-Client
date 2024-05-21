@@ -1,5 +1,5 @@
-import { tagTypes } from "../../tag-Types";
-import { baseApi } from "../baseApi";
+import { baseApi } from "@/redux/api/baseApi";
+import { tagTypes } from "@/redux/tag-Types";
 
 const adminsApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

@@ -9,7 +9,8 @@ import { BloodGroupOptions, genderOptions } from "@/constant/global";
 import {
   useGetSingleAdminQuery,
   useUpdateAdminMutation,
-} from "@/redux/api/admin/adminManagementApi";
+} from "@/redux/features/admin/adminManagementApi";
+import { dateFormatter } from "@/utils/dateFormatter";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
@@ -23,22 +24,33 @@ type TParams = {
 };
 
 const AdminUpdatePage = ({ params }: TParams) => {
-  //   console.log(params?.doctorId);
   const router = useRouter();
 
-  const id = params?.adminId;
-
-  const { data, isLoading } = useGetSingleAdminQuery(id);
-  const [updateAdmin] = useUpdateAdminMutation();
-  console.log(data);
-  const admin = data;
+  const { data, isLoading } = useGetSingleAdminQuery(params?.adminId);
+  const [updateAdmin, { data: updateData, error }] = useUpdateAdminMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    values.id = id;
-    // console.log({ id: values.id, body: values });
-
+    const formattedValues = {
+      admin: {
+        name: values.name,
+        designation: "Admin",
+        gender: values.gender,
+        dateOfBirth: dateFormatter(values.dateOfBirth),
+        email: values.email,
+        contactNo: values.contactNo,
+        emergencyContactNo: values.emergencyContactNo,
+        bloodGroup: values.bloodGroup,
+        presentAddress: values.presentAddress,
+        permanentAddress: values.permanentAddress,
+      },
+    };
+    console.log(formattedValues);
     try {
-      const res = await updateAdmin({ id: values.id, body: values }).unwrap();
+      const res = await updateAdmin({
+        id: params?.adminId,
+        body: formattedValues,
+      }).unwrap();
+
       if (res?.id) {
         toast.success("Admin Updated Successfully!!!");
         router.push("/dashboard/admin/admin-management");
@@ -49,22 +61,21 @@ const AdminUpdatePage = ({ params }: TParams) => {
   };
 
   const defaultValues = {
-    admin: {
-      name: {
-        firstName: data?.name?.firstName || "",
-        middleName: data?.name?.middleName || "",
-        lastName: data?.name?.lastName || "",
-      },
-      email: data?.email || "",
-      gender: data?.gender || "",
-      dateOfBirth: dayjs(data?.dateOfBirth) || "",
-      contactNo: data?.contactNo || "",
-      emergencyContactNo: data?.emergencyContactNo || "",
-      bloodGroup: data?.bloodGroup || "",
-      presentAddress: data?.presentAddress || "",
-      permanentAddress: data?.permanentAddress || "",
+    name: {
+      firstName: data?.name?.firstName || "",
+      middleName: data?.name?.middleName || "",
+      lastName: data?.name?.lastName || "",
     },
+    email: data?.email || "",
+    gender: data?.gender || "",
+    dateOfBirth: dayjs(data?.dateOfBirth) || "",
+    contactNo: data?.contactNo || "",
+    emergencyContactNo: data?.emergencyContactNo || "",
+    bloodGroup: data?.bloodGroup || "",
+    presentAddress: data?.presentAddress || "",
+    permanentAddress: data?.permanentAddress || "",
   };
+
   return (
     <Box>
       <Typography
@@ -81,7 +92,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
       ) : (
         <DohaForm
           onSubmit={handleFormSubmit}
-          // resolver={zodResolver(validationSchema)}
+          //   resolver={zodResolver(validationSchema)}
           defaultValues={defaultValues}
         >
           <Grid container spacing={3} my={1}>
@@ -90,7 +101,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 label="First Name"
                 fullWidth={true}
                 type="text"
-                name="admin.name.firstName"
+                name="name.firstName"
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -98,7 +109,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 label="Middle Name"
                 fullWidth={true}
                 type="text"
-                name="admin.name.middleName"
+                name="name.middleName"
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -106,7 +117,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 label="Last Name"
                 type="text"
                 fullWidth={true}
-                name="admin.name.lastName"
+                name="name.lastName"
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -114,7 +125,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 label="Email"
                 type="email"
                 fullWidth={true}
-                name="admin.email"
+                name="email"
               />
             </Grid>
 
@@ -123,19 +134,19 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 items={genderOptions}
                 label="Gender"
                 fullWidth={true}
-                name="admin.gender"
+                name="gender"
                 sx={{ textAlign: "start" }}
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
-              <DohaDatePicker name="admin.dateOfBirth" label="Date of Birth" />
+              <DohaDatePicker name="dateOfBirth" label="Date of Birth" />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <DohaInput
                 label="Contact Number"
                 type="number"
                 fullWidth={true}
-                name="admin.contactNo"
+                name="contactNo"
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -143,7 +154,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 label="Emergency Contact Number"
                 type="number"
                 fullWidth={true}
-                name="admin.emergencyContactNo"
+                name="emergencyContactNo"
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -151,7 +162,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 items={BloodGroupOptions}
                 label="Blood Group"
                 fullWidth={true}
-                name="admin.bloodGroup"
+                name="bloodGroup"
                 sx={{ textAlign: "start" }}
               />
             </Grid>
@@ -160,7 +171,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 label="Present Address"
                 type="text"
                 fullWidth={true}
-                name="admin.presentAddress"
+                name="presentAddress"
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -168,7 +179,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 label="Parmanent Address"
                 type="text"
                 fullWidth={true}
-                name="admin.permanentAddress"
+                name="permanentAddress"
               />
             </Grid>
           </Grid>
