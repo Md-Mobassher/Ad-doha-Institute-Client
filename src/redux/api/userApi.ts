@@ -1,5 +1,5 @@
-import { tagTypes } from "../tag-Types";
 import { baseApi } from "./baseApi";
+import { tagTypes } from "../tag-Types";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

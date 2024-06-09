@@ -17,8 +17,12 @@ const LoginPage = () => {
       >
         <Box
           sx={{
-            maxWidth: 600,
-            width: "100%",
+            maxWidth: {
+              xs: 400,
+              sm: 600,
+              md: 600,
+              lg: 700,
+            },
             boxShadow: 1,
             borderRadius: 1,
             p: {

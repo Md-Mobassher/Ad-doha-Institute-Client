@@ -4,24 +4,19 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { storeUserInfo } from "@/services/auth.services";
 import { z } from "zod";
 import { FieldValues } from "react-hook-form";
-import { userLogin } from "@/services/actions/userLogin";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
-import { useLoginMutation } from "@/redux/features/auth/authApi";
-import { useAppDispatch } from "@/redux/hooks";
-import { verifyToken } from "@/utils/verifyToken";
-import { setUser, TUser } from "@/redux/features/auth/authSlice";
+import { storeUserInfo } from "@/services/auth.services";
+import { userLogin } from "@/services/actions/userLogin";
 
 const validationSchema = z.object({
   email: z.string().email("Please enter a valid email address!"),
   password: z.string().min(6, "Must be at least 6 characters"),
 });
-
 const defaultValues = {
   email: "",
   password: "",
@@ -31,24 +26,13 @@ const LoginForm = () => {
   const router = useRouter();
   const [error, setError] = useState("");
 
-  const dispatch = useAppDispatch();
-  const [login] = useLoginMutation();
-
   const handleLogin = async (values: FieldValues) => {
-    console.log(values);
-
     try {
-      // const res = await userLogin(values);
-      const res = await login(values).unwrap();
-
-      console.log(res);
-      const user = verifyToken(res.data.accessToken) as TUser;
-
+      const res = await userLogin(values);
       if (res?.data?.accessToken) {
         toast.success(res?.message);
-        dispatch(setUser({ user: user, token: res.data.accessToken }));
-        // storeUserInfo({ accessToken: res?.data?.accessToken });
-        router.push(`/dashboard`);
+        storeUserInfo({ accessToken: res?.data?.accessToken });
+        router.push("/dashboard");
       } else {
         setError(res.message);
         toast.error(res?.message);
