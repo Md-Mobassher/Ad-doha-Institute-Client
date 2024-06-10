@@ -45,7 +45,17 @@ export default function DohaFullScreenModal({
         TransitionComponent={Transition}
       >
         <DialogTitle
-          sx={{ color: "primary.main", background: "#f4f7fe" }}
+          sx={{
+            color: "primary.main",
+            fontSize: {
+              lg: "40px",
+              md: "35px",
+              sm: "30px",
+              xs: "25px",
+            },
+            fontWeight: 600,
+            background: "#f4f7fe",
+          }}
           id="customized-dialog-title"
         >
           {title}

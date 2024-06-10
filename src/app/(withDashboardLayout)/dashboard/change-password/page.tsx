@@ -62,9 +62,9 @@ const ChangePassword = () => {
             },
           }}
         >
-          * <KeyIcon sx={{ color: "primary.main" }} />
+          <KeyIcon sx={{ color: "primary.main" }} />
         </Box>
-        <Typography variant="h5" fontWeight={600} sx={{ mb: 2, mt: -1.5 }}>
+        <Typography variant="h5" fontWeight={600} sx={{ mb: 3, mt: -1.5 }}>
           Change password
         </Typography>
       </Stack>

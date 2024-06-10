@@ -13,7 +13,7 @@ import SideBar from "../SideBar/SideBar";
 import { Avatar, Badge, Stack } from "@mui/material";
 import AccountMenu from "../AccountMenu/AccountMenu";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import { useGetSingleUserQuery } from "@/redux/api/userApi";
+import { useGetSingleUserQuery } from "@/redux/features/userApi";
 
 const drawerWidth = 240;
 

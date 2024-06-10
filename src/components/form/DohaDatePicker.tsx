@@ -34,6 +34,7 @@ const DohaDatePicker = ({
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DesktopDatePicker
               label={label}
+              timezone="system"
               disableFuture
               {...field}
               onChange={(date) => onChange(date)}

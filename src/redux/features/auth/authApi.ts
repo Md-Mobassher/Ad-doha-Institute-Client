@@ -13,20 +13,15 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.user],
     }),
-
     changePassword: build.mutation({
-      query: (values) => {
-        console.log(values);
-        return {
-          url: `${AUTH_URL}/change-password`,
-          method: "POST",
-          contentType: "application/json",
-          data: values,
-        };
-      },
+      query: (data) => ({
+        url: `${AUTH_URL}/change-password`,
+        method: "POST",
+        contentType: "application/json",
+        data: data,
+      }),
       invalidatesTags: [tagTypes.user],
     }),
-
     forgotPassword: build.mutation({
       query: (data) => ({
         url: `${AUTH_URL}/forgot-password`,
@@ -35,7 +30,6 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.user],
     }),
-
     resetPassword: build.mutation({
       query: (data) => ({
         url: `${AUTH_URL}/reset-password`,

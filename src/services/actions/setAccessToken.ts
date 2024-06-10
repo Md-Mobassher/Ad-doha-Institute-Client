@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 const setAccessToken = (token: string, option?: any) => {
-  console.log(token);
+  // console.log(token);
   cookies().set(authKey, token);
   if (option && option.passwordChangeRequired) {
     redirect("/dashboard/change-password");

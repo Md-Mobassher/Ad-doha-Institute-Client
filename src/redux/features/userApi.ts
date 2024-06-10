@@ -1,4 +1,4 @@
-import { baseApi } from "./baseApi";
+import { baseApi } from "../api/baseApi";
 import { tagTypes } from "../tag-Types";
 
 export const userApi = baseApi.injectEndpoints({

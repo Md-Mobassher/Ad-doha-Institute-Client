@@ -10,7 +10,7 @@ const adminsApi = baseApi.injectEndpoints({
         contentType: "multipart/form-data",
         data,
       }),
-      invalidatesTags: [tagTypes.admin],
+      // invalidatesTags: [tagTypes.admin],
     }),
 
     getAllAdmin: build.query({
@@ -37,16 +37,16 @@ const adminsApi = baseApi.injectEndpoints({
     }),
 
     updateAdmin: build.mutation({
-      query: (arg) => {
-        console.log("Update Admin Argument:", arg);
-        console.log(arg.body);
+      query: (data) => {
+        console.log(data.id);
+        console.log(data.body);
         return {
-          url: `/admins/${arg.id}`,
+          url: `/admins/${data.id}`,
           method: "PATCH",
-          body: arg.body,
+          body: data.body,
         };
       },
-      invalidatesTags: [tagTypes.admin],
+      // invalidatesTags: [tagTypes.admin],
     }),
   }),
 });
