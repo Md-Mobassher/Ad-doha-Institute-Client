@@ -50,7 +50,7 @@ const DohaSelectField = ({
           }
         >
           {items.map((item) => (
-            <MenuItem key={name} value={item.value}>
+            <MenuItem key={item.value} value={item.value}>
               {item.label}
             </MenuItem>
           ))}

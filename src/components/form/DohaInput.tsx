@@ -10,6 +10,7 @@ type TInputProps = {
   sx?: SxProps;
   placeholder?: string;
   required?: boolean;
+  disabled?: boolean;
 };
 
 const DohaInput = ({
@@ -19,6 +20,7 @@ const DohaInput = ({
   size = "small",
   fullWidth,
   sx,
+  disabled,
   required,
 }: TInputProps) => {
   const { control } = useFormContext();
@@ -37,6 +39,7 @@ const DohaInput = ({
           fullWidth={fullWidth}
           placeholder={label}
           required={required}
+          disabled={disabled}
           error={!!error?.message}
           helperText={error?.message}
         />

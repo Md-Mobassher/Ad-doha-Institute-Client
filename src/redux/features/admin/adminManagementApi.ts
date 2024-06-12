@@ -10,7 +10,7 @@ const adminsApi = baseApi.injectEndpoints({
         contentType: "multipart/form-data",
         data,
       }),
-      // invalidatesTags: [tagTypes.admin],
+      invalidatesTags: [tagTypes.admin],
     }),
 
     getAllAdmin: build.query({
