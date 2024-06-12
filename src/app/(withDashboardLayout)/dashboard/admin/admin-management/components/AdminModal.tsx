@@ -157,7 +157,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
               label="Contact Number"
-              type="text"
+              type="number"
               fullWidth={true}
               name="admin.contactNo"
               required
@@ -166,7 +166,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
               label="Emergency Contact Number"
-              type="text"
+              type="number"
               fullWidth={true}
               name="admin.emergencyContactNo"
               required

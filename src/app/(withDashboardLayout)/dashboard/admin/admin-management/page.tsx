@@ -72,8 +72,8 @@ const AdminManagementPage = () => {
     { field: "fullName", headerName: "Name", flex: 1 },
     { field: "id", headerName: "ID" },
     { field: "email", headerName: "Email", flex: 1 },
-    { field: "contactNo", headerName: "Contact Number", flex: 1 },
-    { field: "gender", headerName: "Gender", width: 100 },
+    { field: "contactNo", headerName: "Contact No" },
+    { field: "gender", headerName: "Gender" },
     { field: "presentAddress", headerName: "Address" },
     {
       field: "action",
@@ -114,7 +114,7 @@ const AdminManagementPage = () => {
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"
-          placeholder="search admin"
+          placeholder="Search Admin"
         />
       </Stack>
       {!isLoading ? (

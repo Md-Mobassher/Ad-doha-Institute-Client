@@ -35,6 +35,7 @@ const facultiesApi = baseApi.injectEndpoints({
         url: `/faculties/${id}`,
         method: "GET",
       }),
+      providesTags: [tagTypes.faculty],
     }),
 
     deleteFaculty: build.mutation({

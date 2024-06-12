@@ -48,13 +48,12 @@ export const updateAdminValidationSchema = z.object({
 
 const AdminUpdatePage = ({ params }: TParams) => {
   const router = useRouter();
-
   const { data, isLoading } = useGetSingleAdminQuery(params?.adminId);
   const [updateAdmin, { data: updateData, error }] = useUpdateAdminMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
     values.admin.dateOfBirth = dateFormatter(values.admin.dateOfBirth);
-    console.log(values);
+    // console.log(values);
 
     try {
       const res = await updateAdmin({
@@ -65,8 +64,8 @@ const AdminUpdatePage = ({ params }: TParams) => {
 
       if (res?.id) {
         toast.success(res.message || "Admin Updated Successfully!!!");
-        router.refresh();
         router.push("/dashboard/admin/admin-management");
+        router.refresh();
       }
     } catch (err: any) {
       console.error(err);
@@ -81,6 +80,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
         lastName: data?.name?.lastName || "",
       },
       designation: data?.designation || "",
+      id: data?.id || "",
       email: data?.email || "",
       gender: data?.gender || "",
       dateOfBirth: dayjs(data?.dateOfBirth) || "",
@@ -150,6 +150,15 @@ const AdminUpdatePage = ({ params }: TParams) => {
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <DohaInput
+                label="ID"
+                type="text"
+                fullWidth={true}
+                name="admin.id"
+                disabled
+              />
+            </Grid>
+            <Grid item lg={4} md={6} sm={6} xs={12}>
+              <DohaInput
                 label="Email"
                 type="email"
                 fullWidth={true}
@@ -174,7 +183,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <DohaInput
                 label="Contact Number"
-                type="text"
+                type="number"
                 fullWidth={true}
                 name="admin.contactNo"
                 required
@@ -183,7 +192,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <DohaInput
                 label="Emergency Contact Number"
-                type="text"
+                type="number"
                 fullWidth={true}
                 name="admin.emergencyContactNo"
                 required

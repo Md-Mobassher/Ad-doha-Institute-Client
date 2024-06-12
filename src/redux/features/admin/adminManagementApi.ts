@@ -35,6 +35,7 @@ const adminsApi = baseApi.injectEndpoints({
         url: `/admins/${id}`,
         method: "GET",
       }),
+      providesTags: [tagTypes.admin],
     }),
 
     deleteAdmin: build.mutation({

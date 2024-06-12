@@ -66,8 +66,8 @@ const FacultyUpdatePage = ({ params }: TParams) => {
 
       if (res?.id) {
         toast.success(res.message || "faculty Updated Successfully!!!");
-        router.refresh();
         router.push("/dashboard/admin/faculty-management");
+        router.refresh();
       }
     } catch (err: any) {
       console.error(err);
@@ -152,6 +152,15 @@ const FacultyUpdatePage = ({ params }: TParams) => {
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <DohaInput
+                label="ID"
+                type="text"
+                fullWidth={true}
+                name="faculty.id"
+                disabled
+              />
+            </Grid>
+            <Grid item lg={4} md={6} sm={6} xs={12}>
+              <DohaInput
                 label="Email"
                 type="email"
                 fullWidth={true}
@@ -179,7 +188,7 @@ const FacultyUpdatePage = ({ params }: TParams) => {
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <DohaInput
                 label="Contact Number"
-                type="text"
+                type="number"
                 fullWidth={true}
                 name="faculty.contactNo"
                 required
@@ -188,7 +197,7 @@ const FacultyUpdatePage = ({ params }: TParams) => {
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <DohaInput
                 label="Emergency Contact Number"
-                type="text"
+                type="number"
                 fullWidth={true}
                 name="faculty.emergencyContactNo"
                 required

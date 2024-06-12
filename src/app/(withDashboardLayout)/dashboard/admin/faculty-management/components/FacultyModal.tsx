@@ -72,7 +72,6 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
       designation: "Faculty",
       email: "",
       gender: "",
-      academicDepartment: "",
       dateOfBirth: "",
       contactNo: "",
       emergencyContactNo: "",
@@ -147,7 +146,7 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
               name="password"
             />
           </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
+          {/* <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaSelectField
               items={genderOptions}
               label="Department"
@@ -156,7 +155,7 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
               sx={{ textAlign: "start" }}
               required
             />
-          </Grid>
+          </Grid> */}
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaSelectField
               items={genderOptions}
@@ -174,7 +173,7 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
               label="Contact Number"
-              type="text"
+              type="number"
               fullWidth={true}
               name="faculty.contactNo"
               required
@@ -183,7 +182,7 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
               label="Emergency Contact Number"
-              type="text"
+              type="number"
               fullWidth={true}
               name="faculty.emergencyContactNo"
               required
