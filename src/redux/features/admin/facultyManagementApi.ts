@@ -1,5 +1,7 @@
 import { baseApi } from "@/redux/api/baseApi";
 import { tagTypes } from "@/redux/tag-Types";
+import { IMeta } from "@/type";
+import { TFaculty } from "@/type/faculty";
 
 const facultiesApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -14,10 +16,17 @@ const facultiesApi = baseApi.injectEndpoints({
     }),
 
     getAllFaculty: build.query({
-      query: () => ({
+      query: (arg: Record<string, any>) => ({
         url: "/faculties",
         method: "GET",
+        params: arg,
       }),
+      transformResponse: (response: TFaculty[], meta: IMeta) => {
+        return {
+          faculties: response,
+          meta,
+        };
+      },
       providesTags: [tagTypes.faculty],
     }),
 
@@ -37,11 +46,13 @@ const facultiesApi = baseApi.injectEndpoints({
     }),
 
     updateFaculty: build.mutation({
-      query: ({ id, updatedData }) => ({
-        url: `/faculties/${id}`,
-        method: "PATCH",
-        updatedData,
-      }),
+      query: (data) => {
+        return {
+          url: `/faculties/${data.id}`,
+          method: "PATCH",
+          data: data.values,
+        };
+      },
       invalidatesTags: [tagTypes.faculty],
     }),
   }),

@@ -7,9 +7,9 @@ import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
 import { BloodGroupOptions, genderOptions } from "@/constant/global";
 import {
-  useGetSingleAdminQuery,
-  useUpdateAdminMutation,
-} from "@/redux/features/admin/adminManagementApi";
+  useGetSingleFacultyQuery,
+  useUpdateFacultyMutation,
+} from "@/redux/features/admin/facultyManagementApi";
 import { dateFormatter } from "@/utils/dateFormatter";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import dayjs from "dayjs";
@@ -20,7 +20,7 @@ import { z } from "zod";
 
 type TParams = {
   params: {
-    adminId: string;
+    facultyId: string;
   };
 };
 const updateUserNameValidationSchema = z.object({
@@ -29,8 +29,8 @@ const updateUserNameValidationSchema = z.object({
   lastName: z.string().min(3).max(20).optional(),
 });
 
-export const updateAdminValidationSchema = z.object({
-  admin: z.object({
+export const updateFacultyValidationSchema = z.object({
+  faculty: z.object({
     name: updateUserNameValidationSchema.optional(),
     designation: z.string().max(30).optional(),
     gender: z.enum(["male", "female", "other"]).optional(),
@@ -46,27 +46,28 @@ export const updateAdminValidationSchema = z.object({
   }),
 });
 
-const AdminUpdatePage = ({ params }: TParams) => {
+const FacultyUpdatePage = ({ params }: TParams) => {
   const router = useRouter();
 
-  const { data, isLoading } = useGetSingleAdminQuery(params?.adminId);
-  const [updateAdmin, { data: updateData, error }] = useUpdateAdminMutation();
+  const { data, isLoading } = useGetSingleFacultyQuery(params?.facultyId);
+  const [updateFaculty, { data: updateData, error }] =
+    useUpdateFacultyMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    values.admin.dateOfBirth = dateFormatter(values.admin.dateOfBirth);
+    values.faculty.dateOfBirth = dateFormatter(values.faculty.dateOfBirth);
     console.log(values);
 
     try {
-      const res = await updateAdmin({
-        id: params.adminId,
+      const res = await updateFaculty({
+        id: params.facultyId,
         values,
       }).unwrap();
       // console.log(res);
 
       if (res?.id) {
-        toast.success(res.message || "Admin Updated Successfully!!!");
+        toast.success(res.message || "faculty Updated Successfully!!!");
         router.refresh();
-        router.push("/dashboard/admin/admin-management");
+        router.push("/dashboard/admin/faculty-management");
       }
     } catch (err: any) {
       console.error(err);
@@ -74,13 +75,14 @@ const AdminUpdatePage = ({ params }: TParams) => {
   };
 
   const defaultValues = {
-    admin: {
+    faculty: {
       name: {
         firstName: data?.name?.firstName || "",
         middleName: data?.name?.middleName || "",
         lastName: data?.name?.lastName || "",
       },
       designation: data?.designation || "",
+      id: data?.id || "",
       email: data?.email || "",
       gender: data?.gender || "",
       dateOfBirth: dayjs(data?.dateOfBirth) || "",
@@ -102,7 +104,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
         textAlign="center"
         color={"primary.main"}
       >
-        Update Admin Info
+        Update Faculty Info
       </Typography>
       {isLoading ? (
         <LoadingPage />
@@ -117,7 +119,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 label="First Name"
                 fullWidth={true}
                 type="text"
-                name="admin.name.firstName"
+                name="faculty.name.firstName"
                 required
               />
             </Grid>
@@ -126,7 +128,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 label="Middle Name"
                 fullWidth={true}
                 type="text"
-                name="admin.name.middleName"
+                name="faculty.name.middleName"
                 required
               />
             </Grid>
@@ -135,7 +137,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 label="Last Name"
                 type="text"
                 fullWidth={true}
-                name="admin.name.lastName"
+                name="faculty.name.lastName"
                 required
               />
             </Grid>
@@ -144,7 +146,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 label="Designation"
                 type="text"
                 fullWidth={true}
-                name="admin.designation"
+                name="faculty.designation"
                 disabled
               />
             </Grid>
@@ -153,7 +155,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 label="Email"
                 type="email"
                 fullWidth={true}
-                name="admin.email"
+                name="faculty.email"
                 required
               />
             </Grid>
@@ -163,20 +165,23 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 items={genderOptions}
                 label="Gender"
                 fullWidth={true}
-                name="admin.gender"
+                name="faculty.gender"
                 sx={{ textAlign: "start" }}
                 required
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
-              <DohaDatePicker name="admin.dateOfBirth" label="Date of Birth" />
+              <DohaDatePicker
+                name="faculty.dateOfBirth"
+                label="Date of Birth"
+              />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <DohaInput
                 label="Contact Number"
                 type="text"
                 fullWidth={true}
-                name="admin.contactNo"
+                name="faculty.contactNo"
                 required
               />
             </Grid>
@@ -185,7 +190,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 label="Emergency Contact Number"
                 type="text"
                 fullWidth={true}
-                name="admin.emergencyContactNo"
+                name="faculty.emergencyContactNo"
                 required
               />
             </Grid>
@@ -194,7 +199,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 items={BloodGroupOptions}
                 label="Blood Group"
                 fullWidth={true}
-                name="admin.bloodGroup"
+                name="faculty.bloodGroup"
                 sx={{ textAlign: "start" }}
                 required
               />
@@ -204,7 +209,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 label="Present Address"
                 type="text"
                 fullWidth={true}
-                name="admin.presentAddress"
+                name="faculty.presentAddress"
                 required
               />
             </Grid>
@@ -213,7 +218,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 label="Permanent Address"
                 type="text"
                 fullWidth={true}
-                name="admin.permanentAddress"
+                name="faculty.permanentAddress"
                 required
               />
             </Grid>
@@ -225,7 +230,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
             fullWidth={true}
             type="submit"
           >
-            Update Admin
+            Update Faculty
           </Button>
         </DohaForm>
       )}
@@ -233,4 +238,4 @@ const AdminUpdatePage = ({ params }: TParams) => {
   );
 };
 
-export default AdminUpdatePage;
+export default FacultyUpdatePage;
