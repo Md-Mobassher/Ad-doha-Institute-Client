@@ -59,7 +59,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
     try {
       const res = await updateAdmin({
         id: params.adminId,
-        body: values,
+        values,
       }).unwrap();
       // console.log(res);
 
