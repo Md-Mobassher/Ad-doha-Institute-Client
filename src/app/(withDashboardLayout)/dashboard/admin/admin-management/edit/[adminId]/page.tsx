@@ -5,19 +5,12 @@ import DohaDatePicker from "@/components/form/DohaDatePicker";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
-import {
-  BloodGroup,
-  BloodGroupOptions,
-  genderOptions,
-  genders,
-} from "@/constant/global";
+import { BloodGroupOptions, genderOptions } from "@/constant/global";
 import {
   useGetSingleAdminQuery,
   useUpdateAdminMutation,
 } from "@/redux/features/admin/adminManagementApi";
 import { dateFormatter } from "@/utils/dateFormatter";
-import { modifyPayload } from "@/utils/modifyPayload";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
@@ -40,12 +33,14 @@ export const updateAdminValidationSchema = z.object({
   admin: z.object({
     name: updateUserNameValidationSchema.optional(),
     designation: z.string().max(30).optional(),
-    gender: z.enum([...genders] as [string, ...string[]]).optional(),
+    gender: z.enum(["male", "female", "other"]).optional(),
     dateOfBirth: z.string().optional(),
     email: z.string().email().optional(),
     contactNo: z.string().optional(),
     emergencyContactNo: z.string().optional(),
-    bloodGroup: z.enum([...BloodGroup] as [string, ...string[]]).optional(),
+    bloodGroup: z
+      .enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"])
+      .optional(),
     presentAddress: z.string().optional(),
     permanentAddress: z.string().optional(),
   }),
@@ -59,24 +54,21 @@ const AdminUpdatePage = ({ params }: TParams) => {
 
   const handleFormSubmit = async (values: FieldValues) => {
     values.admin.dateOfBirth = dateFormatter(values.admin.dateOfBirth);
-    values.admin.designation = "Admin";
     console.log(values);
+
     try {
       const res = await updateAdmin({
         id: params.adminId,
         body: values,
       }).unwrap();
-      console.log(res);
+      // console.log(res);
 
       if (res?.id) {
         toast.success(res.message || "Admin Updated Successfully!!!");
         router.push("/dashboard/admin/admin-management");
-      } else {
-        toast.error(res.message || "Admin Update Failed!!!");
       }
     } catch (err: any) {
       console.error(err);
-      toast.error("Something went wrong!!!");
     }
   };
 
@@ -87,6 +79,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
         middleName: data?.name?.middleName || "",
         lastName: data?.name?.lastName || "",
       },
+      designation: data?.designation || "",
       email: data?.email || "",
       gender: data?.gender || "",
       dateOfBirth: dayjs(data?.dateOfBirth) || "",
@@ -124,6 +117,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 fullWidth={true}
                 type="text"
                 name="admin.name.firstName"
+                required
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -132,6 +126,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 fullWidth={true}
                 type="text"
                 name="admin.name.middleName"
+                required
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -140,6 +135,16 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 type="text"
                 fullWidth={true}
                 name="admin.name.lastName"
+                required
+              />
+            </Grid>
+            <Grid item lg={4} md={6} sm={6} xs={12}>
+              <DohaInput
+                label="Designation"
+                type="text"
+                fullWidth={true}
+                name="admin.designation"
+                disabled
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -148,6 +153,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 type="email"
                 fullWidth={true}
                 name="admin.email"
+                required
               />
             </Grid>
 
@@ -158,25 +164,28 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 fullWidth={true}
                 name="admin.gender"
                 sx={{ textAlign: "start" }}
+                required
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
-              <DohaDatePicker name="dateOfBirth" label="Date of Birth" />
+              <DohaDatePicker name="admin.dateOfBirth" label="Date of Birth" />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <DohaInput
                 label="Contact Number"
-                type="number"
+                type="text"
                 fullWidth={true}
                 name="admin.contactNo"
+                required
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <DohaInput
                 label="Emergency Contact Number"
-                type="number"
+                type="text"
                 fullWidth={true}
                 name="admin.emergencyContactNo"
+                required
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -186,6 +195,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 fullWidth={true}
                 name="admin.bloodGroup"
                 sx={{ textAlign: "start" }}
+                required
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -194,14 +204,16 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 type="text"
                 fullWidth={true}
                 name="admin.presentAddress"
+                required
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <DohaInput
-                label="Parmanent Address"
+                label="Permanent Address"
                 type="text"
                 fullWidth={true}
                 name="admin.permanentAddress"
+                required
               />
             </Grid>
           </Grid>

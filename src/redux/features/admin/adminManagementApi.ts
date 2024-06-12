@@ -1,5 +1,7 @@
 import { baseApi } from "@/redux/api/baseApi";
 import { tagTypes } from "../../tag-Types";
+import { TAdmin } from "@/type/admin";
+import { IMeta } from "@/type";
 
 const adminsApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -14,10 +16,17 @@ const adminsApi = baseApi.injectEndpoints({
     }),
 
     getAllAdmin: build.query({
-      query: () => ({
+      query: (arg: Record<string, any>) => ({
         url: "/admins",
         method: "GET",
+        params: arg,
       }),
+      transformResponse: (response: TAdmin[], meta: IMeta) => {
+        return {
+          admins: response,
+          meta,
+        };
+      },
       providesTags: [tagTypes.admin],
     }),
 
@@ -46,7 +55,7 @@ const adminsApi = baseApi.injectEndpoints({
           body: data.body,
         };
       },
-      // invalidatesTags: [tagTypes.admin],
+      invalidatesTags: [tagTypes.admin],
     }),
   }),
 });

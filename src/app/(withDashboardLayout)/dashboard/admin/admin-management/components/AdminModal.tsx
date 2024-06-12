@@ -7,7 +7,7 @@ import { BloodGroupOptions, genderOptions } from "@/constant/global";
 import { useCreateAdminMutation } from "@/redux/features/admin/adminManagementApi";
 import { dateFormatter } from "@/utils/dateFormatter";
 import { modifyPayload } from "@/utils/modifyPayload";
-import { zodResolver } from "@hookform/resolvers/zod";
+// import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";

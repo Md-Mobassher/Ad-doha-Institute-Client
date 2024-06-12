@@ -8,13 +8,13 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Link from "next/link";
-import Image from "next/image";
 import LoadingPage from "@/app/loading";
 import { toast } from "sonner";
 import {
   useDeleteAdminMutation,
   useGetAllAdminQuery,
 } from "@/redux/features/admin/adminManagementApi";
+import { useDebounced } from "@/redux/hooks";
 
 const AdminManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -22,31 +22,31 @@ const AdminManagementPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   // console.log(searchTerm);
 
-  // const debouncedTerm = useDebounced({
-  //   searchQuery: searchTerm,
-  //   delay: 600,
-  // });
+  const debouncedTerm = useDebounced({
+    searchQuery: searchTerm,
+    delay: 600,
+  });
 
-  // if (!!debouncedTerm) {
-  //   query["searchTerm"] = searchTerm;
-  // }
+  if (!!debouncedTerm) {
+    query["searchTerm"] = searchTerm;
+  }
 
   const { data, isLoading } = useGetAllAdminQuery({ ...query });
   const [deleteAdmin] = useDeleteAdminMutation();
 
-  // console.log(data);
-  const admins = data;
+  const admins = data?.admins;
   const meta = data?.meta;
   // console.log(admins);
 
   const handleDelete = async (id: string) => {
-    console.log(id);
+    // console.log(id);
     try {
       const res = await deleteAdmin(id).unwrap();
-      console.log(res);
-      if (res?.id) {
-        toast.success("Amin deleted successfully!!!");
-      }
+      toast.success("Amin deleted successfully!!!");
+      // console.log(res);
+      // if (res?.id) {
+      //   toast.success("Amin deleted successfully!!!");
+      // }
     } catch (err: any) {
       console.error(err.message);
     }
@@ -64,7 +64,7 @@ const AdminManagementPage = () => {
               marginTop: "5px",
             }}
           >
-            <Avatar alt={data?.fullName} src={row.profileImg} />;
+            <Avatar alt="profile image" src={row.profileImg} />;
           </Box>
         );
       },
@@ -83,7 +83,7 @@ const AdminManagementPage = () => {
         return (
           <Box>
             <IconButton
-              onClick={() => handleDelete(row.id)}
+              onClick={() => handleDelete(row._id)}
               aria-label="delete"
             >
               <DeleteIcon sx={{ color: "red" }} />
