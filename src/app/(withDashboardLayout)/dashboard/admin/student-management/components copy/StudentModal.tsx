@@ -1,0 +1,217 @@
+import DohaDatePicker from "@/components/form/DohaDatePicker";
+import DohaForm from "@/components/form/DohaForm";
+import DohaInput from "@/components/form/DohaInput";
+import DohaSelectField from "@/components/form/DohaSelectField";
+import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenModal";
+import { BloodGroupOptions, genderOptions } from "@/constant/global";
+import { useCreateFacultyMutation } from "@/redux/features/admin/facultyManagementApi";
+import { useCreateStudentMutation } from "@/redux/features/admin/studentManagementApi";
+import { dateFormatter } from "@/utils/dateFormatter";
+import { modifyPayload } from "@/utils/modifyPayload";
+// import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, Grid } from "@mui/material";
+import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+
+type TProps = {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const createUserNameValidationSchema = z.object({
+  firstName: z.string().min(3).max(20),
+  middleName: z.string().min(3).max(20).optional(),
+  lastName: z.string().min(3).max(20),
+});
+
+export const createFacultyValidationSchema = z.object({
+  password: z.string().min(6).max(20).optional(),
+  faculty: z.object({
+    name: createUserNameValidationSchema,
+    designation: z.string().max(30),
+    gender: z.enum(["male", "female", "other"]),
+    dateOfBirth: z.string(),
+    email: z.string().email(),
+    contactNo: z.string(),
+    emergencyContactNo: z.string(),
+    bloodGroup: z.enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]),
+    presentAddress: z.string(),
+    permanentAddress: z.string(),
+  }),
+});
+
+const CreateStudentModal = ({ open, setOpen }: TProps) => {
+  const [createStudent] = useCreateStudentMutation();
+
+  const handleFormSubmit = async (values: FieldValues) => {
+    values.student.dateOfBirth = dateFormatter(values.student.dateOfBirth);
+    console.log("Form Values:", values);
+
+    const data = modifyPayload(values);
+    try {
+      const res = await createStudent(data).unwrap();
+      console.log(res);
+
+      if (res?.id) {
+        toast.success("Student created successfully!!!");
+        setOpen(false);
+      }
+    } catch (err: any) {
+      console.error(err);
+    }
+  };
+
+  const defaultValues = {
+    password: "",
+    student: {
+      name: {
+        firstName: "",
+        middleName: "",
+        lastName: "",
+      },
+      email: "",
+      gender: "",
+      dateOfBirth: "",
+      contactNo: "",
+      emergencyContactNo: "",
+      bloodGroup: "",
+      presentAddress: "",
+      permanentAddress: "",
+    },
+  };
+
+  return (
+    <DohaFullScreenModal
+      open={open}
+      setOpen={setOpen}
+      title="Create New Student"
+    >
+      <DohaForm
+        onSubmit={handleFormSubmit}
+        // resolver={zodResolver(createStduentValidationSchema)}
+        defaultValues={defaultValues}
+      >
+        <Grid container spacing={3} my={1}>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="First Name"
+              fullWidth={true}
+              type="text"
+              name="student.name.firstName"
+              required
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="Middle Name"
+              fullWidth={true}
+              type="text"
+              name="student.name.middleName"
+              required
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="Last Name"
+              type="text"
+              fullWidth={true}
+              name="student.name.lastName"
+              required
+            />
+          </Grid>
+
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="Email"
+              type="email"
+              fullWidth={true}
+              name="student.email"
+              required
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="Password"
+              type="password"
+              fullWidth={true}
+              name="password"
+            />
+          </Grid>
+
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaSelectField
+              items={genderOptions}
+              label="Gender"
+              fullWidth={true}
+              name="student.gender"
+              sx={{ textAlign: "start" }}
+              required
+            />
+          </Grid>
+
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaDatePicker name="student.dateOfBirth" label="Date of Birth" />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="Contact Number"
+              type="number"
+              fullWidth={true}
+              name="student.contactNo"
+              required
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="Emergency Contact Number"
+              type="number"
+              fullWidth={true}
+              name="student.emergencyContactNo"
+              required
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaSelectField
+              items={BloodGroupOptions}
+              label="Blood Group"
+              fullWidth={true}
+              name="student.bloodGroup"
+              sx={{ textAlign: "start" }}
+              required
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="Present Address"
+              type="text"
+              fullWidth={true}
+              name="student.presentAddress"
+              required
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="Permanent Address"
+              type="text"
+              fullWidth={true}
+              name="student.permanentAddress"
+              required
+            />
+          </Grid>
+        </Grid>
+        <Button
+          sx={{
+            margin: "16px 0px",
+          }}
+          fullWidth={true}
+          type="submit"
+        >
+          Create A New Student
+        </Button>
+      </DohaForm>
+    </DohaFullScreenModal>
+  );
+};
+
+export default CreateStudentModal;
