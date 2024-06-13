@@ -11,12 +11,12 @@ import LoadingPage from "@/app/loading";
 import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
 import {
-  useDeleteStudentMutation,
-  useGetAllStudentsQuery,
-} from "@/redux/features/admin/studentManagementApi";
-import CreateStudentModal from "./components/StudentModal";
+  useDeleteFacultyMutation,
+  useGetAllFacultyQuery,
+} from "@/redux/features/admin/facultyManagementApi";
+import CreateFacultyModal from "./components/FacultyModal";
 
-const StudentManagementPage = () => {
+const FacultyManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const query: Record<string, any> = {};
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -31,21 +31,21 @@ const StudentManagementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  const { data, isLoading } = useGetAllStudentsQuery({ ...query });
-  const [deleteStudent] = useDeleteStudentMutation();
+  const { data, isLoading } = useGetAllFacultyQuery({ ...query });
+  const [deleteFaculty] = useDeleteFacultyMutation();
 
-  const students = data?.students;
+  const faculties = data?.faculties;
   const meta = data?.meta;
-  // console.log(students);
+  // console.log(faculties);
 
   const handleDelete = async (id: string) => {
     // console.log(id);
     try {
-      const res = await deleteStudent(id).unwrap();
+      const res = await deleteFaculty(id).unwrap();
 
       // console.log(res);
       if (res?.id) {
-        toast.success("Student deleted successfully!!!");
+        toast.success("Faculty deleted successfully!!!");
       }
     } catch (err: any) {
       console.error(err.message);
@@ -90,7 +90,7 @@ const StudentManagementPage = () => {
             >
               <DeleteIcon sx={{ color: "red" }} />
             </IconButton>
-            <Link href={`/dashboard/admin/student-management/edit/${row._id}`}>
+            <Link href={`/dashboard/admin/faculty-management/edit/${row._id}`}>
               <IconButton aria-label="delete">
                 <EditIcon />
               </IconButton>
@@ -109,12 +109,12 @@ const StudentManagementPage = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => setIsModalOpen(true)}>Create New Student</Button>
-        <CreateStudentModal open={isModalOpen} setOpen={setIsModalOpen} />
+        <Button onClick={() => setIsModalOpen(true)}>Create New Faculty</Button>
+        <CreateFacultyModal open={isModalOpen} setOpen={setIsModalOpen} />
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"
-          placeholder="Search Student"
+          placeholder="Search Faculty"
         />
       </Stack>
       {!isLoading ? (
@@ -124,7 +124,7 @@ const StudentManagementPage = () => {
             overflow: "auto",
           }}
         >
-          <DataGrid rows={students} columns={columns} />
+          <DataGrid rows={faculties} columns={columns} />
         </Box>
       ) : (
         <LoadingPage />
@@ -133,4 +133,4 @@ const StudentManagementPage = () => {
   );
 };
 
-export default StudentManagementPage;
+export default FacultyManagementPage;

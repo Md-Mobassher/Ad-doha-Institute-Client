@@ -7,10 +7,6 @@ import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
 import { BloodGroupOptions, genderOptions } from "@/constant/global";
 import {
-  useGetSingleFacultyQuery,
-  useUpdateFacultyMutation,
-} from "@/redux/features/admin/facultyManagementApi";
-import {
   useGetSingleStudentQuery,
   useUpdateStudentMutation,
 } from "@/redux/features/admin/studentManagementApi";
@@ -20,35 +16,12 @@ import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
 
 type TParams = {
   params: {
     studentId: string;
   };
 };
-const updateUserNameValidationSchema = z.object({
-  firstName: z.string().min(3).max(20).optional(),
-  middleName: z.string().min(3).max(20).optional(),
-  lastName: z.string().min(3).max(20).optional(),
-});
-
-export const updateStudentValidationSchema = z.object({
-  faculty: z.object({
-    name: updateUserNameValidationSchema.optional(),
-    designation: z.string().max(30).optional(),
-    gender: z.enum(["male", "female", "other"]).optional(),
-    dateOfBirth: z.string().optional(),
-    email: z.string().email().optional(),
-    contactNo: z.string().optional(),
-    emergencyContactNo: z.string().optional(),
-    bloodGroup: z
-      .enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"])
-      .optional(),
-    presentAddress: z.string().optional(),
-    permanentAddress: z.string().optional(),
-  }),
-});
 
 const StudentUpdatePage = ({ params }: TParams) => {
   const router = useRouter();

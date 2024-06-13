@@ -14,7 +14,7 @@ import {
   useDeleteStudentMutation,
   useGetAllStudentsQuery,
 } from "@/redux/features/admin/studentManagementApi";
-import CreateStudentModal from "./components/StudentModal";
+import CreateStudentModal from "./components copy/StudentModal";
 
 const StudentManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

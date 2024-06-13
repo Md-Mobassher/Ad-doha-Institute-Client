@@ -5,10 +5,13 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
-import UserIcon from "@mui/icons-material/Person2";
+import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import KeyIcon from "@mui/icons-material/Key";
-import BookOnlineIcon from "@mui/icons-material/BookOnline";
 import { DrawerItem, UserRole } from "@/type";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import GroupsIcon from "@mui/icons-material/Groups";
+import AutoStoriesIcon from "@mui/icons-material/AutoStories";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 export const drawerItems = (role: UserRole): DrawerItem[] => {
   const roleMenus: DrawerItem[] = [];
@@ -37,24 +40,32 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
         {
           title: "Admin Management",
           path: `${role}/admin-management`,
-          icon: DashboardIcon,
+          icon: AdminPanelSettingsIcon,
         },
-
         {
           title: "Faculty Management",
           path: `${role}/faculty-management`,
-          icon: UserIcon,
+          icon: GroupIcon,
         },
-
         {
           title: "Student Management",
           path: `${role}/student-management`,
-          icon: GroupIcon,
+          icon: GroupsIcon,
         },
         {
           title: "Course Management",
           path: `${role}/course-management`,
-          icon: GroupIcon,
+          icon: AutoStoriesIcon,
+        },
+        {
+          title: "Book Management",
+          path: `${role}/book-management`,
+          icon: MenuBookIcon,
+        },
+        {
+          title: "Video Management",
+          path: `${role}/video-management`,
+          icon: OndemandVideoIcon,
         }
       );
       break;
@@ -69,24 +80,32 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
         {
           title: "Admin Management",
           path: `${role}/admin-management`,
-          icon: DashboardIcon,
+          icon: AdminPanelSettingsIcon,
         },
-
         {
           title: "Faculty Management",
           path: `${role}/faculty-management`,
-          icon: UserIcon,
+          icon: GroupIcon,
         },
-
         {
           title: "Student Management",
           path: `${role}/student-management`,
-          icon: GroupIcon,
+          icon: GroupsIcon,
         },
         {
           title: "Course Management",
           path: `${role}/course-management`,
-          icon: GroupIcon,
+          icon: AutoStoriesIcon,
+        },
+        {
+          title: "Book Management",
+          path: `${role}/book-management`,
+          icon: MenuBookIcon,
+        },
+        {
+          title: "Video Management",
+          path: `${role}/video-management`,
+          icon: OndemandVideoIcon,
         }
       );
       break;
@@ -114,8 +133,8 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
     case USER_ROLE.student:
       roleMenus.push({
         title: "Dashboard",
-        path: `${role}/appointments`,
-        icon: BookOnlineIcon,
+        path: `${role}`,
+        icon: DashboardIcon,
       });
       break;
 

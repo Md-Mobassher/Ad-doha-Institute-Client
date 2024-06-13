@@ -4,7 +4,7 @@ import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
 import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenModal";
 import { BloodGroupOptions, genderOptions } from "@/constant/global";
-import { useCreateFacultyMutation } from "@/redux/features/admin/facultyManagementApi";
+import { useCreateAdminMutation } from "@/redux/features/admin/adminManagementApi";
 import { dateFormatter } from "@/utils/dateFormatter";
 import { modifyPayload } from "@/utils/modifyPayload";
 // import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,20 +18,41 @@ type TProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const CreateFacultyModal = ({ open, setOpen }: TProps) => {
-  const [createFaculty] = useCreateFacultyMutation();
+const createUserNameValidationSchema = z.object({
+  firstName: z.string().min(3).max(20),
+  middleName: z.string().min(3).max(20).optional(),
+  lastName: z.string().min(3).max(20),
+});
+
+export const createAdminValidationSchema = z.object({
+  password: z.string().min(6).max(20).optional(),
+  admin: z.object({
+    name: createUserNameValidationSchema,
+    designation: z.string().max(30),
+    gender: z.enum(["male", "female", "other"]),
+    dateOfBirth: z.string(),
+    email: z.string().email(),
+    contactNo: z.string(),
+    emergencyContactNo: z.string(),
+    bloodGroup: z.enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]),
+    presentAddress: z.string(),
+    permanentAddress: z.string(),
+  }),
+});
+
+const AdminModal = ({ open, setOpen }: TProps) => {
+  const [createAdmin] = useCreateAdminMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    values.faculty.dateOfBirth = dateFormatter(values.faculty.dateOfBirth);
-    console.log("Form Values:", values);
+    values.admin.dateOfBirth = dateFormatter(values.admin.dateOfBirth);
+    // console.log("Form Values:", values);
 
     const data = modifyPayload(values);
     try {
-      const res = await createFaculty(data).unwrap();
-      console.log(res);
+      const res = await createAdmin(data).unwrap();
 
-      if (res[0]?.id) {
-        toast.success("Faculty created successfully!!!");
+      if (res?.id) {
+        toast.success("Admin created successfully!!!");
         setOpen(false);
       }
     } catch (err: any) {
@@ -41,13 +62,13 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
 
   const defaultValues = {
     password: "",
-    faculty: {
+    admin: {
       name: {
         firstName: "",
         middleName: "",
         lastName: "",
       },
-      designation: "Faculty",
+      designation: "Admin",
       email: "",
       gender: "",
       dateOfBirth: "",
@@ -60,14 +81,10 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
   };
 
   return (
-    <DohaFullScreenModal
-      open={open}
-      setOpen={setOpen}
-      title="Create New Faculty"
-    >
+    <DohaFullScreenModal open={open} setOpen={setOpen} title="Create New Admin">
       <DohaForm
         onSubmit={handleFormSubmit}
-        // resolver={zodResolver(createfacultyValidationSchema)}
+        // resolver={zodResolver(createAdminValidationSchema)}
         defaultValues={defaultValues}
       >
         <Grid container spacing={3} my={1}>
@@ -76,7 +93,7 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
               label="First Name"
               fullWidth={true}
               type="text"
-              name="faculty.name.firstName"
+              name="admin.name.firstName"
               required
             />
           </Grid>
@@ -85,7 +102,7 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
               label="Middle Name"
               fullWidth={true}
               type="text"
-              name="faculty.name.middleName"
+              name="admin.name.middleName"
               required
             />
           </Grid>
@@ -94,7 +111,7 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
               label="Last Name"
               type="text"
               fullWidth={true}
-              name="faculty.name.lastName"
+              name="admin.name.lastName"
               required
             />
           </Grid>
@@ -103,7 +120,7 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
               label="Designation"
               type="text"
               fullWidth={true}
-              name="faculty.designation"
+              name="admin.designation"
               disabled
             />
           </Grid>
@@ -112,7 +129,7 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
               label="Email"
               type="email"
               fullWidth={true}
-              name="faculty.email"
+              name="admin.email"
               required
             />
           </Grid>
@@ -124,36 +141,25 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
               name="password"
             />
           </Grid>
-          {/* <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaSelectField
-              items={genderOptions}
-              label="Department"
-              fullWidth={true}
-              name="faculty.academicDepartment"
-              sx={{ textAlign: "start" }}
-              required
-            />
-          </Grid> */}
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaSelectField
               items={genderOptions}
               label="Gender"
               fullWidth={true}
-              name="faculty.gender"
+              name="admin.gender"
               sx={{ textAlign: "start" }}
               required
             />
           </Grid>
-
           <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaDatePicker name="faculty.dateOfBirth" label="Date of Birth" />
+            <DohaDatePicker name="admin.dateOfBirth" label="Date of Birth" />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
               label="Contact Number"
               type="number"
               fullWidth={true}
-              name="faculty.contactNo"
+              name="admin.contactNo"
               required
             />
           </Grid>
@@ -162,7 +168,7 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
               label="Emergency Contact Number"
               type="number"
               fullWidth={true}
-              name="faculty.emergencyContactNo"
+              name="admin.emergencyContactNo"
               required
             />
           </Grid>
@@ -171,7 +177,7 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
               items={BloodGroupOptions}
               label="Blood Group"
               fullWidth={true}
-              name="faculty.bloodGroup"
+              name="admin.bloodGroup"
               sx={{ textAlign: "start" }}
               required
             />
@@ -181,7 +187,7 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
               label="Present Address"
               type="text"
               fullWidth={true}
-              name="faculty.presentAddress"
+              name="admin.presentAddress"
               required
             />
           </Grid>
@@ -190,7 +196,7 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
               label="Permanent Address"
               type="text"
               fullWidth={true}
-              name="faculty.permanentAddress"
+              name="admin.permanentAddress"
               required
             />
           </Grid>
@@ -202,11 +208,11 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
           fullWidth={true}
           type="submit"
         >
-          Create A New faculty
+          Create A New Admin
         </Button>
       </DohaForm>
     </DohaFullScreenModal>
   );
 };
 
-export default CreateFacultyModal;
+export default AdminModal;

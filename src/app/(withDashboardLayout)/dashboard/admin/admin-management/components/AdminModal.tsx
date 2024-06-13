@@ -7,38 +7,14 @@ import { BloodGroupOptions, genderOptions } from "@/constant/global";
 import { useCreateAdminMutation } from "@/redux/features/admin/adminManagementApi";
 import { dateFormatter } from "@/utils/dateFormatter";
 import { modifyPayload } from "@/utils/modifyPayload";
-// import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
 
 type TProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
-const createUserNameValidationSchema = z.object({
-  firstName: z.string().min(3).max(20),
-  middleName: z.string().min(3).max(20).optional(),
-  lastName: z.string().min(3).max(20),
-});
-
-export const createAdminValidationSchema = z.object({
-  password: z.string().min(6).max(20).optional(),
-  admin: z.object({
-    name: createUserNameValidationSchema,
-    designation: z.string().max(30),
-    gender: z.enum(["male", "female", "other"]),
-    dateOfBirth: z.string(),
-    email: z.string().email(),
-    contactNo: z.string(),
-    emergencyContactNo: z.string(),
-    bloodGroup: z.enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]),
-    presentAddress: z.string(),
-    permanentAddress: z.string(),
-  }),
-});
 
 const AdminModal = ({ open, setOpen }: TProps) => {
   const [createAdmin] = useCreateAdminMutation();
@@ -50,8 +26,9 @@ const AdminModal = ({ open, setOpen }: TProps) => {
     const data = modifyPayload(values);
     try {
       const res = await createAdmin(data).unwrap();
+      // console.log(res);
 
-      if (res?.id) {
+      if (res[0]?.id) {
         toast.success("Admin created successfully!!!");
         setOpen(false);
       }

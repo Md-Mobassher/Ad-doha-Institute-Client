@@ -3,20 +3,20 @@
 import { Avatar, Button, IconButton, Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
+import AdminModal from "./components/AdminModal";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Link from "next/link";
 import LoadingPage from "@/app/loading";
 import { toast } from "sonner";
-import { useDebounced } from "@/redux/hooks";
 import {
-  useDeleteStudentMutation,
-  useGetAllStudentsQuery,
-} from "@/redux/features/admin/studentManagementApi";
-import CreateStudentModal from "./components/StudentModal";
+  useDeleteAdminMutation,
+  useGetAllAdminQuery,
+} from "@/redux/features/admin/adminManagementApi";
+import { useDebounced } from "@/redux/hooks";
 
-const StudentManagementPage = () => {
+const AdminManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const query: Record<string, any> = {};
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -31,21 +31,21 @@ const StudentManagementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  const { data, isLoading } = useGetAllStudentsQuery({ ...query });
-  const [deleteStudent] = useDeleteStudentMutation();
+  const { data, isLoading } = useGetAllAdminQuery({ ...query });
+  const [deleteAdmin] = useDeleteAdminMutation();
 
-  const students = data?.students;
+  const admins = data?.admins;
   const meta = data?.meta;
-  // console.log(students);
+  // console.log(admins);
 
   const handleDelete = async (id: string) => {
     // console.log(id);
     try {
-      const res = await deleteStudent(id).unwrap();
+      const res = await deleteAdmin(id).unwrap();
 
       // console.log(res);
       if (res?.id) {
-        toast.success("Student deleted successfully!!!");
+        toast.success("Amin deleted successfully!!!");
       }
     } catch (err: any) {
       console.error(err.message);
@@ -90,7 +90,7 @@ const StudentManagementPage = () => {
             >
               <DeleteIcon sx={{ color: "red" }} />
             </IconButton>
-            <Link href={`/dashboard/admin/student-management/edit/${row._id}`}>
+            <Link href={`/dashboard/admin/admin-management/edit/${row._id}`}>
               <IconButton aria-label="delete">
                 <EditIcon />
               </IconButton>
@@ -109,12 +109,12 @@ const StudentManagementPage = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => setIsModalOpen(true)}>Create New Student</Button>
-        <CreateStudentModal open={isModalOpen} setOpen={setIsModalOpen} />
+        <Button onClick={() => setIsModalOpen(true)}>Create New Admin</Button>
+        <AdminModal open={isModalOpen} setOpen={setIsModalOpen} />
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"
-          placeholder="Search Student"
+          placeholder="Search Admin"
         />
       </Stack>
       {!isLoading ? (
@@ -124,7 +124,7 @@ const StudentManagementPage = () => {
             overflow: "auto",
           }}
         >
-          <DataGrid rows={students} columns={columns} />
+          <DataGrid rows={admins} columns={columns} />
         </Box>
       ) : (
         <LoadingPage />
@@ -133,4 +133,4 @@ const StudentManagementPage = () => {
   );
 };
 
-export default StudentManagementPage;
+export default AdminManagementPage;
