@@ -1,11 +1,9 @@
-import React from "react";
-
-const SuperAdminPage = () => {
+const AdminDashboardPage = () => {
   return (
     <div>
-      <h1>Super Admin Dashboard</h1>
+      <h1>Admin Dashboard</h1>
     </div>
   );
 };
 
-export default SuperAdminPage;
+export default AdminDashboardPage;

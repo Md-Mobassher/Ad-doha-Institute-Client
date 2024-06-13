@@ -54,7 +54,7 @@ const adminsApi = baseApi.injectEndpoints({
           data: data.values,
         };
       },
-      invalidatesTags: [tagTypes.admin],
+      invalidatesTags: [tagTypes.admin, tagTypes.user],
     }),
   }),
 });

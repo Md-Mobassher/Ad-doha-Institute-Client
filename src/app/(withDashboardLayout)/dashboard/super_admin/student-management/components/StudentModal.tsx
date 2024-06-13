@@ -4,7 +4,7 @@ import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
 import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenModal";
 import { BloodGroupOptions, genderOptions } from "@/constant/global";
-import { useCreateAdminMutation } from "@/redux/features/admin/adminManagementApi";
+import { useCreateStudentMutation } from "@/redux/features/admin/studentManagementApi";
 import { dateFormatter } from "@/utils/dateFormatter";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { Button, Grid } from "@mui/material";
@@ -16,20 +16,20 @@ type TProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const AdminModal = ({ open, setOpen }: TProps) => {
-  const [createAdmin, { isLoading }] = useCreateAdminMutation();
+const CreateStudentModal = ({ open, setOpen }: TProps) => {
+  const [createStudent] = useCreateStudentMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    values.admin.dateOfBirth = dateFormatter(values.admin.dateOfBirth);
+    values.student.dateOfBirth = dateFormatter(values.student.dateOfBirth);
     // console.log("Form Values:", values);
 
     const data = modifyPayload(values);
     try {
-      const res = await createAdmin(data).unwrap();
+      const res = await createStudent(data).unwrap();
       // console.log(res);
 
       if (res[0]?.id) {
-        toast.success("Admin created successfully!!!");
+        toast.success("Student Created Successfully!!!");
         setOpen(false);
       }
     } catch (err: any) {
@@ -39,13 +39,12 @@ const AdminModal = ({ open, setOpen }: TProps) => {
 
   const defaultValues = {
     password: "",
-    admin: {
+    student: {
       name: {
         firstName: "",
         middleName: "",
         lastName: "",
       },
-      designation: "Admin",
       email: "",
       gender: "",
       dateOfBirth: "",
@@ -58,10 +57,14 @@ const AdminModal = ({ open, setOpen }: TProps) => {
   };
 
   return (
-    <DohaFullScreenModal open={open} setOpen={setOpen} title="Create New Admin">
+    <DohaFullScreenModal
+      open={open}
+      setOpen={setOpen}
+      title="Create New Student"
+    >
       <DohaForm
         onSubmit={handleFormSubmit}
-        // resolver={zodResolver(createAdminValidationSchema)}
+        // resolver={zodResolver(createStduentValidationSchema)}
         defaultValues={defaultValues}
       >
         <Grid container spacing={3} my={1}>
@@ -70,7 +73,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               label="First Name"
               fullWidth={true}
               type="text"
-              name="admin.name.firstName"
+              name="student.name.firstName"
               required
             />
           </Grid>
@@ -79,7 +82,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               label="Middle Name"
               fullWidth={true}
               type="text"
-              name="admin.name.middleName"
+              name="student.name.middleName"
               required
             />
           </Grid>
@@ -88,25 +91,17 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               label="Last Name"
               type="text"
               fullWidth={true}
-              name="admin.name.lastName"
+              name="student.name.lastName"
               required
             />
           </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaInput
-              label="Designation"
-              type="text"
-              fullWidth={true}
-              name="admin.designation"
-              disabled
-            />
-          </Grid>
+
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
               label="Email"
               type="email"
               fullWidth={true}
-              name="admin.email"
+              name="student.email"
               required
             />
           </Grid>
@@ -118,25 +113,27 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               name="password"
             />
           </Grid>
+
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaSelectField
               items={genderOptions}
               label="Gender"
               fullWidth={true}
-              name="admin.gender"
+              name="student.gender"
               sx={{ textAlign: "start" }}
               required
             />
           </Grid>
+
           <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaDatePicker name="admin.dateOfBirth" label="Date of Birth" />
+            <DohaDatePicker name="student.dateOfBirth" label="Date of Birth" />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
               label="Contact Number"
               type="number"
               fullWidth={true}
-              name="admin.contactNo"
+              name="student.contactNo"
               required
             />
           </Grid>
@@ -145,7 +142,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               label="Emergency Contact Number"
               type="number"
               fullWidth={true}
-              name="admin.emergencyContactNo"
+              name="student.emergencyContactNo"
               required
             />
           </Grid>
@@ -154,7 +151,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               items={BloodGroupOptions}
               label="Blood Group"
               fullWidth={true}
-              name="admin.bloodGroup"
+              name="student.bloodGroup"
               sx={{ textAlign: "start" }}
               required
             />
@@ -164,7 +161,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               label="Present Address"
               type="text"
               fullWidth={true}
-              name="admin.presentAddress"
+              name="student.presentAddress"
               required
             />
           </Grid>
@@ -173,7 +170,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               label="Permanent Address"
               type="text"
               fullWidth={true}
-              name="admin.permanentAddress"
+              name="student.permanentAddress"
               required
             />
           </Grid>
@@ -184,13 +181,12 @@ const AdminModal = ({ open, setOpen }: TProps) => {
           }}
           fullWidth={true}
           type="submit"
-          disabled={isLoading}
         >
-          Create A New Admin
+          Create A New Student
         </Button>
       </DohaForm>
     </DohaFullScreenModal>
   );
 };
 
-export default AdminModal;
+export default CreateStudentModal;

@@ -25,8 +25,8 @@ type TParams = {
 
 const AdminUpdatePage = ({ params }: TParams) => {
   const router = useRouter();
-  const { data, isLoading } = useGetSingleAdminQuery(params?.adminId);
-  const [updateAdmin, { data: updateData, error }] = useUpdateAdminMutation();
+  const { data, isLoading, refetch } = useGetSingleAdminQuery(params?.adminId);
+  const [updateAdmin, { data: updateData }] = useUpdateAdminMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
     values.admin.dateOfBirth = dateFormatter(values.admin.dateOfBirth);
@@ -41,8 +41,8 @@ const AdminUpdatePage = ({ params }: TParams) => {
 
       if (res?.id) {
         toast.success(res.message || "Admin Updated Successfully!!!");
+        await refetch();
         router.push("/dashboard/admin/admin-management");
-        router.refresh();
       }
     } catch (err: any) {
       console.error(err);

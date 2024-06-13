@@ -17,10 +17,11 @@ const validationSchema = z.object({
 });
 
 const ChangePassword = () => {
-  const [changePassword] = useChangePasswordMutation();
+  const [changePassword, { isLoading }] = useChangePasswordMutation();
   const router = useRouter();
 
   const onSubmit = async (values: FieldValues) => {
+    console.log(values);
     try {
       const res = await changePassword(values);
       console.log(res);
@@ -65,7 +66,7 @@ const ChangePassword = () => {
           <KeyIcon sx={{ color: "primary.main" }} />
         </Box>
         <Typography variant="h5" fontWeight={600} sx={{ mb: 3, mt: -1.5 }}>
-          Change password
+          Change Password
         </Typography>
       </Stack>
       <DohaForm
@@ -81,6 +82,7 @@ const ChangePassword = () => {
               label="Old Password"
               fullWidth
               sx={{ mb: 2 }}
+              required
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
@@ -90,12 +92,17 @@ const ChangePassword = () => {
               label="New Password"
               fullWidth
               sx={{ mb: 2 }}
+              required
             />
           </Grid>
         </Grid>
 
-        <Button type="submit" sx={{ width: "100%", my: 2 }}>
-          change Password
+        <Button
+          type="submit"
+          sx={{ width: "100%", my: 2 }}
+          disabled={isLoading}
+        >
+          Change Password
         </Button>
       </DohaForm>
     </Box>

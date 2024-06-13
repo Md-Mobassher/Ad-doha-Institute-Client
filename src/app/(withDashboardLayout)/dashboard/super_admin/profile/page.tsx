@@ -41,7 +41,7 @@ const Profile = () => {
       <ProfileUpdateModal
         open={isModalOpen}
         setOpen={setIsModalOpen}
-        id={data?._id}
+        id={data?.id}
       />
       <Container sx={{ mt: 4 }}>
         <Grid container spacing={4}>

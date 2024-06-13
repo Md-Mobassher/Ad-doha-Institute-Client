@@ -18,28 +18,6 @@ type TProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const createUserNameValidationSchema = z.object({
-  firstName: z.string().min(3).max(20),
-  middleName: z.string().min(3).max(20).optional(),
-  lastName: z.string().min(3).max(20),
-});
-
-export const createFacultyValidationSchema = z.object({
-  password: z.string().min(6).max(20).optional(),
-  faculty: z.object({
-    name: createUserNameValidationSchema,
-    designation: z.string().max(30),
-    gender: z.enum(["male", "female", "other"]),
-    dateOfBirth: z.string(),
-    email: z.string().email(),
-    contactNo: z.string(),
-    emergencyContactNo: z.string(),
-    bloodGroup: z.enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]),
-    presentAddress: z.string(),
-    permanentAddress: z.string(),
-  }),
-});
-
 const CreateFacultyModal = ({ open, setOpen }: TProps) => {
   const [createFaculty] = useCreateFacultyMutation();
 
@@ -52,7 +30,7 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
       const res = await createFaculty(data).unwrap();
       console.log(res);
 
-      if (res?.id) {
+      if (res[0]?.id) {
         toast.success("Faculty created successfully!!!");
         setOpen(false);
       }

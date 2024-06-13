@@ -1,68 +1,110 @@
-import DohaDatePicker from "@/components/form/DohaDatePicker";
+/* eslint-disable react-hooks/exhaustive-deps */
+
+import React, { useEffect, useState } from "react";
+import { FieldValues } from "react-hook-form";
+import { Button, Grid } from "@mui/material";
+import MultipleSelectChip from "./MultipleSelectChip";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  useGetSingleAdminQuery,
+  useUpdateAdminMutation,
+} from "@/redux/features/admin/adminManagementApi";
+import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenModal";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
-import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenModal";
 import { BloodGroupOptions, genderOptions } from "@/constant/global";
-import { useCreateAdminMutation } from "@/redux/features/admin/adminManagementApi";
-import { dateFormatter } from "@/utils/dateFormatter";
-import { modifyPayload } from "@/utils/modifyPayload";
-import { Button, Grid } from "@mui/material";
-import { FieldValues } from "react-hook-form";
-import { toast } from "sonner";
+import DohaDatePicker from "@/components/form/DohaDatePicker";
 
 type TProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  id: string;
 };
 
-const AdminModal = ({ open, setOpen }: TProps) => {
-  const [createAdmin, { isLoading }] = useCreateAdminMutation();
+const validationSchema = z.object({
+  experience: z.preprocess(
+    (x) => (x ? x : undefined),
+    z.coerce.number().int().optional()
+  ),
+  apointmentFee: z.preprocess(
+    (x) => (x ? x : undefined),
+    z.coerce.number().int().optional()
+  ),
+  name: z.string().optional(),
+  contactNumber: z.string().optional(),
+  registrationNumber: z.string().optional(),
+  gender: z.string().optional(),
+  qualification: z.string().optional(),
+  currentWorkingPlace: z.string().optional(),
+  designation: z.string().optional(),
+});
 
-  const handleFormSubmit = async (values: FieldValues) => {
-    values.admin.dateOfBirth = dateFormatter(values.admin.dateOfBirth);
-    // console.log("Form Values:", values);
+const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
+  const { data: adminData, refetch, isSuccess } = useGetSingleAdminQuery(id);
+  const [selectedSpecialtiesIds, setSelectedSpecialtiesIds] = useState([]);
+  const [updateDoctor, { isLoading: updating }] = useUpdateAdminMutation();
 
-    const data = modifyPayload(values);
+  useEffect(() => {
+    if (!isSuccess) return;
+
+    setSelectedSpecialtiesIds(
+      adminData?.doctorSpecialties.map((sp: any) => {
+        return sp.specialtiesId;
+      })
+    );
+  }, [isSuccess]);
+
+  const submitHandler = async (values: FieldValues) => {
+    const specialties = selectedSpecialtiesIds.map((specialtiesId: string) => ({
+      specialtiesId,
+      isDeleted: false,
+    }));
+
+    console.log({ id });
+    // return;
+
+    const excludedFields: Array<keyof typeof values> = [
+      "email",
+      "id",
+      "role",
+      "needPasswordChange",
+      "status",
+      "createdAt",
+      "updatedAt",
+      "isDeleted",
+      "averageRating",
+      "review",
+      "profilePhoto",
+      "registrationNumber",
+      "schedules",
+      "doctorSpecialties",
+    ];
+
+    const updatedValues = Object.fromEntries(
+      Object.entries(values).filter(([key]) => {
+        return !excludedFields.includes(key);
+      })
+    );
+
+    updatedValues.specialties = specialties;
+
     try {
-      const res = await createAdmin(data).unwrap();
-      // console.log(res);
-
-      if (res[0]?.id) {
-        toast.success("Admin created successfully!!!");
-        setOpen(false);
-      }
-    } catch (err: any) {
-      console.error(err);
+      updateDoctor({ body: updatedValues, id });
+      await refetch();
+      setOpen(false);
+    } catch (error) {
+      console.log(error);
     }
   };
 
-  const defaultValues = {
-    password: "",
-    admin: {
-      name: {
-        firstName: "",
-        middleName: "",
-        lastName: "",
-      },
-      designation: "Admin",
-      email: "",
-      gender: "",
-      dateOfBirth: "",
-      contactNo: "",
-      emergencyContactNo: "",
-      bloodGroup: "",
-      presentAddress: "",
-      permanentAddress: "",
-    },
-  };
-
   return (
-    <DohaFullScreenModal open={open} setOpen={setOpen} title="Create New Admin">
+    <DohaFullScreenModal open={open} setOpen={setOpen} title="Update Profile">
       <DohaForm
-        onSubmit={handleFormSubmit}
-        // resolver={zodResolver(createAdminValidationSchema)}
-        defaultValues={defaultValues}
+        onSubmit={submitHandler}
+        defaultValues={adminData}
+        resolver={zodResolver(validationSchema)}
       >
         <Grid container spacing={3} my={1}>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -71,7 +113,6 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               fullWidth={true}
               type="text"
               name="admin.name.firstName"
-              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -80,7 +121,6 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               fullWidth={true}
               type="text"
               name="admin.name.middleName"
-              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -89,16 +129,6 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               type="text"
               fullWidth={true}
               name="admin.name.lastName"
-              required
-            />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaInput
-              label="Designation"
-              type="text"
-              fullWidth={true}
-              name="admin.designation"
-              disabled
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -107,17 +137,9 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               type="email"
               fullWidth={true}
               name="admin.email"
-              required
             />
           </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaInput
-              label="Password"
-              type="password"
-              fullWidth={true}
-              name="password"
-            />
-          </Grid>
+
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaSelectField
               items={genderOptions}
@@ -125,11 +147,10 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               fullWidth={true}
               name="admin.gender"
               sx={{ textAlign: "start" }}
-              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaDatePicker name="admin.dateOfBirth" label="Date of Birth" />
+            <DohaDatePicker name="dateOfBirth" label="Date of Birth" />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
@@ -137,7 +158,6 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               type="number"
               fullWidth={true}
               name="admin.contactNo"
-              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -146,7 +166,6 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               type="number"
               fullWidth={true}
               name="admin.emergencyContactNo"
-              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -156,7 +175,6 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               fullWidth={true}
               name="admin.bloodGroup"
               sx={{ textAlign: "start" }}
-              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -165,32 +183,24 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               type="text"
               fullWidth={true}
               name="admin.presentAddress"
-              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
-              label="Permanent Address"
+              label="Parmanent Address"
               type="text"
               fullWidth={true}
               name="admin.permanentAddress"
-              required
             />
           </Grid>
         </Grid>
-        <Button
-          sx={{
-            margin: "16px 0px",
-          }}
-          fullWidth={true}
-          type="submit"
-          disabled={isLoading}
-        >
-          Create A New Admin
+
+        <Button type="submit" disabled={updating}>
+          Save
         </Button>
       </DohaForm>
     </DohaFullScreenModal>
   );
 };
 
-export default AdminModal;
+export default ProfileUpdateModal;

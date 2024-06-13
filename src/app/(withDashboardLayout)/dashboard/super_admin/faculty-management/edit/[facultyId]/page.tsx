@@ -23,28 +23,6 @@ type TParams = {
     facultyId: string;
   };
 };
-const updateUserNameValidationSchema = z.object({
-  firstName: z.string().min(3).max(20).optional(),
-  middleName: z.string().min(3).max(20).optional(),
-  lastName: z.string().min(3).max(20).optional(),
-});
-
-export const updateFacultyValidationSchema = z.object({
-  faculty: z.object({
-    name: updateUserNameValidationSchema.optional(),
-    designation: z.string().max(30).optional(),
-    gender: z.enum(["male", "female", "other"]).optional(),
-    dateOfBirth: z.string().optional(),
-    email: z.string().email().optional(),
-    contactNo: z.string().optional(),
-    emergencyContactNo: z.string().optional(),
-    bloodGroup: z
-      .enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"])
-      .optional(),
-    presentAddress: z.string().optional(),
-    permanentAddress: z.string().optional(),
-  }),
-});
 
 const FacultyUpdatePage = ({ params }: TParams) => {
   const router = useRouter();

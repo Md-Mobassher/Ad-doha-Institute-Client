@@ -27,8 +27,10 @@ type TParams = {
 const FacultyUpdatePage = ({ params }: TParams) => {
   const router = useRouter();
 
-  const { data, isLoading } = useGetSingleFacultyQuery(params?.facultyId);
-  const [updateFaculty] = useUpdateFacultyMutation();
+  const { data, isLoading, refetch } = useGetSingleFacultyQuery(
+    params?.facultyId
+  );
+  const [updateFaculty, { isLoading: updating }] = useUpdateFacultyMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
     values.faculty.dateOfBirth = dateFormatter(values.faculty.dateOfBirth);
@@ -43,8 +45,8 @@ const FacultyUpdatePage = ({ params }: TParams) => {
 
       if (res?.id) {
         toast.success(res.message || "faculty Updated Successfully!!!");
+        await refetch();
         router.push("/dashboard/admin/faculty-management");
-        router.refresh();
       }
     } catch (err: any) {
       console.error(err);
@@ -215,6 +217,7 @@ const FacultyUpdatePage = ({ params }: TParams) => {
             }}
             fullWidth={true}
             type="submit"
+            disabled={updating}
           >
             Update Faculty
           </Button>
