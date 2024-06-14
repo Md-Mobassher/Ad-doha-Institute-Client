@@ -1,10 +1,8 @@
 import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
-import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenModal";
 import DohaModal from "@/components/shared/DohaModal/DohaModal";
 import { useCreateBookMutation } from "@/redux/features/admin/bookManagementApi";
-import { modifyPayload } from "@/utils/modifyPayload";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { Button, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
@@ -25,6 +23,7 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
       return;
     }
     values.image = imageUrl;
+
     try {
       const res = await createBook(values).unwrap();
       console.log(res);
@@ -45,11 +44,7 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
 
   return (
     <DohaModal open={open} setOpen={setOpen} title="Create New Book">
-      <DohaForm
-        onSubmit={handleFormSubmit}
-        // resolver={zodResolver(createAdminValidationSchema)}
-        defaultValues={defaultValues}
-      >
+      <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
         <Grid container spacing={3} my={1}>
           <Grid item lg={12} md={12} sm={12} xs={12}>
             <DohaInput
@@ -76,13 +71,6 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
               label="Book Image"
               name="file"
             />
-            {/* <DohaInput
-              label="Book Image"
-              fullWidth={true}
-              type="file"
-              name="image"
-              required
-            /> */}
           </Grid>
         </Grid>
         <Button

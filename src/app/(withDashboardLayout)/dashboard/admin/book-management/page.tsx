@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Button, IconButton, Stack, TextField } from "@mui/material";
+import { Button, IconButton, Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -34,11 +34,12 @@ const BookManagementPage = () => {
 
   const { data, isLoading } = useGetAllBooksQuery({ ...query });
   const [deleteBook] = useDeleteBookMutation();
-  console.log(data);
-
+  // console.log(data);
+  if (!data) {
+    <p>No Data Found</p>;
+  }
   const books = data?.books;
   const meta = data?.meta;
-  // console.log(admins);
 
   const handleDelete = async (id: string) => {
     // console.log(id);
@@ -58,7 +59,7 @@ const BookManagementPage = () => {
     {
       field: "image",
       headerName: "Image",
-      width: 150,
+      width: 50,
       renderCell: ({ row }) => {
         return (
           <Box
@@ -73,7 +74,7 @@ const BookManagementPage = () => {
       },
     },
     { field: "title", headerName: "Book Title", flex: 1 },
-    { field: "_id", headerName: "ID" },
+    { field: "_id", headerName: "ID", flex: 1 },
     { field: "url", headerName: "Live Url", flex: 1 },
     {
       field: "action",
@@ -124,7 +125,11 @@ const BookManagementPage = () => {
             overflow: "auto",
           }}
         >
-          <DataGrid rows={books} columns={columns} />
+          <DataGrid
+            rows={books}
+            columns={columns}
+            getRowId={(row) => row._id}
+          />
         </Box>
       ) : (
         <LoadingPage />
