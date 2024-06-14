@@ -19,7 +19,7 @@ const videosApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      transformResponse: (response: Tvideo[], meta: IMeta) => {
+      transformResponse: (response: TVideo[], meta: IMeta) => {
         return {
           videos: response,
           meta,

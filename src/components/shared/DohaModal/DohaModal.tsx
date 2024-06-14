@@ -45,7 +45,26 @@ export default function DohaModal({
         open={open}
         sx={{ ...sx }}
       >
-        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+        <DialogTitle
+          sx={{
+            color: "primary.main",
+            fontSize: {
+              lg: "40px",
+              md: "35px",
+              sm: "30px",
+              xs: "25px",
+            },
+            fontWeight: 600,
+            background: "#f4f7fe",
+            px: {
+              lg: "40px",
+              md: "35px",
+              sm: "30px",
+              xs: "20px",
+            },
+          }}
+          id="customized-dialog-title"
+        >
           {title}
         </DialogTitle>
         <IconButton
