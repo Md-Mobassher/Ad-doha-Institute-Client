@@ -26,7 +26,9 @@ type TParams = {
 const StudentUpdatePage = ({ params }: TParams) => {
   const router = useRouter();
 
-  const { data, isLoading } = useGetSingleStudentQuery(params?.studentId);
+  const { data, isLoading, refetch } = useGetSingleStudentQuery(
+    params?.studentId
+  );
   const [updateStudent] = useUpdateStudentMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
@@ -42,8 +44,8 @@ const StudentUpdatePage = ({ params }: TParams) => {
 
       if (res?.id) {
         toast.success(res.message || "Student Updated Successfully!!!");
-        router.push("/dashboard/admin/student-management");
-        router.refresh();
+        await refetch();
+        router.push("/dashboard/super_admin/student-management");
       }
     } catch (err: any) {
       console.error(err);

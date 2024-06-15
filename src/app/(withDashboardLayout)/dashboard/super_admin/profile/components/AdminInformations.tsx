@@ -1,7 +1,8 @@
 import { Box, Stack, styled, Typography } from "@mui/material";
+import { dateFormatter } from "../../../../../../utils/dateFormatter";
 
 const StyledInformationBox = styled(Box)(({ theme }) => ({
-  background: "#f4f7fe",
+  background: "#f4f7f7",
   borderRadius: theme.spacing(1),
   width: "45%",
   padding: "8px 16px",
@@ -21,18 +22,6 @@ const AdminInformation = ({ data }: any) => {
       <Stack direction={{ xs: "column", md: "row" }} gap={2} flexWrap={"wrap"}>
         <StyledInformationBox>
           <Typography color="secondary" variant="caption">
-            ID
-          </Typography>
-          <Typography>{data?.id}</Typography>
-        </StyledInformationBox>
-        {/* <StyledInformationBox>
-          <Typography color="secondary" variant="caption">
-            Role
-          </Typography>
-          <Typography>{data?.user?.role}</Typography>
-        </StyledInformationBox> */}
-        <StyledInformationBox>
-          <Typography color="secondary" variant="caption">
             Name
           </Typography>
           <Typography>{data?.fullName}</Typography>
@@ -45,9 +34,9 @@ const AdminInformation = ({ data }: any) => {
         </StyledInformationBox>
         <StyledInformationBox>
           <Typography color="secondary" variant="caption">
-            Gender
+            ID
           </Typography>
-          <Typography>{data?.gender}</Typography>
+          <Typography>{data?.id}</Typography>
         </StyledInformationBox>
         <StyledInformationBox>
           <Typography variant="caption" color="secondary">
@@ -58,56 +47,50 @@ const AdminInformation = ({ data }: any) => {
       </Stack>
 
       <Typography variant="h5" my={2} color={"primary.main"}>
-        Professional Information
+        Others Information
       </Typography>
       <Stack direction={{ xs: "column", md: "row" }} flexWrap={"wrap"} gap={2}>
         <StyledInformationBox>
-          <Typography variant="caption" color="secondary"></Typography>
-          <Typography>{data?.apointmentFee}</Typography>
+          <Typography color="secondary" variant="caption">
+            Gender
+          </Typography>
+          <Typography>{data?.gender}</Typography>
         </StyledInformationBox>
         <StyledInformationBox>
           <Typography variant="caption" color="secondary">
-            Qualification
+            Date of Birth
           </Typography>
-          <Typography>{data?.qualification}</Typography>
+          <Typography>{dateFormatter(data?.dateOfBirth)}</Typography>
         </StyledInformationBox>
         <StyledInformationBox>
           <Typography variant="caption" color="secondary">
-            Current Working Place
+            Blood Group
           </Typography>
-          <Typography>{data?.currentWorkingPlace}</Typography>
+          <Typography>{data?.bloodGroup}</Typography>
         </StyledInformationBox>
         <StyledInformationBox>
           <Typography variant="caption" color="secondary">
-            Joined
+            Contact Number
           </Typography>
-          <Typography>
-            {data
-              ? new Date(data.createdAt).toLocaleDateString("en-US", {
-                  month: "2-digit",
-                  day: "2-digit",
-                  year: "2-digit",
-                })
-              : null}
-          </Typography>
+          <Typography>{data?.contactNo}</Typography>
         </StyledInformationBox>
         <StyledInformationBox>
           <Typography variant="caption" color="secondary">
-            Current Status
+            Emergency Contact Number
           </Typography>
-          <Typography>{data?.status}</Typography>
+          <Typography>{data?.emergencyContactNo}</Typography>
         </StyledInformationBox>
         <StyledInformationBox>
           <Typography variant="caption" color="secondary">
-            Average Rating
+            Present Address
           </Typography>
-          <Typography>{data?.averageRating}</Typography>
+          <Typography>{data?.presentAddress}</Typography>
         </StyledInformationBox>
         <StyledInformationBox>
           <Typography variant="caption" color="secondary">
-            experience
+            Permanent Address
           </Typography>
-          <Typography>{data?.experience}</Typography>
+          <Typography>{data?.permanentAddress}</Typography>
         </StyledInformationBox>
       </Stack>
     </>

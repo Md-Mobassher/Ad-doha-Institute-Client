@@ -45,7 +45,7 @@ const AdminManagementPage = () => {
 
       // console.log(res);
       if (res?.id) {
-        toast.success("Amin deleted successfully!!!");
+        toast.success("Admin deleted successfully!!!");
       }
     } catch (err: any) {
       console.error(err.message);

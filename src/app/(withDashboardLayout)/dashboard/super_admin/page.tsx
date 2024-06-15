@@ -1,9 +1,9 @@
-const AdminDashboardPage = () => {
+const SuperAdminDashboardPage = () => {
   return (
     <div>
-      <h1>Admin Dashboard</h1>
+      <h1>Super Admin Dashboard</h1>
     </div>
   );
 };
 
-export default AdminDashboardPage;
+export default SuperAdminDashboardPage;

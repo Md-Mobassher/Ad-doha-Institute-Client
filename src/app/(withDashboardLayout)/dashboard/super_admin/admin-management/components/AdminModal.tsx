@@ -17,7 +17,7 @@ type TProps = {
 };
 
 const AdminModal = ({ open, setOpen }: TProps) => {
-  const [createAdmin] = useCreateAdminMutation();
+  const [createAdmin, { isLoading }] = useCreateAdminMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
     values.admin.dateOfBirth = dateFormatter(values.admin.dateOfBirth);
@@ -184,6 +184,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
           }}
           fullWidth={true}
           type="submit"
+          disabled={isLoading}
         >
           Create A New Admin
         </Button>

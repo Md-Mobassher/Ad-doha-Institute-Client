@@ -1,11 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FieldValues } from "react-hook-form";
 import { Button, Grid } from "@mui/material";
-import MultipleSelectChip from "./MultipleSelectChip";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   useGetSingleAdminQuery,
   useUpdateAdminMutation,
@@ -16,6 +13,9 @@ import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
 import { BloodGroupOptions, genderOptions } from "@/constant/global";
 import DohaDatePicker from "@/components/form/DohaDatePicker";
+import dayjs from "dayjs";
+import { dateFormatter } from "@/utils/dateFormatter";
+import { toast } from "sonner";
 
 type TProps = {
   open: boolean;
@@ -23,88 +23,58 @@ type TProps = {
   id: string;
 };
 
-const validationSchema = z.object({
-  experience: z.preprocess(
-    (x) => (x ? x : undefined),
-    z.coerce.number().int().optional()
-  ),
-  apointmentFee: z.preprocess(
-    (x) => (x ? x : undefined),
-    z.coerce.number().int().optional()
-  ),
-  name: z.string().optional(),
-  contactNumber: z.string().optional(),
-  registrationNumber: z.string().optional(),
-  gender: z.string().optional(),
-  qualification: z.string().optional(),
-  currentWorkingPlace: z.string().optional(),
-  designation: z.string().optional(),
-});
-
 const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
-  const { data: adminData, refetch, isSuccess } = useGetSingleAdminQuery(id);
-  const [selectedSpecialtiesIds, setSelectedSpecialtiesIds] = useState([]);
-  const [updateDoctor, { isLoading: updating }] = useUpdateAdminMutation();
+  const { data, refetch } = useGetSingleAdminQuery(id);
+  const [updateAdmin, { isLoading }] = useUpdateAdminMutation();
 
-  useEffect(() => {
-    if (!isSuccess) return;
-
-    setSelectedSpecialtiesIds(
-      adminData?.doctorSpecialties.map((sp: any) => {
-        return sp.specialtiesId;
-      })
-    );
-  }, [isSuccess]);
-
-  const submitHandler = async (values: FieldValues) => {
-    const specialties = selectedSpecialtiesIds.map((specialtiesId: string) => ({
-      specialtiesId,
-      isDeleted: false,
-    }));
-
-    console.log({ id });
-    // return;
-
-    const excludedFields: Array<keyof typeof values> = [
-      "email",
-      "id",
-      "role",
-      "needPasswordChange",
-      "status",
-      "createdAt",
-      "updatedAt",
-      "isDeleted",
-      "averageRating",
-      "review",
-      "profilePhoto",
-      "registrationNumber",
-      "schedules",
-      "doctorSpecialties",
-    ];
-
-    const updatedValues = Object.fromEntries(
-      Object.entries(values).filter(([key]) => {
-        return !excludedFields.includes(key);
-      })
-    );
-
-    updatedValues.specialties = specialties;
+  const handleFormSubmit = async (values: FieldValues) => {
+    values.admin.dateOfBirth = dateFormatter(values.admin.dateOfBirth);
+    // console.log(values);
 
     try {
-      updateDoctor({ body: updatedValues, id });
-      await refetch();
-      setOpen(false);
+      const res = await updateAdmin({
+        id,
+        values,
+      }).unwrap();
+      // console.log(res);
+
+      if (res?.id) {
+        toast.success(res.message || "Profile Updated Successfully!!!");
+        await refetch();
+        setOpen(false);
+      }
+      // updateAdmin({ body: values, id });
+      // await refetch();
     } catch (error) {
       console.log(error);
     }
   };
 
+  const defaultValues = {
+    admin: {
+      name: {
+        firstName: data?.name?.firstName || "",
+        middleName: data?.name?.middleName || "",
+        lastName: data?.name?.lastName || "",
+      },
+      designation: data?.designation || "",
+      id: data?.id || "",
+      email: data?.email || "",
+      gender: data?.gender || "",
+      dateOfBirth: dayjs(data?.dateOfBirth) || "",
+      contactNo: data?.contactNo || "",
+      emergencyContactNo: data?.emergencyContactNo || "",
+      bloodGroup: data?.bloodGroup || "",
+      presentAddress: data?.presentAddress || "",
+      permanentAddress: data?.permanentAddress || "",
+    },
+  };
+
   return (
     <DohaFullScreenModal open={open} setOpen={setOpen} title="Update Profile">
       <DohaForm
-        onSubmit={submitHandler}
-        defaultValues={adminData}
-        resolver={zodResolver(validationSchema)}
+        onSubmit={handleFormSubmit}
+        defaultValues={data && defaultValues}
       >
         <Grid container spacing={3} my={1}>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -113,6 +83,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               fullWidth={true}
               type="text"
               name="admin.name.firstName"
+              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -121,6 +92,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               fullWidth={true}
               type="text"
               name="admin.name.middleName"
+              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -129,6 +101,25 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               type="text"
               fullWidth={true}
               name="admin.name.lastName"
+              required
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="Designation"
+              type="text"
+              fullWidth={true}
+              name="admin.designation"
+              disabled
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="ID"
+              type="text"
+              fullWidth={true}
+              name="admin.id"
+              disabled
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -137,6 +128,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               type="email"
               fullWidth={true}
               name="admin.email"
+              required
             />
           </Grid>
 
@@ -147,10 +139,11 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               fullWidth={true}
               name="admin.gender"
               sx={{ textAlign: "start" }}
+              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaDatePicker name="dateOfBirth" label="Date of Birth" />
+            <DohaDatePicker name="admin.dateOfBirth" label="Date of Birth" />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
@@ -158,6 +151,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               type="number"
               fullWidth={true}
               name="admin.contactNo"
+              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -166,6 +160,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               type="number"
               fullWidth={true}
               name="admin.emergencyContactNo"
+              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -175,6 +170,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               fullWidth={true}
               name="admin.bloodGroup"
               sx={{ textAlign: "start" }}
+              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -183,20 +179,28 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               type="text"
               fullWidth={true}
               name="admin.presentAddress"
+              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
-              label="Parmanent Address"
+              label="Permanent Address"
               type="text"
               fullWidth={true}
               name="admin.permanentAddress"
+              required
             />
           </Grid>
         </Grid>
-
-        <Button type="submit" disabled={updating}>
-          Save
+        <Button
+          sx={{
+            margin: "16px 0px",
+          }}
+          fullWidth={true}
+          type="submit"
+          disabled={isLoading}
+        >
+          Update Profile
         </Button>
       </DohaForm>
     </DohaFullScreenModal>

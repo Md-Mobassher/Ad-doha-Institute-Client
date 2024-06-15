@@ -17,7 +17,7 @@ type TProps = {
 };
 
 const CreateStudentModal = ({ open, setOpen }: TProps) => {
-  const [createStudent] = useCreateStudentMutation();
+  const [createStudent, { isLoading }] = useCreateStudentMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
     values.student.dateOfBirth = dateFormatter(values.student.dateOfBirth);
@@ -62,11 +62,7 @@ const CreateStudentModal = ({ open, setOpen }: TProps) => {
       setOpen={setOpen}
       title="Create New Student"
     >
-      <DohaForm
-        onSubmit={handleFormSubmit}
-        // resolver={zodResolver(createStduentValidationSchema)}
-        defaultValues={defaultValues}
-      >
+      <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
         <Grid container spacing={3} my={1}>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
@@ -181,6 +177,7 @@ const CreateStudentModal = ({ open, setOpen }: TProps) => {
           }}
           fullWidth={true}
           type="submit"
+          disabled={isLoading}
         >
           Create A New Student
         </Button>

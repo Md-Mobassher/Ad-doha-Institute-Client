@@ -15,6 +15,8 @@ import {
 import AutoFileUploader from "@/components/form/AutoFileUploader";
 import AdminInformation from "./components/AdminInformations";
 import LoadingPage from "@/app/loading";
+import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
+import { toast } from "sonner";
 
 const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,14 +24,27 @@ const Profile = () => {
   const { data, isLoading } = useGetMYProfileQuery(undefined);
   const [updateMYProfile, { isLoading: updating }] =
     useUpdateMYProfileMutation();
-  console.log(data);
+  // console.log(data);
 
-  const fileUploadHandler = (file: File) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("data", JSON.stringify({}));
+  const handleUpdateImage = async (file: File) => {
+    // console.log(file);
+    const imageUrl = await uploadImageToCloudinary(file);
+    if (!imageUrl) {
+      return;
+    }
+    const data = {
+      profileImg: imageUrl,
+    };
 
-    updateMYProfile(formData);
+    try {
+      const res = await updateMYProfile(data).unwrap();
+      // console.log(res);
+      if (res?._id) {
+        toast.success("Profile photo updated successfully!!!");
+      }
+    } catch (err: any) {
+      console.error(err);
+    }
   };
 
   if (isLoading) {
@@ -41,14 +56,14 @@ const Profile = () => {
       <ProfileUpdateModal
         open={isModalOpen}
         setOpen={setIsModalOpen}
-        id={data?.id}
+        id={data?._id}
       />
       <Container sx={{ mt: 4 }}>
         <Grid container spacing={4}>
           <Grid xs={12} md={4}>
             <Box
               sx={{
-                height: 300,
+                height: 320,
                 width: "100%",
                 overflow: "hidden",
                 borderRadius: 1,
@@ -57,10 +72,10 @@ const Profile = () => {
             >
               {data?.profileImg ? (
                 <Image
-                  height={300}
+                  height={450}
                   width={400}
                   src={data?.profileImg}
-                  alt="User Photo"
+                  alt={data?.fullName || "User Photo"}
                 />
               ) : (
                 <PersonIcon
@@ -86,7 +101,7 @@ const Profile = () => {
                   name="file"
                   label="Choose Your Profile Photo"
                   icon={<CloudUploadIcon />}
-                  onFileUpload={fileUploadHandler}
+                  onFileUpload={(file) => handleUpdateImage(file)}
                   variant="text"
                 />
               )}

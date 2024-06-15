@@ -7,11 +7,9 @@ import { BloodGroupOptions, genderOptions } from "@/constant/global";
 import { useCreateFacultyMutation } from "@/redux/features/admin/facultyManagementApi";
 import { dateFormatter } from "@/utils/dateFormatter";
 import { modifyPayload } from "@/utils/modifyPayload";
-// import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
 
 type TProps = {
   open: boolean;
@@ -19,7 +17,7 @@ type TProps = {
 };
 
 const CreateFacultyModal = ({ open, setOpen }: TProps) => {
-  const [createFaculty] = useCreateFacultyMutation();
+  const [createFaculty, { isLoading }] = useCreateFacultyMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
     values.faculty.dateOfBirth = dateFormatter(values.faculty.dateOfBirth);
@@ -201,6 +199,7 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
           }}
           fullWidth={true}
           type="submit"
+          disabled={isLoading}
         >
           Create A New faculty
         </Button>
