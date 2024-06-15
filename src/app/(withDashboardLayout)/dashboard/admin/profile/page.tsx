@@ -27,7 +27,7 @@ const Profile = () => {
   // console.log(data);
 
   const handleUpdateImage = async (file: File) => {
-    console.log(file);
+    // console.log(file);
     const imageUrl = await uploadImageToCloudinary(file);
     if (!imageUrl) {
       return;
@@ -38,7 +38,7 @@ const Profile = () => {
 
     try {
       const res = await updateMYProfile(data).unwrap();
-      console.log(res);
+      // console.log(res);
       if (res?._id) {
         toast.success("Profile photo updated successfully!!!");
       }
@@ -63,7 +63,7 @@ const Profile = () => {
           <Grid xs={12} md={4}>
             <Box
               sx={{
-                height: 350,
+                height: 320,
                 width: "100%",
                 overflow: "hidden",
                 borderRadius: 1,
@@ -72,7 +72,7 @@ const Profile = () => {
             >
               {data?.profileImg ? (
                 <Image
-                  height={300}
+                  height={450}
                   width={400}
                   src={data?.profileImg}
                   alt={data?.fullName || "User Photo"}

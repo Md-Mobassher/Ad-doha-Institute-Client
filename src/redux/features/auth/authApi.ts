@@ -18,7 +18,7 @@ export const authApi = baseApi.injectEndpoints({
         url: `${AUTH_URL}/change-password`,
         method: "POST",
         contentType: "application/json",
-        data: data,
+        data,
       }),
       invalidatesTags: [tagTypes.user],
     }),

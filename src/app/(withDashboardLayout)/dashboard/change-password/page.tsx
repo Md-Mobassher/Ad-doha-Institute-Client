@@ -1,4 +1,5 @@
 "use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import { FieldValues } from "react-hook-form";
@@ -21,12 +22,12 @@ const ChangePassword = () => {
   const router = useRouter();
 
   const onSubmit = async (values: FieldValues) => {
-    console.log(values);
+    // console.log(values);
     try {
       const res = await changePassword(values);
-      console.log(res);
+      // console.log(res);
 
-      if ("data" in res && res.data.status === 200) {
+      if (res?.data?._id) {
         logoutUser(router);
         toast.success("Password Changed Successfully");
       } else {

@@ -33,16 +33,16 @@ const VideoManagementPage = () => {
 
   const { data, isLoading } = useGetAllVideosQuery({ ...query });
   const [deleteVideo] = useDeleteVideoMutation();
-  console.log(data);
+  // console.log(data);
   if (!data) {
     <p>No Data Found</p>;
   }
   const videos = data?.videos;
-  console.log(videos);
   const meta = data?.meta;
+  // console.log(videos);
 
   const handleDelete = async (id: string) => {
-    console.log(id);
+    // console.log(id);
     try {
       const res = await deleteVideo(id).unwrap();
 
