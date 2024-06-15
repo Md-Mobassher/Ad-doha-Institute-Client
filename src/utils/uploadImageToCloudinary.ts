@@ -26,5 +26,5 @@ export const uploadImageToCloudinary = async (file: any) => {
     toast.error("Failed to upload image");
   }
   // console.log(data);
-  return data.secure_url;
+  return data?.secure_url;
 };

@@ -14,11 +14,11 @@ export const profileAPi = baseApi.injectEndpoints({
     }),
     updateMYProfile: build.mutation({
       query: (data) => {
+        console.log(data);
         return {
           url: "/users/update-my-profile",
           method: "PATCH",
           data,
-          contentType: "multipart/form-data",
         };
       },
       invalidatesTags: [tagTypes.user],

@@ -2,7 +2,7 @@ import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaModal from "@/components/shared/DohaModal/DohaModal";
-import { useCreateBookMutation } from "@/redux/features/admin/bookManagementApi";
+import { useCreateVideoMutation } from "@/redux/features/admin/videoManagementApi";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { Button, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
@@ -13,22 +13,17 @@ type TProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const CreateBookModal = ({ open, setOpen }: TProps) => {
-  const [createBook, { isLoading }] = useCreateBookMutation();
+const CreateVideoModal = ({ open, setOpen }: TProps) => {
+  const [createVideo, { isLoading }] = useCreateVideoMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    // console.log("Form Values:", values);
-    const imageUrl = await uploadImageToCloudinary(values.file);
-    if (!imageUrl) {
-      return;
-    }
-    values.image = imageUrl;
+    console.log("Form Values:", values);
 
     try {
-      const res = await createBook(values).unwrap();
-      // console.log(res);
+      const res = await createVideo(values).unwrap();
+      console.log(res);
       if (res?._id) {
-        toast.success("Book created successfully!!!");
+        toast.success("Video created successfully!!!");
         setOpen(false);
       }
     } catch (err: any) {
@@ -38,17 +33,16 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
 
   const defaultValues = {
     title: "",
-    image: "",
     url: "",
   };
 
   return (
-    <DohaModal open={open} setOpen={setOpen} title="Create New Book">
+    <DohaModal open={open} setOpen={setOpen} title="Create New Video">
       <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
         <Grid container spacing={3} my={1}>
           <Grid item lg={12} md={12} sm={12} xs={12}>
             <DohaInput
-              label="Book Title"
+              label="Video Title"
               fullWidth={true}
               type="text"
               name="title"
@@ -58,18 +52,11 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
 
           <Grid item lg={12} md={12} sm={12} xs={12}>
             <DohaInput
-              label="Book Url"
+              label="Video Url"
               fullWidth={true}
               type="text"
               name="url"
               required
-            />
-          </Grid>
-          <Grid item lg={12} md={12} sm={12} xs={12}>
-            <DohaFileUploader
-              sx={{ width: "50%" }}
-              label="Book Image"
-              name="file"
             />
           </Grid>
         </Grid>
@@ -81,11 +68,11 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
           type="submit"
           disabled={isLoading}
         >
-          Create A Book
+          Create New Video
         </Button>
       </DohaForm>
     </DohaModal>
   );
 };
 
-export default CreateBookModal;
+export default CreateVideoModal;
