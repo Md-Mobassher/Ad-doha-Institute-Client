@@ -11,7 +11,12 @@ const Navbar = () => {
   return (
     <>
       {/* header top */}
-      <Box className="bg-primary text-white">
+      <Box
+        className="bg-primary text-white"
+        sx={{
+          backgroundColor: "primary.main",
+        }}
+      >
         <Container>
           <Stack
             direction="row"

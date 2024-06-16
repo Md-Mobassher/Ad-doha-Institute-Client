@@ -1,10 +1,11 @@
 "use client";
 
 import { TButtonProps } from "@/type";
+import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa";
 
-const Button = ({ btnTitle, id, navigate }: TButtonProps) => {
+const DohaButton = ({ btnTitle, id, navigate }: TButtonProps) => {
   const router = useRouter();
 
   const handleClick = () => {
@@ -18,15 +19,19 @@ const Button = ({ btnTitle, id, navigate }: TButtonProps) => {
   return (
     <>
       {btnTitle && (
-        <button
-          className="btn btn-outline bg-primary text-white hover:bg-secondary transition-all duration-300 rounded-3xl px-5 "
+        <Button
+          sx={{
+            backgroundColor: "primary.main",
+            color: "#FFF",
+            borderRadius: "8px",
+          }}
           onClick={handleClick}
         >
-          {btnTitle} <FaArrowRight className=" ml-1" />
-        </button>
+          {btnTitle} <FaArrowRight className=" ml-2" />
+        </Button>
       )}
     </>
   );
 };
 
-export default Button;
+export default DohaButton;

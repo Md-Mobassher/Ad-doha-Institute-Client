@@ -1,3 +1,4 @@
+import { Box, Stack, Typography } from "@mui/material";
 import { FaHandPointRight } from "react-icons/fa";
 
 type detailItemProps = {
@@ -9,14 +10,24 @@ const DetailsItem = ({ item, index }: detailItemProps) => {
   return (
     <>
       {index > 0 && <hr className="border-slate-300" />}
-      <div className="flex justify-start items-center gap-4 text-md hover:text-primary my-2 hover:font-semibold">
-        <div>
+      <Stack
+        display="flex"
+        direction="row"
+        justifyContent="start"
+        alignItems="center"
+        gap={2}
+        my={1}
+        color="#000"
+      >
+        <Box>
           <FaHandPointRight className="lg:size-8 md:size-7 size-5" />
-        </div>
-        <div>
-          <p>{item}</p>
-        </div>
-      </div>
+        </Box>
+        <Box>
+          <Typography component="p" fontWeight="400">
+            {item}
+          </Typography>
+        </Box>
+      </Stack>
     </>
   );
 };

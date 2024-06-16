@@ -1,4 +1,4 @@
-import Button from "../Button";
+import DohaButton from "../DohaButton";
 import Container from "../Container";
 import Title from "../Title";
 import { videosData } from "@/data/videos";
@@ -9,7 +9,7 @@ const VideosSection = () => {
     <Container>
       <div className="flex justify-between items-center lg:px-3 mb-7">
         <Title title="ভিডিও" />
-        <Button btnTitle="সকল" navigate="resourses/videos" />
+        <DohaButton btnTitle="সকল" navigate="resourses/videos" />
       </div>
 
       <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5 ">

@@ -1,7 +1,6 @@
 "use client";
 
 import LoadingPage from "@/app/loading";
-import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import {

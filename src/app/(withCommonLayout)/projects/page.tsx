@@ -1,4 +1,4 @@
-import Card from "@/components/ui/Card";
+import DohaCard from "@/components/ui/DohaCard";
 import PageTitle from "@/components/ui/PageTitle";
 import { projectsData } from "@/data/projects";
 import { Container } from "@mui/material";
@@ -10,7 +10,7 @@ const ProjectPage = () => {
       <Container>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-7 md:gap-6 gap-5 py-10">
           {projectsData.map((project) => (
-            <Card
+            <DohaCard
               key={project.id}
               {...project}
               navigate="projects"

@@ -1,4 +1,4 @@
-import Card from "@/components/ui/Card";
+import DohaCard from "@/components/ui/DohaCard";
 
 import PageTitle from "@/components/ui/PageTitle";
 import { servicesData } from "@/data/services";
@@ -13,7 +13,7 @@ const ServicesPage = () => {
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-7 md:gap-6 gap-5 py-10">
           {servicesData.map((service) => (
             <>
-              <Card
+              <DohaCard
                 key={service.id}
                 {...service}
                 navigate="services"

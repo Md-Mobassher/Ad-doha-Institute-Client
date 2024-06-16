@@ -3,7 +3,6 @@ import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaModal from "@/components/shared/DohaModal/DohaModal";
 import { useCreateVideoMutation } from "@/redux/features/admin/videoManagementApi";
-import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { Button, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";

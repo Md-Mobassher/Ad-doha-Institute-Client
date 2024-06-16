@@ -7,7 +7,24 @@ const Container = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <Box className="lg:mt-20 md:mt-16 mt-12 lg:mb-8 md:mb-8 mb-6  px-2">
+    <Box
+      sx={{
+        mt: {
+          lg: "80px",
+          md: "70px",
+          sm: "60px",
+          xs: "50px",
+        },
+        mb: {
+          lg: "32px",
+          md: "30px",
+          sm: "28px",
+          xs: "24px",
+        },
+
+        px: "8px",
+      }}
+    >
       {children}
     </Box>
   );

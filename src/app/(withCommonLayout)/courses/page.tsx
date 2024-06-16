@@ -1,4 +1,4 @@
-import Card from "@/components/ui/Card";
+import DohaCard from "@/components/ui/DohaCard";
 import Container from "@/components/ui/Container";
 import PageTitle from "@/components/ui/PageTitle";
 import { coursesData } from "@/data/courses";
@@ -11,7 +11,7 @@ const CoursesPage = () => {
         <Container>
           <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-8 gap-5">
             {coursesData.map((course) => (
-              <Card
+              <DohaCard
                 key={course.id}
                 {...course}
                 navigate="courses"

@@ -1,5 +1,7 @@
 "use client";
+
 import { TMember } from "@/type";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -10,18 +12,48 @@ const Member = ({ image, name, designation, navigate }: TMember) => {
     router.push(navigate as string);
   };
   return (
-    <div
+    <Box
       className="border hover:border-primary shadow-lg rounded-lg hover:shadow-2xl hover:cursor-pointer"
       onClick={() => handleClick()}
     >
-      <div>
-        <Image src={image} alt={name} className="rounded-t-lg" />
-      </div>
-      <div className="p-4">
-        <h3 className="text-md font-bold mb-2 text-primary">{name}</h3>
-        <h5 className="text-sm">{designation}</h5>
-      </div>
-    </div>
+      <Box>
+        <Image
+          src={image}
+          alt={name}
+          className="rounded-t-lg"
+          width={380}
+          height={400}
+        />
+      </Box>
+      <Box p={2}>
+        <Typography
+          fontSize={{
+            lg: "20px",
+            md: "19px",
+            sm: "18px",
+            xs: "17px",
+          }}
+          component="h3"
+          fontWeight="600"
+          mb="8px"
+          color="primary.main"
+        >
+          {name}
+        </Typography>
+        <Typography
+          fontSize={{
+            lg: "17px",
+            md: "16px",
+            sm: "15px",
+            xs: "14px",
+          }}
+          component="p"
+          fontWeight="400"
+        >
+          {designation}
+        </Typography>
+      </Box>
+    </Box>
   );
 };
 

@@ -3,7 +3,7 @@ import Image from "next/image";
 import DetailsItem from "./DetailsItem";
 import { TCardDetails } from "@/type";
 import PageTitle from "./PageTitle";
-import Button from "./Button";
+import DohaButton from "./DohaButton";
 import Link from "next/link";
 
 const CardDetails = ({
@@ -26,7 +26,7 @@ const CardDetails = ({
               <div>
                 {btnTitle && link && (
                   <Link href={link as string}>
-                    <Button btnTitle={btnTitle || "Details"} />
+                    <DohaButton btnTitle={btnTitle || "Details"} />
                   </Link>
                 )}
               </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { booksData } from "@/data/books";
-import Button from "../Button";
+import DohaButton from "../DohaButton";
 import Container from "../Container";
 import Title from "../Title";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,7 +15,7 @@ const BooksSection = () => {
     <Container>
       <div className="flex justify-between items-center lg:px-3 mb-7">
         <Title title="বই" />
-        <Button btnTitle="সকল" navigate="resourses/books" />
+        <DohaButton btnTitle="সকল" navigate="resourses/books" />
       </div>
 
       <Swiper
@@ -52,13 +52,13 @@ const BooksSection = () => {
       >
         {booksData.map((book: TBook) => (
           <SwiperSlide className=" mb-12 h-full " key={book.id}>
-            <div key={book.id}>
+            <div>
               <Link href={book.link} target="_blank">
                 <div className="border hover:border-primary rounded-lg shadow-md hover:shadow-2xl p-2 w-full h-full flex flex-col justify-between transition-all duration-500">
                   <div>
                     <Image
-                      src={book.image}
-                      alt={book.title}
+                      src={book?.image}
+                      alt={book?.title}
                       width={180}
                       height={220}
                       className="mx-auto pb-2"
@@ -67,7 +67,7 @@ const BooksSection = () => {
                   <div>
                     <hr />
                     <p className="text-center my-2 text-primary font-bold">
-                      {book.title}
+                      {book?.title}
                     </p>
                   </div>
                 </div>

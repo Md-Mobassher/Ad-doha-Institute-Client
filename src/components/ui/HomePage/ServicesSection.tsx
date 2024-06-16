@@ -1,15 +1,15 @@
 import Title from "@/components/ui/Title";
 import Slider from "@/components/ui/Slider";
-import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import { servicesData } from "@/data/services";
+import DohaButton from "../DohaButton";
 
 const ServicesSection = () => {
   return (
     <Container>
       <div className="flex justify-between items-center lg:px-3 mb-7 ">
         <Title title="আমাদের সেবাসমূহ" />
-        <Button btnTitle="সকল " navigate="services" />
+        <DohaButton btnTitle="সকল " navigate="services" />
       </div>
 
       <div>

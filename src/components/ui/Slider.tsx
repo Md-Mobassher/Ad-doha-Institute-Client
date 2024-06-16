@@ -2,7 +2,7 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import Card from "./Card";
+import DohaCard from "./DohaCard";
 import { TCardProps, TSliderProps } from "@/type";
 
 const Slider = ({
@@ -48,7 +48,7 @@ const Slider = ({
     >
       {items.map((item: TCardProps) => (
         <SwiperSlide className=" mb-12 h-full " key={item.id}>
-          <Card
+          <DohaCard
             {...item}
             btnTitle={btnTitle}
             navigate={navigate}

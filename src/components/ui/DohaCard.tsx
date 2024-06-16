@@ -1,9 +1,9 @@
 import { TCardProps } from "@/type";
 import Image from "next/image";
-import Button from "./Button";
+import DohaButton from "./DohaButton";
 import Link from "next/link";
 
-const Card = ({
+const DohaCard = ({
   image,
   title,
   details,
@@ -34,7 +34,7 @@ const Card = ({
 
         <div className="flex justify-between items-center">
           {btnTitle && (
-            <Button
+            <DohaButton
               btnTitle={btnTitle || "Details"}
               id={id}
               navigate={navigate}
@@ -44,7 +44,7 @@ const Card = ({
 
           {btnTitle2 && link && (
             <Link href={link as string}>
-              <Button btnTitle={btnTitle2 || "Details"} />
+              <DohaButton btnTitle={btnTitle2 || "Details"} />
             </Link>
           )}
         </div>
@@ -53,4 +53,4 @@ const Card = ({
   );
 };
 
-export default Card;
+export default DohaCard;
