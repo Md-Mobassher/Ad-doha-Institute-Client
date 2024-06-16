@@ -13,7 +13,7 @@ import {
   useUpdateMYProfileMutation,
 } from "@/redux/features/myProfile";
 import AutoFileUploader from "@/components/form/AutoFileUploader";
-import AdminInformation from "./components/AdminInformations";
+import MyInformation from "./components/MyInformations";
 import LoadingPage from "@/app/loading";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { toast } from "sonner";
@@ -116,7 +116,7 @@ const Profile = () => {
             </Button>
           </Grid>
           <Grid xs={12} md={8}>
-            <AdminInformation data={data} />
+            <MyInformation data={data} />
           </Grid>
         </Grid>
       </Container>

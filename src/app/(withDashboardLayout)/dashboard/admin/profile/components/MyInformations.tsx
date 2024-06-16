@@ -11,8 +11,8 @@ const StyledInformationBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const FacultyInformation = ({ data }: any) => {
-  console.log(data);
+const MyInformation = ({ data }: any) => {
+  // console.log(data);
   return (
     <>
       <Typography variant="h5" color="primary.main" mb={2}>
@@ -97,4 +97,4 @@ const FacultyInformation = ({ data }: any) => {
   );
 };
 
-export default FacultyInformation;
+export default MyInformation;

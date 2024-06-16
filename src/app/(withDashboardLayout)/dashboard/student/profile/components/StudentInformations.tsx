@@ -11,7 +11,7 @@ const StyledInformationBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const AdminInformation = ({ data }: any) => {
+const StudentInformation = ({ data }: any) => {
   console.log(data);
   return (
     <>
@@ -38,12 +38,14 @@ const AdminInformation = ({ data }: any) => {
           </Typography>
           <Typography>{data?.id}</Typography>
         </StyledInformationBox>
-        <StyledInformationBox>
-          <Typography variant="caption" color="secondary">
-            Designation
-          </Typography>
-          <Typography>{data?.designation}</Typography>
-        </StyledInformationBox>
+        {data?.designation && (
+          <StyledInformationBox>
+            <Typography variant="caption" color="secondary">
+              Designation
+            </Typography>
+            <Typography>{data?.designation}</Typography>
+          </StyledInformationBox>
+        )}
       </Stack>
 
       <Typography variant="h5" my={2} color={"primary.main"}>
@@ -97,4 +99,4 @@ const AdminInformation = ({ data }: any) => {
   );
 };
 
-export default AdminInformation;
+export default StudentInformation;
