@@ -1,44 +1,83 @@
 import DetailsItem from "@/components/ui/DetailsItem";
 import { objectivesData } from "@/data/aimsObjectives";
+import { Box, Divider, Typography } from "@mui/material";
 
 const AimsObjectivesPage = () => {
   return (
     <>
-      <div className="text-center mt-5">
-        <h1 className="text-2xl font-bold text-primary">
+      <Box sx={{ textAlign: "center", mt: "20px" }}>
+        <Typography
+          component="h2"
+          sx={{
+            fontSize: "24px",
+            fontWeight: "700",
+            color: "primary.main",
+          }}
+        >
           {objectivesData.pageTitle.title}
-        </h1>
-        <h3 className="text-xl font-bold mt-1">
+        </Typography>
+        <Typography
+          component="h4"
+          sx={{
+            fontSize: "20px",
+            fontWeight: "600",
+            mt: "6px",
+          }}
+        >
           {objectivesData.pageTitle.details}
-        </h3>
-      </div>
-      <div className=" p-4">
+        </Typography>
+      </Box>
+      <Box p={2}>
         {/* aim */}
-        <div className="mt-8">
-          <div className="divider divider-start divider-primary h-1 mb-5">
-            <h3 className="text-xl font-bold text-primary">
+        <Box mt={4}>
+          <Divider textAlign="left">
+            <Typography
+              component="h4"
+              sx={{
+                fontSize: "20px",
+                fontWeight: "600",
+                mt: "6px",
+                color: "primary.main",
+              }}
+            >
               {objectivesData.aim.title}
-            </h3>
-          </div>
-          <div className="mt-8">
-            <p>{objectivesData.aim.details}</p>
-          </div>
-        </div>
+            </Typography>
+          </Divider>
+
+          <Typography
+            component="p"
+            sx={{
+              fontSize: "16px",
+              fontWeight: "400",
+              mt: "20px",
+            }}
+          >
+            {objectivesData.aim.details}
+          </Typography>
+        </Box>
 
         {/* objectives */}
-        <div className="mt-10">
-          <div className="divider divider-start divider-primary h-1">
-            <h3 className="text-xl font-bold text-primary">
+        <Box mt={5}>
+          <Divider textAlign="left" sx={{ dividerColor: "primary.main" }}>
+            <Typography
+              component="h4"
+              sx={{
+                fontSize: "20px",
+                fontWeight: "600",
+                color: "primary.main",
+              }}
+            >
               {objectivesData.objectives.title}
-            </h3>
-          </div>
-          <div className="mt-8">
+            </Typography>
+          </Divider>
+
+          <Box mt={4}>
             {objectivesData.objectives.details.map((item, index) => (
               <DetailsItem key={index} item={item} index={index} />
             ))}
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
     </>
   );
 };

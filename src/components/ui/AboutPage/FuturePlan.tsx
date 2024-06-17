@@ -1,3 +1,5 @@
+import { Box, Divider, Typography } from "@mui/material";
+
 type TFuturePlanProps = {
   title: string;
   details: string;
@@ -6,15 +8,33 @@ type TFuturePlanProps = {
 
 const FuturePlan = ({ title, details, details2 }: TFuturePlanProps) => {
   return (
-    <div className="mt-8">
-      <div className="divider divider-start divider-primary h-1 mb-5">
-        <h3 className="text-xl font-bold text-primary">{title}</h3>
-      </div>
-      <div className="mt-8">
-        <p className=" mb-4">{details}</p>
-        <p>{details2}</p>
-      </div>
-    </div>
+    <Box mt="32px">
+      <Box mt={4}>
+        <Divider textAlign="left">
+          <Typography
+            component="h3"
+            fontSize={{
+              lg: "20px",
+              md: "19px",
+              sm: "18px",
+              xs: "17px",
+            }}
+            fontWeight="700"
+            color="primary.main"
+          >
+            {title}
+          </Typography>
+        </Divider>
+      </Box>
+      <Box mt="32px">
+        <Typography component="p" mb={2}>
+          {details}
+        </Typography>
+        <Typography component="p" mb={2}>
+          {details2}
+        </Typography>
+      </Box>
+    </Box>
   );
 };
 

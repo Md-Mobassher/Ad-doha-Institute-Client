@@ -1,6 +1,7 @@
 import MemberDetails from "@/components/ui/MemberDetails";
 import { advisoryCommitteData } from "@/data/advisoryCommittee";
 import { TMember } from "@/type";
+import { Box } from "@mui/material";
 
 type TParams = {
   params: {
@@ -14,9 +15,9 @@ const AdvisoryCommitteeDetailsPage = ({ params }: TParams) => {
   );
 
   return (
-    <div className="p-5">
+    <Box p={2}>
       <MemberDetails {...(committeeData as TMember)} />
-    </div>
+    </Box>
   );
 };
 

@@ -9,14 +9,20 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { TBook } from "@/type";
 import Image from "next/image";
 import Link from "next/link";
+import { Box, Stack, Typography } from "@mui/material";
 
 const BooksSection = () => {
   return (
     <Container>
-      <div className="flex justify-between items-center lg:px-3 mb-7">
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={4}
+      >
         <Title title="বই" />
         <DohaButton btnTitle="সকল" navigate="resourses/books" />
-      </div>
+      </Stack>
 
       <Swiper
         spaceBetween={20}
@@ -52,10 +58,10 @@ const BooksSection = () => {
       >
         {booksData.map((book: TBook) => (
           <SwiperSlide className=" mb-12 h-full " key={book.id}>
-            <div>
+            <Box>
               <Link href={book.link} target="_blank">
-                <div className="border hover:border-primary rounded-lg shadow-md hover:shadow-2xl p-2 w-full h-full flex flex-col justify-between transition-all duration-500">
-                  <div>
+                <Box className="border hover:border-primary rounded-lg shadow-md hover:shadow-2xl p-2 w-full h-full flex flex-col justify-between transition-all duration-500">
+                  <Box>
                     <Image
                       src={book?.image}
                       alt={book?.title}
@@ -63,16 +69,22 @@ const BooksSection = () => {
                       height={220}
                       className="mx-auto pb-2"
                     />
-                  </div>
-                  <div>
+                  </Box>
+                  <Box>
                     <hr />
-                    <p className="text-center my-2 text-primary font-bold">
+                    <Typography
+                      component="h6"
+                      textAlign="center"
+                      my="8px"
+                      fontWeight="700"
+                      color="primary.main"
+                    >
                       {book?.title}
-                    </p>
-                  </div>
-                </div>
+                    </Typography>
+                  </Box>
+                </Box>
               </Link>
-            </div>
+            </Box>
           </SwiperSlide>
         ))}
       </Swiper>

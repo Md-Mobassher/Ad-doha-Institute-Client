@@ -1,5 +1,6 @@
 import assets from "@/assets";
 
+export const facultyPageTitle = "শিক্ষক মন্ডলী";
 export const facultyData = [
   {
     id: "1",

@@ -1,5 +1,7 @@
 import assets from "@/assets";
 
+export const advisoryCommitteePageTitle = "উপদেষ্টা কমিটি";
+
 export const advisoryCommitteData = [
   {
     id: "1",

@@ -3,16 +3,22 @@ import Slider from "@/components/ui/Slider";
 import Container from "@/components/ui/Container";
 import { servicesData } from "@/data/services";
 import DohaButton from "../DohaButton";
+import { Box, Stack } from "@mui/material";
 
 const ServicesSection = () => {
   return (
     <Container>
-      <div className="flex justify-between items-center lg:px-3 mb-7 ">
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={4}
+      >
         <Title title="আমাদের সেবাসমূহ" />
         <DohaButton btnTitle="সকল " navigate="services" />
-      </div>
+      </Stack>
 
-      <div>
+      <Box>
         <Slider
           items={servicesData}
           slidesPerView={3}
@@ -20,7 +26,7 @@ const ServicesSection = () => {
           btnTitle2="সেবা নিন"
           navigate="services"
         />
-      </div>
+      </Box>
     </Container>
   );
 };

@@ -27,6 +27,7 @@ export type TButtonProps = {
   title?: string;
   id?: string;
   navigate?: string;
+  variant?: "text" | "outlined" | "contained";
 };
 
 export type TCardDetails = {

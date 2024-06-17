@@ -1,5 +1,6 @@
 "use client";
 
+import { Box } from "@mui/material";
 import Image from "next/image";
 import { Autoplay, Pagination, EffectCoverflow } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,7 +11,7 @@ type TSlide = {
 
 const BannerSection = ({ slides }: any) => {
   return (
-    <div className="mt-3 mb-5 ">
+    <Box mt="12px" mb="20px">
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
@@ -45,13 +46,13 @@ const BannerSection = ({ slides }: any) => {
               src={slide.imageUrl}
               alt={`Slide ${index + 1}`}
               className="rounded-md w-full"
-              width={1200}
+              width={1000}
               height={1000}
             />
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </Box>
   );
 };
 

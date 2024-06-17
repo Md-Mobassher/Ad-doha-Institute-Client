@@ -13,10 +13,34 @@ const Member = ({ image, name, designation, navigate }: TMember) => {
   };
   return (
     <Box
-      className="border hover:border-primary shadow-lg rounded-lg hover:shadow-2xl hover:cursor-pointer"
+      sx={{
+        borderRadius: "10px",
+        border: "1px solid lightgray",
+        width: "100%",
+        height: "100%",
+        backgroundColor: "#fff",
+        boxShadow: "5 2 1",
+        cursor: "pointer",
+        ":hover": {
+          border: "1px solid #22C55E",
+        },
+      }}
       onClick={() => handleClick()}
     >
-      <Box>
+      <Box
+        sx={{
+          width: "100%",
+          height: 250,
+          "& img": {
+            width: "100%",
+            height: "100%",
+            overflow: "hidden",
+            objectFit: "cover",
+            borderBottom: "1px solid lightgray",
+            borderTopRadius: "10px",
+          },
+        }}
+      >
         <Image
           src={image}
           alt={name}
@@ -25,6 +49,7 @@ const Member = ({ image, name, designation, navigate }: TMember) => {
           height={400}
         />
       </Box>
+
       <Box p={2}>
         <Typography
           fontSize={{

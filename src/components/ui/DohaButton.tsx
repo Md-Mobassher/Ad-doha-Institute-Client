@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa";
 
-const DohaButton = ({ btnTitle, id, navigate }: TButtonProps) => {
+const DohaButton = ({ btnTitle, id, navigate, variant }: TButtonProps) => {
   const router = useRouter();
 
   const handleClick = () => {
@@ -21,11 +21,10 @@ const DohaButton = ({ btnTitle, id, navigate }: TButtonProps) => {
       {btnTitle && (
         <Button
           sx={{
-            backgroundColor: "primary.main",
-            color: "#FFF",
             borderRadius: "8px",
           }}
           onClick={handleClick}
+          variant={variant}
         >
           {btnTitle} <FaArrowRight className=" ml-2" />
         </Button>

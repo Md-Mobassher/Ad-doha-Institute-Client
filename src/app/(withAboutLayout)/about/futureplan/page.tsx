@@ -1,20 +1,35 @@
 import FuturePlan from "@/components/ui/AboutPage/FuturePlan";
 import { objectivesData } from "@/data/aimsObjectives";
+import { Box, Typography } from "@mui/material";
 
 const FuturePlanPage = () => {
   return (
     <>
-      <div className="text-center mt-5">
-        <h1 className="text-2xl font-bold text-primary">
+      <Box sx={{ textAlign: "center", mt: "20px" }}>
+        <Typography
+          component="h2"
+          sx={{
+            fontSize: "24px",
+            fontWeight: "700",
+            color: "primary.main",
+          }}
+        >
           {objectivesData.pageTitle.title}
-        </h1>
-        <h3 className="text-xl font-bold mt-1">
+        </Typography>
+        <Typography
+          component="h4"
+          sx={{
+            fontSize: "20px",
+            fontWeight: "600",
+            mt: "6px",
+          }}
+        >
           {objectivesData.pageTitle.details}
-        </h3>
-      </div>
-      <div className=" p-4">
+        </Typography>
+      </Box>
+      <Box p={2}>
         <FuturePlan {...objectivesData.futurePlan} />
-      </div>
+      </Box>
     </>
   );
 };
