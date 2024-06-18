@@ -13,7 +13,7 @@ const NavItems = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const userInfo = useUserInfo();
-  console.log(userInfo);
+  // console.log(userInfo);
 
   const handleLogOut = () => {
     logoutUser(router);
@@ -28,33 +28,81 @@ const NavItems = () => {
       {/*  large device menu */}
       <Hidden smDown>
         {navbarItemsData.map((item) => (
-          <Box
+          <Typography
             key={item.id}
-            className="bg-white px-3 py-[10px] text-md font-semibold text-black hover:bg-green-500 hover:text-white cursor-pointer btn border-0 rounded-md shadow-none inline"
+            component={Button}
+            sx={{
+              backgroundColor: "white",
+              boxShadow: "none",
+              fontSize: "15px",
+              fontWeight: 500,
+              px: "10px",
+
+              ":hover": {
+                backgroundColor: "primary.main",
+                color: "white",
+              },
+            }}
             onClick={() => handleNavigate(item.link)}
           >
             {item.title}
-          </Box>
+          </Typography>
         ))}
 
         {userInfo?.userId ? (
-          <Box
-            className="bg-white px-3 py-[10px] text-md font-semibold text-black hover:bg-green-500 hover:text-white cursor-pointer btn border-0 rounded-md shadow-none inline"
-            component={Link}
-            href="/dashboard"
+          <Typography
+            component={Button}
+            sx={{
+              backgroundColor: "white",
+              boxShadow: "none",
+              fontSize: "15px",
+              fontWeight: 500,
+              px: "10px",
+              ":hover": {
+                backgroundColor: "primary.main",
+                color: "white",
+              },
+            }}
+            onClick={() => handleNavigate("dashboard")}
           >
             ড্যাশবোর্ড
-          </Box>
+          </Typography>
         ) : null}
 
         {userInfo?.userId ? (
-          <Button color="error" onClick={handleLogOut} sx={{ boxShadow: 0 }}>
+          <Typography
+            component={Button}
+            sx={{
+              backgroundColor: "red",
+              boxShadow: "none",
+              color: "white",
+              fontSize: "15px",
+              fontWeight: 500,
+              px: "12px",
+              ":hover": {
+                backgroundColor: "primary.main",
+                color: "white",
+              },
+            }}
+            onClick={() => handleLogOut()}
+          >
             লগআউট
-          </Button>
+          </Typography>
         ) : (
-          <Button component={Link} href="/login">
+          <Typography
+            component={Button}
+            sx={{
+              boxShadow: "none",
+              fontSize: "15px",
+              fontWeight: 500,
+              px: "14px",
+              backgroundColor: "primary.main",
+              color: "white",
+            }}
+            onClick={() => handleNavigate("login")}
+          >
             লগিন
-          </Button>
+          </Typography>
         )}
       </Hidden>
 
@@ -73,13 +121,13 @@ const NavItems = () => {
             aria-expanded={isOpen ? "true" : "false"}
           >
             {isOpen ? (
-              <div className="p-1 border rounded-md hover:bg-green-500 hover:text-white">
+              <Box className="p-1 border rounded-md hover:bg-green-500 hover:text-white">
                 <RxCross2 className="size-8" />
-              </div>
+              </Box>
             ) : (
-              <div className="p-1 border rounded-md hover:bg-green-500 hover:text-white">
+              <Box className="p-1 border rounded-md hover:bg-green-500 hover:text-white">
                 <GiHamburgerMenu className="size-8" />
-              </div>
+              </Box>
             )}
             {isOpen && (
               <Box
@@ -99,42 +147,86 @@ const NavItems = () => {
                   alignItems="center"
                 >
                   {navbarItemsData.map((item) => (
-                    <Box
+                    <Typography
                       key={item.id}
-                      className="bg-white text-md font-semibold text-black hover:bg-green-500    hover:text-white cursor-pointer  shadow-none "
+                      component={Button}
+                      sx={{
+                        backgroundColor: "white",
+                        boxShadow: "none",
+                        fontSize: "15px",
+                        fontWeight: 500,
+                        px: "10px",
+                        ":hover": {
+                          backgroundColor: "primary.main",
+                          color: "white",
+                        },
+                      }}
                       onClick={() => handleNavigate(item.link)}
                       py="8px"
-                      width="100%"
+                      fullWidth
                     >
                       {item.title}
-                    </Box>
+                    </Typography>
                   ))}
 
                   {userInfo?.userId ? (
-                    <Box
-                      className="bg-white text-md font-semibold text-black hover:bg-green-500    hover:text-white cursor-pointer  shadow-none "
-                      component={Link}
-                      href="/dashboard"
+                    <Typography
+                      component={Button}
+                      sx={{
+                        backgroundColor: "white",
+                        boxShadow: "none",
+                        fontSize: "15px",
+                        fontWeight: 500,
+                        px: "10px",
+                        ":hover": {
+                          backgroundColor: "primary.main",
+                          color: "white",
+                        },
+                      }}
+                      onClick={() => handleNavigate("dashboard")}
                       py="8px"
-                      width="100%"
+                      fullWidth
                     >
                       ড্যাশবোর্ড
-                    </Box>
+                    </Typography>
                   ) : null}
 
                   {userInfo?.userId ? (
-                    <Button
-                      color="error"
-                      onClick={handleLogOut}
-                      sx={{ boxShadow: 0 }}
+                    <Typography
+                      component={Button}
+                      sx={{
+                        backgroundColor: "red",
+                        boxShadow: "none",
+                        color: "white",
+                        fontSize: "15px",
+                        fontWeight: 500,
+                        px: "12px",
+                        ":hover": {
+                          backgroundColor: "primary.main",
+                          color: "white",
+                        },
+                      }}
+                      onClick={() => handleLogOut()}
                       fullWidth
                     >
                       লগআউট
-                    </Button>
+                    </Typography>
                   ) : (
-                    <Button fullWidth component={Link} href="/login">
+                    <Typography
+                      component={Button}
+                      sx={{
+                        backgroundColor: "primary.main",
+                        color: "white",
+                        boxShadow: "none",
+                        fontSize: "15px",
+                        fontWeight: 500,
+                        px: "14px",
+                      }}
+                      onClick={() => handleNavigate("login")}
+                      fullWidth
+                    >
                       লগিন
-                    </Button>
+                    </Typography>
                   )}
                 </Stack>
               </Box>

@@ -5,16 +5,16 @@ import { HiOutlineMail } from "react-icons/hi";
 import { AiOutlineYoutube } from "react-icons/ai";
 import Image from "next/image";
 import assets from "@/assets";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Container, Hidden, Stack, Typography } from "@mui/material";
 
 const Navbar = () => {
   return (
     <>
       {/* header top */}
       <Box
-        className="bg-primary text-white"
         sx={{
           backgroundColor: "primary.main",
+          color: "#fff",
         }}
       >
         <Container>
@@ -23,7 +23,13 @@ const Navbar = () => {
             justifyContent="space-between"
             alignItems="center"
           >
-            <div className="flex justify-between items-center gap-5 text-sm">
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              gap="15px"
+              fontSize="14px"
+            >
               <Stack
                 direction="row"
                 justifyContent="space-between"
@@ -40,24 +46,51 @@ const Navbar = () => {
               >
                 <HiOutlineMail className="size-5" /> <p>info@ad-doha.org​</p>
               </Stack>
-            </div>
-
-            <div className="flex ">
-              <Link href="https://www.facebook.com/addoha.org" target="_blank">
-                <div className="w-8 h-8 flex justify-center items-center hover:bg-white hover:text-primary">
-                  <FaFacebookF />
-                </div>
-              </Link>
-
-              <Link
-                href="https://www.youtube.com/channel/UC6m__rWQY4zybxI3r14mPVg"
-                target="_blank"
+            </Stack>
+            <Hidden smDown>
+              <Stack
+                justifyContent="center"
+                alignItems="center"
+                direction="row"
               >
-                <div className="size-8 flex justify-center items-center hover:bg-white hover:text-primary">
-                  <AiOutlineYoutube />
-                </div>
-              </Link>
-            </div>
+                <Box
+                  component={Link}
+                  href="https://www.facebook.com/addoha.org"
+                  target="_blank"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "30px",
+                    py: "5px",
+                    ":hover": {
+                      backgroundColor: "#fff",
+                      color: "primary.main",
+                    },
+                  }}
+                >
+                  <FaFacebookF className="size-5" />
+                </Box>
+                <Box
+                  component={Link}
+                  href="https://www.youtube.com/channel/UC6m__rWQY4zybxI3r14mPVg"
+                  target="_blank"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "30px",
+                    py: "3px",
+                    ":hover": {
+                      backgroundColor: "#fff",
+                      color: "primary.main",
+                    },
+                  }}
+                >
+                  <AiOutlineYoutube className="size-6" />
+                </Box>
+              </Stack>
+            </Hidden>
           </Stack>
         </Container>
       </Box>

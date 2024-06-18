@@ -7,9 +7,7 @@ import Title from "../Title";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { TBook } from "@/type";
-import Image from "next/image";
-import Link from "next/link";
-import { Box, Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import DohaBook from "../DohaBook";
 
 const BooksSection = () => {
@@ -49,10 +47,10 @@ const BooksSection = () => {
             slidesPerView: 4,
           },
           1200: {
-            slidesPerView: 5,
+            slidesPerView: 4,
           },
           1800: {
-            slidesPerView: 6,
+            slidesPerView: 5,
           },
         }}
         className=""
@@ -60,6 +58,7 @@ const BooksSection = () => {
         {booksData.map((book: TBook) => (
           <SwiperSlide className=" mb-12 h-full " key={book.id}>
             <DohaBook {...book} />
+            {/* <DohaCard {...book} /> */}
           </SwiperSlide>
         ))}
       </Swiper>

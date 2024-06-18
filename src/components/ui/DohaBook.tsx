@@ -1,11 +1,15 @@
 import { TBook } from "@/type";
 import Image from "next/image";
-import { Box, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 
 const DohaBook = ({ image, title, url }: TBook) => {
   return (
-    <Box
+    <Stack
+      direction="column"
+      justifyContent="space-between"
+      alignItems="stretch"
+      mb={1}
       component={Link}
       href={url}
       target="_blank"
@@ -19,22 +23,21 @@ const DohaBook = ({ image, title, url }: TBook) => {
         ":hover": {
           border: "1px solid #22C55E",
         },
-        p: "5px",
+        p: "10px",
       }}
     >
       <Box
         sx={{
           width: "100%",
-          height: 300,
           "& img": {
-            width: "90%",
+            width: "95%",
             height: "100%",
             overflow: "hidden",
             objectFit: "cover",
             borderBottom: "1px solid lightgray",
             borderTopRadius: "10px",
             mx: "auto",
-            py: 2,
+            pb: "10px",
           },
         }}
       >
@@ -42,22 +45,22 @@ const DohaBook = ({ image, title, url }: TBook) => {
           src={image}
           alt={title || "Book image"}
           width={200}
-          height={280}
-          className="bg-white rounded-t-lg"
+          height={400}
         />
       </Box>
       <Box>
         <Typography
-          component="h6"
+          component="h4"
+          fontSize="18px"
           textAlign="center"
-          my="8px"
+          my="6px"
           fontWeight="700"
           color="primary.main"
         >
           {title}
         </Typography>
       </Box>
-    </Box>
+    </Stack>
   );
 };
 
