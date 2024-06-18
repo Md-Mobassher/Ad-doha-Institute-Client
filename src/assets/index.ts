@@ -69,6 +69,11 @@ const assets = {
     email: require("../assets/logo/email.png"),
     call: require("../assets/logo/call.webp"),
   },
+  resourse: {
+    book: require("../assets/resourses/book.gif"),
+    video: require("../assets/resourses/video.gif"),
+    gallery: require("../assets/resourses/gallery.gif"),
+  },
 };
 
 export default assets;

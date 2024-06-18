@@ -10,6 +10,7 @@ import { TBook } from "@/type";
 import Image from "next/image";
 import Link from "next/link";
 import { Box, Stack, Typography } from "@mui/material";
+import DohaBook from "../DohaBook";
 
 const BooksSection = () => {
   return (
@@ -58,33 +59,7 @@ const BooksSection = () => {
       >
         {booksData.map((book: TBook) => (
           <SwiperSlide className=" mb-12 h-full " key={book.id}>
-            <Box>
-              <Link href={book.link} target="_blank">
-                <Box className="border hover:border-primary rounded-lg shadow-md hover:shadow-2xl p-2 w-full h-full flex flex-col justify-between transition-all duration-500">
-                  <Box>
-                    <Image
-                      src={book?.image}
-                      alt={book?.title}
-                      width={180}
-                      height={220}
-                      className="mx-auto pb-2"
-                    />
-                  </Box>
-                  <Box>
-                    <hr />
-                    <Typography
-                      component="h6"
-                      textAlign="center"
-                      my="8px"
-                      fontWeight="700"
-                      color="primary.main"
-                    >
-                      {book?.title}
-                    </Typography>
-                  </Box>
-                </Box>
-              </Link>
-            </Box>
+            <DohaBook {...book} />
           </SwiperSlide>
         ))}
       </Swiper>

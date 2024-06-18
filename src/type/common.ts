@@ -44,8 +44,7 @@ export type TBook = {
   id: string;
   title: string;
   image: any;
-  link: string;
-  url?: string;
+  url: string;
 };
 export type TVideo = {
   id: string;

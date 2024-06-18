@@ -1,6 +1,6 @@
 import PageTitle from "@/components/ui/PageTitle";
 import { booksData } from "@/data/books";
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ const BooksPage = () => {
       <PageTitle title="বই সমূহ" />
 
       <Container>
-        <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-7 md:gap-6 gap-5 py-10">
+        <Box className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-7 md:gap-6 gap-5 py-10">
           {booksData.map((book) => (
             <div key={book.id}>
               <Link href={book.link} target="_blank">
@@ -32,7 +32,7 @@ const BooksPage = () => {
               </Link>
             </div>
           ))}
-        </div>
+        </Box>
       </Container>
     </>
   );
