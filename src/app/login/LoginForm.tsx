@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,23 +23,28 @@ const defaultValues = {
 };
 
 const LoginForm = () => {
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
   const router = useRouter();
   const [error, setError] = useState("");
 
   const handleLogin = async (values: FieldValues) => {
+    setIsLoading(true);
     try {
       const res = await userLogin(values);
       if (res?.data?.accessToken) {
+        setIsLoading(false);
         toast.success(res?.message);
         storeUserInfo({ accessToken: res?.data?.accessToken });
         router.push("/dashboard");
       } else {
         setError(res.message);
+        setIsLoading(false);
         toast.error(res?.message);
         // console.log(res);
       }
     } catch (err: any) {
       console.error(err.message);
+      setIsLoading(false);
       toast.error(err?.message);
     }
   };
@@ -93,22 +98,35 @@ const LoginForm = () => {
           fontWeight={400}
           color="primary"
         >
-          Forgot Password?
+          পাসওয়ার্ড ভুলে গেছেন?
         </Typography>
 
-        <Button
-          sx={{
-            margin: "10px 0px",
-          }}
-          fullWidth={true}
-          type="submit"
-        >
-          লগিন
-        </Button>
+        {isLoading ? (
+          <Button
+            disabled
+            fullWidth
+            sx={{
+              margin: "10px 0px",
+            }}
+          >
+            <CircularProgress />;
+          </Button>
+        ) : (
+          <Button
+            sx={{
+              margin: "10px 0px",
+            }}
+            fullWidth
+            type="submit"
+          >
+            লগিন
+          </Button>
+        )}
+
         <Typography component="p" fontWeight={500}>
-          Don&apos;t have an account?{" "}
+          একাউন্ট নেই?{" "}
           <Link href="/register" className="text-green-500">
-            Create an account
+            নতুন একাউন্ট তৈরী করুন
           </Link>
         </Typography>
       </DohaForm>

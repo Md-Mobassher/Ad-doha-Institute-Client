@@ -14,10 +14,11 @@ import { userLogin } from "@/services/actions/userLogin";
 import { storeUserInfo } from "@/services/auth.services";
 import { registerStudent } from "@/services/actions/registerStudent";
 import { useRouter } from "next/navigation";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import dayjs from "dayjs";
 import { BloodGroupOptions, genderOptions } from "@/constant/global";
+import { useState } from "react";
 
 export const nameValidationSchema = z.object({
   firstName: z.string().min(1, "Please enter your first name!"),
@@ -73,17 +74,20 @@ export const defaultValues = {
 };
 
 const RegisterForm = () => {
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
   const router = useRouter();
 
   const handleRegister = async (values: FieldValues) => {
+    setIsLoading(true);
     values.student.dateOfBirth = dateFormatter(values.student.dateOfBirth);
-    console.log(values);
+    // console.log(values);
     const data = modifyPayload(values);
 
     try {
       const res = await registerStudent(data);
-      console.log(res);
+      // console.log(res);
       if (res?.data?.id) {
+        setIsLoading(false);
         toast.success(res?.message);
         const result = await userLogin({
           password: values.password,
@@ -96,6 +100,7 @@ const RegisterForm = () => {
       }
     } catch (err: any) {
       console.error(err.message);
+      setIsLoading(false);
     }
   };
 
@@ -201,19 +206,32 @@ const RegisterForm = () => {
             />
           </Grid>
         </Grid>
-        <Button
-          sx={{
-            margin: "16px 0px",
-          }}
-          fullWidth={true}
-          type="submit"
-        >
-          Register
-        </Button>
+        {isLoading ? (
+          <Button
+            disabled
+            fullWidth
+            sx={{
+              margin: "10px 0px",
+            }}
+          >
+            <CircularProgress />;
+          </Button>
+        ) : (
+          <Button
+            sx={{
+              margin: "16px 0px",
+            }}
+            fullWidth={true}
+            type="submit"
+          >
+            রেজিষ্টার
+          </Button>
+        )}
+
         <Typography component="p" fontWeight={300}>
-          Do you already have an account?{" "}
+          আপনার কি ইতিমধ্যে একটি একাউন্ট আছে?{" "}
           <Link href="/login" className="text-green-500">
-            Login
+            লগিন
           </Link>
         </Typography>
       </DohaForm>
