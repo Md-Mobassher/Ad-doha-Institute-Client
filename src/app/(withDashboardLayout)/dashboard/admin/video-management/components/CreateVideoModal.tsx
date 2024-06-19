@@ -3,7 +3,7 @@ import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaModal from "@/components/shared/DohaModal/DohaModal";
 import { useCreateVideoMutation } from "@/redux/features/admin/videoManagementApi";
-import { Button, Grid } from "@mui/material";
+import { Button, CircularProgress, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -13,14 +13,14 @@ type TProps = {
 };
 
 const CreateVideoModal = ({ open, setOpen }: TProps) => {
-  const [createVideo, { isLoading }] = useCreateVideoMutation();
+  const [createVideo, { isLoading: creating }] = useCreateVideoMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    console.log("Form Values:", values);
+    // console.log("Form Values:", values);
 
     try {
       const res = await createVideo(values).unwrap();
-      console.log(res);
+      // console.log(res);
       if (res?._id) {
         toast.success("Video created successfully!!!");
         setOpen(false);
@@ -59,16 +59,27 @@ const CreateVideoModal = ({ open, setOpen }: TProps) => {
             />
           </Grid>
         </Grid>
-        <Button
-          sx={{
-            margin: "16px 0px",
-          }}
-          fullWidth={true}
-          type="submit"
-          disabled={isLoading}
-        >
-          Create New Video
-        </Button>
+        {creating ? (
+          <Button
+            disabled
+            fullWidth
+            sx={{
+              margin: "10px 0px",
+            }}
+          >
+            <CircularProgress thickness={6} />;
+          </Button>
+        ) : (
+          <Button
+            sx={{
+              margin: "16px 0px",
+            }}
+            fullWidth={true}
+            type="submit"
+          >
+            Create New Video
+          </Button>
+        )}
       </DohaForm>
     </DohaModal>
   );
