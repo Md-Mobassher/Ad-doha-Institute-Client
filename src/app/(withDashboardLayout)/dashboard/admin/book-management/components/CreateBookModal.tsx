@@ -4,9 +4,10 @@ import DohaInput from "@/components/form/DohaInput";
 import DohaModal from "@/components/shared/DohaModal/DohaModal";
 import { useCreateBookMutation } from "@/redux/features/admin/bookManagementApi";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
-import { Button, Grid } from "@mui/material";
+import { Button, CircularProgress, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
+import { SxProps } from "@mui/material/styles";
 
 type TProps = {
   open: boolean;
@@ -14,7 +15,7 @@ type TProps = {
 };
 
 const CreateBookModal = ({ open, setOpen }: TProps) => {
-  const [createBook, { isLoading }] = useCreateBookMutation();
+  const [createBook, { isLoading: creating }] = useCreateBookMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
     // console.log("Form Values:", values);
@@ -73,16 +74,27 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
             />
           </Grid>
         </Grid>
-        <Button
-          sx={{
-            margin: "16px 0px",
-          }}
-          fullWidth={true}
-          type="submit"
-          disabled={isLoading}
-        >
-          Create A Book
-        </Button>
+        {creating ? (
+          <Button
+            disabled
+            fullWidth
+            sx={{
+              margin: "10px 0px",
+            }}
+          >
+            <CircularProgress thickness={6} />;
+          </Button>
+        ) : (
+          <Button
+            sx={{
+              margin: "10px 0px",
+            }}
+            fullWidth
+            type="submit"
+          >
+            Create A Book
+          </Button>
+        )}
       </DohaForm>
     </DohaModal>
   );

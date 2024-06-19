@@ -1,10 +1,49 @@
+import { Box, CircularProgress, Stack, Typography } from "@mui/material";
+
 const LoadingPage = () => {
   return (
-    <div className="flex justify-center items-center h-[calc(100vh-300px)]">
-      <p className="text-7xl font-bold text-primary">L</p>
-      <div className="w-14 h-14 border-8 border-dashed rounded-full animate-spin mt-2 border-red-500"></div>
-      <p className="text-7xl font-bold text-primary">ading....</p>
-    </div>
+    <Stack
+      justifyContent="center"
+      alignItems="center"
+      direction="row"
+      minHeight={{
+        lg: 500,
+        md: 450,
+        sm: 400,
+        xs: 300,
+      }}
+    >
+      <Typography
+        sx={{
+          fontSize: {
+            lg: "100px",
+            md: "90px",
+            sm: "80px",
+            xs: "50px",
+          },
+          fontWeight: 800,
+          color: "primary.main",
+        }}
+      >
+        L
+      </Typography>
+      <Box className="lg:size-14 md:size-12 size-10 border-8 border-dashed rounded-full animate-spin mt-2 border-red-500"></Box>
+
+      <Typography
+        sx={{
+          fontSize: {
+            lg: "100px",
+            md: "90px",
+            sm: "80px",
+            xs: "50px",
+          },
+          fontWeight: 800,
+          color: "primary.main",
+        }}
+      >
+        ading....
+      </Typography>
+    </Stack>
   );
 };
 
