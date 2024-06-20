@@ -1,14 +1,9 @@
-"use client";
-
-import { booksData } from "@/data/books";
 import DohaButton from "../DohaButton";
 import Container from "../Container";
 import Title from "../Title";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import { TBook } from "@/type";
+
 import { Stack } from "@mui/material";
-import DohaBook from "../DohaBook";
+import Books from "./Books";
 
 const BooksSection = () => {
   return (
@@ -23,45 +18,7 @@ const BooksSection = () => {
         <DohaButton btnTitle="সকল" navigate="resourses/books" />
       </Stack>
 
-      <Swiper
-        spaceBetween={20}
-        slidesPerView={5}
-        autoplay={{
-          delay: 4000,
-        }}
-        loop={true}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
-        draggable={true}
-        breakpoints={{
-          300: {
-            slidesPerView: 2,
-          },
-          600: {
-            slidesPerView: 3,
-          },
-          900: {
-            slidesPerView: 4,
-          },
-          1200: {
-            slidesPerView: 4,
-          },
-          1800: {
-            slidesPerView: 5,
-          },
-        }}
-        className=""
-      >
-        {booksData.map((book: TBook) => (
-          <SwiperSlide className=" mb-12 h-full " key={book.id}>
-            <DohaBook {...book} />
-            {/* <DohaCard {...book} /> */}
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <Books />
     </Container>
   );
 };
