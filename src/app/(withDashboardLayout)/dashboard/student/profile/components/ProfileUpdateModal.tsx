@@ -3,10 +3,6 @@
 import React from "react";
 import { FieldValues } from "react-hook-form";
 import { Button, Grid } from "@mui/material";
-import {
-  useGetSingleAdminQuery,
-  useUpdateAdminMutation,
-} from "@/redux/features/admin/adminManagementApi";
 import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenModal";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
@@ -16,10 +12,6 @@ import DohaDatePicker from "@/components/form/DohaDatePicker";
 import dayjs from "dayjs";
 import { dateFormatter } from "@/utils/dateFormatter";
 import { toast } from "sonner";
-import {
-  useGetSingleFacultyQuery,
-  useUpdateFacultyMutation,
-} from "@/redux/features/admin/facultyManagementApi";
 import {
   useGetMYProfileQuery,
   useUpdateMYProfileMutation,
