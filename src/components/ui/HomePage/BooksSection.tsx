@@ -1,5 +1,5 @@
 import DohaButton from "../DohaButton";
-import Container from "../Container";
+import Container from "../DohaContainer";
 import Title from "../Title";
 
 import { Stack } from "@mui/material";

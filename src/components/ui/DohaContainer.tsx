@@ -9,17 +9,17 @@ const DohaContainer = ({
     <Container>
       <Box
         sx={{
-          mt: {
-            lg: "80px",
-            md: "70px",
-            sm: "60px",
-            xs: "50px",
-          },
-          mb: {
+          pt: {
             lg: "32px",
             md: "30px",
             sm: "28px",
             xs: "24px",
+          },
+          pb: {
+            lg: "80px",
+            md: "70px",
+            sm: "60px",
+            xs: "50px",
           },
           px: {
             lg: "8px",

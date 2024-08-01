@@ -1,5 +1,5 @@
 import DohaCard from "@/components/ui/DohaCard";
-import Container from "@/components/ui/Container";
+import Container from "@/components/ui/DohaContainer";
 import PageTitle from "@/components/ui/PageTitle";
 import { coursesData } from "@/data/courses";
 

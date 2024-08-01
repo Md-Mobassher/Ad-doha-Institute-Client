@@ -1,5 +1,5 @@
 import Title from "@/components/ui/Title";
-import Container from "../Container";
+import Container from "../DohaContainer";
 import { coursesData } from "@/data/courses";
 import DohaCard from "../DohaCard";
 import DohaButton from "../DohaButton";
