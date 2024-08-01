@@ -1,5 +1,5 @@
 import DetailsItem from "@/components/ui/DetailsItem";
-import { objectivesData } from "@/data/aimsObjectives";
+import { aimObjectivesData } from "@/data/aimsObjectives";
 import { Box, Divider, Typography } from "@mui/material";
 
 const AimsObjectivesPage = () => {
@@ -14,7 +14,7 @@ const AimsObjectivesPage = () => {
             color: "primary.main",
           }}
         >
-          {objectivesData.pageTitle.title}
+          {aimObjectivesData.pageTitle.title}
         </Typography>
         <Typography
           component="h4"
@@ -24,7 +24,7 @@ const AimsObjectivesPage = () => {
             mt: "6px",
           }}
         >
-          {objectivesData.pageTitle.details}
+          {aimObjectivesData.pageTitle.details}
         </Typography>
       </Box>
       <Box p={2}>
@@ -40,7 +40,7 @@ const AimsObjectivesPage = () => {
                 color: "primary.main",
               }}
             >
-              {objectivesData.aim.title}
+              {aimObjectivesData.aim.title}
             </Typography>
           </Divider>
 
@@ -52,7 +52,7 @@ const AimsObjectivesPage = () => {
               mt: "20px",
             }}
           >
-            {objectivesData.aim.details}
+            {aimObjectivesData.aim.details}
           </Typography>
         </Box>
 
@@ -67,12 +67,12 @@ const AimsObjectivesPage = () => {
                 color: "primary.main",
               }}
             >
-              {objectivesData.objectives.title}
+              {aimObjectivesData.objectives.title}
             </Typography>
           </Divider>
 
           <Box mt={4}>
-            {objectivesData.objectives.details.map((item, index) => (
+            {aimObjectivesData.objectives.details.map((item, index) => (
               <DetailsItem key={index} item={item} index={index} />
             ))}
           </Box>

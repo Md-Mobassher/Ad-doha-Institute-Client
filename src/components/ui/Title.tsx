@@ -7,7 +7,7 @@ type ITitle = {
 const Title = ({ title }: ITitle) => {
   return (
     <Typography
-      component="h1"
+      component="h2"
       sx={{
         fontSize: {
           lg: "30px",

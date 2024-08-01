@@ -15,7 +15,6 @@ const Navbar = () => {
         position: "sticky",
         top: "0px",
         zIndex: "50",
-        boxShadow: "0 0.5px 5px 0px",
       }}
     >
       <Container>

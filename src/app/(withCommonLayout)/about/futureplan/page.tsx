@@ -1,5 +1,5 @@
 import FuturePlan from "@/components/ui/AboutPage/FuturePlan";
-import { objectivesData } from "@/data/aimsObjectives";
+import { aim&ObjectivesData } from "@/data/aimsObjectives";
 import { Box, Typography } from "@mui/material";
 
 const FuturePlanPage = () => {
@@ -14,7 +14,7 @@ const FuturePlanPage = () => {
             color: "primary.main",
           }}
         >
-          {objectivesData.pageTitle.title}
+          {aim&ObjectivesData.pageTitle.title}
         </Typography>
         <Typography
           component="h4"
@@ -24,11 +24,11 @@ const FuturePlanPage = () => {
             mt: "6px",
           }}
         >
-          {objectivesData.pageTitle.details}
+          {aim&ObjectivesData.pageTitle.details}
         </Typography>
       </Box>
       <Box p={2}>
-        <FuturePlan {...objectivesData.futurePlan} />
+        <FuturePlan {...aim&ObjectivesData.futurePlan} />
       </Box>
     </>
   );
