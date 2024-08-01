@@ -10,10 +10,10 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { ExpandMore } from "@mui/icons-material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ExpandMore } from "@mui/icons-material";
 
 const DesktopMenu = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -53,7 +53,6 @@ const DesktopMenu = () => {
                 px: "10px",
                 display: "flex",
                 alignItems: "center",
-
                 ":hover": {
                   backgroundColor: "secondary.main",
                   color: "primary.main",
@@ -78,28 +77,31 @@ const DesktopMenu = () => {
                     }}
                   >
                     {item.subItems.map((subItem, subIndex) => (
-                      <Link href={subItem.link} passHref key={subItem.id}>
-                        <MenuItem
-                          sx={{
-                            width: "220px",
-                            boxShadow: "none",
-                            fontSize: "15px",
-                            fontWeight: 500,
-                            px: "20px",
-                            borderBottom:
-                              subIndex === item.subItems.length - 1
-                                ? "none"
-                                : "1px solid gray",
+                      <MenuItem
+                        key={subItem.id}
+                        sx={{
+                          width: "220px",
+                          boxShadow: "none",
+                          fontSize: "15px",
+                          fontWeight: 500,
+                          px: "20px",
+                          borderBottom:
+                            subIndex === item.subItems.length - 1
+                              ? "none"
+                              : "1px solid gray",
 
-                            ":hover": {
-                              backgroundColor: "primary.main",
-                              color: "secondary.main",
-                            },
-                          }}
-                        >
-                          {subItem.title}
-                        </MenuItem>
-                      </Link>
+                          ":hover": {
+                            backgroundColor: "primary.main",
+                            color: "secondary.main",
+                          },
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleNavigate(subItem.link);
+                        }}
+                      >
+                        {subItem.title}
+                      </MenuItem>
                     ))}
                   </Menu>
                 </>

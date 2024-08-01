@@ -3,17 +3,40 @@
 import { navbarItemsData } from "@/data/navbar";
 import useUserInfo from "@/hooks/useUserInfo";
 import { logoutUser } from "@/services/actions/logoutUser";
-import { Box, Button, Hidden, Stack, Typography } from "@mui/material";
+import { ExpandMore } from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  Hidden,
+  Menu,
+  MenuItem,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
 
 const MobileMenu = () => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [openSubMenu, setOpenSubMenu] = useState<null | number>(null);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const userInfo = useUserInfo();
-  // console.log(userInfo);
+
+  const handleMouseEnter = (
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
+    index: number
+  ) => {
+    setAnchorEl(event.currentTarget);
+    setOpenSubMenu(index);
+  };
+
+  const handleMouseLeave = () => {
+    setAnchorEl(null);
+    setOpenSubMenu(null);
+  };
 
   const handleLogOut = () => {
     logoutUser(router);
@@ -63,27 +86,75 @@ const MobileMenu = () => {
                 justifyContent="center"
                 alignItems="center"
               >
-                {navbarItemsData.map((item) => (
-                  <Typography
+                {navbarItemsData.map((item, index) => (
+                  <MenuItem
                     key={item.id}
-                    component={Button}
                     sx={{
-                      backgroundColor: "white",
+                      width: "100%",
+                      backgroundColor: "secondary.main",
                       boxShadow: "none",
                       fontSize: "15px",
                       fontWeight: 500,
-                      px: "10px",
+                      px: "15px",
+                      textAlign: "start",
+                      borderBottom:
+                        index === navbarItemsData.length - 1
+                          ? "none"
+                          : "1px solid gray",
                       ":hover": {
                         backgroundColor: "primary.main",
-                        color: "white",
+                        color: "secondary.main",
                       },
                     }}
                     onClick={() => handleNavigate(item.link)}
-                    py="8px"
-                    fullWidth
+                    onMouseEnter={(e) => handleMouseEnter(e, index)}
+                    onMouseLeave={handleMouseLeave}
                   >
                     {item.title}
-                  </Typography>
+                    {item.subItems && (
+                      <>
+                        <ExpandMore sx={{ ml: "5px" }} />
+                        <Menu
+                          anchorEl={anchorEl}
+                          open={openSubMenu === index}
+                          onClose={handleMouseLeave}
+                          MenuListProps={{ onMouseLeave: handleMouseLeave }}
+                          sx={{
+                            boxShadow: "none",
+                            padding: "0px 0px",
+                          }}
+                        >
+                          {item.subItems.map((subItem, subIndex) => (
+                            <MenuItem
+                              key={subItem.id}
+                              sx={{
+                                width: "225px",
+                                boxShadow: "none",
+                                fontSize: "15px",
+                                fontWeight: 500,
+                                pl: "25px",
+                                borderBottom:
+                                  subIndex === item.subItems.length - 1
+                                    ? "none"
+                                    : "1px solid gray",
+
+                                ":hover": {
+                                  backgroundColor: "primary.main",
+                                  color: "secondary.main",
+                                },
+                              }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleNavigate(subItem.link);
+                              }}
+                            >
+                              {subItem.title}
+                            </MenuItem>
+                          ))}
+                        </Menu>
+                      </>
+                    )}
+                  </MenuItem>
                 ))}
 
                 {userInfo?.userId ? (

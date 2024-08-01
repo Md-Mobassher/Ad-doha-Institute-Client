@@ -62,7 +62,7 @@ export const navbarItemsData = [
   {
     id: "5",
     title: "রিসোর্স",
-    link: "#",
+    link: "resources",
     subItems: [
       {
         id: "5-1",

@@ -11,7 +11,7 @@ const Navbar = () => {
     <Box
       sx={{
         backgroundColor: "primary.main",
-        py: "2px",
+        py: "8px",
         position: "sticky",
         top: "0px",
         zIndex: "50",
