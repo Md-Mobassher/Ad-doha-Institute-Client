@@ -1,10 +1,11 @@
 import FuturePlan from "@/components/ui/AboutPage/FuturePlan";
-import { aim&ObjectivesData } from "@/data/aimsObjectives";
+import DohaContainer from "@/components/ui/DohaContainer";
+import { aimObjectivesData } from "@/data/aimsObjectives";
 import { Box, Typography } from "@mui/material";
 
 const FuturePlanPage = () => {
   return (
-    <>
+    <DohaContainer>
       <Box sx={{ textAlign: "center", mt: "20px" }}>
         <Typography
           component="h2"
@@ -14,7 +15,7 @@ const FuturePlanPage = () => {
             color: "primary.main",
           }}
         >
-          {aim&ObjectivesData.pageTitle.title}
+          {aimObjectivesData.pageTitle.title}
         </Typography>
         <Typography
           component="h4"
@@ -24,13 +25,13 @@ const FuturePlanPage = () => {
             mt: "6px",
           }}
         >
-          {aim&ObjectivesData.pageTitle.details}
+          {aimObjectivesData.pageTitle.details}
         </Typography>
       </Box>
       <Box p={2}>
-        <FuturePlan {...aim&ObjectivesData.futurePlan} />
+        <FuturePlan {...aimObjectivesData.futurePlan} />
       </Box>
-    </>
+    </DohaContainer>
   );
 };
 

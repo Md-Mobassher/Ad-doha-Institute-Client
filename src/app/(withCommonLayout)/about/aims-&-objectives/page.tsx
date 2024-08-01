@@ -1,10 +1,11 @@
 import DetailsItem from "@/components/ui/DetailsItem";
+import DohaContainer from "@/components/ui/DohaContainer";
 import { aimObjectivesData } from "@/data/aimsObjectives";
 import { Box, Divider, Typography } from "@mui/material";
 
 const AimsObjectivesPage = () => {
   return (
-    <>
+    <DohaContainer>
       <Box sx={{ textAlign: "center", mt: "20px" }}>
         <Typography
           component="h2"
@@ -78,7 +79,7 @@ const AimsObjectivesPage = () => {
           </Box>
         </Box>
       </Box>
-    </>
+    </DohaContainer>
   );
 };
 

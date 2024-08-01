@@ -4,10 +4,11 @@ import {
   advisoryCommitteePageTitle,
 } from "@/data/advisoryCommittee";
 import { Box, Divider, Typography } from "@mui/material";
+import DohaContainer from "@/components/ui/DohaContainer";
 
 const AdvisoryCommitteePage = () => {
   return (
-    <>
+    <DohaContainer>
       <Box my={2}>
         <Typography
           component="h2"
@@ -31,7 +32,7 @@ const AdvisoryCommitteePage = () => {
             />
           ))}
       </Box>
-    </>
+    </DohaContainer>
   );
 };
 

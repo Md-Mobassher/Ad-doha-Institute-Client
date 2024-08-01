@@ -1,10 +1,11 @@
+import DohaContainer from "@/components/ui/DohaContainer";
 import Member from "@/components/ui/Member";
 import { facultyData, facultyPageTitle } from "@/data/faculties";
 import { Box, Typography } from "@mui/material";
 
 const FacultyPage = () => {
   return (
-    <>
+    <DohaContainer>
       <Box my={2}>
         <Typography
           component="h2"
@@ -28,7 +29,7 @@ const FacultyPage = () => {
             />
           ))}
       </Box>
-    </>
+    </DohaContainer>
   );
 };
 

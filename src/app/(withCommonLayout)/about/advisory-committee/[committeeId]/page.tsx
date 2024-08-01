@@ -1,3 +1,4 @@
+import DohaContainer from "@/components/ui/DohaContainer";
 import MemberDetails from "@/components/ui/MemberDetails";
 import { advisoryCommitteData } from "@/data/advisoryCommittee";
 import { TMember } from "@/type";
@@ -15,9 +16,11 @@ const AdvisoryCommitteeDetailsPage = ({ params }: TParams) => {
   );
 
   return (
-    <Box p={2}>
-      <MemberDetails {...(committeeData as TMember)} />
-    </Box>
+    <DohaContainer>
+      <Box p={2}>
+        <MemberDetails {...(committeeData as TMember)} />
+      </Box>
+    </DohaContainer>
   );
 };
 

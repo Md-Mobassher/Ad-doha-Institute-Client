@@ -1,12 +1,15 @@
 import Image from "next/image";
 import commingSoon from "@/assets/comingsoon.png";
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
+import DohaContainer from "@/components/ui/DohaContainer";
 
 const BoardOfDirectorPage = () => {
   return (
-    <Stack justifyContent="center" alignItems="center">
-      <Image src={commingSoon} alt="coming soon image" />
-    </Stack>
+    <DohaContainer>
+      <Stack justifyContent="center" alignItems="center">
+        <Image src={commingSoon} alt="coming soon image" />
+      </Stack>
+    </DohaContainer>
   );
 };
 

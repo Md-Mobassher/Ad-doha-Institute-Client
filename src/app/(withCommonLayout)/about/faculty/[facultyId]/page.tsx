@@ -1,3 +1,4 @@
+import DohaContainer from "@/components/ui/DohaContainer";
 import MemberDetails from "@/components/ui/MemberDetails";
 import { facultyData } from "@/data/faculties";
 import { TMember } from "@/type";
@@ -14,9 +15,9 @@ const FacultyDetailsPage = ({ params }: TParams) => {
   );
 
   return (
-    <div className="lg:p-5 p-2">
+    <DohaContainer>
       <MemberDetails {...(facultyInfo as TMember)} />
-    </div>
+    </DohaContainer>
   );
 };
 
