@@ -16,8 +16,8 @@ const PageTitle = ({ title }: ITitle) => {
           xs: "22px",
         },
         fontWeight: "700",
-        backgroundColor: "primary.main",
-        color: "#fff",
+        backgroundColor: "secondary.main",
+        color: "primary.main",
         textAlign: "center",
         py: "14px",
       }}

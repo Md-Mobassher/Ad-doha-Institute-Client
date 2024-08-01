@@ -7,7 +7,7 @@ import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { Button, CircularProgress, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { SxProps } from "@mui/material/styles";
+
 
 type TProps = {
   open: boolean;
