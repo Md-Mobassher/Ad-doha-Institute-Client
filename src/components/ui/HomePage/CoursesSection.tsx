@@ -2,20 +2,34 @@ import Title from "@/components/ui/Title";
 import Container from "../DohaContainer";
 import { coursesData } from "@/data/courses";
 import DohaCard from "../DohaCard";
-import DohaButton from "../DohaButton";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 
 const CoursesSection = () => {
   return (
     <Container>
       <Stack
-        direction="row"
-        justifyContent="space-between"
+        direction="column"
+        justifyContent="center"
         alignItems="center"
         mb={4}
       >
-        <Title title="আমাদের কোর্সসমূহ" />
-        <DohaButton btnTitle="সকল" navigate="courses" />
+        <Title title="জনপ্রিয় কোর্সসমূহ" />
+        <Typography
+          component="h3"
+          sx={{
+            fontSize: {
+              lg: "23px",
+              md: "22px",
+              sm: "20px",
+              xs: "18px",
+            },
+            pt: "10px",
+            fontWeight: "600",
+            color: "warning.main",
+          }}
+        >
+          এক-নজরে দেখে নিন আমাদের বাছাইকৃত সেরা কোর্সগুলো
+        </Typography>
       </Stack>
 
       <Box className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-7 gap-5 mt-8">

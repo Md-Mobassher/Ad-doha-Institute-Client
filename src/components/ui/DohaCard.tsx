@@ -80,7 +80,7 @@ const DohaCard = ({
             fontWeight="400"
             textAlign="justify"
           >
-            {details.slice(0, 120)}...
+            {details}
           </Typography>
         )}
 
