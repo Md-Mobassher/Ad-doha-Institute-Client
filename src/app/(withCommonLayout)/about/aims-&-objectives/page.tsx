@@ -1,3 +1,4 @@
+import FuturePlan from "@/components/ui/AboutPage/FuturePlan";
 import DetailsItem from "@/components/ui/DetailsItem";
 import DohaContainer from "@/components/ui/DohaContainer";
 import { aimObjectivesData } from "@/data/aimsObjectives";
@@ -77,6 +78,10 @@ const AimsObjectivesPage = () => {
               <DetailsItem key={index} item={item} index={index} />
             ))}
           </Box>
+        </Box>
+
+        <Box p={2}>
+          <FuturePlan {...aimObjectivesData.futurePlan} />
         </Box>
       </Box>
     </DohaContainer>

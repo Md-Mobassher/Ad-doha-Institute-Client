@@ -23,6 +23,7 @@ const CoursesSection = () => {
               sm: "20px",
               xs: "18px",
             },
+            textAlign: "center",
             pt: "10px",
             fontWeight: "600",
             color: "warning.main",
