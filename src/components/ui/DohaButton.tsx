@@ -22,6 +22,10 @@ const DohaButton = ({ btnTitle, id, navigate, variant }: TButtonProps) => {
         <Button
           sx={{
             borderRadius: "8px",
+            ":hover": {
+              backgroundColor: "success.main",
+              color: "secondary.main",
+            },
           }}
           onClick={handleClick}
           variant={variant}

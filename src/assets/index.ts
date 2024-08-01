@@ -1,9 +1,8 @@
 const assets = {
   banner: {
-    moktob: require("../assets/banner/Moktob.webp"),
-    dawah: require("../assets/banner/দাওয়াহ.webp"),
-    poster: require("../assets/banner/web-poster.webp"),
-    poster2: require("../assets/banner/বয়স্কদের.png"),
+    slide1: require("../assets/banner/Slide -1.jpg"),
+    slide2: require("../assets/banner/Slide -2.jpg"),
+    slide3: require("../assets/banner/Slide -3.jpg"),
   },
   logo: {
     headerlogo: require("../assets/logo/logo.png"),

@@ -7,26 +7,31 @@ import { Box, Stack } from "@mui/material";
 
 const ProjectsSection = () => {
   return (
-    <Container>
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        mb={4}
-      >
-        <Title title="আমাদের কার্যক্রম" />
-        <DohaButton btnTitle="সকল" navigate="projects" />
-      </Stack>
+    <Box
+      sx={{
+        backgroundColor: "info.main",
+      }}
+    >
+      <Container>
+        <Stack
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          mb={4}
+        >
+          <Title title="আমাদের কার্যক্রম" />
+        </Stack>
 
-      <Box>
-        <Slider
-          items={projectsData}
-          slidesPerView={3}
-          btnTitle="বিস্তারিত"
-          navigate="projects"
-        />
-      </Box>
-    </Container>
+        <Box>
+          <Slider
+            items={projectsData}
+            slidesPerView={3}
+            btnTitle="বিস্তারিত"
+            navigate="projects"
+          />
+        </Box>
+      </Container>
+    </Box>
   );
 };
 

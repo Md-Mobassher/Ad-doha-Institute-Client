@@ -6,13 +6,12 @@ import CoursesSection from "@/components/ui/HomePage/CoursesSection";
 import ProjectsSection from "@/components/ui/HomePage/ProjectsSection";
 import ServicesSection from "@/components/ui/HomePage/ServicesSection";
 import VideosSection from "@/components/ui/HomePage/VideosSection";
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 
 const slides = [
-  { imageUrl: assets.banner.poster2 },
-  { imageUrl: assets.banner.poster2 },
-  { imageUrl: assets.banner.poster2 },
-  { imageUrl: assets.banner.poster2 },
+  { imageUrl: assets.banner.slide1 },
+  { imageUrl: assets.banner.slide2 },
+  { imageUrl: assets.banner.slide3 },
 ];
 
 const HomePage = () => {

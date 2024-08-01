@@ -24,8 +24,7 @@ const Slider = ({
       pagination={{
         clickable: true,
       }}
-      navigation={true}
-      modules={[Autoplay, Pagination, Navigation]}
+      modules={[Autoplay, Pagination]}
       draggable={true}
       breakpoints={{
         300: {
@@ -38,10 +37,10 @@ const Slider = ({
           slidesPerView: 3,
         },
         1500: {
-          slidesPerView: 4,
+          slidesPerView: 3,
         },
         1800: {
-          slidesPerView: 5,
+          slidesPerView: 3,
         },
       }}
       className=""
