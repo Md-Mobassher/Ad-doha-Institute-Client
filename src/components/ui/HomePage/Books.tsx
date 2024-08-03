@@ -1,11 +1,12 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import { TBook } from "@/type";
-import DohaBook from "../DohaBook";
 import LoadingPage from "@/app/loading";
 import { useGetAllBooksQuery } from "@/redux/features/admin/bookManagementApi";
+import { Box, Divider, Grid, Typography } from "@mui/material";
+import Image from "next/image";
 
 const Books = () => {
   const { data, isLoading } = useGetAllBooksQuery({});
@@ -14,47 +15,59 @@ const Books = () => {
     return <LoadingPage />;
   }
 
-  const booksData = data?.books;
+  const booksData = data?.books || [];
 
   return (
-    <Swiper
-      spaceBetween={20}
-      slidesPerView={5}
-      autoplay={{
-        delay: 4000,
-      }}
-      loop={true}
-      pagination={{
-        clickable: true,
-      }}
-      navigation={true}
-      modules={[Autoplay, Pagination, Navigation]}
-      draggable={true}
-      breakpoints={{
-        300: {
-          slidesPerView: 2,
-        },
-        600: {
-          slidesPerView: 3,
-        },
-        900: {
-          slidesPerView: 4,
-        },
-        1200: {
-          slidesPerView: 4,
-        },
-        1800: {
-          slidesPerView: 5,
-        },
-      }}
-      className=""
-    >
-      {booksData?.map((book: TBook) => (
-        <SwiperSlide className=" mb-12 h-full " key={book.id}>
-          <DohaBook {...book} />
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <Box sx={{ flexGrow: 1, p: 2 }}>
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          "--Grid-borderWidth": "1px",
+          borderTop: "var(--Grid-borderWidth) solid",
+          borderLeft: "var(--Grid-borderWidth) solid",
+          borderColor: "divider",
+          "& > div": {
+            borderRight: "var(--Grid-borderWidth) solid",
+            borderBottom: "var(--Grid-borderWidth) solid",
+            borderColor: "divider",
+          },
+        }}
+      >
+        {booksData?.slice(0, 6)?.map((book: TBook) => (
+          <Grid
+            key={book?.id}
+            {...{ xs: 6, sm: 6, md: 3, lg: 2, xl: 2 }}
+            minHeight={160}
+          >
+            <Box className=" flex flex-col items-center text-center p-3 bg-white">
+              <Image
+                src={book.image}
+                alt={book.title}
+                width={200}
+                height={300}
+                className="mb-5 hover:scale-105 transition-all duration-300"
+              />
+              <Divider />
+              <Typography
+                variant="h6"
+                sx={{
+                  color: "primary.main",
+                  boxShadow: "none",
+                  fontSize: "15px",
+                  fontWeight: 500,
+                  px: "10px",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                {book.title}
+              </Typography>
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 };
 

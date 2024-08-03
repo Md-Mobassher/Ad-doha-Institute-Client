@@ -2,7 +2,15 @@ import Title from "@/components/ui/Title";
 import Container from "../DohaContainer";
 import { coursesData } from "@/data/courses";
 import DohaCard from "../DohaCard";
-import { Box, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Stack,
+  Typography,
+} from "@mui/material";
+import Image from "next/image";
 
 const CoursesSection = () => {
   return (
@@ -33,9 +41,32 @@ const CoursesSection = () => {
         </Typography>
       </Stack>
 
-      <Box className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-7 gap-5 mt-8">
+      <Box className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-7 gap-5 mt-8 mx-auto">
         {coursesData.map((course) => (
-          <DohaCard key={course.id} {...course} />
+          <Card
+            key={course?.id}
+            sx={{
+              maxWidth: 345,
+              border: "1px solid lightgray",
+            }}
+          >
+            <Image width={300} src={course?.image} alt="course image" />
+            <CardContent>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  textAlign: "center",
+                  mt: "5px",
+                }}
+              >
+                {course?.title}
+              </Typography>
+            </CardContent>
+          </Card>
         ))}
       </Box>
     </Container>

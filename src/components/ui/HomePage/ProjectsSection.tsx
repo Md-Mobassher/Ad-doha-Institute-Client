@@ -2,7 +2,6 @@ import Title from "@/components/ui/Title";
 import Slider from "@/components/ui/Slider";
 import Container from "@/components/ui/DohaContainer";
 import { projectsData } from "@/data/projects";
-import DohaButton from "../DohaButton";
 import { Box, Stack } from "@mui/material";
 
 const ProjectsSection = () => {

@@ -1,9 +1,9 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import DohaCard from "./DohaCard";
+import { Autoplay, Pagination } from "swiper/modules";
 import { TCardProps, TSliderProps } from "@/type";
+import DohaCard from "@/components/ui/DohaCard";
 
 const Slider = ({
   items,

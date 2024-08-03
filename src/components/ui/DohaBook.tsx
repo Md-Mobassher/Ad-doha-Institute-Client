@@ -51,11 +51,15 @@ const DohaBook = ({ image, title, url }: TBook) => {
       <Box>
         <Typography
           component="h4"
-          fontSize="18px"
-          textAlign="center"
-          my="6px"
-          fontWeight="700"
-          color="primary.main"
+          sx={{
+            color: "primary.main",
+            boxShadow: "none",
+            fontSize: "15px",
+            fontWeight: 600,
+            px: "10px",
+            my: "6px",
+            textAlign: "center",
+          }}
         >
           {title}
         </Typography>

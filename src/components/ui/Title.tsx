@@ -14,6 +14,7 @@ const Title = ({ title }: ITitle) => {
           md: "28px",
           sm: "26px",
           xs: "22px",
+          fontFamily: "SolaimanLipi ",
         },
         fontWeight: "600",
         color: "primary.main",

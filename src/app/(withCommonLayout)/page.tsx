@@ -4,6 +4,7 @@ import BannerSection from "@/components/ui/HomePage/BannerSection";
 import BooksSection from "@/components/ui/HomePage/BooksSection";
 import CoursesSection from "@/components/ui/HomePage/CoursesSection";
 import DepartmentsSection from "@/components/ui/HomePage/DepartmentsSection";
+import OpinionOfAlim from "@/components/ui/HomePage/OpinionOfAlim";
 import ProjectsSection from "@/components/ui/HomePage/ProjectsSection";
 import StudentsCornerSection from "@/components/ui/HomePage/StudentsCorner";
 import VideosSection from "@/components/ui/HomePage/VideosSection";
@@ -25,6 +26,7 @@ const HomePage = () => {
       <DepartmentsSection />
       <BooksSection />
       <StudentsCornerSection />
+      <OpinionOfAlim />
       <VideosSection />
     </Box>
   );

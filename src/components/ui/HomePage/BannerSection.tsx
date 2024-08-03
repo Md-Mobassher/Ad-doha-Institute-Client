@@ -20,13 +20,6 @@ const BannerSection = ({ slides }: any) => {
       <DohaContainer>
         <Swiper
           slidesPerView={1}
-          coverflowEffect={{
-            rotate: 60,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: true,
-          }}
           spaceBetween={0}
           autoplay={{
             delay: 2500,
@@ -35,7 +28,6 @@ const BannerSection = ({ slides }: any) => {
           pagination={{
             clickable: true,
           }}
-          navigation={true}
           modules={[Autoplay, Pagination]}
           className="w-full lg:h-[560px] md:h-[400px] h-[250px] object-cover rounded-lg mySwiper"
         >

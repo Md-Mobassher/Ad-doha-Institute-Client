@@ -17,10 +17,16 @@ const DohaCard = ({
   return (
     <Box
       sx={{
-        borderRadius: "10px",
+        borderRadius: "8px",
         border: "1px solid lightgray",
         width: "100%",
-        height: "100%",
+        height: {
+          xl: "450px",
+          lg: "480px",
+          md: "480px",
+          sm: "470px",
+          xs: "450px",
+        },
         backgroundColor: "#fff",
         boxShadow: "5 2 1",
         ":hover": {
@@ -38,7 +44,7 @@ const DohaCard = ({
             overflow: "hidden",
             objectFit: "cover",
             borderBottom: "1px solid lightgray",
-            borderTopRadius: "10px",
+            borderTopRadius: "50px",
           },
         }}
       >
