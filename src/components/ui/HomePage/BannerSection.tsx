@@ -37,20 +37,20 @@ const BannerSection = ({ slides }: any) => {
           }}
           navigation={true}
           modules={[Autoplay, Pagination]}
-          className="w-full lg:h-[560px] md:h-[400px] h-[350px] object-cover rounded-lg mySwiper"
+          className="w-full lg:h-[560px] md:h-[400px] h-[250px] object-cover rounded-lg mySwiper"
         >
           {slides.map((slide: TSlide, index: number) => (
             <SwiperSlide
               key={index}
               virtualIndex={index}
-              className="w-full mb-12"
+              className="w-full mb-10"
             >
               <Image
                 src={slide.imageUrl}
                 alt={`Slide ${index + 1}`}
                 className="rounded-md w-full"
                 width={1200}
-                height={560}
+                height={300}
               />
             </SwiperSlide>
           ))}

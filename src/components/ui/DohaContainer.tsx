@@ -10,15 +10,17 @@ const DohaContainer = ({
       <Box
         sx={{
           py: {
+            xl: "50px",
             lg: "50px",
             md: "45px",
             sm: "40px",
             xs: "35px",
           },
           px: {
-            lg: "8px",
-            md: "8px",
-            sm: "8px",
+            xl: "0px",
+            lg: "60px",
+            md: "50px",
+            sm: "20px",
             xs: "10px",
           },
         }}

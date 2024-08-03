@@ -17,7 +17,24 @@ const Navbar = () => {
         zIndex: "50",
       }}
     >
-      <Container>
+      <Container
+        sx={{
+          py: {
+            xl: "10px",
+            lg: "10px",
+            md: "8px",
+            sm: "7px",
+            xs: "6px",
+          },
+          px: {
+            xl: "0px",
+            lg: "60px",
+            md: "50px",
+            sm: "20px",
+            xs: "10px",
+          },
+        }}
+      >
         <Stack
           direction="row"
           alignItems="center"

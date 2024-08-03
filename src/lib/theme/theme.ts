@@ -36,7 +36,7 @@ export const theme = createTheme({
     },
     MuiContainer: {
       defaultProps: {
-        maxWidth: "lg",
+        maxWidth: "xl",
       },
     },
   },
