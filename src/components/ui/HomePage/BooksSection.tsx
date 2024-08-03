@@ -14,7 +14,7 @@ const BooksSection = () => {
         alignItems="center"
         mb={4}
       >
-        <Title title="বই" />
+        <Title title="ই-পাঠাগার" />
         <DohaButton btnTitle="সকল" navigate="resourses/books" />
       </Stack>
 

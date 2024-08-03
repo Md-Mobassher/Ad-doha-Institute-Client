@@ -5,6 +5,7 @@ import BooksSection from "@/components/ui/HomePage/BooksSection";
 import CoursesSection from "@/components/ui/HomePage/CoursesSection";
 import DepartmentsSection from "@/components/ui/HomePage/DepartmentsSection";
 import ProjectsSection from "@/components/ui/HomePage/ProjectsSection";
+import StudentsCornerSection from "@/components/ui/HomePage/StudentsCorner";
 import VideosSection from "@/components/ui/HomePage/VideosSection";
 import { Box } from "@mui/material";
 
@@ -23,6 +24,7 @@ const HomePage = () => {
       <CoursesSection />
       <DepartmentsSection />
       <BooksSection />
+      <StudentsCornerSection />
       <VideosSection />
     </Box>
   );

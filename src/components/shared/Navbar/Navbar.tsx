@@ -30,7 +30,7 @@ const Navbar = () => {
             xl: "0px",
             lg: "60px",
             md: "50px",
-            sm: "20px",
+            sm: "12px",
             xs: "10px",
           },
         }}

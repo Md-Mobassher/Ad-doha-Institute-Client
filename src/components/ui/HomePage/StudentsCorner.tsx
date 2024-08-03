@@ -6,13 +6,13 @@ import DohaContainer from "../DohaContainer";
 import Title from "../Title";
 import assets from "@/assets";
 
-interface Department {
+interface IStudentsCorner {
   id: number;
   title: string;
   imageUrl: string;
 }
 
-const departments: Department[] = [
+const studentsCorner: IStudentsCorner[] = [
   {
     id: 1,
     title: "সহিহ কুরআন শিক্ষা",
@@ -33,10 +33,10 @@ const departments: Department[] = [
     title: "ইংরেজি ভাষা শিক্ষা",
     imageUrl: assets.departments.englishLanguage,
   },
-  { id: 5, title: "ইসলামি নাশিদ", imageUrl: assets.departments.islamiNashid },
+  { id: 5, title: "ইসলামি নাশিদ", imageUrl: assets.departments.islamiNashid },
 ];
 
-const DepartmentsSection: React.FC = () => {
+const StudentsCornerSection: React.FC = () => {
   return (
     <Box
       sx={{
@@ -50,7 +50,7 @@ const DepartmentsSection: React.FC = () => {
           alignItems="center"
           mb={4}
         >
-          <Title title="আমাদের বিভাগসমূহ" />
+          <Title title="শিক্ষার্থী কর্ণার" />
         </Stack>
 
         <Box sx={{ flexGrow: 1, p: 2 }}>
@@ -69,7 +69,7 @@ const DepartmentsSection: React.FC = () => {
               },
             }}
           >
-            {departments.map((department, index) => (
+            {studentsCorner.map((item, index) => (
               <Grid
                 key={index}
                 {...{ xs: 6, sm: 6, md: 2.4, lg: 2.4, xl: 2.4 }}
@@ -77,8 +77,8 @@ const DepartmentsSection: React.FC = () => {
               >
                 <Box className=" flex flex-col items-center text-center p-5 bg-white">
                   <Image
-                    src={department.imageUrl}
-                    alt={department.title}
+                    src={item.imageUrl}
+                    alt={item.title}
                     width={80}
                     height={80}
                     className="mb-5 hover:scale-125 transition-all duration-300"
@@ -95,7 +95,7 @@ const DepartmentsSection: React.FC = () => {
                       alignItems: "center",
                     }}
                   >
-                    {department.title}
+                    {item.title}
                   </Typography>
                 </Box>
               </Grid>
@@ -107,4 +107,4 @@ const DepartmentsSection: React.FC = () => {
   );
 };
 
-export default DepartmentsSection;
+export default StudentsCornerSection;
