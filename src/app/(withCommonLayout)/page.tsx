@@ -27,7 +27,7 @@ const HomePage = () => {
       <BooksSection />
       <StudentsCornerSection />
       <OpinionOfAlim />
-      <VideosSection />
+      {/* <VideosSection /> */}
     </Box>
   );
 };
