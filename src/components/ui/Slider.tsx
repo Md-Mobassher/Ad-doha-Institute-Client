@@ -45,7 +45,7 @@ const Slider = ({
       }}
       className=""
     >
-      {items.map((item: TCardProps) => (
+      {items?.map((item: TCardProps) => (
         <SwiperSlide className=" mb-12 h-full " key={item.id}>
           <DohaCard
             {...item}
