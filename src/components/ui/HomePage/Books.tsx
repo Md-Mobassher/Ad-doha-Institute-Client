@@ -1,7 +1,5 @@
 "use client";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
 import { TBook } from "@/type";
 import LoadingPage from "@/app/loading";
 import { useGetAllBooksQuery } from "@/redux/features/admin/bookManagementApi";

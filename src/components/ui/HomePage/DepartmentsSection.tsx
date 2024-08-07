@@ -75,28 +75,30 @@ const DepartmentsSection: React.FC = () => {
                 {...{ xs: 6, sm: 6, md: 2.4, lg: 2.4, xl: 2.4 }}
                 minHeight={160}
               >
-                <Box className=" flex flex-col items-center text-center p-5 bg-white">
-                  <Image
-                    src={department.imageUrl}
-                    alt={department.title}
-                    width={80}
-                    height={80}
-                    className="mb-5 hover:scale-125 transition-all duration-300"
-                  />
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      color: "primary.main",
-                      boxShadow: "none",
-                      fontSize: "15px",
-                      fontWeight: 500,
-                      px: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    {department.title}
-                  </Typography>
+                <Box className="  text-center p-5 bg-white cursor-pointer">
+                  <Box className="hover:scale-110 transition-all duration-300 flex flex-col items-center">
+                    <Image
+                      src={department.imageUrl}
+                      alt={department.title}
+                      width={80}
+                      height={80}
+                      className="mb-4"
+                    />
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        color: "primary.main",
+                        boxShadow: "none",
+                        fontSize: "15px",
+                        fontWeight: 500,
+                        px: "10px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      {department.title}
+                    </Typography>
+                  </Box>
                 </Box>
               </Grid>
             ))}

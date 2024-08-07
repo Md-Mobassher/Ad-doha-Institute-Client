@@ -63,7 +63,12 @@ const Footer = () => {
           {/* <DohaForm onSubmit={handleSubscribe}>
             <DohaInput type="email" name="subscribe" required />
           </DohaForm> */}
-          <Box mt={2}>
+          <Box
+            mt={2}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
             <input
               type="email"
               className="border border-green-800 rounded-full p-3 lg:w-[500px] w-full"
@@ -138,13 +143,7 @@ const Footer = () => {
               <Typography
                 component="h3"
                 sx={{
-                  borderLeft: {
-                    xl: "3px solid green",
-                    lg: "3px solid green",
-                    md: "3px solid green",
-                    sm: "0px solid green",
-                    xs: "0px solid green",
-                  },
+                  borderLeft: "3px solid green",
                   pl: "15px",
                   fontSize: {
                     lg: "24px",
@@ -231,13 +230,7 @@ const Footer = () => {
               <Typography
                 component="h3"
                 sx={{
-                  borderLeft: {
-                    xl: "3px solid green",
-                    lg: "3px solid green",
-                    md: "3px solid green",
-                    sm: "0px solid green",
-                    xs: "0px solid green",
-                  },
+                  borderLeft: "3px solid green",
                   pl: "15px",
                   fontSize: {
                     lg: "24px",
@@ -308,13 +301,7 @@ const Footer = () => {
               <Typography
                 component="h3"
                 sx={{
-                  borderLeft: {
-                    xl: "3px solid green",
-                    lg: "3px solid green",
-                    md: "3px solid green",
-                    sm: "0px solid green",
-                    xs: "0px solid green",
-                  },
+                  borderLeft: "3px solid green",
                   pl: "15px",
                   fontSize: {
                     lg: "24px",
@@ -397,8 +384,13 @@ const Footer = () => {
               xs: "column",
             }}
             justifyContent="center"
-            alignItems="stretch"
-            gap={2}
+            alignItems="center"
+            gap={{
+              lg: 2,
+              md: 2,
+              sm: "0px",
+              xs: "0px",
+            }}
           >
             <p className="text-center">
               স্বত্ব &copy; {new Date().getFullYear()} | আদ-দোহা ইনস্টিটিউট,
@@ -408,10 +400,10 @@ const Footer = () => {
             <p className="text-center">
               কারিগরি সহায়তায়{" "}
               <Link
-                href="https://dev-mobassher.web.app"
+                href="https://mobassher.vercel.app"
                 target="_blank"
                 rel="noreferrer"
-                className="text-green-500"
+                className="text-[#FAE4BF]"
               >
                 মোঃ মোবাশ্বের হোসেন
               </Link>
