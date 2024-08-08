@@ -18,6 +18,7 @@ import Link from "next/link";
 import { FieldValues } from "react-hook-form";
 import NearMeIcon from "@mui/icons-material/NearMe";
 import { FaFacebook, FaYoutube } from "react-icons/fa";
+import SubTitle from "@/components/ui/SubTitle";
 
 const Footer = () => {
   const handleSubscribe = async (value: FieldValues) => {
@@ -43,23 +44,7 @@ const Footer = () => {
           mb={4}
         >
           <Title title="সাবস্ক্রাইব করুন" />
-          <Typography
-            component="h3"
-            sx={{
-              fontSize: {
-                lg: "18px",
-                md: "17px",
-                sm: "16px",
-                xs: "15px",
-              },
-              textAlign: "center",
-              pt: "10px",
-              fontWeight: "600",
-              color: "warning.main",
-            }}
-          >
-            সর্বশেষ খবর বা আপডেট পেতে এখনই সাবস্ক্রাইব করুন
-          </Typography>
+          <SubTitle title="সর্বশেষ খবর বা আপডেট পেতে এখনই সাবস্ক্রাইব করুন" />
           {/* <DohaForm onSubmit={handleSubscribe}>
             <DohaInput type="email" name="subscribe" required />
           </DohaForm> */}
@@ -71,7 +56,7 @@ const Footer = () => {
           >
             <input
               type="email"
-              className="border border-green-800 rounded-full p-3 lg:w-[500px] w-full"
+              className="border border-green-800 rounded-full p-3 px-6 lg:w-[500px] w-full"
               name="email"
               placeholder="Your Email Address"
             />

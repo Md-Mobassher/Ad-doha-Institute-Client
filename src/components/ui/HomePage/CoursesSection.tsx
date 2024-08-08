@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
+import SubTitle from "../SubTitle";
 
 const CoursesSection = () => {
   return (
@@ -22,23 +23,7 @@ const CoursesSection = () => {
         mb={4}
       >
         <Title title="জনপ্রিয় কোর্সসমূহ" />
-        <Typography
-          component="h3"
-          sx={{
-            fontSize: {
-              lg: "23px",
-              md: "22px",
-              sm: "20px",
-              xs: "18px",
-            },
-            textAlign: "center",
-            pt: "10px",
-            fontWeight: "600",
-            color: "warning.main",
-          }}
-        >
-          এক-নজরে দেখে নিন আমাদের বাছাইকৃত সেরা কোর্সগুলো
-        </Typography>
+        <SubTitle title="এক-নজরে দেখে নিন আমাদের বাছাইকৃত সেরা কোর্সগুলো" />
       </Stack>
 
       <Box className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-7 gap-5 mt-8 mx-auto">

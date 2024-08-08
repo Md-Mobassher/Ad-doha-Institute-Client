@@ -1,90 +1,87 @@
-import FuturePlan from "@/components/ui/AboutPage/FuturePlan";
-import DetailsItem from "@/components/ui/DetailsItem";
 import DohaContainer from "@/components/ui/DohaContainer";
+import SubTitle from "@/components/ui/SubTitle";
+import Title from "@/components/ui/Title";
 import { aimObjectivesData } from "@/data/aimsObjectives";
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const AimsObjectivesPage = () => {
   return (
-    <DohaContainer>
-      <Box sx={{ textAlign: "center", mt: "20px" }}>
-        <Typography
-          component="h2"
-          sx={{
-            fontSize: "24px",
-            fontWeight: "700",
-            color: "primary.main",
-          }}
-        >
-          {aimObjectivesData.pageTitle.title}
-        </Typography>
-        <Typography
-          component="h4"
-          sx={{
-            fontSize: "20px",
-            fontWeight: "600",
-            mt: "6px",
-          }}
-        >
-          {aimObjectivesData.pageTitle.details}
-        </Typography>
+    <Box>
+      <Box
+        sx={{ textAlign: "center", py: "40px", backgroundColor: "info.main" }}
+      >
+        <Title title={aimObjectivesData.pageTitle.title} />
+        <SubTitle title={aimObjectivesData.pageTitle.details} />
       </Box>
-      <Box p={2}>
-        {/* aim */}
-        <Box mt={4}>
-          <Divider textAlign="left">
-            <Typography
-              component="h4"
-              sx={{
-                fontSize: "20px",
-                fontWeight: "600",
-                mt: "6px",
-                color: "primary.main",
-              }}
-            >
-              {aimObjectivesData.aim.title}
-            </Typography>
-          </Divider>
 
+      {/* Into */}
+      <DohaContainer>
+        <Title title={aimObjectivesData.intro.title} />
+        <Typography
+          component="p"
+          sx={{
+            fontSize: "16px",
+            fontWeight: "400",
+            mt: "20px",
+            textAlign: "justify",
+          }}
+        >
+          {aimObjectivesData.intro.details}
+        </Typography>
+      </DohaContainer>
+
+      {/* aim */}
+      <Box
+        sx={{ textAlign: "center", py: "40px", backgroundColor: "info.main" }}
+      >
+        <DohaContainer>
+          <Title title={aimObjectivesData.aim.title} />
           <Typography
             component="p"
             sx={{
               fontSize: "16px",
               fontWeight: "400",
               mt: "20px",
+              textAlign: "justify",
             }}
           >
             {aimObjectivesData.aim.details}
           </Typography>
-        </Box>
-
-        {/* objectives */}
-        <Box mt={5}>
-          <Divider textAlign="left" sx={{ dividerColor: "primary.main" }}>
-            <Typography
-              component="h4"
-              sx={{
-                fontSize: "20px",
-                fontWeight: "600",
-                color: "primary.main",
-              }}
-            >
-              {aimObjectivesData.objectives.title}
-            </Typography>
-          </Divider>
-
-          <Box mt={4}>
-            {aimObjectivesData.objectives.details.map((item, index) => (
-              <DetailsItem key={index} item={item} index={index} />
-            ))}
-          </Box>
-        </Box>
-
-        <Box p={2}>
-          <FuturePlan {...aimObjectivesData.futurePlan} />
-        </Box>
+        </DohaContainer>
       </Box>
-    </DohaContainer>
+
+      {/* objectives */}
+      <DohaContainer>
+        <Title title={aimObjectivesData.objectives.title} />
+        <Typography
+          component="p"
+          sx={{
+            fontSize: "16px",
+            fontWeight: "400",
+            mt: "20px",
+            textAlign: "justify",
+          }}
+        >
+          {aimObjectivesData.objectives.details}
+        </Typography>
+      </DohaContainer>
+
+      {/* future */}
+      <DohaContainer>
+        <Title title={aimObjectivesData.futurePlan.title} />
+        <Typography
+          component="p"
+          sx={{
+            fontSize: "16px",
+            fontWeight: "400",
+            mt: "20px",
+            textAlign: "justify",
+          }}
+        >
+          {aimObjectivesData.futurePlan.details}
+        </Typography>
+      </DohaContainer>
+    </Box>
   );
 };
 
