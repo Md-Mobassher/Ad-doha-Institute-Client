@@ -1,6 +1,7 @@
 import assets from "@/assets";
 
 export const facultyPageTitle = "শিক্ষক মন্ডলী";
+
 export const facultyData = [
   {
     _id: "1",
@@ -38,9 +39,10 @@ export const facultyData = [
   },
   {
     _id: "6",
-    name: "মুফতি আবু বকর সিদ্দীক আদদাঈ",
+    name: "মুফতি আবু বকর সিদ্দীক",
     image: assets.faculties.avatar,
-    designation: "",
+    designation:
+      "ইফতা, জামিয়া ইসলামিয়া দারুল উলূম মাদানিয়া। দাওরাহ, আল জামিয়াতুর রাহমানিয়া দারুল ইসলাম, ঢাকা। কামিল, ফিকাহ, মাদরাসা-ই-আলিয়া, ঢাকা। বি.এ. (অনার্স), এম.এ (এলএল.বি & এলএল.এম), বাংলাদেশ ইসলামি ইউনিভার্সটি।",
   },
   {
     _id: "7",
@@ -105,6 +107,7 @@ export const facultyData = [
     _id: "16",
     name: "মাওলানা আব্দুল্লাহ সোয়াদ",
     image: assets.faculties.abdullahSowad,
-    designation: "শিক্ষক, আদ-দোহা ইন্সটিটিউট",
+    designation:
+      "পরিচালক, নওমুসলিম ডেভেলপমেন্ট ফাউন্ডেশন। মাস্টার্স অব সোশ্যাল সায়েন্স, ওপেন ইউনিভার্সিটি। বিএসসি, সরকারি তোলারাম কলেজ, নারায়নগঞ্জ।",
   },
 ];

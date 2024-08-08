@@ -4,7 +4,7 @@ export const contactData = [
   {
     id: "1",
     title: "ঠিকানা",
-    details: "(ভিশন ভিলেজ) হাজী আউয়াল মার্কেট, ভাকুর্তা, সাভার, ঢাকা",
+    details: "ভিশন ভিলেজ, হাজি আউয়াল মার্কেট, ভাকুর্তা, সাভার, ঢাকা ",
     image: assets.icons.location,
   },
   {
@@ -16,7 +16,7 @@ export const contactData = [
   {
     id: "3",
     title: "ইমেইল",
-    details: "info@ad-doha.org",
+    details: "addohainstitution@gmail.com",
     image: assets.icons.email,
   },
 ];

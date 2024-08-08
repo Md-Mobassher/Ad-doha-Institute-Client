@@ -1,16 +1,15 @@
 import DohaCard from "@/components/ui/DohaCard";
-
+import DohaContainer from "@/components/ui/DohaContainer";
 import PageTitle from "@/components/ui/PageTitle";
 import { servicesData } from "@/data/services";
-import { Container } from "@mui/material";
 
 const ServicesPage = () => {
   return (
     <>
       <PageTitle title="আমাদের সেবাসমূহ" />
 
-      <Container>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-7 md:gap-6 gap-5 py-10">
+      <DohaContainer>
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-7 md:gap-6 gap-5">
           {servicesData.map((service) => (
             <>
               <DohaCard
@@ -24,7 +23,7 @@ const ServicesPage = () => {
             </>
           ))}
         </div>
-      </Container>
+      </DohaContainer>
     </>
   );
 };

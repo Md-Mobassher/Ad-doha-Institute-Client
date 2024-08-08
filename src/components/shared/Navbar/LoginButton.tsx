@@ -95,7 +95,7 @@ const LoginButton = () => {
             }}
             onClick={() => handleNavigate("login")}
           >
-            লগিন
+            লগইন
           </Typography>
         )}
       </Hidden>

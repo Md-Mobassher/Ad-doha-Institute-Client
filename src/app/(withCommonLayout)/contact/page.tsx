@@ -1,15 +1,16 @@
+import DohaContainer from "@/components/ui/DohaContainer";
 import PageTitle from "@/components/ui/PageTitle";
 import { contactData } from "@/data/contact";
-import { Container } from "@mui/material";
+import { Box } from "@mui/material";
 import Image from "next/image";
 
 const ContactPage = () => {
   return (
-    <>
+    <Box>
       <PageTitle title="যোগাযোগ" />
 
-      <Container>
-        <div className="lg:flex md:flex justify-between lg:gap-10 gap-5 my-10 ">
+      <DohaContainer>
+        <div className="lg:flex md:flex justify-between lg:gap-10 gap-5">
           <div className=" border hover:border-primary rounded-lg shadow-md lg:p-5 px-2 py-5 lg:w-[50%] md:w-[50%] w-full h-[405px]">
             <iframe
               src="https://docs.google.com/forms/d/e/1FAIpQLSd4tswcZxcjBGtyiCwfpBQz0PmKX72rL9z82TGW-yjmiivqaw/viewform?embedded=true"
@@ -19,7 +20,7 @@ const ContactPage = () => {
             </iframe>
           </div>
           <div className=" lg:w-[50%] md:w-[50%] w-full lg:mt-0 mt-5">
-            {contactData.map((data) => (
+            {contactData?.map((data) => (
               <div
                 key={data.id}
                 className="flex justify-start items-center gap-5 mb-5 border hover:border-primary rounded-lg shadow-md p-5"
@@ -42,8 +43,8 @@ const ContactPage = () => {
             ))}
           </div>
         </div>
-      </Container>
-    </>
+      </DohaContainer>
+    </Box>
   );
 };
 

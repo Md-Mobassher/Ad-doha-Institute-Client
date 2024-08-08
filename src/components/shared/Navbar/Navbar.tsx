@@ -20,8 +20,8 @@ const Navbar = () => {
       <Container
         sx={{
           py: {
-            xl: "10px",
-            lg: "10px",
+            xl: "8px",
+            lg: "8px",
             md: "8px",
             sm: "7px",
             xs: "6px",

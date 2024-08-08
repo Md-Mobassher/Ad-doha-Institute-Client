@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -41,7 +40,7 @@ const DesktopMenu = () => {
     <Box>
       <Hidden smDown>
         <Stack direction="row" justifyContent="start" alignItems="center">
-          {navbarItemsData.map((item, index) => (
+          {navbarItemsData?.map((item, index) => (
             <Typography
               key={item.id}
               component={Button}

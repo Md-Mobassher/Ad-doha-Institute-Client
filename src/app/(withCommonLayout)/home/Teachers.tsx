@@ -40,7 +40,7 @@ const Teachers = () => {
         }}
         className="w-full h-full flex justify-between items-stretch mySwiper"
       >
-        {facultyData.map((teacher: TTeacher, index: number) => (
+        {facultyData?.map((teacher: TTeacher, index: number) => (
           <SwiperSlide
             key={teacher?._id}
             virtualIndex={index}
@@ -55,16 +55,17 @@ const Teachers = () => {
                   xl: "400px",
                   lg: "500px",
                   md: "520px",
-                  sm: "400px",
-                  xs: "400px",
+                  sm: "500px",
+                  xs: "500px",
                 },
-
+                overflow: "auto",
                 backgroundColor: "#F7F3E7",
                 boxShadow: "5 2 1",
                 ":hover": {
                   border: "1px solid #22C55E",
                 },
-                p: "25px",
+                px: "15px",
+                py: "15px",
               }}
             >
               <Box
