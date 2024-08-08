@@ -16,8 +16,8 @@ const Videos = () => {
 
   return (
     <>
-      <Box className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5 ">
-        {videosData?.slice(0, 2).map((video: TVideo) => (
+      <Box className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 ">
+        {videosData?.slice(0, 3).map((video: TVideo) => (
           <Box className="flex justify-center border" key={video.id}>
             <iframe
               width="620"
@@ -31,7 +31,7 @@ const Videos = () => {
           </Box>
         ))}
       </Box>
-      <Box className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 mt-5 mb-16">
+      {/* <Box className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 mt-5 mb-16">
         {videosData?.slice(2, 5).map((video: TVideo) => (
           <Box className="flex justify-center border" key={video.id}>
             <iframe
@@ -45,7 +45,7 @@ const Videos = () => {
             ></iframe>
           </Box>
         ))}
-      </Box>
+      </Box> */}
     </>
   );
 };

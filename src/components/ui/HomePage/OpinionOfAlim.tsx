@@ -1,4 +1,5 @@
 "use client";
+
 import { Box, Stack, Typography } from "@mui/material";
 import DohaContainer from "../DohaContainer";
 import Title from "../Title";

@@ -91,3 +91,9 @@ export type IGenericErrorMessage = {
   path: string | number;
   message: string;
 };
+export type TTeacher = {
+  _id: string;
+  name: string;
+  designation: string;
+  image: any;
+};
