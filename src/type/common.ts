@@ -52,11 +52,10 @@ export type TVideo = {
   url: string;
 };
 export type TMember = {
-  id: string;
+  _id: string;
   image: any;
   name: string;
   designation: string;
-  details: string;
   navigate?: string;
 };
 

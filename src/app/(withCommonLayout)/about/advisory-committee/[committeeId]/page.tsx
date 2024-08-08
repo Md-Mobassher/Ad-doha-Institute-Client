@@ -12,7 +12,7 @@ type TParams = {
 
 const AdvisoryCommitteeDetailsPage = ({ params }: TParams) => {
   const committeeData = advisoryCommitteData.find(
-    (committee) => committee.id === params.committeeId
+    (committee) => committee._id === params.committeeId
   );
 
   return (

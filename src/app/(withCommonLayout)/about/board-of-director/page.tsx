@@ -7,7 +7,12 @@ const BoardOfDirectorPage = () => {
   return (
     <DohaContainer>
       <Stack justifyContent="center" alignItems="center">
-        <Image src={commingSoon} alt="coming soon image" />
+        <Image
+          src={commingSoon}
+          alt="coming soon image"
+          width={800}
+          height={500}
+        />
       </Stack>
     </DohaContainer>
   );

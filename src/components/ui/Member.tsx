@@ -17,7 +17,9 @@ const Member = ({ image, name, designation, navigate }: TMember) => {
         borderRadius: "10px",
         border: "1px solid lightgray",
         width: "100%",
+        maxWidth: "400px",
         height: "100%",
+        mx: "auto",
         backgroundColor: "#fff",
         boxShadow: "5 2 1",
         cursor: "pointer",
@@ -52,28 +54,32 @@ const Member = ({ image, name, designation, navigate }: TMember) => {
 
       <Box p={2}>
         <Typography
+          component="h3"
           fontSize={{
             lg: "20px",
             md: "19px",
             sm: "18px",
             xs: "17px",
           }}
-          component="h3"
+          fontFamily=""
+          mb="10px"
           fontWeight="600"
-          mb="8px"
           color="primary.main"
+          textAlign="center"
         >
           {name}
         </Typography>
         <Typography
+          component="p"
           fontSize={{
-            lg: "17px",
-            md: "16px",
-            sm: "15px",
+            lg: "15px",
+            md: "15px",
+            sm: "14px",
             xs: "14px",
           }}
-          component="p"
           fontWeight="400"
+          textAlign="center"
+          color="warning.main"
         >
           {designation}
         </Typography>

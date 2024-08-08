@@ -1,7 +1,7 @@
 import { TMember } from "@/type";
 import Image from "next/image";
 
-const MemberDetails = ({ image, name, designation, details }: TMember) => {
+const MemberDetails = ({ image, name, designation }: TMember) => {
   return (
     <div className=" lg:flex md:flex justify-between items-center gap-5">
       <div>
@@ -13,7 +13,6 @@ const MemberDetails = ({ image, name, designation, details }: TMember) => {
           {name}
         </h3>
         <h5 className="text-md">{designation}</h5>
-        <h2>{details}</h2>
       </div>
     </div>
   );
