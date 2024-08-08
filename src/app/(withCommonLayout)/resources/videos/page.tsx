@@ -1,10 +1,11 @@
 "use client";
 
 import LoadingPage from "@/app/loading";
+import DohaContainer from "@/components/ui/DohaContainer";
 import PageTitle from "@/components/ui/PageTitle";
 import { useGetAllVideosQuery } from "@/redux/features/admin/videoManagementApi";
 import { TVideo } from "@/type";
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 
 const VideoPages = () => {
   const { data, isLoading } = useGetAllVideosQuery({});
@@ -19,7 +20,7 @@ const VideoPages = () => {
     <>
       <PageTitle title="ভিডিও সমূহ" />
 
-      <Container>
+      <DohaContainer>
         <Box className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-7 md:gap-6 gap-5 py-10">
           {videosData?.map((video: TVideo) => (
             <Box
@@ -38,7 +39,7 @@ const VideoPages = () => {
             </Box>
           ))}
         </Box>
-      </Container>
+      </DohaContainer>
     </>
   );
 };

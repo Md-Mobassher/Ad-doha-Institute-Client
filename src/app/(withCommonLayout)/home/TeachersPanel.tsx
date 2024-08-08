@@ -1,7 +1,7 @@
 import { Box, Stack } from "@mui/material";
-import DohaContainer from "../DohaContainer";
-import Title from "../Title";
 import Teachers from "./Teachers";
+import DohaContainer from "@/components/ui/DohaContainer";
+import Title from "@/components/ui/Title";
 
 const TeachersPanel = () => {
   return (

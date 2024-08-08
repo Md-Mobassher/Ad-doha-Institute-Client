@@ -1,10 +1,10 @@
 "use client";
 
+import DohaContainer from "@/components/ui/DohaContainer";
 import { Box } from "@mui/material";
 import Image from "next/image";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import DohaContainer from "../DohaContainer";
 
 type TSlide = {
   imageUrl: string;

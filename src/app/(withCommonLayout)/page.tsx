@@ -1,15 +1,15 @@
 import assets from "@/assets";
-import AboutSection from "@/components/ui/HomePage/AboutSection";
-import BannerSection from "@/components/ui/HomePage/BannerSection";
-import BooksSection from "@/components/ui/HomePage/BooksSection";
-import CoursesSection from "@/components/ui/HomePage/CoursesSection";
-import DepartmentsSection from "@/components/ui/HomePage/DepartmentsSection";
-import OpinionOfAlim from "@/components/ui/HomePage/OpinionOfAlim";
-import ProjectsSection from "@/components/ui/HomePage/ProjectsSection";
-import StudentsCornerSection from "@/components/ui/HomePage/StudentsCorner";
-import TeachersPanel from "@/components/ui/HomePage/TeachersPanel";
-import VideosSection from "@/components/ui/HomePage/VideosSection";
 import { Box } from "@mui/material";
+import BannerSection from "./home/BannerSection";
+import AboutSection from "./home/AboutSection";
+import ProjectsSection from "./home/ProjectsSection";
+import CoursesSection from "./home/CoursesSection";
+import DepartmentsSection from "./home/DepartmentsSection";
+import BooksSection from "./home/BooksSection";
+import StudentsCornerSection from "./home/StudentsCorner";
+import OpinionOfAlim from "./home/OpinionOfAlim";
+import TeachersPanel from "./home/TeachersPanel";
+import VideosSection from "./home/VideosSection";
 
 const slides = [
   { imageUrl: assets.banner.slide1 },

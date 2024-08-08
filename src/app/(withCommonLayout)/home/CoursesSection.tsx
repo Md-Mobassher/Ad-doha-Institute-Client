@@ -1,21 +1,13 @@
+import DohaContainer from "@/components/ui/DohaContainer";
+import SubTitle from "@/components/ui/SubTitle";
 import Title from "@/components/ui/Title";
-import Container from "../DohaContainer";
 import { coursesData } from "@/data/courses";
-import DohaCard from "../DohaCard";
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import SubTitle from "../SubTitle";
 
 const CoursesSection = () => {
   return (
-    <Container>
+    <DohaContainer>
       <Stack
         direction="column"
         justifyContent="center"
@@ -54,7 +46,7 @@ const CoursesSection = () => {
           </Card>
         ))}
       </Box>
-    </Container>
+    </DohaContainer>
   );
 };
 

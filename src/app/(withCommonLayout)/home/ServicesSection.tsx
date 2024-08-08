@@ -2,8 +2,8 @@ import Title from "@/components/ui/Title";
 import Slider from "@/components/ui/Slider";
 import Container from "@/components/ui/DohaContainer";
 import { servicesData } from "@/data/services";
-import DohaButton from "../DohaButton";
 import { Box, Stack } from "@mui/material";
+import DohaButton from "@/components/ui/DohaButton";
 
 const ServicesSection = () => {
   return (

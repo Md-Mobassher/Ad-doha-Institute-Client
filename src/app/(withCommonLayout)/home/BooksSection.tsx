@@ -1,13 +1,12 @@
-import DohaButton from "../DohaButton";
-import Container from "../DohaContainer";
-import Title from "../Title";
-
 import { Stack } from "@mui/material";
 import Books from "./Books";
+import DohaContainer from "@/components/ui/DohaContainer";
+import Title from "@/components/ui/Title";
+import DohaButton from "@/components/ui/DohaButton";
 
 const BooksSection = () => {
   return (
-    <Container>
+    <DohaContainer>
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -19,7 +18,7 @@ const BooksSection = () => {
       </Stack>
 
       <Books />
-    </Container>
+    </DohaContainer>
   );
 };
 

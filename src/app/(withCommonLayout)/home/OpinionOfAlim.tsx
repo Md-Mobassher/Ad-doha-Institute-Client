@@ -1,12 +1,13 @@
 "use client";
 
 import { Box, Stack, Typography } from "@mui/material";
-import DohaContainer from "../DohaContainer";
-import Title from "../Title";
+
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { opinionData } from "@/data/opinion";
 import Image from "next/image";
+import DohaContainer from "@/components/ui/DohaContainer";
+import Title from "@/components/ui/Title";
 
 type TOpinion = {
   _id: string;
@@ -19,14 +20,7 @@ const OpinionOfAlim = () => {
   return (
     <Box>
       <DohaContainer>
-        <Stack
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          mb={4}
-        >
-          <Title title="আলিমদের মতামত" />
-        </Stack>
+        <Title title="আলিমদের মতামত" />
 
         <Box>
           <Swiper

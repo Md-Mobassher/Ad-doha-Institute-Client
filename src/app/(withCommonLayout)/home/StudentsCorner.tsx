@@ -2,9 +2,9 @@
 
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import DohaContainer from "../DohaContainer";
-import Title from "../Title";
 import assets from "@/assets";
+import DohaContainer from "@/components/ui/DohaContainer";
+import Title from "@/components/ui/Title";
 
 interface IStudentsCorner {
   id: number;

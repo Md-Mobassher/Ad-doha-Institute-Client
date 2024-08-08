@@ -1,10 +1,10 @@
 import { Box, Stack, Typography } from "@mui/material";
-import DohaContainer from "../DohaContainer";
 import Image from "next/image";
 import assets from "@/assets";
-import Title from "../Title";
 import { aimObjectivesData } from "@/data/aimsObjectives";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
+import DohaContainer from "@/components/ui/DohaContainer";
+import Title from "@/components/ui/Title";
 
 const AboutSection = () => {
   return (

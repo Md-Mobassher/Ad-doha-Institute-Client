@@ -1,4 +1,5 @@
-import { Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import Title from "./Title";
 
 type ITitle = {
   title: string;
@@ -6,24 +7,15 @@ type ITitle = {
 
 const PageTitle = ({ title }: ITitle) => {
   return (
-    <Typography
-      component="h1"
+    <Box
       sx={{
-        fontSize: {
-          lg: "30px",
-          md: "28px",
-          sm: "26px",
-          xs: "22px",
-        },
-        fontWeight: "700",
-        backgroundColor: "secondary.main",
-        color: "primary.main",
         textAlign: "center",
-        py: "14px",
+        py: "30px",
+        backgroundColor: "secondary.main",
       }}
     >
-      {title}
-    </Typography>
+      <Title title={title} />
+    </Box>
   );
 };
 
