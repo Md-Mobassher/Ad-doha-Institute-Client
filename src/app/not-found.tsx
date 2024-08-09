@@ -10,9 +10,7 @@ const NotFoundPage = () => {
           Page not found!
         </h1>
         <Link href={`/`}>
-          <Button className="bg-cyan-400 hover:bg-cyan-600 hover:text-white mt-10">
-            Home Page
-          </Button>
+          <Button>Home Page</Button>
         </Link>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Serif_Bengali } from "next/font/google";
+import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -9,7 +9,10 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { Toaster } from "sonner";
 import Providers from "@/lib/Provider/Providers";
 
-const notoSerif = Noto_Serif_Bengali({ subsets: ["bengali"] });
+const hindSiliguri = Hind_Siliguri({
+  weight: ["400", "600", "700"],
+  subsets: ["latin", "bengali"],
+});
 
 export const metadata: Metadata = {
   title: "Ad-doha Institute",
@@ -25,7 +28,7 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en" data-theme={"light"}>
-        <body className={notoSerif.className}>
+        <body className={`${hindSiliguri.className}`}>
           <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
           <Toaster position="top-center" />
         </body>

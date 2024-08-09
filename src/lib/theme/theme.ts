@@ -31,6 +31,7 @@ export const theme = createTheme({
         root: {
           padding: "8px 16px",
           color: "white",
+          fontFamily: "Suttony MJ, serif",
         },
       },
     },
@@ -40,11 +41,35 @@ export const theme = createTheme({
       },
     },
   },
+
   typography: {
+    fontFamily: "Suttony MJ, serif", // Default font for all typography
+    h1: {
+      fontFamily: "Hind Shiliguri, sans-serif", // Font for h1 elements
+    },
+    h2: {
+      fontFamily: "Hind Shiliguri, sans-serif",
+    },
+    h3: {
+      fontFamily: "Hind Shiliguri, sans-serif",
+    },
+    h4: {
+      fontFamily: "Hind Shiliguri, sans-serif",
+    },
+    h5: {
+      fontFamily: "Hind Shiliguri, sans-serif",
+    },
+    h6: {
+      fontFamily: "Hind Shiliguri, sans-serif",
+    },
     body1: {
       color: "#0B1134",
+      fontFamily: "Suttony MJ, serif", // Applied to body text
     },
-    fontFamily: ["Noto_Serif_Bengali"].join(","),
+    body2: {
+      color: "#0B1134",
+      fontFamily: "Hind Shiliguri, sans-serif",
+    },
   },
 });
 

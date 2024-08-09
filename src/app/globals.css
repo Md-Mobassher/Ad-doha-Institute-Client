@@ -10,3 +10,17 @@ body {
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
+
+@font-face {
+  font-family: "Suttony MJ";
+  src: url("/SutonnyMJ Regular/SutonnyMJ Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Hind Shiliguri";
+  src: url("/HindSiliguri/HindSiliguri-SemiBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}

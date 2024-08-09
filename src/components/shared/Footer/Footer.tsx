@@ -45,9 +45,6 @@ const Footer = () => {
         >
           <Title title="সাবস্ক্রাইব করুন" />
           <SubTitle title="সর্বশেষ খবর বা আপডেট পেতে এখনই সাবস্ক্রাইব করুন" />
-          {/* <DohaForm onSubmit={handleSubscribe}>
-            <DohaInput type="email" name="subscribe" required />
-          </DohaForm> */}
           <Box
             mt={2}
             display="flex"
@@ -65,6 +62,7 @@ const Footer = () => {
         </Stack>
       </Container>
       <Divider />
+
       {/* footer 2 */}
       <Box sx={{ pt: "35px" }}>
         <Container>
@@ -320,12 +318,6 @@ const Footer = () => {
                   }}
                 >
                   <FaFacebook className="size-10" />
-                  {/* <Image
-                    src={assets.icons.call}
-                    alt="facebook"
-                    width={60}
-                    height={60}
-                  /> */}
                 </Typography>
                 <Typography
                   component="a"

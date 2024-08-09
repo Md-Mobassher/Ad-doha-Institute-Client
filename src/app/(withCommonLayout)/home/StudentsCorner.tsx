@@ -85,7 +85,7 @@ const StudentsCornerSection: React.FC = () => {
                       className="mb-4 "
                     />
                     <Typography
-                      variant="h6"
+                      component="p"
                       sx={{
                         color: "primary.main",
                         boxShadow: "none",

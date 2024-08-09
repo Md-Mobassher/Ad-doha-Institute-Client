@@ -48,7 +48,7 @@ const Books = () => {
               />
               <Divider />
               <Typography
-                variant="h6"
+                component="p"
                 sx={{
                   color: "primary.main",
                   boxShadow: "none",

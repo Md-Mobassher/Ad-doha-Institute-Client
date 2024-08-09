@@ -96,3 +96,11 @@ export type TTeacher = {
   designation: string;
   image: any;
 };
+
+export type TOpinion = {
+  _id: string;
+  name: string;
+  designation: string;
+  image: any;
+  opinion: string;
+};

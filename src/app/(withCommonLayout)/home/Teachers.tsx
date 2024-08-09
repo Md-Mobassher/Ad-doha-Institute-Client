@@ -94,13 +94,13 @@ const Teachers = () => {
                 {teacher?.name && (
                   <Typography
                     component="h3"
+                    variant="h3"
                     fontSize={{
-                      lg: "20px",
-                      md: "19px",
-                      sm: "18px",
-                      xs: "17px",
+                      lg: "22px",
+                      md: "20px",
+                      sm: "19px",
+                      xs: "18px",
                     }}
-                    fontFamily=""
                     mb="12px"
                     fontWeight="600"
                     color="primary.main"

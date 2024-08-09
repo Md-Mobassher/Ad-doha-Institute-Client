@@ -1,7 +1,7 @@
 import DohaContainer from "@/components/ui/DohaContainer";
 import SubTitle from "@/components/ui/SubTitle";
 import Title from "@/components/ui/Title";
-import { Box, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 
 const DonatePage = () => {
   return (
@@ -62,11 +62,16 @@ const DonatePage = () => {
         </Typography>
       </DohaContainer>
 
-      {/* aim */}
-      <Box
-        sx={{ textAlign: "center", py: "40px", backgroundColor: "info.main" }}
-      >
-        <DohaContainer>
+      {/* number */}
+
+      <DohaContainer>
+        <Stack
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          gap={{ lg: "30px", md: "30px", sm: "20px", xs: "15px" }}
+          flexWrap="wrap"
+        >
           <Title title="দান-সদাকাহ পাঠানোর মাধ্যম " />
           <Typography
             component="p"
@@ -79,14 +84,14 @@ const DonatePage = () => {
                 xs: "16px",
               },
               fontWeight: "600",
-              mt: "20px",
-              textAlign: "justify",
+              textAlign: "center",
+              color: "warning.main",
             }}
           >
-            নগদ/বিকাশ : +8801916-016099
+            নগদ / বিকাশ : +8801916-016099
           </Typography>
-        </DohaContainer>
-      </Box>
+        </Stack>
+      </DohaContainer>
     </Box>
   );
 };
