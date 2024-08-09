@@ -18,10 +18,10 @@ const DonatePage = () => {
           component="p"
           sx={{
             fontSize: {
-              xl: "20px",
-              lg: "20px",
+              xl: "18px",
+              lg: "18px",
               md: "18px",
-              sm: "18px",
+              sm: "17px",
               xs: "16px",
             },
             fontWeight: "400",
@@ -38,10 +38,10 @@ const DonatePage = () => {
           component="p"
           sx={{
             fontSize: {
-              xl: "20px",
-              lg: "20px",
+              xl: "18px",
+              lg: "18px",
               md: "18px",
-              sm: "18px",
+              sm: "17px",
               xs: "16px",
             },
             fontWeight: "400",
@@ -66,6 +66,7 @@ const DonatePage = () => {
 
       <DohaContainer>
         <Stack
+          pt="-20px"
           direction="row"
           justifyContent="center"
           alignItems="center"

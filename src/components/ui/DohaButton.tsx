@@ -28,7 +28,6 @@ const DohaButton = ({ btnTitle, id, navigate, variant }: TButtonProps) => {
             },
           }}
           onClick={handleClick}
-          variant={variant}
         >
           {btnTitle} <FaArrowRight className=" ml-2" />
         </Button>

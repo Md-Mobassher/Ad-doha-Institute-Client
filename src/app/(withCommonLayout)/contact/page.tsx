@@ -36,6 +36,7 @@ const ContactPage = () => {
                 <Box>
                   <Typography
                     component="h3"
+                    variant="h3"
                     sx={{
                       fontSize: {
                         xl: "20px",
@@ -54,7 +55,8 @@ const ContactPage = () => {
                   </Typography>
 
                   <Typography
-                    component="p"
+                    component="h6"
+                    variant="h6"
                     sx={{
                       fontSize: {
                         xl: "16px",

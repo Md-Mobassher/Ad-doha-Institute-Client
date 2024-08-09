@@ -9,7 +9,7 @@ type TParamsProps = {
 
 const ServiceDetailsPage = ({ params }: TParamsProps) => {
   const serviceData = servicesData.find(
-    (service) => service.id === params.serviceId
+    (service) => service?.navigation === params?.serviceId
   );
 
   return (

@@ -3,13 +3,14 @@ import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 
 export type TCardProps = {
-  id: string;
+  _id: string;
   image?: string | any;
   title: string;
   details?: string;
   btnTitle?: string;
   btnTitle2?: string;
   navigate?: string;
+  navigation?: string;
   link?: string;
 };
 
@@ -31,7 +32,7 @@ export type TButtonProps = {
 };
 
 export type TCardDetails = {
-  id: string;
+  _id: string;
   title: string;
   image: any;
   details: string;
@@ -41,7 +42,7 @@ export type TCardDetails = {
 };
 
 export type TBook = {
-  id: string;
+  _id: string;
   title: string;
   image: any;
   url: string;

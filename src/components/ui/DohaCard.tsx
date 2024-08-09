@@ -10,7 +10,7 @@ const DohaCard = ({
   details,
   btnTitle,
   btnTitle2,
-  id,
+  navigation,
   link,
   navigate,
 }: TCardProps) => {
@@ -60,6 +60,7 @@ const DohaCard = ({
         {title && (
           <Typography
             component="h3"
+            variant="h3"
             fontSize={{
               lg: "20px",
               md: "19px",
@@ -67,7 +68,6 @@ const DohaCard = ({
               xs: "17px",
             }}
             mb="12px"
-            fontWeight="700"
             color="primary.main"
           >
             {title}
@@ -83,7 +83,6 @@ const DohaCard = ({
               xs: "14px",
             }}
             mb="16px"
-            fontWeight="400"
             textAlign="justify"
           >
             {details}
@@ -98,7 +97,7 @@ const DohaCard = ({
           {btnTitle && (
             <DohaButton
               btnTitle={btnTitle || "Details"}
-              id={id}
+              id={navigation}
               navigate={navigate}
               title={title}
             />

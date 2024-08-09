@@ -34,7 +34,7 @@ const Books = () => {
       >
         {booksData?.slice(0, 6)?.map((book: TBook) => (
           <Grid
-            key={book?.id}
+            key={book?._id}
             {...{ xs: 6, sm: 6, md: 3, lg: 2, xl: 2 }}
             minHeight={160}
           >

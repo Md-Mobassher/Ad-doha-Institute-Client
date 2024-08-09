@@ -24,6 +24,7 @@ const Footer = () => {
   const handleSubscribe = async (value: FieldValues) => {
     console.log(value);
   };
+
   return (
     <Box
       sx={{
@@ -90,7 +91,7 @@ const Footer = () => {
                 />
               </Link>
               <Typography
-                component="h4"
+                component="p"
                 sx={{
                   fontSize: {
                     lg: "16px",
@@ -125,6 +126,7 @@ const Footer = () => {
             >
               <Typography
                 component="h3"
+                variant="h3"
                 sx={{
                   borderLeft: "3px solid green",
                   pl: "15px",
@@ -142,7 +144,8 @@ const Footer = () => {
                 যোগাযোগ
               </Typography>
               <Typography
-                component="p"
+                component="h6"
+                variant="h6"
                 sx={{
                   fontSize: {
                     lg: "16px",
@@ -159,7 +162,8 @@ const Footer = () => {
                 <Email sx={{ mr: "8px" }} /> addohainstitution@gmail.com
               </Typography>
               <Typography
-                component="p"
+                component="h6"
+                variant="h6"
                 sx={{
                   fontSize: {
                     lg: "16px",
@@ -212,6 +216,7 @@ const Footer = () => {
             >
               <Typography
                 component="h3"
+                variant="h3"
                 sx={{
                   borderLeft: "3px solid green",
                   pl: "15px",
@@ -240,7 +245,6 @@ const Footer = () => {
                   },
                   display: "flex",
                   pt: { lg: "16px", md: "16px", sm: "10", xs: "8px" },
-                  fontWeight: "500",
                   color: "primary.main",
                 }}
               >
@@ -258,7 +262,6 @@ const Footer = () => {
                   },
                   display: "flex",
                   pt: { lg: "16px", md: "16px", sm: "10", xs: "8px" },
-                  fontWeight: "500",
                   color: "primary.main",
                 }}
               >
@@ -283,6 +286,7 @@ const Footer = () => {
             >
               <Typography
                 component="h3"
+                variant="h3"
                 sx={{
                   borderLeft: "3px solid green",
                   pl: "15px",
@@ -303,7 +307,8 @@ const Footer = () => {
               <Stack direction="row" gap="16px">
                 <Typography
                   component="a"
-                  href="/"
+                  target="_blank"
+                  href="https://www.facebook.com/addoha.org"
                   sx={{
                     fontSize: {
                       lg: "16px",
@@ -317,11 +322,12 @@ const Footer = () => {
                     color: "primary.main",
                   }}
                 >
-                  <FaFacebook className="size-10" />
+                  <FaFacebook className="size-9 hover:scale-125 transition-all duration-300" />
                 </Typography>
                 <Typography
                   component="a"
-                  href="/"
+                  target="_blank"
+                  href="https://www.youtube.com/channel/UC6m__rWQY4zybxI3r14mPVg"
                   sx={{
                     fontSize: {
                       lg: "16px",
@@ -335,13 +341,7 @@ const Footer = () => {
                     color: "primary.main",
                   }}
                 >
-                  <FaYoutube className="size-10" />
-                  {/* <Image
-                    src={assets.icons.call}
-                    alt="facebook"
-                    width={60}
-                    height={60}
-                  /> */}
+                  <FaYoutube className="size-9 hover:scale-125 transition-all duration-300" />
                 </Typography>
               </Stack>
             </Box>

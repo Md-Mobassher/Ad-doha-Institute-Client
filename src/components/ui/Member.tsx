@@ -55,15 +55,14 @@ const Member = ({ image, name, designation, navigate }: TMember) => {
       <Box p={2}>
         <Typography
           component="h3"
+          variant="h3"
           fontSize={{
             lg: "20px",
             md: "19px",
             sm: "18px",
             xs: "17px",
           }}
-          fontFamily=""
           mb="10px"
-          fontWeight="600"
           color="primary.main"
           textAlign="center"
         >

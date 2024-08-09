@@ -49,7 +49,7 @@ export const navbarItemsData = [
         title: "শিক্ষা সহায়তা",
         link: "services/educational-assistance",
       },
-      { id: "4-5", title: "কর্জে হাসানাহ", link: "services/korze-asanah" },
+      { id: "4-5", title: "কর্জে হাসানাহ", link: "services/korze-hasanah" },
       { id: "4-6", title: "আইনী সহায়তা", link: "services/legal-aid" },
       { id: "4-7", title: "বিয়ে", link: "services/marriage" },
       {
