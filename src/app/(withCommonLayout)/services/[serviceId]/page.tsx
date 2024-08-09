@@ -1,5 +1,6 @@
 import CardDetails from "@/components/ui/CardDetails";
 import { servicesData } from "../../../../data/services/index";
+import { Box } from "@mui/material";
 
 type TParamsProps = {
   params: {
@@ -13,7 +14,7 @@ const ServiceDetailsPage = ({ params }: TParamsProps) => {
   );
 
   return (
-    <div className="">
+    <Box>
       {serviceData ? (
         <>
           <CardDetails {...serviceData} />
@@ -21,7 +22,7 @@ const ServiceDetailsPage = ({ params }: TParamsProps) => {
       ) : (
         <p>No Service Found</p>
       )}
-    </div>
+    </Box>
   );
 };
 

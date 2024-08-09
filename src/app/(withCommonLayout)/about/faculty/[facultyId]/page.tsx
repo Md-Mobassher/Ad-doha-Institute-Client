@@ -11,7 +11,7 @@ type TParams = {
 
 const FacultyDetailsPage = ({ params }: TParams) => {
   const facultyInfo = facultyData.find(
-    (faculty) => faculty.id === params.facultyId
+    (faculty) => faculty._id === params.facultyId
   );
 
   return (

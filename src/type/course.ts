@@ -1,22 +1,42 @@
 export interface TCourse {
   _id: string;
+  navigation: string;
   courseImage: any;
   courseName: string;
-  medium: string;
-  totalClasses: number;
+  medium?: string;
+  totalClasses: string;
   duration: string;
   schedule: string[];
   classDuration: string;
   fee: {
-    total: number;
-    admission?: number;
-    monthly?: number;
+    total: string;
+    admission?: string;
+    monthly?: string;
   };
   contact: string;
   description: string;
-  objectives?: string[]; // Optional if some courses might not have objectives
-  outcomes?: string[]; // Optional if some courses might not have outcomes
-  topics?: string[]; // Optional if some courses include a list of topics
-  targetAudience?: string[]; // Optional if some courses have a defined target audience
-  modules?: string[]; // Optional if some courses include a list of modules
+  objectives?: string[];
+  outcomes?: string[];
+  topics?: string[];
+  targetAudience?: string[];
+  modules?: string[];
 }
+
+export const defaultCourseData: TCourse = {
+  _id: "",
+  navigation: "",
+  courseName: "",
+  courseImage: null,
+  medium: "",
+  totalClasses: "",
+  duration: "",
+  schedule: [],
+  classDuration: "",
+  fee: {
+    total: "",
+    admission: "",
+    monthly: "",
+  },
+  contact: "",
+  description: "",
+};

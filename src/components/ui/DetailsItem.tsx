@@ -1,5 +1,6 @@
-import { Box, Stack, Typography } from "@mui/material";
-import { FaHandPointRight } from "react-icons/fa";
+import { Stack, Typography } from "@mui/material";
+
+import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 
 type detailItemProps = {
   index: number;
@@ -9,24 +10,25 @@ type detailItemProps = {
 const DetailsItem = ({ item, index }: detailItemProps) => {
   return (
     <>
-      {index > 0 && <hr className="border-slate-300" />}
+      {/* {index > 0 && <hr className="border-slate-300" />} */}
+
       <Stack
-        display="flex"
         direction="row"
         justifyContent="start"
         alignItems="center"
-        gap={2}
-        my={1}
-        color="#000"
+        gap="16px"
+        mb={1}
       >
-        <Box>
-          <FaHandPointRight className="lg:size-8 md:size-7 size-5" />
-        </Box>
-        <Box>
-          <Typography component="p" fontWeight="400">
-            {item}
-          </Typography>
-        </Box>
+        <RadioButtonCheckedIcon sx={{ color: "primary.main" }} />
+        <Typography
+          component="p"
+          sx={{
+            color: "primary.main",
+            fontSize: "16px",
+          }}
+        >
+          {item}
+        </Typography>
       </Stack>
     </>
   );

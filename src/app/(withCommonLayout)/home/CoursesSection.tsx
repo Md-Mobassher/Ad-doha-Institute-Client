@@ -4,6 +4,8 @@ import Title from "@/components/ui/Title";
 import { coursesData } from "@/data/courses";
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import Image from "next/image";
+import CardTitle from "@/components/ui/CardTitle";
+import Link from "next/link";
 
 const CoursesSection = () => {
   return (
@@ -21,28 +23,26 @@ const CoursesSection = () => {
       <Box className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-7 gap-5 mt-8 mx-auto">
         {coursesData.map((course) => (
           <Card
-            key={course?.id}
+            component={Link}
+            key={course?._id}
+            href={`/courses/${course.navigation}`}
             sx={{
-              maxWidth: 345,
               border: "1px solid lightgray",
+              borderRadius: "8px",
+              ":hover": {
+                border: "1px solid #0F473C",
+              },
             }}
           >
-            <Image width={300} src={course?.image} alt="course image" />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  fontSize: "18px",
-                  fontWeight: 600,
-                  textAlign: "center",
-                  mt: "5px",
-                }}
-              >
-                {course?.title}
-              </Typography>
-            </CardContent>
+            <Image
+              width={300}
+              src={course?.courseImage}
+              alt="course image"
+              className="border-b border-gray-300"
+            />
+            <Box sx={{ p: "20px" }}>
+              <CardTitle title={course?.courseName} />
+            </Box>
           </Card>
         ))}
       </Box>
