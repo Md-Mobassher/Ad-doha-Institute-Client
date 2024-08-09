@@ -11,7 +11,7 @@ const ProjectPage = () => {
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-7 md:gap-6 gap-5 py-10">
           {projectsData.map((project) => (
             <DohaCard
-              key={project.id}
+              key={project._id}
               {...project}
               navigate="projects"
               btnTitle="বিস্তারিত"
