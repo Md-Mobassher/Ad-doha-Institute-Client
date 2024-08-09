@@ -3,6 +3,7 @@ import Image from "next/image";
 import DohaButton from "./DohaButton";
 import Link from "next/link";
 import { Box, Stack, Typography } from "@mui/material";
+import CardTitle from "./CardTitle";
 
 const DohaCard = ({
   image,
@@ -57,22 +58,7 @@ const DohaCard = ({
         />
       </Box>
       <Box p="20px">
-        {title && (
-          <Typography
-            component="h3"
-            variant="h3"
-            fontSize={{
-              lg: "20px",
-              md: "19px",
-              sm: "18px",
-              xs: "17px",
-            }}
-            mb="12px"
-            color="primary.main"
-          >
-            {title}
-          </Typography>
-        )}
+        {title && <CardTitle title={title} />}
         {details && (
           <Typography
             component="p"

@@ -43,28 +43,36 @@ export const theme = createTheme({
   },
 
   typography: {
-    fontFamily: "Suttony MJ, serif", // Default font for all typography
+    fontFamily: "Hind Shiliguri, sans-serif",
+    fontWeightRegular: 400,
     h1: {
-      fontFamily: "Hind Shiliguri, sans-serif", // Font for h1 elements
+      fontFamily: "Hind Shiliguri, sans-serif",
+      fontWeight: 700,
     },
     h2: {
       fontFamily: "Hind Shiliguri, sans-serif",
+      fontWeight: 700,
     },
     h3: {
       fontFamily: "Hind Shiliguri, sans-serif",
+      fontWeight: 600,
     },
     h4: {
       fontFamily: "Hind Shiliguri, sans-serif",
+      fontWeight: 600,
     },
     h5: {
       fontFamily: "Hind Shiliguri, sans-serif",
+      fontWeight: 600,
     },
     h6: {
       fontFamily: "Hind Shiliguri, sans-serif",
+      fontWeight: 600,
     },
     body1: {
       color: "#0B1134",
-      fontFamily: "Suttony MJ, serif", // Applied to body text
+      fontFamily: "Suttony MJ, serif",
+      fontSize: "16px", // Applied to body text
     },
     body2: {
       color: "#0B1134",

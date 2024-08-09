@@ -6,6 +6,7 @@ import PageTitle from "./PageTitle";
 import DohaButton from "./DohaButton";
 import Link from "next/link";
 import { Stack, Typography } from "@mui/material";
+import CardTitle from "./CardTitle";
 
 const CardDetails = ({
   image,
@@ -45,8 +46,22 @@ const CardDetails = ({
                       alignItems="center"
                       mt={3}
                     >
-                      <Typography component="p">
-                        {title} - এই সেবাটি নিতে এইখানে{" "}
+                      <CardTitle title={title} />
+                      <Typography
+                        component="h3"
+                        variant="h3"
+                        sx={{
+                          fontSize: {
+                            lg: "16px",
+                            md: "16px",
+                            sm: "15px",
+                            xs: "14px",
+                          },
+                          color: "warning.main",
+                        }}
+                      >
+                        {" "}
+                        - সেবাটি পেতে এখানে{" "}
                       </Typography>
                       <DohaButton btnTitle={btnTitle || "ক্লিক করুন"} />
                     </Stack>

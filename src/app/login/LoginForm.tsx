@@ -119,7 +119,7 @@ const LoginForm = () => {
             fullWidth
             type="submit"
           >
-            লগিন
+            লগইন
           </Button>
         )}
 

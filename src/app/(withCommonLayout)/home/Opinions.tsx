@@ -1,11 +1,14 @@
 "use client";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { opinionData } from "@/data/opinion";
 import Image from "next/image";
 import { TOpinion } from "@/type";
+import CardTitle from "@/components/ui/CardTitle";
+import CardSubTitle from "@/components/ui/CardSubTitle";
+import Details from "@/components/ui/Details";
 
 const Opinions = () => {
   return (
@@ -90,54 +93,11 @@ const Opinions = () => {
               />
             </Box>
             <Box>
-              {opinion?.name && (
-                <Typography
-                  component="h3"
-                  variant="h3"
-                  fontSize={{
-                    lg: "22px",
-                    md: "20px",
-                    sm: "19px",
-                    xs: "18px",
-                  }}
-                  mb="12px"
-                  color="primary.main"
-                  textAlign="center"
-                >
-                  {opinion?.name}
-                </Typography>
-              )}
+              {opinion?.name && <CardTitle title={opinion?.name} />}
               {opinion?.designation && (
-                <Typography
-                  component="p"
-                  fontSize={{
-                    lg: "15px",
-                    md: "15px",
-                    sm: "14px",
-                    xs: "14px",
-                  }}
-                  mb="16px"
-                  textAlign="center"
-                  color="warning.main"
-                >
-                  {opinion?.designation}
-                </Typography>
+                <CardSubTitle title={opinion?.designation} />
               )}
-              {opinion?.opinion && (
-                <Typography
-                  component="p"
-                  fontSize={{
-                    lg: "16px",
-                    md: "16px",
-                    sm: "15px",
-                    xs: "14px",
-                  }}
-                  mb="16px"
-                  textAlign="justify"
-                >
-                  {opinion?.opinion}
-                </Typography>
-              )}
+              {opinion?.opinion && <Details details={opinion?.opinion} />}
             </Box>
           </Box>
         </SwiperSlide>

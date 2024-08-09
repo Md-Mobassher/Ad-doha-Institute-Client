@@ -39,7 +39,7 @@ const DesktopMenu = () => {
   return (
     <Box>
       <Hidden smDown>
-        <Stack direction="row" justifyContent="start" alignItems="center">
+        <Stack direction="row" justifyContent="end" alignItems="center">
           {navbarItemsData?.map((item, index) => (
             <Typography
               key={item.id}

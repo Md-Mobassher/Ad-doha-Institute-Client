@@ -5,6 +5,8 @@ import { aimObjectivesData } from "@/data/aimsObjectives";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import DohaContainer from "@/components/ui/DohaContainer";
 import Title from "@/components/ui/Title";
+import CardDetails from "@/components/ui/CardDetails";
+import Details from "@/components/ui/Details";
 
 const AboutSection = () => {
   return (
@@ -38,16 +40,7 @@ const AboutSection = () => {
               mt: "16px",
             }}
           />
-          <Typography
-            sx={{
-              color: "primary.main",
-              fontSize: "16px",
-              fontWeight: 400,
-              textAlign: "justify",
-            }}
-          >
-            {aimObjectivesData?.intro?.details}
-          </Typography>
+          <Details details={aimObjectivesData?.intro?.details} />
 
           <Box mt={3}>
             <Stack

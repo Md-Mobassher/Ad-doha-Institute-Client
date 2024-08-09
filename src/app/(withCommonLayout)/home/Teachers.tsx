@@ -6,6 +6,8 @@ import { facultyData } from "@/data/faculties";
 import Image from "next/image";
 import { Box, Typography } from "@mui/material";
 import { TTeacher } from "@/type";
+import CardTitle from "@/components/ui/CardTitle";
+import CardSubTitle from "@/components/ui/CardSubTitle";
 
 const Teachers = () => {
   return (
@@ -91,40 +93,9 @@ const Teachers = () => {
                 />
               </Box>
               <Box>
-                {teacher?.name && (
-                  <Typography
-                    component="h3"
-                    variant="h3"
-                    fontSize={{
-                      lg: "22px",
-                      md: "20px",
-                      sm: "19px",
-                      xs: "18px",
-                    }}
-                    mb="12px"
-                    fontWeight="600"
-                    color="primary.main"
-                    textAlign="center"
-                  >
-                    {teacher?.name}
-                  </Typography>
-                )}
+                {teacher?.name && <CardTitle title={teacher?.name} />}
                 {teacher?.designation && (
-                  <Typography
-                    component="p"
-                    fontSize={{
-                      lg: "15px",
-                      md: "15px",
-                      sm: "14px",
-                      xs: "14px",
-                    }}
-                    mb="16px"
-                    fontWeight="400"
-                    textAlign="center"
-                    color="warning.main"
-                  >
-                    {teacher?.designation}
-                  </Typography>
+                  <CardSubTitle title={teacher?.designation} />
                 )}
               </Box>
             </Box>

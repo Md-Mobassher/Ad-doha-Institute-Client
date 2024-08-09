@@ -40,11 +40,7 @@ const Navbar = () => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Typography
-            component={Link}
-            href="/"
-            className=" text-4xl font-semibold"
-          >
+          <Typography component={Link} href="/">
             <Image
               src={assets.logo.headerlogo}
               width={250}

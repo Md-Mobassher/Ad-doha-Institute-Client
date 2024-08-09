@@ -47,12 +47,12 @@ const MobileMenu = () => {
   };
 
   return (
-    <Box
-      sx={{
-        position: "relative",
-      }}
-    >
-      <Hidden smUp>
+    <Hidden smUp>
+      <Box
+        sx={{
+          position: "relative",
+        }}
+      >
         <button
           onClick={() => setIsOpen(!isOpen)}
           type="button"
@@ -61,11 +61,33 @@ const MobileMenu = () => {
           aria-expanded={isOpen ? "true" : "false"}
         >
           {isOpen ? (
-            <Box className="p-1 border rounded-md hover:bg-green-500 hover:text-white">
+            <Box
+              sx={{
+                padding: "5px",
+                border: "1px solid secondary.main",
+                borderRadius: "5px",
+                color: "secondary.main",
+                ":hover": {
+                  backgroundColor: "secondary.main",
+                  color: "primary.main",
+                },
+              }}
+            >
               <RxCross2 className="size-8" />
             </Box>
           ) : (
-            <Box className="p-1 border rounded-md hover:bg-green-500 hover:text-white">
+            <Box
+              sx={{
+                padding: "5px",
+                border: "1px solid secondary.main",
+                borderRadius: "5px",
+                color: "secondary.main",
+                ":hover": {
+                  backgroundColor: "secondary.main",
+                  color: "primary.main",
+                },
+              }}
+            >
               <GiHamburgerMenu className="size-8" />
             </Box>
           )}
@@ -96,6 +118,7 @@ const MobileMenu = () => {
                       fontSize: "15px",
                       fontWeight: 500,
                       px: "15px",
+                      py: "0px",
                       textAlign: "start",
                       borderBottom:
                         index === navbarItemsData.length - 1
@@ -106,9 +129,10 @@ const MobileMenu = () => {
                         color: "secondary.main",
                       },
                     }}
-                    onClick={() => handleNavigate(item.link)}
-                    onMouseEnter={(e) => handleMouseEnter(e, index)}
-                    onMouseLeave={handleMouseLeave}
+                    onClick={(e) => {
+                      handleNavigate(item.link);
+                      handleMouseEnter(e, index);
+                    }}
                   >
                     {item.title}
                     {item.subItems && (
@@ -220,8 +244,8 @@ const MobileMenu = () => {
             </Box>
           )}
         </button>
-      </Hidden>
-    </Box>
+      </Box>
+    </Hidden>
   );
 };
 

@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Suttony MJ";
+  src: url("/NotoSerif/NotoSerifBengali-VariableFont_wdth,wght.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Hind Shiliguri Bold";
+  src: url("/HindSiliguri/HindSiliguri-SemiBold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Hind Shiliguri Semibold";
+  src: url("/HindSiliguri/HindSiliguri-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Hind Shiliguri";
+  src: url("/HindSiliguri/HindSiliguri-SemiBold.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 html,
 body {
   padding: 0;
@@ -9,18 +35,4 @@ body {
   background: #fff;
   box-sizing: border-box;
   scroll-behavior: smooth;
-}
-
-@font-face {
-  font-family: "Suttony MJ";
-  src: url("/SutonnyMJ Regular/SutonnyMJ Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Hind Shiliguri";
-  src: url("/HindSiliguri/HindSiliguri-SemiBold.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
 }

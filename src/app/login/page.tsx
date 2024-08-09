@@ -53,7 +53,8 @@ const LoginPage = () => {
             <Box>
               <Link href="/">
                 <Typography
-                  variant="h5"
+                  component="h4"
+                  variant="h4"
                   fontWeight={600}
                   mt="12px"
                   mb="4px"
