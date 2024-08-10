@@ -61,7 +61,7 @@ const Opinions = () => {
                 xs: "100%",
               },
 
-              backgroundColor: "#F7F3E7",
+              backgroundColor: "secondary.main",
               boxShadow: "5 2 1",
               ":hover": {
                 border: "1px solid #22C55E",
@@ -73,13 +73,11 @@ const Opinions = () => {
               sx={{
                 width: "100%",
                 "& img": {
-                  width: "150px",
-                  height: "150px",
+                  width: "180px",
+                  height: "180px",
                   overflow: "hidden",
-                  objectFit: "cover",
-                  borderBottom: "1px solid lightgray",
+                  objectFit: "contain",
                   borderRadius: "100px",
-                  border: "1px solid #22C55E",
                   mx: "auto",
                   mb: "25px",
                 },
@@ -88,8 +86,8 @@ const Opinions = () => {
               <Image
                 src={opinion.image}
                 alt={`Opinion ${index + 1}`}
-                width={160}
-                height={160}
+                width={300}
+                height={300}
               />
             </Box>
             <Box>

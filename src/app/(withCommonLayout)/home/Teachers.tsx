@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import { facultyData } from "@/data/faculties";
 import Image from "next/image";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { TTeacher } from "@/type";
 import CardTitle from "@/components/ui/CardTitle";
 import CardSubTitle from "@/components/ui/CardSubTitle";
@@ -61,7 +61,7 @@ const Teachers = () => {
                   xs: "500px",
                 },
                 overflow: "auto",
-                backgroundColor: "#F7F3E7",
+                backgroundColor: "secondary.main",
                 boxShadow: "5 2 1",
                 ":hover": {
                   border: "1px solid #22C55E",
@@ -74,12 +74,12 @@ const Teachers = () => {
                 sx={{
                   width: "100%",
                   "& img": {
-                    width: "100%",
-                    height: "260px",
+                    width: "180px",
+                    height: "180px",
                     overflow: "hidden",
-                    objectFit: "cover",
+                    objectFit: "contain",
                     borderRadius: "10px",
-                    border: "1px solid lightgray",
+
                     mx: "auto",
                     mb: "20px",
                   },

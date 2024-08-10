@@ -1,23 +1,43 @@
 "use client";
 
-import DohaContainer from "@/components/ui/DohaContainer";
-import { Box } from "@mui/material";
+import assets from "@/assets";
+import { Box, Container } from "@mui/material";
 import Image from "next/image";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-type TSlide = {
-  imageUrl: string;
-};
+const slides = [
+  { imageUrl: assets?.banner?.slide1 },
+  { imageUrl: assets?.banner?.slide2 },
+  { imageUrl: assets?.banner?.slide3 },
+  { imageUrl: assets?.banner?.slide4 },
+];
 
-const BannerSection = ({ slides }: any) => {
+const BannerSection = () => {
   return (
     <Box
       sx={{
         backgroundColor: "info.main",
       }}
     >
-      <DohaContainer>
+      <Container
+        sx={{
+          py: {
+            xl: "60px",
+            lg: "50px",
+            md: "30px",
+            sm: "20px",
+            xs: "10px",
+          },
+          px: {
+            xl: "10px",
+            lg: "60px",
+            md: "50px",
+            sm: "12px",
+            xs: "10px",
+          },
+        }}
+      >
         <Swiper
           slidesPerView={1}
           spaceBetween={0}
@@ -29,9 +49,9 @@ const BannerSection = ({ slides }: any) => {
             clickable: true,
           }}
           modules={[Autoplay, Pagination]}
-          className="w-full lg:h-[560px] md:h-[400px] h-[250px] object-cover rounded-lg mySwiper"
+          className="w-full lg:h-[560px] md:h-[400px] h-[200px] object-cover rounded-lg mySwiper"
         >
-          {slides.map((slide: TSlide, index: number) => (
+          {slides.map((slide, index: number) => (
             <SwiperSlide
               key={index}
               virtualIndex={index}
@@ -47,7 +67,7 @@ const BannerSection = ({ slides }: any) => {
             </SwiperSlide>
           ))}
         </Swiper>
-      </DohaContainer>
+      </Container>
     </Box>
   );
 };

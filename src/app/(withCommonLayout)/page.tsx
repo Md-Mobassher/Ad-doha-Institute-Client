@@ -1,4 +1,3 @@
-import assets from "@/assets";
 import { Box } from "@mui/material";
 import BannerSection from "./home/BannerSection";
 import AboutSection from "./home/AboutSection";
@@ -11,16 +10,10 @@ import OpinionOfAlim from "./home/OpinionOfAlim";
 import TeachersPanel from "./home/TeachersPanel";
 import VideosSection from "./home/VideosSection";
 
-const slides = [
-  { imageUrl: assets.banner.slide1 },
-  { imageUrl: assets.banner.slide2 },
-  { imageUrl: assets.banner.slide3 },
-];
-
 const HomePage = () => {
   return (
     <Box>
-      <BannerSection slides={slides} />
+      <BannerSection />
       <AboutSection />
       <ProjectsSection />
       <CoursesSection />

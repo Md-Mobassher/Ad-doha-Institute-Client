@@ -17,7 +17,7 @@ const FacultyPage = () => {
         <DohaContainer>
           <Box className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-7">
             {facultyData &&
-              facultyData.map((faculty) => (
+              facultyData?.map((faculty) => (
                 <Member
                   key={faculty._id}
                   {...faculty}

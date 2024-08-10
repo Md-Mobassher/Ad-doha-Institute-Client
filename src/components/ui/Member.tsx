@@ -20,7 +20,7 @@ const Member = ({ image, name, designation, navigate }: TMember) => {
         maxWidth: "400px",
         height: "100%",
         mx: "auto",
-        backgroundColor: "#fff",
+        backgroundColor: "info.main",
         boxShadow: "5 2 1",
         cursor: "pointer",
         ":hover": {
@@ -37,8 +37,9 @@ const Member = ({ image, name, designation, navigate }: TMember) => {
             width: "100%",
             height: "100%",
             overflow: "hidden",
-            objectFit: "cover",
-            borderBottom: "1px solid lightgray",
+            objectFit: "contain",
+
+            p: "10px",
             borderTopRadius: "10px",
           },
         }}
@@ -47,7 +48,7 @@ const Member = ({ image, name, designation, navigate }: TMember) => {
           src={image}
           alt={name}
           className="rounded-t-lg"
-          width={380}
+          width={400}
           height={400}
         />
       </Box>

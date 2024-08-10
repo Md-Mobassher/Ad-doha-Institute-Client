@@ -1,6 +1,6 @@
 import assets from "@/assets";
 
-export const facultyPageTitle = "শিক্ষক মন্ডলী";
+export const facultyPageTitle = "শিক্ষকবৃন্দ";
 
 export const facultyData = [
   {
@@ -13,100 +13,100 @@ export const facultyData = [
   {
     _id: "2",
     name: "আরিফুল ইসলাম অপু",
-    image: assets.faculties.avatar,
+    image: assets.faculties.arifulIslam,
     designation:
       "সহকারী অধ্যাপক, ম্যানেজমেন্ট ইনফরমেশন সিস্টেম, ঢাকা বিশ্ববিদ্যালয়। বিবিএ (ম্যানেজমেন্ট ইনফরমেশন সিস্টিম), এমবিএ (ম্যানেজমেন্ট ইনফরমেশন সিস্টিম), পিজিডি (কম্পিউটার সায়েন্স), এমএ (ইসলামিক স্টাডিজ), এমএস (হালাল ইনডাস্ট্রি ম্যানেজমেন্ট), সার্টিফাইড শরিয়াহ অডিটর এবং উপদেষ্টা (CSAA)।",
   },
   {
     _id: "3",
     name: "শায়েখ আব্দুল করিম নায়েফ",
-    image: assets.faculties.avatar,
+    image: assets.faculties.abdullalnoman,
     designation:
       "বি.এ. (অনার্স), এম.এ, ইসলামিক স্টাডিজ, ঢাকা বিশ্ববিদ্যালয়। পিএইচডি গবেষক, ইন্টারন্যাশনাল ইসলামিক ইউনিভার্সিটি, মালয়েশিয়া। ইমাম ও খতিব, মেলবোর্ন মাল্টিকালচারাল সেন্টার, অস্ট্রেলিয়া।",
   },
   {
     _id: "4",
     name: "মাওলানা খালিদ মুহাম্মাদ সাইফুল্লাহ",
-    image: assets.faculties.avatar,
+    image: assets.faculties.khalidsaifullah,
     designation:
       "দাওরাহ ও দাওয়াহ, জামিয়াতুল উলুমিল ইসলামিয়া মুহাম্মাদপুর, ঢাকা। রিসার্চ ফেলো, সেন্টার ফর অল্টারনেটিভ ডেভেলপমেন্ট ট্রাস্ট, বারিধারা। গবেষক, আস সুন্নাহ ফাউন্ডেশন। কো-অর্ডিনেটর, পোস্ট গ্রাজুয়েট ডিপ্লোমা ইন ইসলামিক দাওয়াহ (আস-সুন্নাহ ফাউন্ডেশন কর্তৃক পরিচালিত)।",
   },
   {
     _id: "5",
     name: "শায়েখ ড. আমিনুল ইসলাম আজহারী",
-    image: assets.faculties.aminulIslamAzhari,
+    image: assets.faculties.abdullalnoman,
     designation: "ইমাম ও খতিব গার্ডেন সিটি মসজিদ, টুঊম্বা, অস্ট্রেলিয়া",
   },
   {
     _id: "6",
     name: "মুফতি আবু বকর সিদ্দীক",
-    image: assets.faculties.avatar,
+    image: assets.faculties.abdullalnoman,
     designation:
       "ইফতা, জামিয়া ইসলামিয়া দারুল উলূম মাদানিয়া। দাওরাহ, আল জামিয়াতুর রাহমানিয়া দারুল ইসলাম, ঢাকা। কামিল, ফিকাহ, মাদরাসা-ই-আলিয়া, ঢাকা। বি.এ. (অনার্স), এম.এ (এলএল.বি & এলএল.এম), বাংলাদেশ ইসলামি ইউনিভার্সটি।",
   },
   {
     _id: "7",
     name: "শায়েখ ফরিদুল ইসলাম",
-    image: assets.faculties.foridulHasan,
+    image: assets.faculties.abdullalnoman,
     designation:
       "বি.এ, এম.এ, ইসলামিক স্টাডিজ, ঢাকা বিশ্ববিদ্যালয় (খতিব ও পরিচালক, বাইতুল ফালাহ মসজিদ এন্ড ইসলামিক সেন্টার, দক্ষিণ কোরিয়া)",
   },
   {
     _id: "8",
     name: "আব্দুল্লাহ আল নোমান",
-    image: assets.faculties.avatar,
+    image: assets.faculties.abdullalnoman,
     designation:
       "বি.এ. (অনার্স), এম.এ, ইংরেজি, মোহাম্মদপুর কেন্দ্রীয় বিশ্ববিদ্যালয় কলেজ। ",
   },
   {
     _id: "9",
     name: "মাওলানা ওমর ফারুক",
-    image: assets.faculties.avatar,
+    image: assets.faculties.abdullalnoman,
     designation:
       "দাওরাহ, জামিয়া রাহমানিয়া আরাবিয়াহ, মোহাম্মদপুর। দাওয়াহ, আন-নূর নৈশ মাদরাসা, মোহাম্মদপুর, ঢাকা।",
   },
   {
     _id: "10",
     name: "মাওলানা শরিফুল ইসলাম",
-    image: assets.faculties.avatar,
+    image: assets.faculties.sorifulIslam,
     designation:
       "দাওরাহ, জামিয়া ইসলামিয়া লালমাটিয়া, মোহাম্মদপুর, ঢাকা। দাওয়াহ, আন-নূর ইসলামিয়া, মোহাম্মদপুর, ঢাকা।",
   },
   {
     _id: "11",
     name: "মুফতী নোমান আহমদ জালালাবাদী",
-    image: assets.faculties.avatar,
+    image: assets.faculties.noman,
     designation: "দাওরা ও ইফতা, জামিয়া মাদানিয়া, বারিধারা, গুলশান, ঢাকা",
   },
   {
     _id: "12",
     name: "মাওলানা দেলোয়ার হুসাইন",
-    image: assets.faculties.avatar,
+    image: assets.faculties.deloarHossen,
     designation:
       "ইফতা, আল জামিয়া আরাবিয়া রাহিলিয়া দারুল উলুম মাদ্রাসা, সাতগাড়া, রংপুর। দাওরাহ, জামিয়া আরাবিয়া ইমদাদুল উলুম মাদ্রাসা ফরিদাবাদ, ঢাকা । দাওয়াহ, আন-নূর ইসলামিয়া নৈশ মাদ্রাসা, মোহাম্মদপুর, ঢাকা। আদব, যায়েদ বিন সাবিত রা. মাদ্রাসা, হজরতপুর, কেরানীগঞ্জ, ঢাকা।",
   },
   {
     _id: "13",
     name: "সম্রাট সালমান ফারসি",
-    image: assets.faculties.avatar,
+    image: assets.faculties.salmanFarshi,
     designation: "বিশিষ্ট দাঈ ও তুলনামূলক ধর্মতত্ত্ব গবেষক",
   },
   {
     _id: "14",
     name: "মাওলানা জিয়াউল হক আনসারি",
-    image: assets.faculties.avatar,
+    image: assets.faculties.jiaulHaque,
     designation: "কামিল, হাদিস, কক্সবাজার হাশেমিয়া কামিল (মাস্টার্স) মাদ্রাসা",
   },
   {
     _id: "15",
     name: "তানভীর আহমেদ শরীফ",
-    image: assets.faculties.tanvirAhmedSorif,
+    image: assets.faculties.abdullalnoman,
     designation: "শিক্ষক, আদ-দোহা ইন্সটিটিউট",
   },
   {
     _id: "16",
     name: "মাওলানা আব্দুল্লাহ সোয়াদ",
-    image: assets.faculties.abdullahSowad,
+    image: assets.faculties.abdullalnoman,
     designation:
       "পরিচালক, নওমুসলিম ডেভেলপমেন্ট ফাউন্ডেশন। মাস্টার্স অব সোশ্যাল সায়েন্স, ওপেন ইউনিভার্সিটি। বিএসসি, সরকারি তোলারাম কলেজ, নারায়নগঞ্জ।",
   },

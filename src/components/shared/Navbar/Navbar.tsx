@@ -40,14 +40,20 @@ const Navbar = () => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Typography component={Link} href="/">
+          <Box
+            component={Link}
+            href="/"
+            sx={{
+              width: { lg: "250px", md: "200px", sm: "180px", xs: "200px" },
+            }}
+          >
             <Image
               src={assets.logo.headerlogo}
               width={250}
               height={50}
               alt="logo"
             />
-          </Typography>
+          </Box>
 
           {/* menu items */}
 
