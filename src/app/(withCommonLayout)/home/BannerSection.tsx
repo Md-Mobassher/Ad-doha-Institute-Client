@@ -62,7 +62,7 @@ const BannerSection = () => {
                 alt={`Slide ${index + 1}`}
                 className="rounded-md w-full"
                 width={1200}
-                height={300}
+                height={560}
               />
             </SwiperSlide>
           ))}

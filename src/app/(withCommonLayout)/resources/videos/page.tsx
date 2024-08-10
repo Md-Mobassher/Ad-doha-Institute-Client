@@ -21,7 +21,7 @@ const VideoPages = () => {
       <PageTitle title="ভিডিও সমূহ" />
 
       <DohaContainer>
-        <Box className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-7 md:gap-6 gap-5 py-10">
+        <Box className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-7 md:gap-6 gap-5">
           {videosData?.map((video: TVideo) => (
             <Box
               className="flex justify-center border hover:border-primary hover:shadow-xl shadow"

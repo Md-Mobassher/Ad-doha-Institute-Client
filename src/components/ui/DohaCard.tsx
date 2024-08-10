@@ -4,6 +4,7 @@ import DohaButton from "./DohaButton";
 import Link from "next/link";
 import { Box, Stack, Typography } from "@mui/material";
 import CardTitle from "./CardTitle";
+import Details from "./Details";
 
 const DohaCard = ({
   image,
@@ -29,7 +30,6 @@ const DohaCard = ({
           xs: "450px",
         },
         backgroundColor: "#fff",
-        boxShadow: "5 2 1",
         ":hover": {
           border: "1px solid #22C55E",
         },
@@ -59,26 +59,13 @@ const DohaCard = ({
       </Box>
       <Box p="20px">
         {title && <CardTitle title={title} />}
-        {details && (
-          <Typography
-            component="p"
-            fontSize={{
-              lg: "16px",
-              md: "15px",
-              sm: "14px",
-              xs: "14px",
-            }}
-            mb="16px"
-            textAlign="justify"
-          >
-            {details}
-          </Typography>
-        )}
+        {details && <Details details={details} />}
 
         <Stack
           justifyContent="space-between"
-          alignItems="center"
+          alignItems="end"
           direction="row"
+          pt={1}
         >
           {btnTitle && (
             <DohaButton

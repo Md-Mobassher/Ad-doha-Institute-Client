@@ -1,14 +1,21 @@
-import DohaContainer from "@/components/ui/DohaContainer";
 import PageTitle from "@/components/ui/PageTitle";
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
+import Image from "next/image";
+import commingSoon from "@/assets/comingsoon.png";
 
 const GalleryPage = () => {
   return (
     <Box>
       <PageTitle title="ছবি সমূহ" />
-      <DohaContainer>
-        <Box className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-7"></Box>
-      </DohaContainer>
+
+      <Stack justifyContent="center" alignItems="center">
+        <Image
+          src={commingSoon}
+          alt="coming soon image"
+          width={800}
+          height={500}
+        />
+      </Stack>
     </Box>
   );
 };

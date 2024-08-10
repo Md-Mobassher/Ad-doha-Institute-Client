@@ -31,9 +31,7 @@ const AimsObjectivesPage = () => {
       </DohaContainer>
 
       {/* aim */}
-      <Box
-        sx={{ textAlign: "center", py: "40px", backgroundColor: "info.main" }}
-      >
+      <Box sx={{ textAlign: "center", backgroundColor: "info.main" }}>
         <DohaContainer>
           <Title title={aimObjectivesData.aim.title} />
           <Typography
@@ -51,20 +49,22 @@ const AimsObjectivesPage = () => {
       </Box>
 
       {/* objectives */}
-      <DohaContainer>
-        <Title title={aimObjectivesData.objectives.title} />
-        <Typography
-          component="p"
-          sx={{
-            fontSize: "16px",
-            fontWeight: "400",
-            mt: "20px",
-            textAlign: "justify",
-          }}
-        >
-          {aimObjectivesData.objectives.details}
-        </Typography>
-      </DohaContainer>
+      <Box sx={{ textAlign: "center", backgroundColor: "info.main" }}>
+        <DohaContainer>
+          <Title title={aimObjectivesData.objectives.title} />
+          <Typography
+            component="p"
+            sx={{
+              fontSize: "16px",
+              fontWeight: "400",
+              mt: "20px",
+              textAlign: "justify",
+            }}
+          >
+            {aimObjectivesData.objectives.details}
+          </Typography>
+        </DohaContainer>
+      </Box>
 
       {/* future */}
       <DohaContainer>

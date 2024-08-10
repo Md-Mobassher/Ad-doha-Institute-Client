@@ -1,19 +1,23 @@
+import Details from "@/components/ui/Details";
 import DohaContainer from "@/components/ui/DohaContainer";
-import SubTitle from "@/components/ui/SubTitle";
+import PageTitle from "@/components/ui/PageTitle";
 import Title from "@/components/ui/Title";
 import { Box, Stack, Typography } from "@mui/material";
 
 const DonatePage = () => {
   return (
     <Box>
-      <Box
-        sx={{ textAlign: "center", py: "40px", backgroundColor: "info.main" }}
-      >
-        <Title title="ডোনেশন" />
-      </Box>
+      <PageTitle title="ডোনেশন" />
 
       {/* Into */}
       <DohaContainer>
+        {/* <Details
+          details="আদ-দোহা ইনস্টিটিউট দাওয়াহ, শিক্ষা ও সেবাসহ বিভিন্ন সামাজিক কার্যক্রম
+          পরিচালনা করে থাকে। তার জন্য ব্যাপক অর্থের প্রয়োজন হয়। শুধু মাত্র
+          শিক্ষা ফিল্ড থেকে শিক্ষার্থীদের গুরুত্বের জন্য নামমাত্র ফী নেওয়া হয়;
+          যা আমাদের অন্যান্য কার্যক্রম পরিচালনার জন্য যথেষ্ট নয়। ফলে আমাদের
+          কার্যক্রমগুলো সুষ্ঠুভাবে পরিচালনা করা দুরূহ হয়ে ওঠে।"
+        /> */}
         <Typography
           component="p"
           sx={{
@@ -66,7 +70,6 @@ const DonatePage = () => {
 
       <DohaContainer>
         <Stack
-          pt="-20px"
           direction="row"
           justifyContent="center"
           alignItems="center"

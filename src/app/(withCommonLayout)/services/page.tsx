@@ -8,23 +8,28 @@ const ServicesPage = () => {
   return (
     <Box>
       <PageTitle title="আমাদের সেবাসমূহ" />
-
-      <DohaContainer>
-        <Box className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-7 md:gap-6 gap-5">
-          {servicesData?.map((service) => (
-            <>
-              <DohaCard
-                key={service.navigation}
-                {...service}
-                navigate="services"
-                btnTitle="বিস্তারিত"
-                btnTitle2="সেবা নিন"
-                link={service.link}
-              />
-            </>
-          ))}
-        </Box>
-      </DohaContainer>
+      <Box
+        sx={{
+          backgroundColor: "info.main",
+        }}
+      >
+        <DohaContainer>
+          <Box className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-7 md:gap-6 gap-5">
+            {servicesData?.map((service) => (
+              <>
+                <DohaCard
+                  key={service.navigation}
+                  {...service}
+                  navigate="services"
+                  btnTitle="বিস্তারিত"
+                  btnTitle2="সেবা নিন"
+                  link={service.link}
+                />
+              </>
+            ))}
+          </Box>
+        </DohaContainer>
+      </Box>
     </Box>
   );
 };

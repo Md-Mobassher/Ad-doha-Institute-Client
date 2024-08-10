@@ -11,7 +11,7 @@ const PageTitle = ({ title }: ITitle) => {
       sx={{
         textAlign: "center",
         py: "30px",
-        backgroundColor: "secondary.main",
+        backgroundColor: "info.main",
       }}
     >
       <Title title={title} />
