@@ -3,11 +3,10 @@ import { Stack, Typography } from "@mui/material";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 
 type detailItemProps = {
-  index: number;
   item: string;
 };
 
-const DetailsItem = ({ item, index }: detailItemProps) => {
+const DetailsItem = ({ item }: detailItemProps) => {
   return (
     <>
       {/* {index > 0 && <hr className="border-slate-300" />} */}
@@ -22,10 +21,13 @@ const DetailsItem = ({ item, index }: detailItemProps) => {
         <RadioButtonCheckedIcon sx={{ color: "primary.main" }} />
         <Typography
           component="p"
-          sx={{
-            color: "primary.main",
-            fontSize: "16px",
+          fontSize={{
+            lg: "16px",
+            md: "16px",
+            sm: "15px",
+            xs: "14px",
           }}
+          textAlign="start"
         >
           {item}
         </Typography>
