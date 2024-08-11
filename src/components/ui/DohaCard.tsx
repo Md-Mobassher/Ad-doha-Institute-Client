@@ -2,7 +2,7 @@ import { TCardProps } from "@/type";
 import Image from "next/image";
 import DohaButton from "./DohaButton";
 import Link from "next/link";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import CardTitle from "./CardTitle";
 import Details from "./Details";
 
@@ -69,7 +69,7 @@ const DohaCard = ({
         >
           {btnTitle && (
             <DohaButton
-              btnTitle={btnTitle || "Details"}
+              btnTitle={btnTitle || "বিস্তারিত"}
               id={navigation}
               navigate={navigate}
               title={title}
@@ -78,7 +78,7 @@ const DohaCard = ({
 
           {btnTitle2 && link && (
             <Link href={link as string}>
-              <DohaButton btnTitle={btnTitle2 || "Details"} />
+              <DohaButton btnTitle={btnTitle2 || "বিস্তারিত"} />
             </Link>
           )}
         </Stack>

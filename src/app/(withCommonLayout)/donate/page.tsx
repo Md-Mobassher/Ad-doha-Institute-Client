@@ -64,17 +64,14 @@ const DonatePage = () => {
           যেকোনো মাধ্যমে ইনস্টিটিউটকে সহযোগিতা করবেন বলে আমরা আশাবাদী। মহান
           আল্লাহ কবুল করুন। সকলকে উত্তম প্রতিদান দান করুন। আমীন!
         </Typography>
-      </DohaContainer>
 
-      {/* number */}
-
-      <DohaContainer>
         <Stack
           direction="row"
           justifyContent="center"
           alignItems="center"
           gap={{ lg: "30px", md: "30px", sm: "20px", xs: "15px" }}
           flexWrap="wrap"
+          mt={6}
         >
           <Title title="দান-সদাকাহ পাঠানোর মাধ্যম " />
           <Typography
