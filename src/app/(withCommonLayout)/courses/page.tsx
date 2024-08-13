@@ -68,7 +68,7 @@ const CoursesPage = () => {
                     <Link href={`/courses/${course?.navigation}`}>
                       <Button>বিস্তারিত</Button>
                     </Link>
-                    <Link href={`/courses/${course._id}`}>
+                    <Link href={course?.link}>
                       <Button>এনরোল</Button>
                     </Link>
                   </Stack>

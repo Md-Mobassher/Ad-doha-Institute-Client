@@ -34,6 +34,7 @@ export const coursesData = [
       "১০টি সুরা মুখস্তকরণ",
       "বিশেষ দোয়া এবং তাসবীহ মুখস্তকরণ",
     ],
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSc5VhJgFxqZKs-5FfiC9-cJku9w8lG5G59UnUR0j1vVCRdNFg/viewform",
   },
   {
     _id: "2",
@@ -69,6 +70,7 @@ export const coursesData = [
       "ইসলামি দাওয়াহ সম্পর্কে প্রাথমিক জ্ঞান অর্জন করবে।",
       "দৈনন্দিন জীবনে প্রয়োজনীয় দুয়াগুলো অর্থসহ মুখস্ত হওয়া ও সেগুলোর ব্যবহার জানা।",
     ],
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSeQ2BSTF3ZwXJ9FWVOwSgWwAFhxOAnO8ePenbkHLYvJ98Bu1g/viewform",
   },
   {
     _id: "3",
@@ -117,6 +119,7 @@ export const coursesData = [
       "প্রাক্টিক্যাল দাওয়াহ : কুরআন ও বাইবেলের আলোকে",
       "পরীক্ষা",
     ],
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSftGH-PAPfQk4Q-SYvi87IXlzxhZgNQOcQvqfXf-Mgk1z6HAA/viewform",
   },
   {
     _id: "4",
@@ -148,5 +151,6 @@ export const coursesData = [
       "ইংরেজি ভাষায় প্রয়োজনীয় দোয়া মুখস্থ।",
       "ইংরেজি ভাষায় ইসলামের মৌলিক বিষয়সমূহের অধ্যয়ন ও অনুশীলন।",
     ],
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSel-3aqQQfaje4KtSL4G098CRWH0FcDLLsTmrXw-aTYxdEoGQ/viewform",
   },
 ];
