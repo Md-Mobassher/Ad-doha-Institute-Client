@@ -5,7 +5,7 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const Member = ({ image, name, designation, navigate }: TMember) => {
+const FacultyMember = ({ image, name, designation, navigate }: TMember) => {
   const router = useRouter();
 
   const handleClick = () => {
@@ -25,6 +25,7 @@ const Member = ({ image, name, designation, navigate }: TMember) => {
         ":hover": {
           border: "1px solid #22C55E",
         },
+        p: "16px",
       }}
       onClick={() => handleClick()}
     >
@@ -32,6 +33,9 @@ const Member = ({ image, name, designation, navigate }: TMember) => {
         sx={{
           width: "100%",
           "& img": {
+            width: "200px",
+            mb: "16px",
+            mx: "auto",
             objectFit: "contain",
             borderTopRadius: "10px",
           },
@@ -46,7 +50,7 @@ const Member = ({ image, name, designation, navigate }: TMember) => {
         />
       </Box>
 
-      <Box p={2}>
+      <Box>
         <Typography
           component="h3"
           variant="h3"
@@ -81,4 +85,4 @@ const Member = ({ image, name, designation, navigate }: TMember) => {
   );
 };
 
-export default Member;
+export default FacultyMember;

@@ -10,7 +10,7 @@ const Details = ({ details }: { details: string }) => {
         sm: "15px",
         xs: "14px",
       }}
-      mb="8px"
+      pb="8px"
       textAlign="justify"
     >
       {details}

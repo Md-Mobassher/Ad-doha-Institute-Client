@@ -54,9 +54,9 @@ const Opinions = () => {
               border: "1px solid lightgray",
               width: "100%",
               height: {
-                xl: "600px",
-                lg: "650px",
-                md: "650px",
+                xl: "680px",
+                lg: "740px",
+                md: "700px",
                 sm: "100%",
                 xs: "100%",
               },
@@ -66,20 +66,20 @@ const Opinions = () => {
               ":hover": {
                 border: "1px solid #22C55E",
               },
-              p: "25px",
+              p: "20px",
             }}
           >
             <Box
               sx={{
                 width: "100%",
                 "& img": {
-                  width: "180px",
-                  height: "180px",
+                  width: "200px",
+                  height: "200px",
                   overflow: "hidden",
                   objectFit: "contain",
                   borderRadius: "100px",
                   mx: "auto",
-                  mb: "25px",
+                  mb: "20px",
                 },
               }}
             >
@@ -90,7 +90,7 @@ const Opinions = () => {
                 height={300}
               />
             </Box>
-            <Box>
+            <Box sx={{ overflow: "hidden" }}>
               {opinion?.name && <CardTitle title={opinion?.name} />}
               {opinion?.designation && (
                 <CardSubTitle title={opinion?.designation} />

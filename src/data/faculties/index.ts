@@ -20,7 +20,7 @@ export const facultyData = [
   {
     _id: "3",
     name: "শায়েখ আব্দুল করিম নায়েফ",
-    image: assets.faculties.abdullalnoman,
+    image: assets.faculties.abdulKorim,
     designation:
       "বি.এ. (অনার্স), এম.এ, ইসলামিক স্টাডিজ, ঢাকা বিশ্ববিদ্যালয়। পিএইচডি গবেষক, ইন্টারন্যাশনাল ইসলামিক ইউনিভার্সিটি, মালয়েশিয়া। ইমাম ও খতিব, মেলবোর্ন মাল্টিকালচারাল সেন্টার, অস্ট্রেলিয়া।",
   },
@@ -34,20 +34,20 @@ export const facultyData = [
   {
     _id: "5",
     name: "শায়েখ ড. আমিনুল ইসলাম আজহারী",
-    image: assets.faculties.abdullalnoman,
+    image: assets.faculties.aminulIslamAzhari,
     designation: "ইমাম ও খতিব গার্ডেন সিটি মসজিদ, টুঊম্বা, অস্ট্রেলিয়া",
   },
   {
     _id: "6",
     name: "মুফতি আবু বকর সিদ্দীক",
-    image: assets.faculties.abdullalnoman,
+    image: assets.faculties.abuBakarSiddik,
     designation:
       "ইফতা, জামিয়া ইসলামিয়া দারুল উলূম মাদানিয়া। দাওরাহ, আল জামিয়াতুর রাহমানিয়া দারুল ইসলাম, ঢাকা। কামিল, ফিকাহ, মাদরাসা-ই-আলিয়া, ঢাকা। বি.এ. (অনার্স), এম.এ (এলএল.বি & এলএল.এম), বাংলাদেশ ইসলামি ইউনিভার্সটি।",
   },
   {
     _id: "7",
     name: "শায়েখ ফরিদুল ইসলাম",
-    image: assets.faculties.abdullalnoman,
+    image: assets.faculties.forifulIslam,
     designation:
       "বি.এ, এম.এ, ইসলামিক স্টাডিজ, ঢাকা বিশ্ববিদ্যালয় (খতিব ও পরিচালক, বাইতুল ফালাহ মসজিদ এন্ড ইসলামিক সেন্টার, দক্ষিণ কোরিয়া)",
   },
@@ -100,13 +100,13 @@ export const facultyData = [
   {
     _id: "15",
     name: "তানভীর আহমেদ শরীফ",
-    image: assets.faculties.abdullalnoman,
+    image: assets.faculties.tanvirAhmed,
     designation: "শিক্ষক, আদ-দোহা ইন্সটিটিউট",
   },
   {
     _id: "16",
     name: "মাওলানা আব্দুল্লাহ সোয়াদ",
-    image: assets.faculties.abdullalnoman,
+    image: assets.faculties.abdullahSoad,
     designation:
       "পরিচালক, নওমুসলিম ডেভেলপমেন্ট ফাউন্ডেশন। মাস্টার্স অব সোশ্যাল সায়েন্স, ওপেন ইউনিভার্সিটি। বিএসসি, সরকারি তোলারাম কলেজ, নারায়নগঞ্জ।",
   },

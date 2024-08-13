@@ -23,8 +23,8 @@ const BannerSection = () => {
       <Container
         sx={{
           py: {
-            xl: "60px",
-            lg: "50px",
+            xl: "50px",
+            lg: "40px",
             md: "30px",
             sm: "20px",
             xs: "10px",

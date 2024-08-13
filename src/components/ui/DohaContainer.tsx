@@ -20,8 +20,8 @@ const DohaContainer = ({
             xl: "0px",
             lg: "60px",
             md: "50px",
-            sm: "20px",
-            xs: "10px",
+            sm: "16px",
+            xs: "8px",
           },
         }}
       >

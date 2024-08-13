@@ -13,20 +13,20 @@ export const advisoryCommitteData = [
   {
     _id: "2",
     name: "শায়েখ উমায়ের কোব্বাদী",
-    image: assets.faculties.avatar,
+    image: assets.advisoryCommittees.umayerKobbadi,
     designation:
       "মুহাদ্দিস, মাদরাসা দারুর রাশাদ, মিরপুর। খতিব, বায়তুল ফালাহ জামে মসজিদ, মিরপুর, ঢাকা। চেয়ারম্যান, আল-ফালাহ ওয়েল ফেয়ার ফাউন্ডেশন।",
   },
   {
     _id: "3",
     name: "শায়েখ মুফতি মুজিবুর রহমান",
-    image: assets.faculties.avatar,
+    image: assets.advisoryCommittees.mujiburRahman,
     designation: "তুলনামূলক ধর্মতত্ত্ব বিভাগীয় প্রধান, আন-নু নৈশ মাদরাসা।",
   },
   {
     _id: "4",
     name: "শায়েখ জি এম মেহেরুল্লাহ",
-    image: assets.faculties.avatar,
+    image: assets.advisoryCommittees.gMMeherullah,
     designation: "হেড মুহাদ্দিস, মাদরাসা-ই-আলিয়া, ঢাকা।",
   },
   {
@@ -38,7 +38,7 @@ export const advisoryCommitteData = [
   {
     _id: "6",
     name: "মাওলানা রুহুল আমিন সাদী",
-    image: assets.advisoryCommittees.ruhulamin,
+    image: assets.advisoryCommittees.ruhulAmin,
     designation: "আলিম, লেখক ও অনলাইন এক্টিভিস্ট",
   },
   {
