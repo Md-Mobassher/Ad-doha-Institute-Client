@@ -5,6 +5,7 @@ import LoadingPage from "@/app/loading";
 import { useGetAllBooksQuery } from "@/redux/features/admin/bookManagementApi";
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 
 const Books = () => {
   const { data, isLoading } = useGetAllBooksQuery({});
@@ -39,28 +40,34 @@ const Books = () => {
             minHeight={160}
           >
             <Box className=" flex flex-col items-center text-center p-3 bg-white">
-              <Image
-                src={book.image}
-                alt={book.title}
-                width={200}
-                height={300}
-                className="mb-5 hover:scale-105 transition-all duration-300"
-              />
-              <Divider />
-              <Typography
-                component="p"
-                sx={{
-                  color: "primary.main",
-                  boxShadow: "none",
-                  fontSize: "15px",
-                  fontWeight: 500,
-                  px: "10px",
-                  display: "flex",
-                  alignItems: "center",
-                }}
+              <Link
+                href={book?.url}
+                target="_blank"
+                className=" hover:scale-105 transition-all duration-300"
               >
-                {book.title}
-              </Typography>
+                <Image
+                  src={book?.image}
+                  alt={book?.title}
+                  width={200}
+                  height={300}
+                  className="pb-5 "
+                />
+                <Divider />
+                <Typography
+                  component="p"
+                  sx={{
+                    color: "primary.main",
+                    boxShadow: "none",
+                    fontSize: "15px",
+                    fontWeight: 500,
+                    px: "10px",
+                    mt: "10px",
+                    textAlign: "center",
+                  }}
+                >
+                  {book.title}
+                </Typography>
+              </Link>
             </Box>
           </Grid>
         ))}

@@ -14,7 +14,7 @@ const BooksSection = () => {
         mb={4}
       >
         <Title title="ই-পাঠাগার" />
-        <DohaButton btnTitle="সকল" navigate="resourses/books" />
+        <DohaButton btnTitle="সকল" navigate="resources/library" />
       </Stack>
 
       <Books />

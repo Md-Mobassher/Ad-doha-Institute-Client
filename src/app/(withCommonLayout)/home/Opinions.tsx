@@ -77,7 +77,6 @@ const Opinions = () => {
                   height: "200px",
                   overflow: "hidden",
                   objectFit: "contain",
-                  borderRadius: "100px",
                   mx: "auto",
                   mb: "20px",
                 },

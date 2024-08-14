@@ -7,6 +7,7 @@ import { useGetAllBooksQuery } from "@/redux/features/admin/bookManagementApi";
 import { TBook } from "@/type";
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 
 const BooksPage = () => {
   const { data, isLoading } = useGetAllBooksQuery({});
@@ -44,7 +45,11 @@ const BooksPage = () => {
                 minHeight={160}
               >
                 <Box className="p-3">
-                  <Box className=" flex flex-col items-center text-center  bg-white hover:scale-105 transition-all duration-300">
+                  <Link
+                    href={book?.url}
+                    target="_blank"
+                    className=" flex flex-col items-center text-center  bg-white hover:scale-105 transition-all duration-300"
+                  >
                     <Image
                       src={book?.image}
                       alt={book?.title}
@@ -67,7 +72,7 @@ const BooksPage = () => {
                     >
                       {book?.title}
                     </Typography>
-                  </Box>
+                  </Link>
                 </Box>
               </Grid>
             ))}

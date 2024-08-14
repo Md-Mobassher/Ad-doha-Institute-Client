@@ -113,7 +113,7 @@ const courseDetailsPage = ({ params }: TParamsProps) => {
             </Box>{" "}
             <Box maxWidth={800} mx="auto">
               {topics?.map((item, index) => (
-                <DetailsItem key={index} index={index} item={item} />
+                <DetailsItem key={index} item={item} />
               ))}
             </Box>
           </Box>
@@ -126,7 +126,7 @@ const courseDetailsPage = ({ params }: TParamsProps) => {
             </Box>{" "}
             <Box maxWidth={800} mx="auto">
               {objectives?.map((item, index) => (
-                <DetailsItem key={index} index={index} item={item} />
+                <DetailsItem key={index} item={item} />
               ))}
             </Box>
           </Box>
@@ -139,7 +139,7 @@ const courseDetailsPage = ({ params }: TParamsProps) => {
             </Box>
             <Box maxWidth={800} mx="auto">
               {outcomes?.map((item, index) => (
-                <DetailsItem key={index} index={index} item={item} />
+                <DetailsItem key={index} item={item} />
               ))}
             </Box>
           </Box>
@@ -152,7 +152,7 @@ const courseDetailsPage = ({ params }: TParamsProps) => {
             </Box>
             <Box maxWidth={800} mx="auto">
               {targetAudience?.map((item, index) => (
-                <DetailsItem key={index} index={index} item={item} />
+                <DetailsItem key={index} item={item} />
               ))}
             </Box>
           </Box>
@@ -164,7 +164,7 @@ const courseDetailsPage = ({ params }: TParamsProps) => {
             </Box>
             <Box maxWidth={800} mx="auto">
               {modules?.map((item, index) => (
-                <DetailsItem key={index} index={index} item={item} />
+                <DetailsItem key={index} item={item} />
               ))}
             </Box>
           </Box>

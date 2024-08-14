@@ -20,7 +20,7 @@ const CoursesSection = () => {
         <SubTitle title="এক-নজরে দেখে নিন আমাদের বাছাইকৃত সেরা কোর্সগুলো" />
       </Stack>
 
-      <Box className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-7 gap-5 mt-8 mx-auto">
+      <Box className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-7 md:gap-6  gap-5 mt-8 mx-auto">
         {coursesData.map((course) => (
           <Card
             component={Link}

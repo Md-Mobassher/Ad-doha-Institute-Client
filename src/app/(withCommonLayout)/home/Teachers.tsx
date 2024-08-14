@@ -74,8 +74,8 @@ const Teachers = () => {
                 sx={{
                   width: "100%",
                   "& img": {
-                    width: "180px",
-                    height: "180px",
+                    width: "200px",
+                    height: "200px",
                     overflow: "hidden",
                     objectFit: "contain",
                     borderRadius: "10px",

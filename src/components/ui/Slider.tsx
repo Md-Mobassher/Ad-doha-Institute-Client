@@ -15,7 +15,7 @@ const Slider = ({
 }: TSliderProps) => {
   return (
     <Swiper
-      spaceBetween={spaceBetween || 25}
+      spaceBetween={spaceBetween || 28}
       slidesPerView={slidesPerView || 3}
       autoplay={{
         delay: 4000,
