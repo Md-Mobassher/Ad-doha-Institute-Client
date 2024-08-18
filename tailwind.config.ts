@@ -15,7 +15,7 @@ const config: Config = {
       },
       fontFamily: {
         hindSiliguri: ["Hind Shiliguri", "sans-serif"],
-        suttonyMJ: ["Suttony MJ", "serif"],
+        notoSerifBengali: ["Noto Serif Bengali", "serif"],
       },
     },
   },

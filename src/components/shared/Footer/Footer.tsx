@@ -19,6 +19,7 @@ import { FieldValues } from "react-hook-form";
 import NearMeIcon from "@mui/icons-material/NearMe";
 import { FaFacebook, FaYoutube } from "react-icons/fa";
 import SubTitle from "@/components/ui/SubTitle";
+import CardSubTitle from "@/components/ui/CardSubTitle";
 
 const Footer = () => {
   const handleSubscribe = async (value: FieldValues) => {
@@ -369,12 +370,25 @@ const Footer = () => {
               xs: "0px",
             }}
           >
-            <p className="text-center">
+            {" "}
+            <Typography
+              component="p"
+              fontSize="16px"
+              fontWeight={500}
+              textAlign="center"
+              color="secondary.main"
+            >
               স্বত্ব &copy; {new Date().getFullYear()} | আদ-দোহা ইনস্টিটিউট,
               সর্ব স্বত্ব সংরক্ষিত
-            </p>
-            <p>---</p>
-            <p className="text-center">
+            </Typography>
+            <p>---</p>{" "}
+            <Typography
+              component="p"
+              fontSize="16px"
+              fontWeight={500}
+              textAlign="center"
+              color="secondary.main"
+            >
               কারিগরি সহায়তায়{" "}
               <Link
                 href="https://mobassher.vercel.app"
@@ -384,7 +398,7 @@ const Footer = () => {
               >
                 মোঃ মোবাশ্বের হোসেন
               </Link>
-            </p>
+            </Typography>
           </Stack>
         </Container>
       </Box>

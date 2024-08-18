@@ -31,7 +31,7 @@ export const theme = createTheme({
         root: {
           padding: "8px 16px",
           color: "white",
-          fontFamily: "Suttony MJ, serif",
+          fontFamily: "SolaimanLipi, serif",
         },
       },
     },
@@ -43,7 +43,7 @@ export const theme = createTheme({
   },
 
   typography: {
-    fontFamily: "Hind Shiliguri, sans-serif",
+    fontFamily: "SolaimanLipi, serif",
     fontWeightRegular: 400,
     h1: {
       fontFamily: "Hind Shiliguri, sans-serif",
@@ -71,12 +71,12 @@ export const theme = createTheme({
     },
     body1: {
       color: "#0B1134",
-      fontFamily: "Suttony MJ, serif",
-      fontSize: "16px", // Applied to body text
+      fontFamily: "SolaimanLipi, serif",
+      fontSize: "16px",
     },
     body2: {
       color: "#0B1134",
-      fontFamily: "Hind Shiliguri, sans-serif",
+      fontFamily: "SolaimanLipi, serif",
     },
   },
 });

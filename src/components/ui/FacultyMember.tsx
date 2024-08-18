@@ -1,9 +1,11 @@
 "use client";
 
 import { TMember } from "@/type";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import CardTitle from "./CardTitle";
+import CardSubTitle from "./CardSubTitle";
 
 const FacultyMember = ({ image, name, designation, navigate }: TMember) => {
   const router = useRouter();
@@ -51,35 +53,8 @@ const FacultyMember = ({ image, name, designation, navigate }: TMember) => {
       </Box>
 
       <Box>
-        <Typography
-          component="h3"
-          variant="h3"
-          fontSize={{
-            lg: "20px",
-            md: "19px",
-            sm: "18px",
-            xs: "17px",
-          }}
-          color="primary.main"
-          textAlign="center"
-          pb={"12px"}
-        >
-          {name}
-        </Typography>
-        <Typography
-          component="p"
-          fontSize={{
-            lg: "15px",
-            md: "15px",
-            sm: "14px",
-            xs: "14px",
-          }}
-          fontWeight="400"
-          textAlign="center"
-          color="warning.main"
-        >
-          {designation}
-        </Typography>
+        <CardTitle title={name} />
+        <CardSubTitle title={designation} />
       </Box>
     </Box>
   );

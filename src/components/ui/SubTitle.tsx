@@ -7,8 +7,7 @@ type ISubTitle = {
 const SubTitle = ({ title }: ISubTitle) => {
   return (
     <Typography
-      component="h3"
-      variant="h3"
+      component="p"
       sx={{
         fontSize: {
           xl: "20px",

@@ -1,21 +1,10 @@
 import { TCardProps } from "@/type";
 import Image from "next/image";
-import DohaButton from "./DohaButton";
-import Link from "next/link";
-import { Box, Stack } from "@mui/material";
+import { Box } from "@mui/material";
 import CardTitle from "./CardTitle";
 import Details from "./Details";
 
-const DohaCard = ({
-  image,
-  title,
-  details,
-  btnTitle,
-  btnTitle2,
-  navigation,
-  link,
-  navigate,
-}: TCardProps) => {
+const DohaCard = ({ image, title, details }: TCardProps) => {
   return (
     <Box
       sx={{
@@ -23,13 +12,13 @@ const DohaCard = ({
         border: "1px solid lightgray",
         width: "100%",
         height: {
-          xl: "450px",
-          lg: "480px",
-          md: "480px",
-          sm: "470px",
-          xs: "450px",
+          xl: "400px",
+          lg: "410px",
+          md: "430px",
+          sm: "420px",
+          xs: "390px",
         },
-        backgroundColor: "#fff",
+        backgroundColor: "secondary.main",
         ":hover": {
           border: "1px solid #22C55E",
         },
@@ -60,28 +49,6 @@ const DohaCard = ({
       <Box p="20px">
         {title && <CardTitle title={title} />}
         {details && <Details details={details} />}
-
-        <Stack
-          justifyContent="space-between"
-          alignItems="end"
-          direction="row"
-          pt={1}
-        >
-          {btnTitle && (
-            <DohaButton
-              btnTitle={btnTitle || "বিস্তারিত"}
-              id={navigation}
-              navigate={navigate}
-              title={title}
-            />
-          )}
-
-          {btnTitle2 && link && (
-            <Link href={link as string}>
-              <DohaButton btnTitle={btnTitle2 || "বিস্তারিত"} />
-            </Link>
-          )}
-        </Stack>
       </Box>
     </Box>
   );

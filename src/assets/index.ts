@@ -49,6 +49,7 @@ const assets = {
     aminulIslamAzhari: require("../assets/faculty/শায়েখ ড. আমিনুল ইসলাম আজহারী.png"),
     forifulIslam: require("../assets/faculty/শায়েখ ফরিদুল ইসলাম.png"),
     salmanFarshi: require("../assets/faculty/সম্রাট সালমান ফারসি.png"),
+    omorFaruk: require("../assets/faculty/ওমর_ফারুক.png"),
   },
   advisoryCommittees: {
     abdulKader: require("../assets/advisoryCommittee/আব্দুল কাদের সরকার.jpg"),

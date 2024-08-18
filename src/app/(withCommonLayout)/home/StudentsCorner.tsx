@@ -89,8 +89,8 @@ const StudentsCornerSection: React.FC = () => {
                       sx={{
                         color: "primary.main",
                         boxShadow: "none",
-                        fontSize: "15px",
-                        fontWeight: 500,
+                        fontSize: "16px",
+                        fontWeight: 600,
                         px: "10px",
                         display: "flex",
                         alignItems: "center",

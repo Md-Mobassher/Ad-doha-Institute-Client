@@ -4,6 +4,9 @@ import { TMember } from "@/type";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import CardTitle from "./CardTitle";
+import CardDetails from "./CardDetails";
+import CardSubTitle from "./CardSubTitle";
 
 const Member = ({ image, name, designation, navigate }: TMember) => {
   const router = useRouter();
@@ -47,35 +50,8 @@ const Member = ({ image, name, designation, navigate }: TMember) => {
       </Box>
 
       <Box p={2}>
-        <Typography
-          component="h3"
-          variant="h3"
-          fontSize={{
-            lg: "20px",
-            md: "19px",
-            sm: "18px",
-            xs: "17px",
-          }}
-          color="primary.main"
-          textAlign="center"
-          pb={"12px"}
-        >
-          {name}
-        </Typography>
-        <Typography
-          component="p"
-          fontSize={{
-            lg: "15px",
-            md: "15px",
-            sm: "14px",
-            xs: "14px",
-          }}
-          fontWeight="400"
-          textAlign="center"
-          color="warning.main"
-        >
-          {designation}
-        </Typography>
+        <CardTitle title={name} />
+        <CardSubTitle title={designation} />
       </Box>
     </Box>
   );

@@ -3,10 +3,9 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Suttony MJ";
-  src: url("/NotoSerif/NotoSerifBengali-VariableFont_wdth,wght.ttf")
-    format("truetype");
-  font-weight: normal;
+  font-family: "SolaimanLipi";
+  src: url("/SolaimanLipi/SolaimanLipi_22-02-2012.ttf") format("truetype");
+  font-weight: 400;
   font-style: normal;
 }
 @font-face {

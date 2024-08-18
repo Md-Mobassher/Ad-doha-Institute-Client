@@ -61,7 +61,7 @@ export const facultyData = [
   {
     _id: "9",
     name: "মাওলানা ওমর ফারুক",
-    image: assets.faculties.abdullalnoman,
+    image: assets.faculties.omorFaruk,
     designation:
       "দাওরাহ, জামিয়া রাহমানিয়া আরাবিয়াহ, মোহাম্মদপুর। দাওয়াহ, আন-নূর নৈশ মাদরাসা, মোহাম্মদপুর, ঢাকা।",
   },

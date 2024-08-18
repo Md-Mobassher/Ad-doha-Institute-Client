@@ -4,13 +4,9 @@ const CardSubTitle = ({ title }: { title: string }) => {
   return (
     <Typography
       component="p"
-      fontSize={{
-        lg: "15px",
-        md: "15px",
-        sm: "14px",
-        xs: "14px",
-      }}
-      mb="16px"
+      fontSize="16px"
+      mb="15px"
+      fontWeight={500}
       textAlign="center"
       color="warning.main"
     >
