@@ -7,7 +7,7 @@ const assets = {
   },
   logo: {
     headerlogo: require("../assets/logo/logo.png"),
-    footerlogo: require("../assets/logo/logo-footer.webp"),
+    footerlogo: require("../assets/logo/footer_logo.png"),
     logo: require("../assets/logo/favicon.webp"),
   },
   projects: {

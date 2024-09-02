@@ -126,7 +126,7 @@ const Header: React.FC<HeaderProps> = ({ top, header, menu }) => {
               },
             }}
           >
-            <div className="flex items-center justify-between gap-1">
+            <div className="flex items-center  justify-between gap-1 flex-wrap">
               <Link href="/">
                 <div className="lg:w-[280px] md:w-[240px] w-[220px]">
                   <Image

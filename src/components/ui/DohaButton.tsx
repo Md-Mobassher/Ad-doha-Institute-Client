@@ -1,7 +1,7 @@
 "use client";
 
 import { TButtonProps } from "@/type";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa";
 
@@ -21,15 +21,30 @@ const DohaButton = ({ btnTitle, id, navigate, variant }: TButtonProps) => {
       {btnTitle && (
         <Button
           sx={{
-            borderRadius: "8px",
+            borderRadius: "50px",
+            backgroundColor: "secondary.main",
+            color: "primary.main",
+            border: "2px solid #0F473C",
+            px: "16px",
+            py: "4px",
+            textSizeAdjust: "auto",
             ":hover": {
-              backgroundColor: "success.main",
+              backgroundColor: "primary.main",
               color: "secondary.main",
             },
+            fontSize: {
+              lg: "16px",
+              md: "16px",
+              sm: "16px",
+              xs: "15px",
+            },
+            fontWeight: 600,
           }}
           onClick={handleClick}
         >
-          {btnTitle} <FaArrowRight className=" ml-2" />
+          {btnTitle}
+
+          <FaArrowRight className=" ml-2" />
         </Button>
       )}
     </>

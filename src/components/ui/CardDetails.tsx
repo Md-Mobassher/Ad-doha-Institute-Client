@@ -49,8 +49,14 @@ const CardDetails = ({
                     <Stack
                       direction="row"
                       gap="30px"
-                      justifyContent="start"
+                      justifyContent={{
+                        lg: "start",
+                        md: "start",
+                        sm: "start",
+                        xs: "center",
+                      }}
                       alignItems="center"
+                      flexWrap="wrap"
                       mt={3}
                     >
                       <Typography
@@ -80,7 +86,7 @@ const CardDetails = ({
                           color: "warning.main",
                         }}
                       >
-                        - সেবাটি পেতে এখানে{" "}
+                        - সেবাটি পেতে{" "}
                       </Typography>
                       <DohaButton btnTitle={btnTitle || "ক্লিক করুন"} />
                     </Stack>

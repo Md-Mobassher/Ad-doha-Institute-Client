@@ -23,7 +23,7 @@ const Menu: React.FC<MenuProps> = ({ items }) => {
 
   return (
     <div className="z-20 block sticky top-0 w-full">
-      <div className="flex lg:flex-row md:flex-row flex-col lg:space-x-3 md:space-x-1">
+      <div className="flex lg:flex-row md:flex-row flex-col lg:justify-center lg:items-center">
         {items.map((item, index) => (
           <div
             key={index}
@@ -33,7 +33,7 @@ const Menu: React.FC<MenuProps> = ({ items }) => {
           >
             <Link
               href={item.link}
-              className="p-2 text-white hover:text-[#0F473C] block hover:bg-[#F7F3E7] font-semibold"
+              className="p-2 text-white hover:text-[#0F473C] block hover:bg-[#F7F3E7] font-semibold lg:rounded-full px-4 py-2"
             >
               {item.title}
             </Link>

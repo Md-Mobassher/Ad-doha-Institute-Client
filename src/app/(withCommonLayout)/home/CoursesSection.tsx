@@ -6,6 +6,7 @@ import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import CardTitle from "@/components/ui/CardTitle";
 import Link from "next/link";
+import DohaButton from "@/components/ui/DohaButton";
 
 const CoursesSection = () => {
   return (
@@ -23,9 +24,7 @@ const CoursesSection = () => {
       <Box className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-7 md:gap-6  gap-5 mt-8 mx-auto">
         {coursesData.map((course) => (
           <Card
-            component={Link}
             key={course?._id}
-            href={`/courses/${course.navigation}`}
             sx={{
               border: "1px solid lightgray",
               borderRadius: "8px",
@@ -40,8 +39,18 @@ const CoursesSection = () => {
               alt="course image"
               className="border-b border-gray-300"
             />
-            <Box sx={{ p: "20px" }}>
-              <CardTitle title={course?.courseName} />
+            <Box
+              sx={{
+                p: "20px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {/* <CardTitle title={course?.courseName} /> */}
+              <Link href={`/courses/${course.navigation}`}>
+                <DohaButton btnTitle="রেজিস্টার করুন" />
+              </Link>
             </Box>
           </Card>
         ))}

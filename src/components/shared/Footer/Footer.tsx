@@ -17,7 +17,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FieldValues } from "react-hook-form";
 import NearMeIcon from "@mui/icons-material/NearMe";
-import { FaFacebook, FaYoutube } from "react-icons/fa";
+import { FaArrowRight, FaFacebook, FaYoutube } from "react-icons/fa";
 import SubTitle from "@/components/ui/SubTitle";
 import CardSubTitle from "@/components/ui/CardSubTitle";
 
@@ -50,16 +50,42 @@ const Footer = () => {
           <Box
             mt={2}
             display="flex"
-            justifyContent="center"
+            justifyContent="space-between "
             alignItems="center"
+            gap={2}
+            className="lg:w-[500px] w-full  rounded-full border border-green-800 p-2 bg-white"
           >
             <input
               type="email"
-              className="border border-green-800 rounded-full p-3 px-6 lg:w-[500px] w-full"
+              className=" px-6 border-0 focus:outline-none w-[80%]"
               name="email"
               placeholder="Your Email Address"
             />
-            <Button className="rounded-full">সাবস্ক্রাইব</Button>
+            <Button
+              sx={{
+                borderRadius: "50px",
+                backgroundColor: "primary.main",
+                color: "secondary.main",
+                border: "2px solid #0F473C",
+                px: "16px",
+                py: "5px",
+                textSizeAdjust: "auto",
+                ":hover": {
+                  backgroundColor: "primary.main",
+                  color: "secondary.main",
+                },
+                fontSize: {
+                  lg: "16px",
+                  md: "16px",
+                  sm: "16px",
+                  xs: "15px",
+                },
+                fontWeight: 600,
+              }}
+            >
+              সাবস্ক্রাইব
+              <FaArrowRight className=" ml-2" />
+            </Button>
           </Box>
         </Stack>
       </Container>
@@ -85,7 +111,7 @@ const Footer = () => {
             <Box sx={{ width: "100%", height: "100%" }}>
               <Link href="/">
                 <Image
-                  src={assets.logo.headerlogo}
+                  src={assets.logo.footerlogo}
                   width={250}
                   height={50}
                   alt="logo"
