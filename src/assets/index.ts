@@ -26,10 +26,13 @@ const assets = {
     marriage: require("../assets/services/বিয়ে.jpg"),
   },
   courses: {
-    newMuslim: require("../assets/courses/new-muslim.jpg"),
-    childMoktob: require("../assets/courses/child-maktab.jpg"),
-    oldMoktob: require("../assets/courses/old-maktab.jpg"),
-    ladyMoktob: require("../assets/courses/lady-makab.jpg"),
+    english: require("../assets/courses/English Course.jpg"),
+    islamiNasid: require("../assets/courses/ইসলামী নাশিদ কোর্স web.jpg"),
+    comIslamkhristan: require("../assets/courses/তুলনামূলক ধর্মতত্ত্ব- ইসলাম ও খ্রিস্টান.jpg"),
+    comIslamBoudho: require("../assets/courses/তুলনামূলক ধর্মতত্ত্ব- ইসলাম ও বৌদ্ধধর্ম.jpg"),
+    comIslamHindu: require("../assets/courses/তুলনামূলক ধর্মতত্ত্ব- ইসলাম ও হিন্দুধর্ম.jpg"),
+    moulikIslam: require("../assets/courses/মৌলিক ইসলাম শিক্ষা.jpg"),
+    sohihQuran: require("../assets/courses/সহিহ কুরআন শিক্ষা.jpg"),
   },
 
   faculties: {

@@ -2,104 +2,52 @@
 
 import useUserInfo from "@/hooks/useUserInfo";
 import { logoutUser } from "@/services/actions/logoutUser";
-import { Box, Button, Hidden, Typography } from "@mui/material";
+
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const LoginButton = () => {
   const router = useRouter();
   const userInfo = useUserInfo();
-  // console.log(userInfo);
 
   const handleLogOut = () => {
     logoutUser(router);
   };
 
-  const handleNavigate = (link: string) => {
-    router.push(`/${link}`);
-  };
-
   return (
-    <Box>
-      <Typography
-        component={Button}
-        sx={{
-          boxShadow: "none",
-          fontSize: "15px",
-          fontWeight: 500,
-          px: "14px",
-          color: "secondary.main",
-          ":hover": {
-            backgroundColor: "secondary.main",
-            color: "primary.main",
-          },
-        }}
-        onClick={() => handleNavigate("donate")}
+    <div className="flex lg:flex-row md:flex-row flex-col lg:space-x-3 md:space-x-1">
+      <Link
+        href={"/donate"}
+        className="p-2 text-white hover:text-[#0F473C] block hover:bg-[#F7F3E7] font-semibold"
       >
         ডোনেট
-      </Typography>
+      </Link>
 
-      <Hidden smDown>
-        {userInfo?.userId ? (
-          <Typography
-            component={Button}
-            sx={{
-              backgroundColor: "",
-              color: "secondary.main",
-              boxShadow: "none",
-              fontSize: "15px",
-              fontWeight: 500,
-              px: "10px",
-              ":hover": {
-                backgroundColor: "secondary.main",
-                color: "primary.main",
-              },
-            }}
-            onClick={() => handleNavigate("dashboard")}
-          >
-            ড্যাশবোর্ড
-          </Typography>
-        ) : null}
+      {userInfo?.userId ? (
+        <Link
+          href={"/dashboard"}
+          className="p-2 text-white hover:text-[#0F473C] block hover:bg-[#F7F3E7] font-semibold"
+        >
+          ড্যাশবোর্ড
+        </Link>
+      ) : null}
 
-        {userInfo?.userId ? (
-          <Typography
-            component={Button}
-            sx={{
-              backgroundColor: "red",
-              boxShadow: "none",
-              color: "white",
-              fontSize: "15px",
-              fontWeight: 500,
-              px: "12px",
-              ":hover": {
-                backgroundColor: "secondary.main",
-                color: "primary.main",
-              },
-            }}
-            onClick={() => handleLogOut()}
-          >
-            লগআউট
-          </Typography>
-        ) : (
-          <Typography
-            component={Button}
-            sx={{
-              boxShadow: "none",
-              fontSize: "15px",
-              fontWeight: 500,
-              px: "14px",
-              color: "secondary.main",
-              ":hover": {
-                backgroundColor: "secondary.main",
-                color: "primary.main",
-              },
-            }}
-            onClick={() => handleNavigate("login")}
-          >
-            লগইন
-          </Typography>
-        )}
-      </Hidden>
-    </Box>
+      {userInfo?.userId ? (
+        <h5
+          onClick={() => handleLogOut()}
+          className="p-2 text-white hover:text-[#0F473C] block hover:bg-[#F7F3E7] font-semibold"
+        >
+          লগআউট
+        </h5>
+      ) : (
+        <Link
+          href={"/login"}
+          className="p-2 text-white hover:text-[#0F473C] block hover:bg-[#F7F3E7] font-semibold"
+        >
+          লগইন
+        </Link>
+      )}
+    </div>
   );
 };
 
