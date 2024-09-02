@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Box, Stack, Typography } from "@mui/material";
 import Title from "@/components/ui/Title";
 import PageTitle from "./PageTitle";
+import SubTitle from "./SubTitle";
 
 const CardDetails = ({
   image,
@@ -21,16 +22,22 @@ const CardDetails = ({
       <PageTitle title={title} />
       <Box className="">
         <Container>
-          <Box className="md:flex flex-wrap justify-between items-center rounded-lg min-h-80 lg:p-8">
+          {details && (
+            <Box className="max-w-3xl mx-auto lg:-mt-10 md:-mt-7 -mt-5 lg:mb-5 mb-8">
+              <SubTitle title={details} />
+            </Box>
+          )}
+
+          <Box className="md:flex flex-wrap justify-between items-start rounded-lg min-h-80 lg:p-8">
             <Box className="lg:w-[45%] md:w-[45%] w-full rounded-lg border border-gray-300">
               <Image src={image} alt={title} className="mx-auto rounded-lg" />
             </Box>
 
-            <Box className="lg:w-[45%] md:w-[45%] w-full lg:mt-0 mt-5">
+            <Box className="lg:w-[45%] md:w-[45%] w-full lg:mt-0 mt-8">
               {description?.map((item, index) => (
                 <DetailsItem key={index} item={item} />
               ))}
-              {details && <Typography>{details}</Typography>}
+
               <Box>
                 {btnTitle && link && (
                   <Link href={link as string}>

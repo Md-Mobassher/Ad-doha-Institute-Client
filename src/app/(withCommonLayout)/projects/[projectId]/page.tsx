@@ -9,7 +9,7 @@ type TParamsProps = {
 
 const ProjectDetailsPage = ({ params }: TParamsProps) => {
   const projectData = projectsData.find(
-    (project) => project._id === params.projectId
+    (project) => project?.navigation === params?.projectId
   );
 
   return (

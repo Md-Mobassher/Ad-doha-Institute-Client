@@ -14,7 +14,7 @@ const DetailsItem = ({ item }: detailItemProps) => {
       <Stack
         direction="row"
         justifyContent="start"
-        alignItems="center"
+        alignItems="start"
         gap="16px"
         mb={1}
       >
@@ -24,8 +24,8 @@ const DetailsItem = ({ item }: detailItemProps) => {
           fontSize={{
             lg: "16px",
             md: "16px",
-            sm: "15px",
-            xs: "14px",
+            sm: "16px",
+            xs: "15px",
           }}
           textAlign="start"
         >

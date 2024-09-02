@@ -49,7 +49,7 @@ const BannerSection = () => {
             clickable: true,
           }}
           modules={[Autoplay, Pagination]}
-          className="w-full lg:h-[560px] md:h-[400px] h-[200px] object-cover rounded-lg mySwiper"
+          className="w-full  object-contain rounded-lg mySwiper"
         >
           {slides.map((slide, index: number) => (
             <SwiperSlide

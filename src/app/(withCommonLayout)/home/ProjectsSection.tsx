@@ -22,7 +22,12 @@ const ProjectsSection = () => {
         </Stack>
 
         <Box>
-          <Slider items={projectsData} slidesPerView={3} />
+          <Slider
+            items={projectsData}
+            slidesPerView={3}
+            btnTitle="বিস্তারিত"
+            navigate="projects"
+          />
         </Box>
       </Container>
     </Box>

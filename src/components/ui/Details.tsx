@@ -7,8 +7,8 @@ const Details = ({ details }: { details: string }) => {
       fontSize={{
         lg: "16px",
         md: "16px",
-        sm: "15px",
-        xs: "14px",
+        sm: "16px",
+        xs: "15px",
       }}
       pb="8px"
       textAlign="justify"
