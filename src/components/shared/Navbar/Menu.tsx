@@ -38,7 +38,7 @@ const Menu: React.FC<MenuProps> = ({ items }) => {
               {item.title}
             </Link>
             {hoverIndex === index && item.option === "sub" && item.subItems && (
-              <div className="absolute lg:left-0 md:left-0 left-10 bg-gray-200 shadow-lg w-52 border border-[#F7F3E7] z-50">
+              <div className="absolute lg:left-0 md:left-0 left-28 bg-gray-200 shadow-lg w-52 border border-[#F7F3E7] z-50">
                 <div className="flex flex-col">
                   {item.subItems.map((subItem, subIndex) => (
                     <Link

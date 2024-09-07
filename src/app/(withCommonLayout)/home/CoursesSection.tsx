@@ -34,7 +34,7 @@ const CoursesSection = () => {
             }}
           >
             <Image
-              width={300}
+              width={600}
               src={course?.courseImage}
               alt="course image"
               className="border-b border-gray-300"
@@ -49,7 +49,7 @@ const CoursesSection = () => {
             >
               {/* <CardTitle title={course?.courseName} /> */}
               <Link href={`/courses/${course.navigation}`}>
-                <DohaButton btnTitle="রেজিস্টার করুন" />
+                <DohaButton btnTitle="রেজিস্টার" />
               </Link>
             </Box>
           </Card>

@@ -68,8 +68,8 @@ const assets = {
     quranShikkha: require("../assets/department/quran.png"),
     islamShikkha: require("../assets/department/hadis.png"),
     dhormototto: require("../assets/department/open-book.png"),
-    englishLanguage: require("../assets/department/books-2.png"),
-    islamiNashid: require("../assets/department/agenda.png"),
+    englishLanguage: require("../assets/department/English.png"),
+    islamiNashid: require("../assets/department/নাশিদ.png"),
   },
   icons: {
     location: require("../assets/logo/location.png"),
