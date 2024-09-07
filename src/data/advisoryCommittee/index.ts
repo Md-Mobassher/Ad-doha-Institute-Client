@@ -47,4 +47,10 @@ export const advisoryCommitteData = [
     image: assets.advisoryCommittees.saifulIslam,
     designation: "খতিব, মসজিদ উত্ তাকওয়া, ধানমন্ডি",
   },
+  {
+    _id: "8",
+    name: "আব্দুল কাদের সরকার",
+    image: assets.advisoryCommittees.abdulKader,
+    designation: "খতিব, মসজিদ উত্ তাকওয়া, ধানমন্ডি",
+  },
 ];

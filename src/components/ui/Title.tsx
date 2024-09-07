@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-type ITitle = {
+export type ITitle = {
   title: string;
 };
 

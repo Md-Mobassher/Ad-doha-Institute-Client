@@ -1,11 +1,11 @@
-import CardTitle from "@/components/ui/CardTitle";
-import Details from "@/components/ui/Details";
+import DohaButton from "@/components/ui/DohaButton";
 import Container from "@/components/ui/DohaContainer";
 import PageTitle from "@/components/ui/PageTitle";
 import { coursesData } from "@/data/courses";
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import CoursePrice from "./components/CoursePrice";
 
 const CoursesPage = () => {
   return (
@@ -33,13 +33,10 @@ const CoursesPage = () => {
                 </Box>
                 <Box
                   sx={{
-                    backgroundColor: "#fff",
+                    backgroundColor: "#ffffff",
                     borderRadius: "10px",
                   }}
                 >
-                  <Box pt={2}>
-                    <CardTitle title={course?.courseName} />
-                  </Box>
                   <Stack
                     direction="row"
                     justifyContent="space-between"
@@ -47,29 +44,12 @@ const CoursesPage = () => {
                     gap="5px"
                     flexWrap="wrap"
                     px={2}
-                    py={1}
+                    py={2}
                   >
-                    <Details
-                      details={`সর্বমোট ক্লাসঃ ${course?.totalClasses} টি`}
-                    />
-                    <Details details={`কোর্স ব্যপ্তিঃ ${course?.duration}`} />
+                    <CoursePrice price={course?.fee?.total} />
 
-                    <Details details={`কোর্স ফিঃ ${course?.fee?.total} টাকা`} />
-                  </Stack>
-
-                  <Stack
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    gap="15px"
-                    px={2}
-                    pb={2}
-                  >
-                    <Link href={`/courses/${course?.navigation}`}>
-                      <Button>বিস্তারিত</Button>
-                    </Link>
-                    <Link href={course?.link}>
-                      <Button>এনরোল</Button>
+                    <Link href={`/courses/${course.navigation}`}>
+                      <DohaButton btnTitle="রেজিস্টার" />
                     </Link>
                   </Stack>
                 </Box>

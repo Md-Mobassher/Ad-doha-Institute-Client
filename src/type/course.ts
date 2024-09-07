@@ -20,6 +20,7 @@ export interface TCourse {
   topics?: string[];
   targetAudience?: string[];
   modules?: string[];
+  link?: string;
 }
 
 export const defaultCourseData: TCourse = {
