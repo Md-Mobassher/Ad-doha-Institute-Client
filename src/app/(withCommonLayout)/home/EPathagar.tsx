@@ -1,11 +1,11 @@
 import DohaContainer from "@/components/ui/DohaContainer";
 import { Box, Button, Stack } from "@mui/material";
 import Image from "next/image";
-import nadvi from "@/assets/Nadbi.jpg";
 import CourseTitle2 from "../courses/components/CourseTitle2";
 import CourseTitle3 from "../courses/components/CourseTitle3";
 import Link from "next/link";
 import Title from "@/components/ui/Title";
+import assets from "@/assets";
 
 const EPathagar = () => {
   return (
@@ -35,7 +35,7 @@ const EPathagar = () => {
             }}
           >
             <Image
-              src={nadvi}
+              src={assets.advisoryCommittees.nadvi}
               alt={"Abul Hasan Ali Nadvi"}
               width={900}
               height={600}

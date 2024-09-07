@@ -63,6 +63,7 @@ const assets = {
     gMMeherullah: require("../assets/advisoryCommittee/শায়েখ জি এম মেহেরুল্লাহ.jpg"),
     mujiburRahman: require("../assets/advisoryCommittee/শায়েখ মুফতি মুজিবুর রহমান.jpg"),
     saifulIslam: require("../assets/advisoryCommittee/হাফেজ মুফতি সাইফুল ইসলাম.jpg"),
+    nadvi: require("../assets/advisoryCommittee/Nadbi.jpg"),
   },
   departments: {
     quranShikkha: require("../assets/department/quran.png"),
