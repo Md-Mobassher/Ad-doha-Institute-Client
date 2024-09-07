@@ -4,11 +4,11 @@ import AboutSection from "./home/AboutSection";
 import ProjectsSection from "./home/ProjectsSection";
 import CoursesSection from "./home/CoursesSection";
 import DepartmentsSection from "./home/DepartmentsSection";
-import BooksSection from "./home/BooksSection";
 import StudentsCornerSection from "./home/StudentsCorner";
 import OpinionOfAlim from "./home/OpinionOfAlim";
 import TeachersPanel from "./home/TeachersPanel";
 import VideosSection from "./home/VideosSection";
+import EPathagar from "./home/EPathagar";
 
 const HomePage = () => {
   return (
@@ -18,7 +18,7 @@ const HomePage = () => {
       <ProjectsSection />
       <CoursesSection />
       <DepartmentsSection />
-      <BooksSection />
+      <EPathagar />
       <StudentsCornerSection />
       <OpinionOfAlim />
       <TeachersPanel />
