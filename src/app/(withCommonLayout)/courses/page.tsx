@@ -2,7 +2,7 @@ import DohaButton from "@/components/ui/DohaButton";
 import Container from "@/components/ui/DohaContainer";
 import PageTitle from "@/components/ui/PageTitle";
 import { coursesData } from "@/data/courses";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import CoursePrice from "./components/CoursePrice";

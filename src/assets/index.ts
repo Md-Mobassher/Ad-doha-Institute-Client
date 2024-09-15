@@ -82,6 +82,10 @@ const assets = {
     video: require("../assets/resourses/video.gif"),
     gallery: require("../assets/resourses/gallery.gif"),
   },
+  about: {
+    aim: require("../assets/about/aim.png"),
+    objective: require("../assets/about/uddesso.png"),
+  },
 };
 
 export default assets;
