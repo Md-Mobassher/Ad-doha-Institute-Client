@@ -18,7 +18,7 @@ const LoginButton = () => {
     <div className="flex lg:flex-row md:flex-row flex-col lg:justify-center lg:items-center">
       <Link
         href={"/donate"}
-        className="lg:rounded-full lg:border-2 border-orange-200 lg:px-5 px-4 py-2 text-white hover:text-[#0F473C] inline hover:bg-[#F7F3E7] font-semibold"
+        className="lg:rounded-full px-4 py-2 text-white hover:text-[#0F473C] inline hover:bg-[#F7F3E7] font-semibold"
       >
         ডোনেট
       </Link>

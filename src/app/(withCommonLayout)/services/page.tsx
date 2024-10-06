@@ -22,7 +22,6 @@ const ServicesPage = () => {
                   {...service}
                   navigate="services"
                   btnTitle="বিস্তারিত"
-                  btnTitle2="সেবা নিন"
                   link={service.link}
                 />
               </>

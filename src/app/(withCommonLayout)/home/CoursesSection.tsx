@@ -18,7 +18,7 @@ const CoursesSection = () => {
         mb={4}
       >
         <Title title="জনপ্রিয় কোর্সসমূহ" />
-        <SubTitle title="এক-নজরে দেখে নিন আমাদের বাছাইকৃত সেরা কোর্সগুলো" />
+        <SubTitle title="এক-নজরে দেখে নিন আমাদের বাছাইকৃত কোর্সগুলো" />
       </Stack>
 
       <Box className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-7 md:gap-6  gap-5 mt-8 mx-auto">

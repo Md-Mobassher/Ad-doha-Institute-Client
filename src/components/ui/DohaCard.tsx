@@ -57,7 +57,7 @@ const DohaCard = ({
         </Box>
         <Box px="20px" pt="20px">
           {title && <CardTitle title={title} />}
-          {details && <Details details={details} />}
+          {details && <Details details={`${details.slice(0, 145)}...`} />}
         </Box>
       </Box>
 
