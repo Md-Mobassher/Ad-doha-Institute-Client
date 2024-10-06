@@ -111,7 +111,7 @@ const courseDetailsPage = ({ params }: TParamsProps) => {
               title="রেজিস্ট্রেশন ফি:"
               details={`${fee.admission} টাকা`}
             />
-            <CourseTitle2 title="মাসিক ফিঃ:" details={`${fee.monthly} টাকা`} />
+            <CourseTitle2 title="মাসিক ফি:" details={`${fee.monthly} টাকা`} />
             <CourseTitle2 title="সর্বমোট:" details2={`${fee?.total} টাকা`} />
             <CourseTitle2
               title="ফি পরিশোধের ধরন:"

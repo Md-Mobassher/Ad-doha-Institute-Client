@@ -42,7 +42,7 @@ const LoginButton = () => {
       ) : (
         <Link
           href={"/login"}
-          className="lg:rounded-full px-4 py-2 text-white hover:text-[#0F473C] hover:bg-[#F7F3E7] font-semibold mt-1"
+          className="lg:rounded-full px-4 py-2 text-white hover:text-[#0F473C] hover:bg-[#F7F3E7] font-semibold"
         >
           লগইন
         </Link>

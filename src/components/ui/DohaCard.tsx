@@ -64,8 +64,8 @@ const DohaCard = ({
       <Box>
         {btnTitle && (
           <Stack
-            justifyContent="space-between"
-            alignItems="end"
+            justifyContent="center"
+            alignItems="center"
             direction="row"
             pt="10px"
             px="20px"

@@ -11,7 +11,7 @@ const CourseTitle2 = ({ title, details, details2 }: TTitle2) => {
     <Stack
       direction="row"
       justifyContent="start"
-      alignItems="start"
+      alignItems="center"
       mt="1px"
       gap="10px"
     >
