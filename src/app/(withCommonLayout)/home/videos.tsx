@@ -1,17 +1,20 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Pagination } from "swiper/modules";
 import LoadingPage from "@/app/loading";
 import { useGetAllVideosQuery } from "@/redux/features/admin/videoManagementApi";
 import { TVideo } from "@/type";
 import { Box } from "@mui/material";
 
 const Videos = () => {
-  const { data, isLoading } = useGetAllVideosQuery({});
+  const { data, isLoading, isError } = useGetAllVideosQuery({});
 
   if (isLoading) {
     return <LoadingPage />;
+  }
+  if (isError) {
+    return <h2>Error fetching video!</h2>;
   }
 
   const videosData = data?.videos;
@@ -47,8 +50,8 @@ const Videos = () => {
       >
         {/* <Box className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 "> */}
         {videosData?.map((video: TVideo) => (
-          <SwiperSlide key={video.id}>
-            <Box className="flex justify-center border" key={video.id}>
+          <SwiperSlide key={video?._id}>
+            <Box className="flex justify-center border" key={video._id}>
               <iframe
                 width="620"
                 height="300"

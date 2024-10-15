@@ -12,13 +12,18 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import GroupsIcon from "@mui/icons-material/Groups";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import CommentIcon from "@mui/icons-material/Comment";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import WorkspacesIcon from "@mui/icons-material/Workspaces";
 
 export const drawerItems = (role: UserRole): DrawerItem[] => {
   const roleMenus: DrawerItem[] = [];
 
   const defaultMenus = [
     {
-      title: "Profile",
+      title: "My Profile",
       path: `${role}/profile`,
       icon: PersonIcon,
     },
@@ -53,14 +58,34 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           icon: GroupsIcon,
         },
         {
+          title: "Department Management",
+          path: `${role}/department-management`,
+          icon: WorkspacesIcon,
+        },
+        {
           title: "Course Management",
           path: `${role}/course-management`,
           icon: AutoStoriesIcon,
         },
         {
-          title: "Book Management",
-          path: `${role}/book-management`,
-          icon: MenuBookIcon,
+          title: "Teacher Management",
+          path: `${role}/teacher-management`,
+          icon: PeopleAltIcon,
+        },
+        {
+          title: "Advisory Committee Management",
+          path: `${role}/advisory-committee-management`,
+          icon: PeopleOutlineIcon,
+        },
+        {
+          title: "Opinion Management",
+          path: `${role}/opinion-management`,
+          icon: CommentIcon,
+        },
+        {
+          title: "Library Management",
+          path: `${role}/library-management`,
+          icon: LibraryBooksIcon,
         },
         {
           title: "Video Management",
@@ -93,14 +118,34 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           icon: GroupsIcon,
         },
         {
+          title: "Department Management",
+          path: `${role}/department-management`,
+          icon: WorkspacesIcon,
+        },
+        {
           title: "Course Management",
           path: `${role}/course-management`,
           icon: AutoStoriesIcon,
         },
         {
-          title: "Book Management",
-          path: `${role}/book-management`,
-          icon: MenuBookIcon,
+          title: "Teacher Management",
+          path: `${role}/teacher-management`,
+          icon: PeopleAltIcon,
+        },
+        {
+          title: "Advisory Committee Management",
+          path: `${role}/advisory-committee-management`,
+          icon: PeopleOutlineIcon,
+        },
+        {
+          title: "Opinion Management",
+          path: `${role}/opinion-management`,
+          icon: CommentIcon,
+        },
+        {
+          title: "Library Management",
+          path: `${role}/library-management`,
+          icon: LibraryBooksIcon,
         },
         {
           title: "Video Management",

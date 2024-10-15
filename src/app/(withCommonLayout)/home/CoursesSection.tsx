@@ -2,9 +2,8 @@ import DohaContainer from "@/components/ui/DohaContainer";
 import SubTitle from "@/components/ui/SubTitle";
 import Title from "@/components/ui/Title";
 import { coursesData } from "@/data/courses";
-import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
+import { Box, Card, Stack } from "@mui/material";
 import Image from "next/image";
-import CardTitle from "@/components/ui/CardTitle";
 import Link from "next/link";
 import DohaButton from "@/components/ui/DohaButton";
 
