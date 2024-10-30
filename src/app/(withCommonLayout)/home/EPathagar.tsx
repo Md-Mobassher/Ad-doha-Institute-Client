@@ -19,7 +19,7 @@ const EPathagar = () => {
             xs: "column",
           }}
           justifyContent="space-between"
-          alignItems="start"
+          alignItems="center"
           gap={8}
         >
           <Box

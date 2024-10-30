@@ -52,6 +52,12 @@ export type TVideo = {
   title?: string;
   url: string;
 };
+export type TAcademicDepartment = {
+  _id: string;
+  name: string;
+  image: string;
+  position: number;
+};
 export type TMember = {
   _id: string;
   image: any;

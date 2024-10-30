@@ -79,6 +79,7 @@ const assets = {
   },
   resourse: {
     book: require("../assets/resourses/book.gif"),
+    preOrder: require("../assets/resourses/books/preorderbooks.jpg"),
     video: require("../assets/resourses/video.gif"),
     gallery: require("../assets/resourses/gallery.gif"),
   },

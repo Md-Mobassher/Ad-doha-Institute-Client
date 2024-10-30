@@ -25,7 +25,7 @@ const VideoPages = () => {
           {videosData?.map((video: TVideo) => (
             <Box
               className="flex justify-center border hover:border-primary hover:shadow-xl shadow"
-              key={video.id}
+              key={video._id}
             >
               <iframe
                 width="620"

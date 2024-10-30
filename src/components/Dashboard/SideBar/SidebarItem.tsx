@@ -29,6 +29,8 @@ const SidebarItem = ({ item }: IProps) => {
                 "& svg": {
                   color: " #22C55E",
                 },
+                fontSize: "14px",
+                fontWeight: 600,
               }
             : {}),
           p: 0,
@@ -38,14 +40,11 @@ const SidebarItem = ({ item }: IProps) => {
           },
         }}
       >
-        <ListItemButton sx={{ px: "5px", py: "5px" }}>
-          <ListItemIcon sx={{ px: "5px" }}>
+        <ListItemButton sx={{ px: "5px", py: "5px", gap: 0 }}>
+          <ListItemIcon sx={{ pl: "5px", pr: 0 }}>
             {item.icon && <item.icon />}
           </ListItemIcon>
-          <ListItemText
-            primary={item.title}
-            sx={{ fontSize: "14px", fontWeight: 600 }}
-          />
+          <ListItemText primary={item.title} />
         </ListItemButton>
       </ListItem>
     </Link>
