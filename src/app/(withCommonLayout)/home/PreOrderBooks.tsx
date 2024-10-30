@@ -13,6 +13,14 @@ const PreOrderBooks = () => {
     <Box>
       <DohaContainer>
         <Stack
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          mb={4}
+        >
+          <Title title="নতুন প্রকাশিত বই" />
+        </Stack>
+        <Stack
           direction={{
             lg: "row",
             md: "row",
@@ -22,6 +30,7 @@ const PreOrderBooks = () => {
           justifyContent="space-between"
           alignItems="center"
           gap={8}
+          mt={2}
         >
           <Box
             width="100%"
