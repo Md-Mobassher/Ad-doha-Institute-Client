@@ -2,6 +2,23 @@ import { USER_ROLE } from "@/constant/role";
 import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 
+export type TGender = "male" | "female" | "other";
+export type TBloodGroup =
+  | "A+"
+  | "A-"
+  | "B+"
+  | "B-"
+  | "AB+"
+  | "AB-"
+  | "O+"
+  | "O-";
+
+export type TUserName = {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+};
+
 export type TCardProps = {
   _id: string;
   image?: string | any;
@@ -47,11 +64,7 @@ export type TBook = {
   image: any;
   url: string;
 };
-export type TVideo = {
-  _id: string;
-  title?: string;
-  url: string;
-};
+
 export type TAcademicDepartment = {
   _id: string;
   name: string;

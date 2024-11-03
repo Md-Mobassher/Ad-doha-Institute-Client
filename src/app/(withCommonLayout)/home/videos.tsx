@@ -2,23 +2,14 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
-import LoadingPage from "@/app/loading";
-import { useGetAllVideosQuery } from "@/redux/features/admin/videoManagementApi";
-import { TVideo } from "@/type";
+import { IVideo } from "@/type";
 import { Box } from "@mui/material";
 
-const Videos = () => {
-  const { data, isLoading, isError } = useGetAllVideosQuery({});
+interface VideosProps {
+  videos: IVideo[];
+}
 
-  if (isLoading) {
-    return <LoadingPage />;
-  }
-  if (isError) {
-    return <h2>Error fetching video!</h2>;
-  }
-
-  const videosData = data?.videos;
-
+const Videos = ({ videos }: VideosProps) => {
   return (
     <>
       <Swiper
@@ -48,23 +39,22 @@ const Videos = () => {
         }}
         className="w-full h-full flex justify-between items-stretch mySwiper"
       >
-        {/* <Box className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 "> */}
-        {videosData?.map((video: TVideo) => (
-          <SwiperSlide key={video?._id}>
-            <Box className="flex justify-center border" key={video._id}>
-              <iframe
-                width="620"
-                height="300"
-                src={video.url}
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              ></iframe>
-            </Box>
-          </SwiperSlide>
-        ))}
-        {/* </Box> */}
+        {videos &&
+          videos?.map((video: IVideo) => (
+            <SwiperSlide key={video?._id}>
+              <Box className="flex justify-center border" key={video._id}>
+                <iframe
+                  width="620"
+                  height="300"
+                  src={video.url}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                ></iframe>
+              </Box>
+            </SwiperSlide>
+          ))}
       </Swiper>
     </>
   );

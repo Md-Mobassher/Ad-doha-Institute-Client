@@ -1,42 +1,22 @@
-"use client";
-
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import assets from "@/assets";
 import DohaContainer from "@/components/ui/DohaContainer";
 import Title from "@/components/ui/Title";
+import CourseTitle3 from "../courses/components/CourseTitle3";
+import { IDepartment } from "@/type";
 
-interface Department {
-  id: number;
-  title: string;
-  imageUrl: string;
-}
+const DepartmentsSection: React.FC = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/academic-departments`,
+    {
+      next: {
+        revalidate: 30,
+      },
+    }
+  );
+  const { data } = await res.json();
+  const departments = (data as IDepartment[]) || [];
 
-const departments: Department[] = [
-  {
-    id: 1,
-    title: "সহিহ কুরআন শিক্ষা",
-    imageUrl: assets.departments.quranShikkha,
-  },
-  {
-    id: 2,
-    title: "মৌলিক ইসলাম শিক্ষা",
-    imageUrl: assets.departments.islamShikkha,
-  },
-  {
-    id: 3,
-    title: "তুলনামূলক ধর্মতত্ত্ব",
-    imageUrl: assets.departments.dhormototto,
-  },
-  {
-    id: 4,
-    title: "ইংরেজি ভাষা শিক্ষা",
-    imageUrl: assets.departments.englishLanguage,
-  },
-  { id: 5, title: "ইসলামি নাশিদ", imageUrl: assets.departments.islamiNashid },
-];
-
-const DepartmentsSection: React.FC = () => {
   return (
     <Box
       sx={{
@@ -49,8 +29,10 @@ const DepartmentsSection: React.FC = () => {
           justifyContent="center"
           alignItems="center"
           mb={4}
+          gap={2}
         >
           <Title title="আমাদের বিভাগসমূহ" />
+          <CourseTitle3 />
         </Stack>
 
         <Box sx={{ flexGrow: 1, p: 2 }}>
@@ -69,39 +51,40 @@ const DepartmentsSection: React.FC = () => {
               },
             }}
           >
-            {departments.map((department, index) => (
-              <Grid
-                key={index}
-                {...{ xs: 6, sm: 6, md: 2.4, lg: 2.4, xl: 2.4 }}
-                minHeight={160}
-              >
-                <Box className="  text-center p-5 bg-white cursor-pointer">
-                  <Box className="hover:scale-110 transition-all duration-300 flex flex-col items-center">
-                    <Image
-                      src={department.imageUrl}
-                      alt={department.title}
-                      width={80}
-                      height={80}
-                      className="mb-4"
-                    />
-                    <Typography
-                      component="p"
-                      sx={{
-                        color: "primary.main",
-                        boxShadow: "none",
-                        fontSize: "16px",
-                        fontWeight: 600,
-                        px: "10px",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      {department.title}
-                    </Typography>
+            {departments &&
+              departments?.map((department: IDepartment) => (
+                <Grid
+                  key={department?._id}
+                  {...{ xs: 6, sm: 4, md: 2.4, lg: 2.4, xl: 2.4 }}
+                  minHeight={160}
+                >
+                  <Box className="  text-center p-5 bg-white cursor-pointer">
+                    <Box className="hover:scale-110 transition-all duration-300 flex flex-col items-center">
+                      <Image
+                        src={department.image}
+                        alt={department.name}
+                        width={80}
+                        height={80}
+                        className="mb-4"
+                      />
+                      <Typography
+                        component="p"
+                        sx={{
+                          color: "primary.main",
+                          boxShadow: "none",
+                          fontSize: "16px",
+                          fontWeight: 600,
+                          px: "10px",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        {department.name}
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
-              </Grid>
-            ))}
+                </Grid>
+              ))}
           </Grid>
         </Box>
       </DohaContainer>

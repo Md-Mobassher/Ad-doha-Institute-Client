@@ -1,6 +1,6 @@
 import { baseApi } from "../../api/baseApi";
 import { tagTypes } from "../../tag-Types";
-import { IMeta, TAcademicDepartment, TVideo } from "../../../type/common";
+import { IMeta, TAcademicDepartment } from "../../../type/common";
 
 const academicDepartmentsApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

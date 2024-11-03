@@ -1,7 +1,9 @@
+import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaModal from "@/components/shared/DohaModal/DohaModal";
 import { useCreateAcademicDepartmentMutation } from "@/redux/features/admin/departmentManagementApi";
+import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { Button, CircularProgress, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -15,7 +17,18 @@ const CreateDepartmentModal = ({ open, setOpen }: TProps) => {
   const [createDepartment, { isLoading: creating }] =
     useCreateAcademicDepartmentMutation();
 
+  const defaultValues = {
+    name: "",
+    image: "",
+    position: "",
+  };
+
   const handleFormSubmit = async (values: FieldValues) => {
+    const imageUrl = await uploadImageToCloudinary(values.file);
+    if (!imageUrl) {
+      return;
+    }
+    values.image = imageUrl;
     const newDepartment = {
       name: values.name,
       image: values.image,
@@ -25,7 +38,7 @@ const CreateDepartmentModal = ({ open, setOpen }: TProps) => {
 
     try {
       const res = await createDepartment(newDepartment).unwrap();
-      console.log(res);
+      // console.log(res);
       if (res?._id) {
         toast.success("Academic Department created successfully!!!");
         setOpen(false);
@@ -35,16 +48,10 @@ const CreateDepartmentModal = ({ open, setOpen }: TProps) => {
     }
   };
 
-  const defaultValues = {
-    name: "",
-    image: "",
-    position: "",
-  };
-
   return (
     <DohaModal open={open} setOpen={setOpen} title="Create New Department">
       <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
-        <Grid container spacing={3} my={1}>
+        <Grid container spacing={3} my={0}>
           <Grid item lg={12} md={12} sm={12} xs={12}>
             <DohaInput
               label="Academic Department Name"
@@ -65,12 +72,16 @@ const CreateDepartmentModal = ({ open, setOpen }: TProps) => {
           </Grid>
 
           <Grid item lg={12} md={12} sm={12} xs={12}>
-            <DohaInput
-              label="Academic Department Image"
-              fullWidth={true}
-              type="text"
-              name="image"
-              required
+            <DohaFileUploader
+              sx={{
+                width: "100%",
+                backgroundColor: "success.main",
+                ":hover": {
+                  backgroundColor: "primary.main",
+                },
+              }}
+              label="image"
+              name="file"
             />
           </Grid>
         </Grid>
@@ -92,7 +103,7 @@ const CreateDepartmentModal = ({ open, setOpen }: TProps) => {
             fullWidth={true}
             type="submit"
           >
-            Create New Academic Department
+            Create New Department
           </Button>
         )}
       </DohaForm>

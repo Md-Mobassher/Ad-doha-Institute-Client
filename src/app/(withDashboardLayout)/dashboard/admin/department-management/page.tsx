@@ -42,14 +42,13 @@ const DepartmentManagementPage = () => {
     <p>No Data Found</p>;
   }
 
-  // console.log(data);
   const academicDepartment = data?.departments;
 
   const meta = data?.meta;
   // console.log(academicDepartment
 
   const handleDelete = async () => {
-    console.log(deleteId);
+    // console.log(deleteId);
     try {
       const res = await deleteAcademicDepartment(deleteId).unwrap();
 
@@ -58,7 +57,8 @@ const DepartmentManagementPage = () => {
         toast.success("Academic Department deleted successfully!!!");
       }
     } catch (err: any) {
-      console.error(err.message);
+      toast.error(err.message || "Failed to delete Academic Department!!!");
+      // console.error(err.message);
     }
   };
 
@@ -66,27 +66,31 @@ const DepartmentManagementPage = () => {
     {
       field: "image",
       headerName: "Image",
-      width: 50,
+      width: 150,
       renderCell: ({ row }) => {
         return (
           <Box
             sx={{
-              marginTop: "5px",
+              margin: "3px",
+              display: "flex",
+              justifyContent: "start",
+              alignItems: "center",
+              borderRadius: "5px",
             }}
           >
             {row?.image ? (
               <Image
                 alt="Department image"
-                src={assets.departments.quranShikkha}
-                width={200}
-                height={200}
+                src={row?.image}
+                width={50}
+                height={50}
               />
             ) : (
               <Image
                 alt="Department image"
-                src={assets.departments.quranShikkha}
-                width={200}
-                height={200}
+                src={assets.departments.englishLanguage}
+                width={50}
+                height={50}
               />
             )}
           </Box>
@@ -94,7 +98,7 @@ const DepartmentManagementPage = () => {
       },
     },
     { field: "name", headerName: "Department Name", flex: 1 },
-    { field: "position", headerName: "Position", width: 100 },
+    { field: "position", headerName: "Position", width: 100, flex: 1 },
     {
       field: "action",
       headerName: "Action",

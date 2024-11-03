@@ -15,13 +15,16 @@ import {
   useGetAllVideosQuery,
 } from "@/redux/features/admin/videoManagementApi";
 import CreateVideoModal from "./components/CreateVideoModal";
+import DeleteModal from "@/components/ui/DeletModal";
 
 const VideoManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const query: Record<string, any> = {};
   const [searchTerm, setSearchTerm] = useState<string>("");
-  // console.log(searchTerm);
-
+  const [deleteId, setDeleteId] = useState<string>("");
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const { data, isLoading } = useGetAllVideosQuery({ ...query });
+  const [deleteVideo] = useDeleteVideoMutation();
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
@@ -31,9 +34,6 @@ const VideoManagementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  const { data, isLoading } = useGetAllVideosQuery({ ...query });
-  const [deleteVideo] = useDeleteVideoMutation();
-  // console.log(data);
   if (!data) {
     <p>No Data Found</p>;
   }
@@ -41,23 +41,24 @@ const VideoManagementPage = () => {
   const meta = data?.meta;
   // console.log(videos);
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async () => {
     // console.log(id);
     try {
-      const res = await deleteVideo(id).unwrap();
-
+      const res = await deleteVideo(deleteId).unwrap();
       // console.log(res);
-      if (res?.id) {
+
+      if (res === null) {
         toast.success("Video deleted successfully!!!");
       }
     } catch (err: any) {
-      console.error(err.message);
+      toast.error(err.message || "Failed to delete Video!!!");
+      // console.error(err.message);
     }
   };
 
   const columns: GridColDef[] = [
     { field: "title", headerName: "Video Title", flex: 1 },
-    { field: "_id", headerName: "ID", flex: 1 },
+    { field: "position", headerName: "Position", width: 100, flex: 1 },
     { field: "url", headerName: "Video Url", flex: 1 },
     {
       field: "action",
@@ -69,7 +70,10 @@ const VideoManagementPage = () => {
         return (
           <Box>
             <IconButton
-              onClick={() => handleDelete(row._id)}
+              onClick={() => {
+                setDeleteModalOpen(true);
+                setDeleteId(row._id);
+              }}
               aria-label="delete"
             >
               <DeleteIcon sx={{ color: "red" }} />
@@ -117,6 +121,11 @@ const VideoManagementPage = () => {
       ) : (
         <LoadingPage />
       )}
+      <DeleteModal
+        open={deleteModalOpen}
+        setOpen={setDeleteModalOpen}
+        onDeleteConfirm={handleDelete}
+      />
     </Box>
   );
 };
