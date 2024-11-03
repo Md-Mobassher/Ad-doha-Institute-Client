@@ -24,17 +24,15 @@ const VideoUpdatePage = ({ params }: TParams) => {
   const [updateVideo, { isLoading: updating }] = useUpdateVideoMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    const updatedVideo = {
+    const id = params.videoId;
+    const updatedData = {
       title: values.title,
       url: values.url,
       position: Number(values.position),
     };
 
     try {
-      const res = await updateVideo({
-        id: params.videoId,
-        updatedVideo,
-      }).unwrap();
+      const res = await updateVideo({ id, updatedData }).unwrap();
       // console.log(res);
 
       if (res?._id) {

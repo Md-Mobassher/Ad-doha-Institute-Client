@@ -5,9 +5,9 @@ import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import {
-  useGetSingleOpinionQuery,
-  useUpdateOpinionMutation,
-} from "@/redux/features/admin/opinionManagementApi";
+  useGetSingleTeacherQuery,
+  useUpdateTeacherMutation,
+} from "@/redux/features/admin/teacherManagementApi";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
@@ -16,16 +16,16 @@ import { toast } from "sonner";
 
 type TParams = {
   params: {
-    opinionId: string;
+    teacherId: string;
   };
 };
 
-const OpinionUpdatePage = ({ params }: TParams) => {
+const TeacherUpdatePage = ({ params }: TParams) => {
   const router = useRouter();
-  const { data, isLoading, refetch } = useGetSingleOpinionQuery(
-    params?.opinionId
+  const { data, isLoading, refetch } = useGetSingleTeacherQuery(
+    params?.teacherId
   );
-  const [updateOpinion, { isLoading: updating }] = useUpdateOpinionMutation();
+  const [updateTeacher, { isLoading: updating }] = useUpdateTeacherMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
     let imageUrl = data?.image || "";
@@ -36,25 +36,25 @@ const OpinionUpdatePage = ({ params }: TParams) => {
         return;
       }
     }
-    const id = params?.opinionId;
-    const updatedData = {
-      name: values.name,
-      image: imageUrl,
-      designation: values.designation,
-      opinion: values.opinion,
-      position: Number(values.position),
-    };
 
     try {
-      const res = await updateOpinion({ id, updatedData });
-      // console.log(res);
+      const id = params?.teacherId;
+      const updatedData = {
+        name: values.name,
+        image: imageUrl,
+        designation: values.designation,
+        position: Number(values.position),
+      };
+      const res = await updateTeacher({ id, updatedData });
+
+      console.log("Response from updateTeacher:", res);
 
       if (res?.data?._id) {
-        toast.success(res?.data?.message || "Opinion Updated Successfully!!!");
+        toast.success(res?.data?.message || "Teacher Updated Successfully!!!");
         await refetch();
-        router.push("/dashboard/admin/opinion-management");
+        router.push("/dashboard/admin/teacher-management");
       } else {
-        toast.error(res?.data?.message || "Failed to update Opinion!!!");
+        toast.error(res?.data?.message || "Failed to update Teacher!!!");
       }
     } catch (err: any) {
       console.error(err);
@@ -64,7 +64,7 @@ const OpinionUpdatePage = ({ params }: TParams) => {
   const defaultValues = {
     name: data?.name || "",
     designation: data?.designation || "",
-    opinion: data?.opinion || "",
+    Teacher: data?.Teacher || "",
     position: data?.position || "",
   };
 
@@ -97,7 +97,7 @@ const OpinionUpdatePage = ({ params }: TParams) => {
             textAlign="center"
             color={"primary.main"}
           >
-            Update Opinion
+            Update Teacher
           </Typography>
 
           <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
@@ -121,15 +121,7 @@ const OpinionUpdatePage = ({ params }: TParams) => {
                   required
                 />
               </Grid>
-              <Grid item lg={12} md={12} sm={12} xs={12}>
-                <DohaInput
-                  label="Opinion"
-                  fullWidth={true}
-                  type="text"
-                  name="opinion"
-                  required
-                />
-              </Grid>
+
               <Grid item lg={12} md={12} sm={12} xs={12}>
                 <DohaInput
                   label="Position"
@@ -171,7 +163,7 @@ const OpinionUpdatePage = ({ params }: TParams) => {
                 fullWidth
                 type="submit"
               >
-                Update Opinion
+                Update Teacher
               </Button>
             )}
           </DohaForm>
@@ -181,4 +173,4 @@ const OpinionUpdatePage = ({ params }: TParams) => {
   );
 };
 
-export default OpinionUpdatePage;
+export default TeacherUpdatePage;

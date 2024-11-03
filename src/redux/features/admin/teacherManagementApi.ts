@@ -2,20 +2,20 @@ import { baseApi } from "../../api/baseApi";
 import { tagTypes } from "../../tag-Types";
 import { IMeta, TAcademicDepartment } from "../../../type/common";
 
-const opinionApi = baseApi.injectEndpoints({
+const teachersApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    createOpinion: build.mutation({
+    createTeacher: build.mutation({
       query: (data) => ({
-        url: "/opinions",
+        url: "/teachers",
         method: "POST",
         data,
       }),
-      invalidatesTags: [tagTypes.opinion],
+      invalidatesTags: [tagTypes.teacher],
     }),
 
-    getAllOpinions: build.query({
+    getAllTeachers: build.query({
       query: (arg: Record<string, any>) => ({
-        url: "/opinions",
+        url: "/teachers",
         method: "GET",
         params: arg,
       }),
@@ -25,40 +25,40 @@ const opinionApi = baseApi.injectEndpoints({
           meta,
         };
       },
-      providesTags: [tagTypes.opinion],
+      providesTags: [tagTypes.teacher],
     }),
 
-    getSingleOpinion: build.query({
+    getSingleTeacher: build.query({
       query: (id) => ({
-        url: `/opinions/${id}`,
+        url: `/teachers/${id}`,
         method: "GET",
       }),
-      providesTags: [tagTypes.opinion],
+      providesTags: [tagTypes.teacher],
     }),
 
-    deleteOpinion: build.mutation({
+    deleteTeacher: build.mutation({
       query: (id) => ({
-        url: `/opinions/${id}`,
+        url: `/teachers/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: [tagTypes.opinion],
+      invalidatesTags: [tagTypes.teacher],
     }),
 
-    updateOpinion: build.mutation({
+    updateTeacher: build.mutation({
       query: ({ id, updatedData }) => ({
-        url: `/opinions/${id}`,
+        url: `/teachers/${id}`,
         method: "PATCH",
         data: updatedData,
       }),
-      invalidatesTags: [tagTypes.opinion],
+      invalidatesTags: [tagTypes.teacher],
     }),
   }),
 });
 
 export const {
-  useCreateOpinionMutation,
-  useGetAllOpinionsQuery,
-  useGetSingleOpinionQuery,
-  useDeleteOpinionMutation,
-  useUpdateOpinionMutation,
-} = opinionApi;
+  useCreateTeacherMutation,
+  useGetAllTeachersQuery,
+  useGetSingleTeacherQuery,
+  useDeleteTeacherMutation,
+  useUpdateTeacherMutation,
+} = teachersApi;

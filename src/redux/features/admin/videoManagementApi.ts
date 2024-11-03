@@ -46,10 +46,10 @@ const videosApi = baseApi.injectEndpoints({
     }),
 
     updateVideo: build.mutation({
-      query: ({ id, values }) => ({
+      query: ({ id, updatedData }) => ({
         url: `/videos/${id}`,
         method: "PATCH",
-        data: values,
+        data: updatedData,
       }),
       invalidatesTags: [tagTypes.video],
     }),
