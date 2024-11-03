@@ -4,7 +4,7 @@ import LoadingPage from "@/app/loading";
 import DohaContainer from "@/components/ui/DohaContainer";
 import PageTitle from "@/components/ui/PageTitle";
 import { useGetAllVideosQuery } from "@/redux/features/admin/videoManagementApi";
-import { TVideo } from "@/type";
+import { IVideo } from "@/type";
 import { Box } from "@mui/material";
 
 const VideoPages = () => {
@@ -22,7 +22,7 @@ const VideoPages = () => {
 
       <DohaContainer>
         <Box className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-7 md:gap-6 gap-5">
-          {videosData?.map((video: TVideo) => (
+          {videosData?.map((video: IVideo) => (
             <Box
               className="flex justify-center border hover:border-primary hover:shadow-xl shadow"
               key={video._id}

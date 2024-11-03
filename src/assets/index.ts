@@ -76,6 +76,7 @@ const assets = {
     location: require("../assets/logo/location.png"),
     email: require("../assets/logo/email.png"),
     call: require("../assets/logo/call.webp"),
+    avatar: require("../assets/avatar.webp"),
   },
   resourse: {
     book: require("../assets/resourses/book.gif"),

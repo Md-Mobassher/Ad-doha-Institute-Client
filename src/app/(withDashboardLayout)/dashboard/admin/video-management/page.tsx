@@ -46,7 +46,6 @@ const VideoManagementPage = () => {
     try {
       const res = await deleteVideo(deleteId).unwrap();
       // console.log(res);
-
       if (res === null) {
         toast.success("Video deleted successfully!!!");
       }

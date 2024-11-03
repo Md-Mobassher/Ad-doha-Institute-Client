@@ -1,12 +1,14 @@
 "use client";
 
 import LoadingPage from "@/app/loading";
+import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import {
-  useGetSingleVideoQuery,
-  useUpdateVideoMutation,
-} from "@/redux/features/admin/videoManagementApi";
+  useGetSingleOpinionQuery,
+  useUpdateOpinionMutation,
+} from "@/redux/features/admin/opinionManagementApi";
+import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
@@ -14,33 +16,48 @@ import { toast } from "sonner";
 
 type TParams = {
   params: {
-    videoId: string;
+    opinionId: string;
   };
 };
 
-const VideoUpdatePage = ({ params }: TParams) => {
+const OpinionUpdatePage = ({ params }: TParams) => {
   const router = useRouter();
-  const { data, isLoading, refetch } = useGetSingleVideoQuery(params?.videoId);
-  const [updateVideo, { isLoading: updating }] = useUpdateVideoMutation();
+  const { data, isLoading, refetch } = useGetSingleOpinionQuery(
+    params?.opinionId
+  );
+  const [updateOpinion, { isLoading: updating }] = useUpdateOpinionMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    const updatedVideo = {
-      title: values.title,
-      url: values.url,
+    let imageUrl = data?.image || "";
+    if (values.file) {
+      imageUrl = await uploadImageToCloudinary(values.file);
+      if (!imageUrl) {
+        toast.error(`Failed to upload image! Please try again.`);
+        return;
+      }
+    }
+
+    const updatedOpinion = {
+      name: values.name,
+      image: imageUrl,
+      designation: values.designation,
+      opinion: values.opinion,
       position: Number(values.position),
     };
 
     try {
-      const res = await updateVideo({
-        id: params.videoId,
-        updatedVideo,
-      }).unwrap();
-      // console.log(res);
+      const res = await updateOpinion({
+        id: params.opinionId,
+        updatedOpinion,
+      });
+      console.log(res);
 
-      if (res?._id) {
-        toast.success(res.message || "Video Updated Successfully!!!");
+      if (res?.data?._id) {
+        toast.success(res?.data?.message || "Opinion Updated Successfully!!!");
         await refetch();
-        router.push("/dashboard/admin/video-management");
+        router.push("/dashboard/admin/opinion-management");
+      } else {
+        toast.error(res?.data?.message || "Failed to update Opinion!!!");
       }
     } catch (err: any) {
       console.error(err);
@@ -48,8 +65,9 @@ const VideoUpdatePage = ({ params }: TParams) => {
   };
 
   const defaultValues = {
-    title: data?.title || "",
-    url: data?.url || "",
+    name: data?.name || "",
+    designation: data?.designation || "",
+    opinion: data?.opinion || "",
     position: data?.position || "",
   };
 
@@ -82,34 +100,59 @@ const VideoUpdatePage = ({ params }: TParams) => {
             textAlign="center"
             color={"primary.main"}
           >
-            Update Video Info
+            Update Opinion
           </Typography>
 
           <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
-            <Grid container spacing={3} my={1}>
+            <Grid container spacing={3} my={0}>
               <Grid item lg={12} md={12} sm={12} xs={12}>
                 <DohaInput
-                  label="Video Title"
+                  label="Name"
                   fullWidth={true}
                   type="text"
-                  name="title"
+                  name="name"
+                  required
                 />
               </Grid>
 
               <Grid item lg={12} md={12} sm={12} xs={12}>
                 <DohaInput
-                  label="Video Url"
+                  label="Designation"
                   fullWidth={true}
                   type="text"
-                  name="url"
+                  name="designation"
+                  required
                 />
               </Grid>
               <Grid item lg={12} md={12} sm={12} xs={12}>
                 <DohaInput
-                  label="Video Position"
+                  label="Opinion"
                   fullWidth={true}
-                  type="number"
+                  type="text"
+                  name="opinion"
+                  required
+                />
+              </Grid>
+              <Grid item lg={12} md={12} sm={12} xs={12}>
+                <DohaInput
+                  label="Position"
+                  fullWidth={true}
+                  type="text"
                   name="position"
+                  required
+                />
+              </Grid>
+              <Grid item lg={12} md={12} sm={12} xs={12}>
+                <DohaFileUploader
+                  sx={{
+                    width: "100%",
+                    backgroundColor: "success.main",
+                    ":hover": {
+                      backgroundColor: "primary.main",
+                    },
+                  }}
+                  label="image"
+                  name="file"
                 />
               </Grid>
             </Grid>
@@ -131,7 +174,7 @@ const VideoUpdatePage = ({ params }: TParams) => {
                 fullWidth
                 type="submit"
               >
-                Update Video
+                Update Opinion
               </Button>
             )}
           </DohaForm>
@@ -141,4 +184,4 @@ const VideoUpdatePage = ({ params }: TParams) => {
   );
 };
 
-export default VideoUpdatePage;
+export default OpinionUpdatePage;

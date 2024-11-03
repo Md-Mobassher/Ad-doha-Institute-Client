@@ -51,9 +51,8 @@ const DepartmentManagementPage = () => {
     // console.log(deleteId);
     try {
       const res = await deleteAcademicDepartment(deleteId).unwrap();
-
       // console.log(res);
-      if (res?.id) {
+      if (res === null) {
         toast.success("Academic Department deleted successfully!!!");
       }
     } catch (err: any) {

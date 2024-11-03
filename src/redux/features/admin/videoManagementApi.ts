@@ -1,6 +1,7 @@
 import { baseApi } from "../../api/baseApi";
 import { tagTypes } from "../../tag-Types";
-import { IMeta, TVideo } from "../../../type/common";
+import { IMeta } from "../../../type/common";
+import { IVideo } from "@/type";
 
 const videosApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -19,7 +20,7 @@ const videosApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      transformResponse: (response: TVideo[], meta: IMeta) => {
+      transformResponse: (response: IVideo[], meta: IMeta) => {
         return {
           videos: response,
           meta,
