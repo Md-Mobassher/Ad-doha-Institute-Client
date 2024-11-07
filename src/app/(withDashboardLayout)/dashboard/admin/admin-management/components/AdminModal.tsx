@@ -42,7 +42,6 @@ const AdminModal = ({ open, setOpen }: TProps) => {
     admin: {
       name: {
         firstName: "",
-        middleName: "",
         lastName: "",
       },
       designation: "Admin",
@@ -74,15 +73,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               required
             />
           </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaInput
-              label="Middle Name"
-              fullWidth={true}
-              type="text"
-              name="admin.name.middleName"
-              required
-            />
-          </Grid>
+
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
               label="Last Name"

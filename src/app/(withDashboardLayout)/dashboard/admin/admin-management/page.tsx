@@ -15,40 +15,39 @@ import {
   useGetAllAdminQuery,
 } from "@/redux/features/admin/adminManagementApi";
 import { useDebounced } from "@/redux/hooks";
+import DeleteModal from "@/components/ui/DeletModal";
 
 const AdminManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const query: Record<string, any> = {};
   const [searchTerm, setSearchTerm] = useState<string>("");
-  // console.log(searchTerm);
-
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
   });
-
   if (!!debouncedTerm) {
     query["searchTerm"] = searchTerm;
   }
-
   const { data, isLoading } = useGetAllAdminQuery({ ...query });
   const [deleteAdmin] = useDeleteAdminMutation();
+  const [deleteId, setDeleteId] = useState<string>("");
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const admins = data?.admins;
   const meta = data?.meta;
   // console.log(admins);
 
-  const handleDelete = async (id: string) => {
-    // console.log(id);
+  const handleDelete = async () => {
+    // console.log(deleteId);
     try {
-      const res = await deleteAdmin(id).unwrap();
-
+      const res = await deleteAdmin(deleteId).unwrap();
       // console.log(res);
-      if (res?.id) {
+      if (res === null) {
         toast.success("Admin deleted successfully!!!");
       }
     } catch (err: any) {
-      console.error(err.message);
+      toast.error(err.message || "Failed to delete Admin!!!");
+      // console.error(err.message);
     }
   };
 
@@ -85,7 +84,10 @@ const AdminManagementPage = () => {
         return (
           <Box>
             <IconButton
-              onClick={() => handleDelete(row._id)}
+              onClick={() => {
+                setDeleteModalOpen(true);
+                setDeleteId(row._id);
+              }}
               aria-label="delete"
             >
               <DeleteIcon sx={{ color: "red" }} />
@@ -103,6 +105,12 @@ const AdminManagementPage = () => {
 
   return (
     <Box>
+      <DeleteModal
+        open={deleteModalOpen}
+        setOpen={setDeleteModalOpen}
+        onDeleteConfirm={handleDelete}
+      />
+
       <Stack
         direction="row"
         justifyContent="space-between"

@@ -115,6 +115,9 @@ export type TTeacher = {
   name: string;
   designation: string;
   image: any;
+  position: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type TOpinion = {

@@ -5,6 +5,7 @@ import DohaDatePicker from "@/components/form/DohaDatePicker";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
+import DeleteModal from "@/components/ui/DeletModal";
 import { BloodGroupOptions, genderOptions } from "@/constant/global";
 import {
   useGetSingleAdminQuery,
@@ -14,6 +15,7 @@ import { dateFormatter } from "@/utils/dateFormatter";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -53,7 +55,6 @@ const AdminUpdatePage = ({ params }: TParams) => {
     admin: {
       name: {
         firstName: data?.name?.firstName || "",
-        middleName: data?.name?.middleName || "",
         lastName: data?.name?.lastName || "",
       },
       designation: data?.designation || "",
@@ -95,15 +96,6 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 fullWidth={true}
                 type="text"
                 name="admin.name.firstName"
-                required
-              />
-            </Grid>
-            <Grid item lg={4} md={6} sm={6} xs={12}>
-              <DohaInput
-                label="Middle Name"
-                fullWidth={true}
-                type="text"
-                name="admin.name.middleName"
                 required
               />
             </Grid>

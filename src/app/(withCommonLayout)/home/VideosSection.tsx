@@ -12,7 +12,7 @@ const VideosSection = async () => {
     },
   });
   const { data } = await res.json();
-  console.log(data);
+  // console.log(data);
   const videos = (data as IVideo[]) || [];
 
   return (
