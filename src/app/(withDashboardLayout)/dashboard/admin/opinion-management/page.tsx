@@ -47,16 +47,16 @@ const OpinionManagementPage = () => {
   const meta = data?.meta;
 
   const handleDelete = async () => {
-    // console.log(deleteId);
     try {
       const res = await deleteOpinion(deleteId).unwrap();
       // console.log(res);
       if (res === null) {
         toast.success("Opinion deleted successfully!!!");
+        setDeleteId("");
       }
     } catch (err: any) {
       toast.error(err.message || "Failed to delete Opinion!!!");
-      // console.error(err.message);
+      setDeleteId("");
     }
   };
 

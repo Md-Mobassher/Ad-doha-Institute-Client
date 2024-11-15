@@ -5,10 +5,17 @@ import {
 } from "@/data/advisoryCommittee";
 import { Box } from "@mui/material";
 import DohaContainer from "@/components/ui/DohaContainer";
-import Title from "@/components/ui/Title";
 import PageTitle from "@/components/ui/PageTitle";
+import { TTeacher } from "@/type";
 
-const AdvisoryCommitteePage = () => {
+const AdvisoryCommitteePage = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/advisory-comittees`
+  );
+  const { data } = await res.json();
+  // console.log(data);
+  const advisoryCommitteData = (data as TTeacher[]) || [];
+
   return (
     <Box>
       <PageTitle title={advisoryCommitteePageTitle} />

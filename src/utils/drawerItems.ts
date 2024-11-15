@@ -11,7 +11,6 @@ import { DrawerItem, UserRole } from "@/type";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import GroupsIcon from "@mui/icons-material/Groups";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import CommentIcon from "@mui/icons-material/Comment";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
@@ -83,6 +82,16 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           icon: CommentIcon,
         },
         {
+          title: "Author Management",
+          path: `${role}/author-management`,
+          icon: LibraryBooksIcon,
+        },
+        {
+          title: "Book Category Management",
+          path: `${role}/book-category-management`,
+          icon: LibraryBooksIcon,
+        },
+        {
           title: "Library Management",
           path: `${role}/library-management`,
           icon: LibraryBooksIcon,
@@ -141,6 +150,16 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           title: "Opinion Management",
           path: `${role}/opinion-management`,
           icon: CommentIcon,
+        },
+        {
+          title: "Author Management",
+          path: `${role}/author-management`,
+          icon: LibraryBooksIcon,
+        },
+        {
+          title: "Book Category Management",
+          path: `${role}/book-category-management`,
+          icon: LibraryBooksIcon,
         },
         {
           title: "Library Management",
