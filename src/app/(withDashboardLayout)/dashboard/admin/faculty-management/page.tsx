@@ -3,7 +3,7 @@
 import { Avatar, Button, IconButton, Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Link from "next/link";
@@ -15,11 +15,21 @@ import {
   useGetAllFacultyQuery,
 } from "@/redux/features/admin/facultyManagementApi";
 import CreateFacultyModal from "./components/FacultyModal";
+import DeleteModal from "@/components/ui/DeletModal";
 
 const FacultyManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const query: Record<string, any> = {};
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState<string>("");
+  const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
+    page: 0,
+    pageSize: 10,
+  });
+  const query: Record<string, any> = {
+    page: paginationModel.page + 1,
+    limit: paginationModel.pageSize,
+  };
   // console.log(searchTerm);
 
   const debouncedTerm = useDebounced({
@@ -38,10 +48,10 @@ const FacultyManagementPage = () => {
   const meta = data?.meta;
   // console.log(faculties);
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async () => {
     // console.log(id);
     try {
-      const res = await deleteFaculty(id).unwrap();
+      const res = await deleteFaculty(deleteId).unwrap();
 
       // console.log(res);
       if (res?.id) {
@@ -85,7 +95,10 @@ const FacultyManagementPage = () => {
         return (
           <Box>
             <IconButton
-              onClick={() => handleDelete(row._id)}
+              onClick={() => {
+                setDeleteModalOpen(true);
+                setDeleteId(row?._id);
+              }}
               aria-label="delete"
             >
               <DeleteIcon sx={{ color: "red" }} />
@@ -124,11 +137,25 @@ const FacultyManagementPage = () => {
             overflow: "auto",
           }}
         >
-          <DataGrid rows={faculties} columns={columns} />
+          <DataGrid
+            rows={faculties}
+            columns={columns}
+            paginationModel={paginationModel}
+            onPaginationModelChange={setPaginationModel}
+            rowCount={meta?.total || 0}
+            paginationMode="server"
+            loading={isLoading}
+            pageSizeOptions={[10, 20, 50]}
+          />
         </Box>
       ) : (
         <LoadingPage />
       )}
+      <DeleteModal
+        open={deleteModalOpen}
+        setOpen={setDeleteModalOpen}
+        onDeleteConfirm={handleDelete}
+      />
     </Box>
   );
 };

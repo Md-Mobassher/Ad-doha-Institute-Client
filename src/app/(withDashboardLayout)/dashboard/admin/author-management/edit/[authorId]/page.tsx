@@ -1,6 +1,7 @@
 "use client";
 
 import LoadingPage from "@/app/loading";
+import DohaDatePicker from "@/components/form/DohaDatePicker";
 import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
@@ -54,9 +55,18 @@ const AuthorUpdatePage = ({ params }: TParams) => {
   };
 
   const defaultValues = {
-    title: data?.title || "",
+    name: data?.name || "",
     image: data?.image || "",
-    url: data?.url || "",
+    biography: data?.biography || "",
+    birthDate: data?.birthDate || "",
+    nationality: data?.nationality || "",
+    website: data?.website || "",
+    socialLinks: {
+      facebook: data?.socialLinks?.facebook || "",
+      twitter: data?.socialLinks?.twitter || "",
+      instagram: data?.socialLinks?.instagram || "",
+      linkedin: data?.socialLinks.linkedin || "",
+    },
   };
 
   return (
@@ -66,7 +76,7 @@ const AuthorUpdatePage = ({ params }: TParams) => {
       ) : (
         <Box
           sx={{
-            maxWidth: 600,
+            maxWidth: "100%",
             mx: "auto",
             my: "auto",
             mt: {
@@ -93,26 +103,88 @@ const AuthorUpdatePage = ({ params }: TParams) => {
 
           <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
             <Grid container spacing={3} my={1}>
-              <Grid item lg={12} md={12} sm={12} xs={12}>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
                 <DohaInput
-                  label="Author Title"
+                  label="Author Name"
                   fullWidth={true}
                   type="text"
-                  name="title"
+                  name="name"
+                  required
                 />
               </Grid>
 
-              <Grid item lg={12} md={12} sm={12} xs={12}>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
                 <DohaInput
-                  label="Author Url"
+                  label="Biography"
                   fullWidth={true}
                   type="text"
-                  name="url"
+                  name="biography"
                 />
               </Grid>
-              <Grid item lg={12} md={12} sm={12} xs={12}>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
+                <DohaDatePicker
+                  label="Birth Date"
+                  fullWidth={true}
+                  name="birthDate"
+                />
+              </Grid>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
+                <DohaInput
+                  label="Nationality"
+                  fullWidth={true}
+                  type="text"
+                  name="nationality"
+                />
+              </Grid>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
+                <DohaInput
+                  label="Website"
+                  fullWidth={true}
+                  type="text"
+                  name="website"
+                />
+              </Grid>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
+                <DohaInput
+                  label="Twitter"
+                  fullWidth={true}
+                  type="text"
+                  name="socialLinks.twitter"
+                />
+              </Grid>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
+                <DohaInput
+                  label="Facebook"
+                  fullWidth={true}
+                  type="text"
+                  name="socialLinks.facebook"
+                />
+              </Grid>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
+                <DohaInput
+                  label="Linkedin"
+                  fullWidth={true}
+                  type="text"
+                  name="socialLinks.linkedin"
+                />
+              </Grid>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
+                <DohaInput
+                  label="Instagram"
+                  fullWidth={true}
+                  type="text"
+                  name="socialLinks.instagram"
+                />
+              </Grid>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
                 <DohaFileUploader
-                  sx={{ width: "50%" }}
+                  sx={{
+                    width: "100%",
+                    backgroundColor: "success.main",
+                    ":hover": {
+                      backgroundColor: "primary.main",
+                    },
+                  }}
                   label="Author Image"
                   name="file"
                 />

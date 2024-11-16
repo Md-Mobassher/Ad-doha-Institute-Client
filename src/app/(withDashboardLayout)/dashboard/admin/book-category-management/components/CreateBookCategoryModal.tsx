@@ -1,35 +1,26 @@
-import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaModal from "@/components/shared/DohaModal/DohaModal";
-import { useCreateBookMutation } from "@/redux/features/admin/bookManagementApi";
-import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
+import { useCreateBookcategoryMutation } from "@/redux/features/admin/bookCategoryManagementApi";
 import { Button, CircularProgress, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-
 
 type TProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const CreateBookModal = ({ open, setOpen }: TProps) => {
-  const [createBook, { isLoading: creating }] = useCreateBookMutation();
+const CreateBookCategoryModal = ({ open, setOpen }: TProps) => {
+  const [createBookCategory, { isLoading: creating }] =
+    useCreateBookcategoryMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    // console.log("Form Values:", values);
-    const imageUrl = await uploadImageToCloudinary(values.file);
-    if (!imageUrl) {
-      return;
-    }
-    values.image = imageUrl;
-
     try {
-      const res = await createBook(values).unwrap();
+      const res = await createBookCategory(values).unwrap();
       // console.log(res);
       if (res?._id) {
-        toast.success("Book created successfully!!!");
+        toast.success("Book Category created successfully!!!");
         setOpen(false);
       }
     } catch (err: any) {
@@ -38,39 +29,20 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
   };
 
   const defaultValues = {
-    title: "",
-    image: "",
-    url: "",
+    categoryName: "",
   };
 
   return (
-    <DohaModal open={open} setOpen={setOpen} title="Create New Book">
+    <DohaModal open={open} setOpen={setOpen} title="Create New Book Category">
       <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
         <Grid container spacing={3} my={1}>
           <Grid item lg={12} md={12} sm={12} xs={12}>
             <DohaInput
-              label="Book Title"
+              label="Book Category Name"
               fullWidth={true}
               type="text"
-              name="title"
+              name="categoryName"
               required
-            />
-          </Grid>
-
-          <Grid item lg={12} md={12} sm={12} xs={12}>
-            <DohaInput
-              label="Book Url"
-              fullWidth={true}
-              type="text"
-              name="url"
-              required
-            />
-          </Grid>
-          <Grid item lg={12} md={12} sm={12} xs={12}>
-            <DohaFileUploader
-              sx={{ width: "50%" }}
-              label="Book Image"
-              name="file"
             />
           </Grid>
         </Grid>
@@ -92,7 +64,7 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
             fullWidth
             type="submit"
           >
-            Create A Book
+            Create A Book Category
           </Button>
         )}
       </DohaForm>
@@ -100,4 +72,4 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
   );
 };
 
-export default CreateBookModal;
+export default CreateBookCategoryModal;

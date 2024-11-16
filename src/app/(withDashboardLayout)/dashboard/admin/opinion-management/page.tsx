@@ -3,7 +3,7 @@
 import { Button, IconButton, Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Link from "next/link";
@@ -21,11 +21,17 @@ import {
 
 const OpinionManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const query: Record<string, any> = {};
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [deleteId, setDeleteId] = useState<string>("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-
+  const [deleteId, setDeleteId] = useState<string>("");
+  const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
+    page: 0,
+    pageSize: 10,
+  });
+  const query: Record<string, any> = {
+    page: paginationModel.page + 1,
+    limit: paginationModel.pageSize,
+  };
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
@@ -149,6 +155,12 @@ const OpinionManagementPage = () => {
             rows={opinion}
             columns={columns}
             getRowId={(row) => row._id}
+            paginationModel={paginationModel}
+            onPaginationModelChange={setPaginationModel}
+            rowCount={meta?.total || 0}
+            paginationMode="server"
+            loading={isLoading}
+            pageSizeOptions={[10, 20, 50]}
           />
         </Box>
       ) : (
