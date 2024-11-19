@@ -26,6 +26,7 @@ const CreateDepartmentModal = ({ open, setOpen }: TProps) => {
   const handleFormSubmit = async (values: FieldValues) => {
     const imageUrl = await uploadImageToCloudinary(values.file);
     if (!imageUrl) {
+      toast.error("Failed to upload image!!!");
       return;
     }
     values.image = imageUrl;

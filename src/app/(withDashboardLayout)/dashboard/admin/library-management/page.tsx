@@ -1,6 +1,12 @@
 "use client";
 
-import { Button, IconButton, Stack, TextField } from "@mui/material";
+import {
+  Button,
+  IconButton,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
@@ -17,6 +23,7 @@ import {
 import Image from "next/image";
 import CreateBookModal from "./components/CreateBookModal";
 import DeleteModal from "@/components/ui/DeletModal";
+import NorthEastIcon from "@mui/icons-material/NorthEast";
 
 const BookManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -68,7 +75,7 @@ const BookManagementPage = () => {
     {
       field: "image",
       headerName: "Image",
-      width: 50,
+      width: 100,
       renderCell: ({ row }) => {
         return (
           <Box
@@ -76,15 +83,25 @@ const BookManagementPage = () => {
               marginTop: "5px",
             }}
           >
-            <Image alt="Book image" src={row?.image} width={150} height={180} />
-            ;
+            <Image alt="Book image" src={row?.image} width={50} height={60} />;
           </Box>
         );
       },
     },
-    { field: "title", headerName: "Book Title", flex: 1 },
-    { field: "_id", headerName: "ID", flex: 1 },
-    { field: "url", headerName: "Live Url", flex: 1 },
+    { field: "title", headerName: "Title", flex: 1 },
+
+    {
+      field: "url",
+      headerName: "Url",
+      width: 70,
+      renderCell: ({ row }) => {
+        return (
+          <Link href={row.url}>
+            <NorthEastIcon className="hover:text-green-500" />
+          </Link>
+        );
+      },
+    },
     {
       field: "action",
       headerName: "Action",
@@ -103,7 +120,7 @@ const BookManagementPage = () => {
             >
               <DeleteIcon sx={{ color: "red" }} />
             </IconButton>
-            <Link href={`/dashboard/admin/book-management/edit/${row._id}`}>
+            <Link href={`/dashboard/admin/library-management/edit/${row._id}`}>
               <IconButton aria-label="delete">
                 <EditIcon />
               </IconButton>

@@ -7,14 +7,8 @@ import {
   useGetSingleAcademicDepartmentQuery,
   useUpdateAcademicDepartmentMutation,
 } from "@/redux/features/admin/departmentManagementApi";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
+import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -34,9 +28,17 @@ const DepartmentUpdatePage = ({ params }: TParams) => {
     useUpdateAcademicDepartmentMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
+    let imageUrl = data?.image || "";
+    if (values.file) {
+      imageUrl = await uploadImageToCloudinary(values.file);
+      if (!imageUrl) {
+        toast.error(`Failed to upload image! Please try again.`);
+        return;
+      }
+    }
     const updatedDepartment = {
       name: values.name,
-      image: values.image,
+      image: imageUrl,
       position: Number(values.position),
     };
 
