@@ -3,14 +3,17 @@
 import { Box } from "@mui/material";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { opinionData } from "@/data/opinion";
 import Image from "next/image";
-import { TOpinion } from "@/type";
+import { IOpinion, TOpinion } from "@/type";
 import CardTitle from "@/components/ui/CardTitle";
 import CardSubTitle from "@/components/ui/CardSubTitle";
 import Details from "@/components/ui/Details";
 
-const Opinions = () => {
+interface OpinionProps {
+  opinions: IOpinion[];
+}
+
+const Opinions = ({ opinions }: OpinionProps) => {
   return (
     <Swiper
       slidesPerView={3}
@@ -42,7 +45,7 @@ const Opinions = () => {
       }}
       className="w-full h-full flex justify-between items-stretch mySwiper"
     >
-      {opinionData.map((opinion: TOpinion, index: number) => (
+      {opinions?.map((opinion: TOpinion, index: number) => (
         <SwiperSlide
           key={opinion?._id}
           virtualIndex={index}
@@ -54,13 +57,13 @@ const Opinions = () => {
               border: "1px solid lightgray",
               width: "100%",
               height: {
-                xl: "680px",
-                lg: "740px",
-                md: "700px",
+                xl: "550px",
+                lg: "550px",
+                md: "500px",
                 sm: "100%",
                 xs: "100%",
               },
-
+              overflow: "auto",
               backgroundColor: "secondary.main",
               boxShadow: "5 2 1",
               ":hover": {
