@@ -17,6 +17,7 @@ export const userLogin = async (data: FieldValues) => {
     }
   );
   const userInfo = await res.json();
+  console.log(userInfo);
 
   const passwordChangeRequired = userInfo?.data?.needsPasswordChange;
 

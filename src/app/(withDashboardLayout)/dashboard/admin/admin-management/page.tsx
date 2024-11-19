@@ -45,7 +45,6 @@ const AdminManagementPage = () => {
   // console.log(admins);
 
   const handleDelete = async () => {
-    // console.log(deleteId);
     try {
       const res = await deleteAdmin(deleteId).unwrap();
       // console.log(res);
@@ -90,20 +89,29 @@ const AdminManagementPage = () => {
       renderCell: ({ row }) => {
         return (
           <Box>
-            <IconButton
-              onClick={() => {
-                setDeleteModalOpen(true);
-                setDeleteId(row._id);
-              }}
-              aria-label="delete"
-            >
-              <DeleteIcon sx={{ color: "red" }} />
-            </IconButton>
-            <Link href={`/dashboard/admin/admin-management/edit/${row._id}`}>
-              <IconButton aria-label="delete">
-                <EditIcon />
-              </IconButton>
-            </Link>
+            {row.id === "A-0001" ? (
+              <></>
+            ) : (
+              <>
+                {" "}
+                <IconButton
+                  onClick={() => {
+                    setDeleteModalOpen(true);
+                    setDeleteId(row._id);
+                  }}
+                  aria-label="delete"
+                >
+                  <DeleteIcon sx={{ color: "red" }} />
+                </IconButton>
+                <Link
+                  href={`/dashboard/admin/admin-management/edit/${row._id}`}
+                >
+                  <IconButton aria-label="delete">
+                    <EditIcon />
+                  </IconButton>
+                </Link>
+              </>
+            )}
           </Box>
         );
       },

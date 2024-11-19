@@ -41,13 +41,14 @@ const CreateTeacherModal = ({ open, setOpen }: TProps) => {
 
     try {
       const res = await createTeacher(newTeacher).unwrap();
-      console.log(res);
+      // console.log(res);
       if (res?._id) {
         toast.success("Teacher created successfully!!!");
         setOpen(false);
       }
     } catch (err: any) {
       console.error(err);
+      toast.error("Failed to create Teacher!!!");
     }
   };
 

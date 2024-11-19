@@ -6,7 +6,6 @@ import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenMod
 import { BloodGroupOptions, genderOptions } from "@/constant/global";
 import { useCreateAdminMutation } from "@/redux/features/admin/adminManagementApi";
 import { dateFormatter } from "@/utils/dateFormatter";
-import { modifyPayload } from "@/utils/modifyPayload";
 import { Button, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -21,12 +20,11 @@ const AdminModal = ({ open, setOpen }: TProps) => {
 
   const handleFormSubmit = async (values: FieldValues) => {
     values.admin.dateOfBirth = dateFormatter(values.admin.dateOfBirth);
-    // console.log("Form Values:", values);
+    console.log("Form Values:", values);
 
-    const data = modifyPayload(values);
     try {
-      const res = await createAdmin(data).unwrap();
-      // console.log(res);
+      const res = await createAdmin(values).unwrap();
+      console.log(res);
 
       if (res[0]?.id) {
         toast.success("Admin created successfully!!!");
@@ -34,6 +32,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
       }
     } catch (err: any) {
       console.error(err);
+      toast.error("Failed to create Admin!!!");
     }
   };
 
@@ -107,6 +106,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               type="password"
               fullWidth={true}
               name="password"
+              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -120,7 +120,11 @@ const AdminModal = ({ open, setOpen }: TProps) => {
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaDatePicker name="admin.dateOfBirth" label="Date of Birth" />
+            <DohaDatePicker
+              name="admin.dateOfBirth"
+              label="Date of Birth"
+              required
+            />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
@@ -137,7 +141,6 @@ const AdminModal = ({ open, setOpen }: TProps) => {
               type="number"
               fullWidth={true}
               name="admin.emergencyContactNo"
-              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
