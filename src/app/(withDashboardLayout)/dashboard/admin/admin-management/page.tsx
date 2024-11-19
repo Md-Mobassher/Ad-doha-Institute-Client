@@ -42,7 +42,7 @@ const AdminManagementPage = () => {
 
   const admins = data?.admins;
   const meta = data?.meta;
-  // console.log(admins);
+  console.log(data);
 
   const handleDelete = async () => {
     try {

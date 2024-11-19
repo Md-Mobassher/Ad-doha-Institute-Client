@@ -31,14 +31,17 @@ export const axiosBaseQuery =
           "Content-Type": contentType || "application/json",
         },
       });
-      // console.log(result);
+      console.log(result);
       return result;
+      // return { data: result.data };
     } catch (axiosError) {
       const err = axiosError as AxiosError;
+
+      // Ensure the error matches the expected shape
       return {
         error: {
-          status: err.response?.status,
-          data: err.response?.data || err.message,
+          status: err.response?.status || 500,
+          data: err.response?.data || err.message || "Something went wrong!",
         },
       };
     }
