@@ -98,12 +98,11 @@ const TeacherManagementPage = () => {
       },
     },
     { field: "name", headerName: "Name", flex: 1 },
-    { field: "designation", headerName: "Designation", flex: 1 },
-    { field: "position", headerName: "Position", width: 100, flex: 1 },
+    { field: "designation", headerName: "Designation", flex: 2 },
+    { field: "position", headerName: "Position", width: 100, align: "center" },
     {
       field: "action",
       headerName: "Action",
-      flex: 1,
       headerAlign: "center",
       align: "center",
       renderCell: ({ row }) => {

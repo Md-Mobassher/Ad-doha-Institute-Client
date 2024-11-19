@@ -1,7 +1,6 @@
 import DohaContainer from "@/components/ui/DohaContainer";
 import FacultyMember from "@/components/ui/FacultyMember";
 import PageTitle from "@/components/ui/PageTitle";
-import { facultyData, facultyPageTitle } from "@/data/faculties";
 import { TTeacher } from "@/type";
 import { Box } from "@mui/material";
 
@@ -21,7 +20,7 @@ const FacultyPage = async () => {
   return (
     <>
       <Box>
-        <PageTitle title={facultyPageTitle} />
+        <PageTitle title={"শিক্ষকবৃন্দ"} />
 
         <DohaContainer>
           <Box className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-7">

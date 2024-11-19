@@ -1,25 +1,44 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import { IVideo } from "@/type";
 import { Box } from "@mui/material";
+import { useRef } from "react";
 
 interface VideosProps {
   videos: IVideo[];
 }
 
 const Videos = ({ videos }: VideosProps) => {
+  const swiperRef = useRef<any>(null);
+
+  const handleVideoPlay = () => {
+    if (swiperRef.current?.swiper) {
+      swiperRef.current.swiper.autoplay.stop();
+    }
+  };
+
+  const handleVideoPause = () => {
+    if (swiperRef.current?.swiper) {
+      swiperRef.current.swiper.autoplay.start();
+    }
+  };
+
   return (
     <>
       <Swiper
+        ref={swiperRef}
         slidesPerView={3}
         spaceBetween={25}
+        autoplay={{
+          delay: 5000,
+        }}
         loop={true}
         pagination={{
           clickable: true,
         }}
-        modules={[Pagination]}
+        modules={[Autoplay, Pagination]}
         breakpoints={{
           300: {
             slidesPerView: 1,
@@ -42,7 +61,12 @@ const Videos = ({ videos }: VideosProps) => {
         {videos &&
           videos?.map((video: IVideo) => (
             <SwiperSlide key={video?._id}>
-              <Box className="flex justify-center border" key={video._id}>
+              <Box
+                className="flex justify-center border"
+                onMouseEnter={handleVideoPlay}
+                onMouseLeave={handleVideoPause}
+                key={video._id}
+              >
                 <iframe
                   width="620"
                   height="300"
@@ -51,6 +75,8 @@ const Videos = ({ videos }: VideosProps) => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
+                  onPlay={handleVideoPlay}
+                  onPause={handleVideoPause}
                 ></iframe>
               </Box>
             </SwiperSlide>

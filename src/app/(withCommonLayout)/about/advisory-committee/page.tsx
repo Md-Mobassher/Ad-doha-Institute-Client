@@ -1,8 +1,4 @@
 import Member from "@/components/ui/Member";
-import {
-  advisoryCommitteData,
-  advisoryCommitteePageTitle,
-} from "@/data/advisoryCommittee";
 import { Box } from "@mui/material";
 import DohaContainer from "@/components/ui/DohaContainer";
 import PageTitle from "@/components/ui/PageTitle";
@@ -10,7 +6,12 @@ import { TTeacher } from "@/type";
 
 const AdvisoryCommitteePage = async () => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/advisory-comittees`
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/advisory-comittees`,
+    {
+      next: {
+        revalidate: 30,
+      },
+    }
   );
   const { data } = await res.json();
   // console.log(data);
@@ -18,7 +19,7 @@ const AdvisoryCommitteePage = async () => {
 
   return (
     <Box>
-      <PageTitle title={advisoryCommitteePageTitle} />
+      <PageTitle title={"উপদেষ্টা কমিটি"} />
 
       <DohaContainer>
         <Box className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-7">

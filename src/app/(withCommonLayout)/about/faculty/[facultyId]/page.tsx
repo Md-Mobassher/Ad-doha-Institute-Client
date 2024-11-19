@@ -1,7 +1,6 @@
 import DohaContainer from "@/components/ui/DohaContainer";
 import MemberDetails from "@/components/ui/MemberDetails";
-import { facultyData } from "@/data/faculties";
-import { TMember } from "@/type";
+import { TTeacher } from "@/type";
 
 type TParams = {
   params: {
@@ -9,14 +8,23 @@ type TParams = {
   };
 };
 
-const FacultyDetailsPage = ({ params }: TParams) => {
-  const facultyInfo = facultyData.find(
-    (faculty) => faculty._id === params.facultyId
+const FacultyDetailsPage = async ({ params }: TParams) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/teachers/${params?.facultyId}`,
+    {
+      next: {
+        revalidate: 30,
+      },
+    }
   );
+  const { data } = await res.json();
+  // console.log(data);
+  const facultyInfo = (data as TTeacher) || {};
+  // console.log(facultyInfo);
 
   return (
     <DohaContainer>
-      <MemberDetails {...(facultyInfo as TMember)} />
+      <MemberDetails {...facultyInfo} />
     </DohaContainer>
   );
 };

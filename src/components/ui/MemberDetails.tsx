@@ -5,12 +5,15 @@ const MemberDetails = ({ image, name, designation }: TMember) => {
   return (
     <div className=" lg:flex md:flex justify-between items-center gap-10">
       <div className="w-full">
-        <Image
-          src={image}
-          alt={name}
-          className="rounded-lg border"
-          width={600}
-        />
+        {image && (
+          <Image
+            src={image}
+            alt={name}
+            className="rounded-lg border"
+            width={600}
+            height={500}
+          />
+        )}
       </div>
 
       <div className=" w-full lg:mt-0 mt-5">
