@@ -14,6 +14,7 @@ import { IItem } from "../../../../../../components/form/DohaSelectField";
 import DohaDatePicker from "@/components/form/DohaDatePicker";
 import { FormatOptions, LanguageOptions } from "@/constant/global";
 import LoadingPage from "@/app/loading";
+import { dateFormatter } from "@/utils/dateFormatter";
 
 type TProps = {
   open: boolean;
@@ -39,27 +40,42 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
 
   // console.log(authors, bookCategoryData?.Bookcategorys);
   const handleFormSubmit = async (values: FieldValues) => {
-    const imageUrl = (await uploadImageToCloudinary(values.file)) || "";
+    const imageUrl = await uploadImageToCloudinary(values.file);
     if (!imageUrl) {
       toast.error("Failed to upload image!!!");
     }
-
-    const newBook = {
-      title: values.title,
-      category: values.category,
-      authors: values.authors,
-      image: imageUrl || "",
-      url: values.url,
-      publishedDate: values.publishedDate,
-      publisher: values.publisher,
-      description: values.description,
-      price: Number(values.price) || 0,
-      stock: Number(values.stock) || 0,
-      language: values.language || "Bangla",
-      pageCount: Number(values.pageCount) || 1,
-      format: values.format || "Ebook",
-    };
-
+    let newBook;
+    imageUrl
+      ? (newBook = {
+          title: values.title,
+          category: values.category,
+          authors: values.authors,
+          url: values.url,
+          image: imageUrl,
+          publishedDate: values.publishedDate,
+          publisher: values.publisher,
+          description: values.description,
+          price: Number(values.price) || 0,
+          stock: Number(values.stock) || 0,
+          language: values.language || "Bangla",
+          pageCount: Number(values.pageCount) || 1,
+          format: values.format || "Ebook",
+        })
+      : (newBook = {
+          title: values.title,
+          category: values.category,
+          authors: values.authors,
+          url: values.url,
+          publishedDate: dateFormatter(values.publishedDate),
+          publisher: values.publisher,
+          description: values.description,
+          price: Number(values.price) || 0,
+          stock: Number(values.stock) || 0,
+          language: values.language || "Bangla",
+          pageCount: Number(values.pageCount) || 1,
+          format: values.format || "Ebook",
+        });
+    // console.log("newBook", newBook);
     try {
       const res = await createBook(newBook).unwrap();
       // console.log(res);
@@ -138,7 +154,12 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
             <DohaDatePicker name="publishedDate" label="Published Date" />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaDatePicker name="publisher" label="Publisher" />
+            <DohaInput
+              label="Publisher"
+              fullWidth={true}
+              type="text"
+              name="publisher"
+            />
           </Grid>
 
           <Grid item lg={4} md={6} sm={6} xs={12}>

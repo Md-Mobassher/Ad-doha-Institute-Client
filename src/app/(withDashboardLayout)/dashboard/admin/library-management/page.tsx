@@ -80,10 +80,11 @@ const BookManagementPage = () => {
         return (
           <Box
             sx={{
-              marginTop: "5px",
+              marginTop: "2px",
+              marginBottom: "2px",
             }}
           >
-            <Image alt="Book image" src={row?.image} width={50} height={60} />;
+            <Image alt="Book image" src={row?.image} width={50} height={50} />;
           </Box>
         );
       },

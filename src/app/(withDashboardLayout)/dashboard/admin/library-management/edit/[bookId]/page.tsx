@@ -76,11 +76,11 @@ const BookUpdatePage = ({ params }: TParams) => {
       pageCount: Number(values.pageCount) || 1,
       format: values.format || "Ebook",
     };
-
+    console.log(updatedBook);
     try {
       const res = await updateBook({
         id: params.bookId,
-        updatedBook,
+        values: updatedBook,
       }).unwrap();
       // console.log(res);
 
@@ -185,7 +185,12 @@ const BookUpdatePage = ({ params }: TParams) => {
                 <DohaDatePicker name="publishedDate" label="Published Date" />
               </Grid>
               <Grid item lg={4} md={6} sm={6} xs={12}>
-                <DohaDatePicker name="publisher" label="Publisher" />
+                <DohaInput
+                  label="Publisher"
+                  fullWidth={true}
+                  type="text"
+                  name="publisher"
+                />
               </Grid>
 
               <Grid item lg={4} md={6} sm={6} xs={12}>
