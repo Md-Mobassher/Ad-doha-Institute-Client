@@ -13,18 +13,10 @@ import {
   useGetSingleBookQuery,
   useUpdateBookMutation,
 } from "@/redux/features/admin/bookManagementApi";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { Languages } from "../../../../../../../constant/global";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 
 type TParams = {
@@ -51,6 +43,7 @@ const BookUpdatePage = ({ params }: TParams) => {
     label: author?.name,
     value: author?._id,
   }));
+  // console.log(authors);
 
   const handleFormSubmit = async (values: FieldValues) => {
     let imageUrl = data?.image || "";
@@ -75,7 +68,7 @@ const BookUpdatePage = ({ params }: TParams) => {
       pageCount: Number(values.pageCount) || 1,
       format: values.format || "Ebook",
     };
-    console.log(updatedBook);
+    // console.log(updatedBook);
     try {
       const res = await updateBook({
         id: params.bookId,
@@ -90,6 +83,7 @@ const BookUpdatePage = ({ params }: TParams) => {
       }
     } catch (err: any) {
       console.error(err);
+      toast.error(err.data || "Failied to update Book!!!");
     }
   };
 
@@ -104,7 +98,7 @@ const BookUpdatePage = ({ params }: TParams) => {
     description: data?.description || "",
     price: data?.price || "",
     stock: data?.stock || "",
-    language: data?.languages || "",
+    language: data?.language || "",
     pageCount: data?.pageCount || "",
     format: data?.format || "",
   };
@@ -221,7 +215,7 @@ const BookUpdatePage = ({ params }: TParams) => {
                   label="Language"
                   fullWidth={true}
                   items={LanguageOptions as IItem[] | []}
-                  name="Language"
+                  name="language"
                 />
               </Grid>
               <Grid item lg={4} md={6} sm={6} xs={12}>
