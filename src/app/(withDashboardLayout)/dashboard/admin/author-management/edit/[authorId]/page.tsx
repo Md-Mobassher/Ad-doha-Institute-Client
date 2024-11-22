@@ -9,6 +9,7 @@ import {
   useGetSingleAuthorQuery,
   useUpdateAuthorMutation,
 } from "@/redux/features/admin/authorManagementApi";
+import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import {
   Box,
   Button,
@@ -35,7 +36,15 @@ const AuthorUpdatePage = ({ params }: TParams) => {
   const [updateAuthor, { isLoading: updating }] = useUpdateAuthorMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    // console.log(values);
+    let imageUrl = "";
+    if (values.file) {
+      imageUrl = await uploadImageToCloudinary(values.file);
+    }
+    if (imageUrl) {
+      values.image = imageUrl;
+    } else {
+      delete values.image;
+    }
 
     try {
       const res = await updateAuthor({

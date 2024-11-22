@@ -35,3 +35,8 @@ body {
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
+
+/* Targeting the scrollbar */
+::-webkit-scrollbar {
+  width: 0px; /* Adjust the width */
+}

@@ -24,7 +24,7 @@ const FacultyManagementPage = () => {
   const [deleteId, setDeleteId] = useState<string>("");
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
     page: 0,
-    pageSize: 10,
+    pageSize: 25,
   });
   const query: Record<string, any> = {
     page: paginationModel.page + 1,
@@ -145,7 +145,7 @@ const FacultyManagementPage = () => {
             rowCount={meta?.total || 0}
             paginationMode="server"
             loading={isLoading}
-            pageSizeOptions={[10, 20, 50]}
+            pageSizeOptions={[25, 50, 100]}
           />
         </Box>
       ) : (

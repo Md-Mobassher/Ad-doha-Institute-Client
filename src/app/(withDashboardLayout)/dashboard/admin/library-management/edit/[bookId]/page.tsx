@@ -58,7 +58,6 @@ const BookUpdatePage = ({ params }: TParams) => {
       imageUrl = await uploadImageToCloudinary(values.file);
       if (!imageUrl) {
         toast.error(`Failed to upload image! Please try again.`);
-        return;
       }
     }
     const updatedBook = {

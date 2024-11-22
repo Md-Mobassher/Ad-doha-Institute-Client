@@ -75,7 +75,7 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
           pageCount: Number(values.pageCount) || 1,
           format: values.format || "Ebook",
         });
-    // console.log("newBook", newBook);
+    console.log("newBook", newBook);
     try {
       const res = await createBook(newBook).unwrap();
       // console.log(res);
@@ -84,7 +84,7 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
         setOpen(false);
       }
     } catch (err: any) {
-      toast.error(err.message || "Failed to create Book!!!");
+      toast.error(err.data || "Failed to create Book!!!");
       // console.error(err);
     }
   };

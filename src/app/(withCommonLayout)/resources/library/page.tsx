@@ -1,85 +1,116 @@
 "use client";
-
 import LoadingPage from "@/app/loading";
-import DohaContainer from "@/components/ui/DohaContainer";
-import PageTitle from "@/components/ui/PageTitle";
-import { useGetAllBooksQuery } from "@/redux/features/admin/bookManagementApi";
-import { TBook } from "@/type";
-import { Box, Divider, Grid, Typography } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
+import { useGetAllAuthorsQuery } from "@/redux/features/admin/authorManagementApi";
+import { useGetAllBookcategorysQuery } from "@/redux/features/admin/bookCategoryManagementApi";
+import { IAuthor, TBookcategory } from "@/type";
+import { Delete } from "@mui/icons-material";
+import { Button, Divider, Radio, Typography } from "@mui/material";
+import { useState } from "react";
 
 const BooksPage = () => {
-  const { data, isLoading } = useGetAllBooksQuery({});
+  const { data: categories, isLoading: categoryLoading } =
+    useGetAllBookcategorysQuery({});
+  const { data: authors, isLoading: authorLoading } = useGetAllAuthorsQuery({});
+  const [filter, setFilter] = useState<null | string>(null);
 
-  if (isLoading) {
-    return <LoadingPage />;
-  }
+  const handleRemoveFilter = () => setFilter(null);
 
-  const booksData = data?.books || [];
+  if (authorLoading || categoryLoading) return <LoadingPage />;
 
   return (
-    <Box>
-      <PageTitle title="বই সমূহ" />
-      <DohaContainer>
-        <Box sx={{ flexGrow: 1, p: 2 }}>
-          <Grid
-            container
-            spacing={2}
-            sx={{
-              "--Grid-borderWidth": "1px",
-              borderTop: "var(--Grid-borderWidth) solid",
-              borderLeft: "var(--Grid-borderWidth) solid",
-              borderColor: "divider",
-              "& > div": {
-                borderRight: "var(--Grid-borderWidth) solid",
-                borderBottom: "var(--Grid-borderWidth) solid",
-                borderColor: "divider",
-              },
-            }}
+    <div className="flex min-h-screen bg-gray-100 p-4">
+      {/* Sidebar */}
+      <aside className="w-64 p-2">
+        {/* Categories */}
+        <div className="mb-6">
+          <Typography variant="h6">CATEGORRIES</Typography>
+          <Divider />
+          <ul className="space-y-1 mt-3 max-h-[300px] overflow-y-auto mb-4 scroll-m-1">
+            {categories &&
+              categories?.Bookcategorys?.map((category: TBookcategory) => (
+                <li key={category._id} className="flex items-center">
+                  {/* Controlled Radio Button */}
+                  <Radio
+                    size="medium"
+                    checked={filter === category._id}
+                    onChange={() => setFilter(category._id as string)}
+                  />
+                  <span>{category.categoryName}</span>
+                </li>
+              ))}
+          </ul>
+          <Button
+            className="mt-10 w-full flex justify-center items-center gap-2"
+            onClick={handleRemoveFilter}
           >
-            {booksData?.map((book: TBook) => (
-              <Grid
-                key={book?._id}
-                {...{ xs: 6, sm: 6, md: 4, lg: 3, xl: 3 }}
-                minHeight={160}
-              >
-                <Box className="p-3">
-                  <Link
-                    href={book?.url}
-                    target="_blank"
-                    className=" flex flex-col items-center text-center  bg-white hover:scale-105 transition-all duration-300"
-                  >
-                    <Image
-                      src={book?.image}
-                      alt={book?.title}
-                      width={200}
-                      height={300}
-                      className="mb-5 "
-                    />
-                    <Divider />
-                    <Typography
-                      component="p"
-                      sx={{
-                        color: "primary.main",
-                        boxShadow: "none",
-                        fontSize: "15px",
-                        fontWeight: 500,
-                        px: "10px",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      {book?.title}
-                    </Typography>
-                  </Link>
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-      </DohaContainer>
-    </Box>
+            <Delete /> Clear
+          </Button>
+        </div>
+
+        {/* Authors */}
+        <div className="mb-6 mt-8">
+          <Typography variant="h6">AUTHORS</Typography>
+          <Divider />
+          <ul className="space-y-1 mt-3 max-h-[300px] overflow-y-auto mb-5">
+            {authors &&
+              authors?.Authors?.map((author: IAuthor) => (
+                <li key={author._id} className="flex items-center">
+                  {/* Controlled Radio Button */}
+                  <Radio
+                    size="medium"
+                    checked={filter === author._id}
+                    onChange={() => setFilter(author._id)}
+                  />
+                  <span>{author.name}</span>
+                </li>
+              ))}
+          </ul>
+          <Button
+            className="mt-10 w-full flex justify-center items-center gap-2"
+            onClick={handleRemoveFilter}
+          >
+            <Delete /> Clear
+          </Button>
+        </div>
+      </aside>
+
+      {/* Content */}
+      <main className="flex-1 p-4">
+        <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
+          {[...Array(9)].map((_, index) => (
+            <div
+              key={index}
+              className="bg-white shadow-md rounded-lg p-4 flex flex-col"
+            >
+              <div className="w-full h-48 bg-gray-200 rounded-lg mb-4">
+                {/* Placeholder for book image */}
+              </div>
+              <Typography variant="body1" className="font-bold mb-2">
+                Book Title {index + 1}
+              </Typography>
+              <Typography variant="body2" className="text-gray-600 mb-2">
+                Author Name
+              </Typography>
+              <Typography variant="body2" className="text-yellow-500 mb-4">
+                ★★★★☆ (4/5)
+              </Typography>
+              <div className="flex justify-between items-center">
+                <Typography variant="body1" className="font-bold">
+                  $20
+                </Typography>
+                <Button
+                  variant="contained"
+                  size="small"
+                  className="bg-pink-500"
+                >
+                  Add to Cart
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+    </div>
   );
 };
 

@@ -23,8 +23,11 @@ const CreateAuthorModal = ({ open, setOpen }: TProps) => {
     if (values.file) {
       imageUrl = await uploadImageToCloudinary(values.file);
     }
-
-    values.image = imageUrl;
+    if (imageUrl) {
+      values.image = imageUrl;
+    } else {
+      delete values.image;
+    }
 
     try {
       const res = await createAuthor(values).unwrap();
@@ -35,6 +38,7 @@ const CreateAuthorModal = ({ open, setOpen }: TProps) => {
       }
     } catch (err: any) {
       console.error(err);
+      toast.error(err?.data || "Failed to create Author!!!");
     }
   };
 
