@@ -1,5 +1,6 @@
 import { baseApi } from "@/redux/api/baseApi";
 import { tagTypes } from "@/redux/tag-Types";
+import { IMeta, TCourse } from "@/type";
 
 const coursesApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -7,17 +8,23 @@ const coursesApi = baseApi.injectEndpoints({
       query: (data) => ({
         url: "/courses",
         method: "POST",
-        contentType: "multipart/form-data",
         data,
       }),
       invalidatesTags: [tagTypes.course],
     }),
 
     getAllCourses: build.query({
-      query: () => ({
+      query: (arg: Record<string, any>) => ({
         url: "/courses",
         method: "GET",
+        params: arg,
       }),
+      transformResponse: (response: TCourse[], meta: IMeta) => {
+        return {
+          courses: response,
+          meta,
+        };
+      },
       providesTags: [tagTypes.course],
     }),
 
@@ -37,14 +44,20 @@ const coursesApi = baseApi.injectEndpoints({
     }),
 
     updateCourse: build.mutation({
-      query: ({ id, updatedData }) => ({
+      query: ({ id, values }) => ({
         url: `/courses/${id}`,
         method: "PATCH",
-        updatedData,
+        data: values,
       }),
       invalidatesTags: [tagTypes.course],
     }),
   }),
 });
 
-export const {} = coursesApi;
+export const {
+  useCreateCourseMutation,
+  useGetAllCoursesQuery,
+  useGetSingleCourseQuery,
+  useDeleteCourseMutation,
+  useUpdateCourseMutation,
+} = coursesApi;

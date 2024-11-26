@@ -38,5 +38,16 @@ body {
 
 /* Targeting the scrollbar */
 ::-webkit-scrollbar {
-  width: 0px; /* Adjust the width */
+  width: 5px; /* Adjust the width */
+}
+
+.ql-toolbar {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #f8f9fa;
+}
+
+.ql-container {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }

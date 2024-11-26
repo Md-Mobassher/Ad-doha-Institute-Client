@@ -8,101 +8,119 @@ import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField, { IItem } from "@/components/form/DohaSelectField";
 import { FormatOptions, LanguageOptions } from "@/constant/global";
 import { useGetAllAuthorsQuery } from "@/redux/features/admin/authorManagementApi";
-import { useGetAllBookcategorysQuery } from "@/redux/features/admin/bookCategoryManagementApi";
-import {
-  useGetSingleBookQuery,
-  useUpdateBookMutation,
-} from "@/redux/features/admin/bookManagementApi";
 import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
+import {
+  useGetSingleCourseQuery,
+  useUpdateCourseMutation,
+} from "@/redux/features/admin/courseManagementApi";
+import { useGetAllAcademicDepartmentsQuery } from "@/redux/features/admin/departmentManagementApi";
+import { Component, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import QuillEditor from "@/components/form/QuilEditor";
+import RichTextEditor from "@/components/form/QuilEditor";
 
 type TParams = {
   params: {
-    bookId: string;
+    courseId: string;
   };
 };
 
 const CourseUpdatePage = ({ params }: TParams) => {
   const router = useRouter();
-  const { data, isLoading, refetch } = useGetSingleBookQuery(params?.bookId);
-  const [updateBook, { isLoading: updating }] = useUpdateBookMutation();
-  const { data: authorData, isLoading: authorLoading } = useGetAllAuthorsQuery(
-    {}
+  const { data, isLoading, refetch } = useGetSingleCourseQuery(
+    params?.courseId
   );
-  const { data: bookCategoryData, isLoading: categoryLoading } =
-    useGetAllBookcategorysQuery({});
+  const [content, setContent] = useState("");
+  const [updateCourse, { isLoading: updating }] = useUpdateCourseMutation();
+  const { data: departmentData, isLoading: departmentLoading } =
+    useGetAllAcademicDepartmentsQuery({});
 
-  const categories = bookCategoryData?.Bookcategorys?.map((category) => ({
-    label: category?.categoryName,
-    value: category?._id,
+  useEffect(() => {
+    if (data?.courseDescription) {
+      setContent(data.courseDescription);
+    } else {
+      setContent("");
+    }
+  }, [data]);
+
+  const departments = departmentData?.departments?.map((department) => ({
+    label: department.name,
+    value: department?._id,
   }));
-  const authors = authorData?.Authors?.map((author) => ({
-    label: author?.name,
-    value: author?._id,
-  }));
-  // console.log(authors);
 
   const handleFormSubmit = async (values: FieldValues) => {
-    let imageUrl = data?.image || "";
+    let imageUrl = data?.courseImage || "";
     if (values.file) {
       imageUrl = await uploadImageToCloudinary(values.file);
       if (!imageUrl) {
         toast.error(`Failed to upload image! Please try again.`);
       }
     }
-    const updatedBook = {
-      title: values.title,
-      category: values.category,
-      authors: values.authors,
-      image: imageUrl || "",
-      url: values.url,
-      publishedDate: values.publishedDate,
-      publisher: values.publisher,
-      description: values.description,
-      price: Number(values.price) || 0,
-      stock: Number(values.stock) || 0,
-      language: values.language || "Bangla",
-      pageCount: Number(values.pageCount) || 1,
-      format: values.format || "Ebook",
+    const updatedCourse = {
+      academicDepartment: values.academicDepartment,
+      courseName: values.courseName,
+      slug: values.slug,
+      medium: values.medium,
+      totalClasses: values.totalClasses,
+      courseDuration: values.courseDuration,
+      schedule: values.schedule,
+      classDuration: values.classDuration,
+      fee: {
+        total: values.fee.total,
+        admission: values.fee.admission,
+        monthly: values.fee.monthly,
+      },
+      feePaymentMethod: values.feePaymentMethod,
+      contact: values.contact,
+      courseDescription: content || "",
+      courseImage: imageUrl,
     };
-    // console.log(updatedBook);
+
     try {
-      const res = await updateBook({
-        id: params.bookId,
-        values: updatedBook,
+      const res = await updateCourse({
+        id: params.courseId,
+        values: updatedCourse,
       }).unwrap();
-      // console.log(res);
+      // console.log("res" + res);
 
       if (res?._id) {
-        toast.success(res.message || "Book Updated Successfully!!!");
+        toast.success(res.message || "Course Updated Successfully!!!");
         await refetch();
-        router.push("/dashboard/admin/library-management");
+        router.push("/dashboard/admin/course-management");
       }
     } catch (err: any) {
       console.error(err);
-      toast.error(err.data || "Failied to update Book!!!");
+      toast.error(err.data || "Failied to update Course!!!");
     }
   };
 
-  const defaultValues = {
-    title: data?.title || "",
-    category: data?.category || "",
-    authors: data?.authors || "",
-    image: data?.image || "",
-    url: data?.url || "",
-    publishedDate: data?.publishedDate || "",
-    publisher: data?.publisher || "",
-    description: data?.description || "",
-    price: data?.price || "",
-    stock: data?.stock || "",
-    language: data?.language || "",
-    pageCount: data?.pageCount || "",
-    format: data?.format || "",
+  const handleChange = (content: string) => {
+    setContent(content);
   };
 
+  const defaultValues = {
+    academicDepartment: data?.academicDepartment || "",
+    courseName: data?.courseName || "",
+    slug: data?.slug || "",
+    medium: data?.medium || "",
+    totalClasses: data?.totalClasses || "",
+    courseDuration: data?.courseDuration || "",
+    schedule: data?.schedule || "",
+    classDuration: data?.classDuration || "",
+    fee: {
+      total: data?.fee?.total || "",
+      admission: data?.fee?.admission || "",
+      monthly: data?.fee?.monthly || "",
+    },
+    feePaymentMethod: data?.feePaymentMethod || "",
+    contact: data?.contact || "",
+  };
+
+  console.log("content" + content);
   return (
     <>
       {isLoading ? (
@@ -132,110 +150,129 @@ const CourseUpdatePage = ({ params }: TParams) => {
             textAlign="center"
             color={"primary.main"}
           >
-            Update Book Info
+            Update Course Info
           </Typography>
 
           <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
             <Grid container spacing={3} my={1}>
               <Grid item lg={4} md={6} sm={6} xs={12}>
                 <DohaInput
-                  label="Book Title"
+                  label="Course Title"
                   fullWidth={true}
                   type="text"
-                  name="title"
+                  name="courseName"
                   required
-                />
-              </Grid>
-              <Grid item lg={4} md={6} sm={6} xs={12}>
-                <DohaSelectField
-                  label="Category"
-                  fullWidth={true}
-                  items={categories as IItem[] | []}
-                  name="category"
-                  required
-                />
-              </Grid>
-              <Grid item lg={4} md={6} sm={6} xs={12}>
-                <DohaSelectField
-                  label="Authors"
-                  fullWidth={true}
-                  items={authors as IItem[]}
-                  name="authors"
-                  isMulti={true}
-                  required
-                />
-              </Grid>
-              <Grid item lg={4} md={6} sm={6} xs={12}>
-                <DohaInput
-                  label="Book Drive Url"
-                  fullWidth={true}
-                  type="text"
-                  name="url"
-                  required
-                />
-              </Grid>
-              <Grid item lg={4} md={6} sm={6} xs={12}>
-                <DohaDatePicker name="publishedDate" label="Published Date" />
-              </Grid>
-              <Grid item lg={4} md={6} sm={6} xs={12}>
-                <DohaInput
-                  label="Publisher"
-                  fullWidth={true}
-                  type="text"
-                  name="publisher"
                 />
               </Grid>
 
               <Grid item lg={4} md={6} sm={6} xs={12}>
+                <DohaSelectField
+                  label="Department"
+                  fullWidth={true}
+                  items={departments as IItem[]}
+                  name="academicDepartment"
+                  required
+                />
+              </Grid>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
                 <DohaInput
-                  label="Description"
+                  label="Slug"
                   fullWidth={true}
                   type="text"
-                  name="description"
+                  name="slug"
+                  required
                 />
               </Grid>
               <Grid item lg={4} md={6} sm={6} xs={12}>
                 <DohaInput
-                  label="Price"
+                  label="Medium"
                   fullWidth={true}
-                  type="number"
-                  name="price"
+                  type="text"
+                  name="medium"
+                  required
                 />
               </Grid>
               <Grid item lg={4} md={6} sm={6} xs={12}>
                 <DohaInput
-                  label="Stock"
+                  label="Total Classes"
                   fullWidth={true}
-                  type="number"
-                  name="stock"
-                />
-              </Grid>
-              <Grid item lg={4} md={6} sm={6} xs={12}>
-                <DohaSelectField
-                  label="Language"
-                  fullWidth={true}
-                  items={LanguageOptions as IItem[] | []}
-                  name="language"
+                  type="text"
+                  name="totalClasses"
+                  required
                 />
               </Grid>
               <Grid item lg={4} md={6} sm={6} xs={12}>
                 <DohaInput
-                  label="Page Count"
+                  label="Course Duration"
                   fullWidth={true}
-                  type="number"
-                  name="pageCount"
+                  type="text"
+                  name="courseDuration"
+                  required
                 />
               </Grid>
               <Grid item lg={4} md={6} sm={6} xs={12}>
-                <DohaSelectField
-                  label="Format"
+                <DohaInput
+                  label="Schedule"
                   fullWidth={true}
-                  items={FormatOptions as IItem[] | []}
-                  name="format"
+                  type="text"
+                  name="schedule"
+                  required
                 />
               </Grid>
-
-              <Grid item lg={12} md={12} sm={12} xs={12}>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
+                <DohaInput
+                  label="Class Duration"
+                  fullWidth={true}
+                  type="text"
+                  name="classDuration"
+                  required
+                />
+              </Grid>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
+                <DohaInput
+                  label="Total Fees"
+                  fullWidth={true}
+                  type="text"
+                  name="fee.total"
+                  required
+                />
+              </Grid>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
+                <DohaInput
+                  label="Admission Fees"
+                  fullWidth={true}
+                  type="text"
+                  name="fee.admission"
+                  required
+                />
+              </Grid>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
+                <DohaInput
+                  label="Monthly Fees"
+                  fullWidth={true}
+                  type="text"
+                  name="fee.monthly"
+                  required
+                />
+              </Grid>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
+                <DohaInput
+                  label="Fee Payment Method"
+                  fullWidth={true}
+                  type="text"
+                  name="feePaymentMethod"
+                />
+              </Grid>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
+                <DohaInput
+                  label="Contact Number"
+                  fullWidth={true}
+                  type="text"
+                  name="contact"
+                  required
+                />
+              </Grid>
+              <Grid item lg={4} md={6} sm={6} xs={12}>
                 <DohaFileUploader
                   sx={{
                     width: "100%",
@@ -246,6 +283,13 @@ const CourseUpdatePage = ({ params }: TParams) => {
                   }}
                   label="Image"
                   name="file"
+                />
+              </Grid>
+              <Grid item lg={12} md={12} sm={12} xs={12} mb={4}>
+                <RichTextEditor
+                  value={content}
+                  onChange={handleChange}
+                  placeholder="Enter course description..."
                 />
               </Grid>
             </Grid>
@@ -267,7 +311,7 @@ const CourseUpdatePage = ({ params }: TParams) => {
                 fullWidth
                 type="submit"
               >
-                Update Book
+                Update Course
               </Button>
             )}
           </DohaForm>

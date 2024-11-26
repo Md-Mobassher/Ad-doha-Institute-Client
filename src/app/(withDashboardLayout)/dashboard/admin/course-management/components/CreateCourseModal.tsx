@@ -1,20 +1,20 @@
+"use client";
 import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
 import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenModal";
-import { useGetAllAuthorsQuery } from "@/redux/features/admin/authorManagementApi";
-import { useGetAllBookcategorysQuery } from "@/redux/features/admin/bookCategoryManagementApi";
-import { useCreateBookMutation } from "@/redux/features/admin/bookManagementApi";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
-import { Button, CircularProgress, Grid } from "@mui/material";
+import { Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { IItem } from "../../../../../../components/form/DohaSelectField";
-import DohaDatePicker from "@/components/form/DohaDatePicker";
-import { FormatOptions, LanguageOptions } from "@/constant/global";
-import LoadingPage from "@/app/loading";
-import { dateFormatter } from "@/utils/dateFormatter";
+import { useCreateCourseMutation } from "@/redux/features/admin/courseManagementApi";
+import { useGetAllAcademicDepartmentsQuery } from "@/redux/features/admin/departmentManagementApi";
+import { useState } from "react";
+import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
+import RichTextEditor from "@/components/form/QuilEditor";
 
 type TProps = {
   open: boolean;
@@ -22,87 +22,84 @@ type TProps = {
 };
 
 const CreateCourseModal = ({ open, setOpen }: TProps) => {
-  const [createBook, { isLoading: creating }] = useCreateBookMutation();
-  const { data: authorData, isLoading: authorLoading } = useGetAllAuthorsQuery(
-    {}
-  );
-  const { data: bookCategoryData, isLoading: categoryLoading } =
-    useGetAllBookcategorysQuery({});
+  const [content, setContent] = useState("");
+  const [createCourse, { isLoading: creating }] = useCreateCourseMutation();
+  const { data: departmentData, isLoading: departmentLoading } =
+    useGetAllAcademicDepartmentsQuery({});
+  const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
-  const categories = bookCategoryData?.Bookcategorys?.map((category) => ({
-    label: category?.categoryName,
-    value: category?._id,
-  }));
-  const authors = authorData?.Authors?.map((author) => ({
-    label: author?.name,
-    value: author?._id,
+  const departments = departmentData?.departments?.map((department) => ({
+    label: department.name,
+    value: department?._id,
   }));
 
-  // console.log(authors, bookCategoryData?.Bookcategorys);
+  const handleChange = (content: string) => {
+    setContent(content);
+  };
+  // console.log(authors, CourseCategoryData?.Coursecategorys);
   const handleFormSubmit = async (values: FieldValues) => {
-    const imageUrl = await uploadImageToCloudinary(values.file);
-    if (!imageUrl) {
-      toast.error("Failed to upload image!!!");
+    let imageUrl = "";
+    if (values.file) {
+      imageUrl = await uploadImageToCloudinary(values.file);
+      if (!imageUrl) {
+        toast.error("Failed to upload image!!!");
+        // return;
+      }
     }
-    let newBook;
-    imageUrl
-      ? (newBook = {
-          title: values.title,
-          category: values.category,
-          authors: values.authors,
-          url: values.url,
-          image: imageUrl,
-          publishedDate: values.publishedDate,
-          publisher: values.publisher,
-          description: values.description,
-          price: Number(values.price) || 0,
-          stock: Number(values.stock) || 0,
-          language: values.language || "Bangla",
-          pageCount: Number(values.pageCount) || 1,
-          format: values.format || "Ebook",
-        })
-      : (newBook = {
-          title: values.title,
-          category: values.category,
-          authors: values.authors,
-          url: values.url,
-          publishedDate: dateFormatter(values.publishedDate),
-          publisher: values.publisher,
-          description: values.description,
-          price: Number(values.price) || 0,
-          stock: Number(values.stock) || 0,
-          language: values.language || "Bangla",
-          pageCount: Number(values.pageCount) || 1,
-          format: values.format || "Ebook",
-        });
-    console.log("newBook", newBook);
+
+    const newCourse = {
+      academicDepartment: values.academicDepartment,
+      courseName: values.courseName,
+      slug: values.slug,
+      medium: values.medium,
+      totalClasses: values.totalClasses,
+      courseDuration: values.courseDuration,
+      schedule: values.schedule,
+      classDuration: values.classDuration,
+      fee: {
+        total: values.fee.total,
+        admission: values.fee.admission,
+        monthly: values.fee.monthly,
+      },
+      feePaymentMethod: values.feePaymentMethod,
+      contact: values.contact,
+      courseDescription: content || "",
+      courseImage:
+        imageUrl ||
+        "https://res.cloudinary.com/dvt8faj0s/image/upload/v1732036461/pngtree-no-image_wgj8uf.jpg",
+    };
+
+    console.log("newCourse", newCourse);
     try {
-      const res = await createBook(newBook).unwrap();
-      // console.log(res);
+      const res = await createCourse(newCourse).unwrap();
+      console.log(res);
       if (res?._id) {
-        toast.success("Book created successfully!!!");
+        toast.success("Course created successfully!!!");
         setOpen(false);
+        setContent("");
       }
     } catch (err: any) {
-      toast.error(err.data || "Failed to create Book!!!");
+      toast.error(err.data || "Failed to create Course!!!");
       // console.error(err);
     }
   };
 
   const defaultValues = {
-    title: "",
-    category: "",
-    authors: "",
-    image: "",
-    url: "",
-    publishedDate: "",
-    publisher: "",
-    description: "",
-    price: "",
-    stock: "",
-    language: "",
-    pageCount: "",
-    format: "",
+    academicDepartment: "",
+    courseName: "",
+    slug: "",
+    medium: "",
+    totalClasses: "",
+    courseDuration: "",
+    schedule: "",
+    classDuration: "",
+    fee: {
+      total: "",
+      admission: "",
+      monthly: "",
+    },
+    feePaymentMethod: "",
+    contact: "",
   };
 
   // if (authorLoading || categoryLoading) {
@@ -110,108 +107,131 @@ const CreateCourseModal = ({ open, setOpen }: TProps) => {
   // }
 
   return (
-    <DohaFullScreenModal open={open} setOpen={setOpen} title="Create New Book">
+    <DohaFullScreenModal
+      open={open}
+      setOpen={setOpen}
+      title="Create New Course"
+    >
       <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
         <Grid container spacing={3} my={1}>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
-              label="Book Title"
+              label="Course Title"
               fullWidth={true}
               type="text"
-              name="title"
+              name="courseName"
               required
-            />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaSelectField
-              label="Category"
-              fullWidth={true}
-              items={categories as IItem[] | []}
-              name="category"
-              required
-            />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaSelectField
-              label="Authors"
-              fullWidth={true}
-              items={authors as IItem[]}
-              name="authors"
-              isMulti={true}
-              required
-            />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaInput
-              label="Book Drive Url"
-              fullWidth={true}
-              type="text"
-              name="url"
-              required
-            />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaDatePicker name="publishedDate" label="Published Date" />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaInput
-              label="Publisher"
-              fullWidth={true}
-              type="text"
-              name="publisher"
             />
           </Grid>
 
           <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaSelectField
+              label="Department"
+              fullWidth={true}
+              items={departments as IItem[]}
+              name="academicDepartment"
+              required
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
-              label="Description"
+              label="Slug"
               fullWidth={true}
               type="text"
-              name="description"
+              name="slug"
+              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
-              label="Price"
+              label="Medium"
               fullWidth={true}
-              type="number"
-              name="price"
+              type="text"
+              name="medium"
+              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
-              label="Stock"
+              label="Total Classes"
               fullWidth={true}
-              type="number"
-              name="stock"
-            />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaSelectField
-              label="Language"
-              fullWidth={true}
-              items={LanguageOptions as IItem[] | []}
-              name="Language"
+              type="text"
+              name="totalClasses"
+              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
-              label="Page Count"
+              label="Course Duration"
               fullWidth={true}
-              type="number"
-              name="pageCount"
+              type="text"
+              name="courseDuration"
+              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaSelectField
-              label="Format"
+            <DohaInput
+              label="Schedule"
               fullWidth={true}
-              items={FormatOptions as IItem[] | []}
-              name="format"
+              type="text"
+              name="schedule"
+              required
             />
           </Grid>
-
-          <Grid item lg={12} md={12} sm={12} xs={12}>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="Class Duration"
+              fullWidth={true}
+              type="text"
+              name="classDuration"
+              required
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="Total Fees"
+              fullWidth={true}
+              type="text"
+              name="fee.total"
+              required
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="Admission Fees"
+              fullWidth={true}
+              type="text"
+              name="fee.admission"
+              required
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="Monthly Fees"
+              fullWidth={true}
+              type="text"
+              name="fee.monthly"
+              required
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="Fee Payment Method"
+              fullWidth={true}
+              type="text"
+              name="feePaymentMethod"
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
+            <DohaInput
+              label="Contact Number"
+              fullWidth={true}
+              type="text"
+              name="contact"
+              required
+            />
+          </Grid>
+          <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaFileUploader
               sx={{
                 width: "100%",
@@ -222,6 +242,13 @@ const CreateCourseModal = ({ open, setOpen }: TProps) => {
               }}
               label="Image"
               name="file"
+            />
+          </Grid>
+          <Grid item lg={12} md={12} sm={12} xs={12} mb={4}>
+            <RichTextEditor
+              value={content}
+              onChange={handleChange}
+              placeholder="Enter course description..."
             />
           </Grid>
         </Grid>
@@ -243,7 +270,7 @@ const CreateCourseModal = ({ open, setOpen }: TProps) => {
             fullWidth
             type="submit"
           >
-            Create A Book
+            Create New Course
           </Button>
         )}
       </DohaForm>

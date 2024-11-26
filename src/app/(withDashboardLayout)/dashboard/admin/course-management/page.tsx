@@ -10,14 +10,14 @@ import Link from "next/link";
 import LoadingPage from "@/app/loading";
 import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
-import {
-  useDeleteBookMutation,
-  useGetAllBooksQuery,
-} from "@/redux/features/admin/bookManagementApi";
 import Image from "next/image";
 import DeleteModal from "@/components/ui/DeletModal";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 import CreateCourseModal from "./components/CreateCourseModal";
+import {
+  useDeleteCourseMutation,
+  useGetAllCoursesQuery,
+} from "@/redux/features/admin/courseManagementApi";
 
 const CourseMangementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -42,32 +42,32 @@ const CourseMangementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  const { data, isLoading } = useGetAllBooksQuery({ ...query });
-  const [deleteBook] = useDeleteBookMutation();
-  // console.log(data);
+  const { data, isLoading } = useGetAllCoursesQuery({ ...query });
+  const [deleteCourse] = useDeleteCourseMutation();
+
   if (!data) {
     <p>No Data Found</p>;
   }
-  const books = data?.books;
+  const courses = data?.courses;
   const meta = data?.meta;
-
+  console.log(courses);
   const handleDelete = async () => {
     // console.log(id);
     try {
-      const res = await deleteBook(deleteId).unwrap();
+      const res = await deleteCourse(deleteId).unwrap();
 
-      // console.log(res);
-      if (res?.id) {
-        toast.success("Book deleted successfully!!!");
+      console.log(res);
+      if (res?.data === null) {
+        toast.success("Course deleted successfully!!!");
       }
     } catch (err: any) {
-      console.error(err.message);
+      toast.error(err || "Failed to Delete Course!!!");
     }
   };
 
   const columns: GridColDef[] = [
     {
-      field: "image",
+      field: "courseImage",
       headerName: "Image",
       width: 100,
       renderCell: ({ row }) => {
@@ -78,25 +78,38 @@ const CourseMangementPage = () => {
               marginBottom: "2px",
             }}
           >
-            <Image alt="Book image" src={row?.image} width={50} height={50} />;
+            <Image
+              alt="Course image"
+              src={row?.courseImage}
+              width={50}
+              height={50}
+            />
+            ;
           </Box>
         );
       },
     },
-    { field: "title", headerName: "Title", flex: 1 },
-
+    { field: "courseName", headerName: "Course Title", flex: 2 },
+    { field: "medium", headerName: "Medium", flex: 1, align: "center" },
     {
-      field: "url",
-      headerName: "Url",
-      width: 70,
-      renderCell: ({ row }) => {
-        return (
-          <Link href={row.url}>
-            <NorthEastIcon className="hover:text-green-500" />
-          </Link>
-        );
-      },
+      field: "courseDuration",
+      headerName: "Course Duration",
+      flex: 1,
+      align: "center",
     },
+    {
+      field: "totalClasses",
+      headerName: "Total Classes",
+      flex: 1,
+      align: "center",
+    },
+    {
+      field: "classDuration",
+      headerName: "Class Duration",
+      flex: 1,
+      align: "center",
+    },
+
     {
       field: "action",
       headerName: "Action",
@@ -115,7 +128,7 @@ const CourseMangementPage = () => {
             >
               <DeleteIcon sx={{ color: "red" }} />
             </IconButton>
-            <Link href={`/dashboard/admin/library-management/edit/${row._id}`}>
+            <Link href={`/dashboard/admin/course-management/edit/${row._id}`}>
               <IconButton aria-label="delete">
                 <EditIcon />
               </IconButton>
@@ -139,7 +152,7 @@ const CourseMangementPage = () => {
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"
-          placeholder="Search Book"
+          placeholder="Search Course"
         />
       </Stack>
       {!isLoading ? (
@@ -150,7 +163,7 @@ const CourseMangementPage = () => {
           }}
         >
           <DataGrid
-            rows={books}
+            rows={courses}
             columns={columns}
             getRowId={(row) => row._id}
             paginationModel={paginationModel}

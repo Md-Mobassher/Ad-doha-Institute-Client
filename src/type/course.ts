@@ -1,12 +1,11 @@
 export interface TCourse {
   _id: string;
-  navigation: string;
   courseImage: any;
   courseName: string;
-  medium?: string;
+  medium: string;
   totalClasses: string;
-  duration: string;
-  schedule: string[];
+  courseDuration: string;
+  schedule: string;
   classDuration: string;
   fee: {
     total: string;
@@ -14,24 +13,20 @@ export interface TCourse {
     monthly?: string;
   };
   contact: string;
-  description: string;
-  objectives?: string[];
-  outcomes?: string[];
-  topics?: string[];
-  targetAudience?: string[];
-  modules?: string[];
-  link?: string;
+  courseDescription: string;
+  createdAt?: string;
+  upddatedAt?: string;
+  __v?: number;
 }
 
 export const defaultCourseData: TCourse = {
   _id: "",
-  navigation: "",
   courseName: "",
   courseImage: null,
   medium: "",
   totalClasses: "",
-  duration: "",
-  schedule: [],
+  courseDuration: "",
+  schedule: "",
   classDuration: "",
   fee: {
     total: "",
@@ -39,5 +34,5 @@ export const defaultCourseData: TCourse = {
     monthly: "",
   },
   contact: "",
-  description: "",
+  courseDescription: "",
 };
