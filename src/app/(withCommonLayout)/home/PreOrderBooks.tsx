@@ -1,4 +1,3 @@
-import assets from "@/assets";
 import DohaContainer from "@/components/ui/DohaContainer";
 import Title from "@/components/ui/Title";
 import { Box, Button, Stack } from "@mui/material";
@@ -7,6 +6,7 @@ import CourseTitle3 from "../courses/components/CourseTitle3";
 import Details from "@/components/ui/Details";
 import Link from "next/link";
 import CourseTitle2 from "../courses/components/CourseTitle2";
+import preOrder from "@/assets/resourses/books/preorderbooks.jpg";
 
 const PreOrderBooks = () => {
   return (
@@ -45,7 +45,7 @@ const PreOrderBooks = () => {
             }}
           >
             <Image
-              src={assets.resourse.preOrder}
+              src={preOrder}
               alt={"preOrder"}
               width={900}
               height={400}

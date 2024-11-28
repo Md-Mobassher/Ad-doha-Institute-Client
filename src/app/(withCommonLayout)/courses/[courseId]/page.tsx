@@ -36,8 +36,6 @@ const courseDetailsPage = ({ params }: TParamsProps) => {
     classDuration,
     contact,
     courseImage,
-    description,
-    duration,
     fee,
     medium,
     navigation,

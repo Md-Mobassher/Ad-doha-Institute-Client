@@ -1,16 +1,19 @@
 "use client";
 
-import assets from "@/assets";
 import { Box, Container } from "@mui/material";
 import Image from "next/image";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import banner1 from "@/assets/banner/Slide -1.jpg";
+import banner2 from "@/assets/banner/Slide -2.jpg";
+import banner3 from "@/assets/banner/Slide -3.jpg";
+import banner4 from "@/assets/banner/Slide -4.jpg";
 
 const slides = [
-  { imageUrl: assets?.banner?.slide1 },
-  { imageUrl: assets?.banner?.slide2 },
-  { imageUrl: assets?.banner?.slide3 },
-  { imageUrl: assets?.banner?.slide4 },
+  { imageUrl: banner1 },
+  { imageUrl: banner2 },
+  { imageUrl: banner3 },
+  { imageUrl: banner4 },
 ];
 
 const BannerSection = () => {

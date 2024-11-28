@@ -4,8 +4,8 @@ import Image from "next/image";
 import CourseTitle3 from "../courses/components/CourseTitle3";
 import Link from "next/link";
 import Title from "@/components/ui/Title";
-import assets from "@/assets";
 import Details from "@/components/ui/Details";
+import nadvi from "@/assets/advisoryCommittee/Nadbi.jpg";
 
 const EPathagar = () => {
   return (
@@ -35,7 +35,7 @@ const EPathagar = () => {
             }}
           >
             <Image
-              src={assets.advisoryCommittees.nadvi}
+              src={nadvi}
               alt={"Abul Hasan Ali Nadvi"}
               width={900}
               height={600}

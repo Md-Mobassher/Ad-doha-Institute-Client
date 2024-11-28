@@ -1,13 +1,10 @@
 "use client";
 
 import LoadingPage from "@/app/loading";
-import DohaDatePicker from "@/components/form/DohaDatePicker";
 import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField, { IItem } from "@/components/form/DohaSelectField";
-import { FormatOptions, LanguageOptions } from "@/constant/global";
-import { useGetAllAuthorsQuery } from "@/redux/features/admin/authorManagementApi";
 import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
@@ -18,9 +15,7 @@ import {
   useUpdateCourseMutation,
 } from "@/redux/features/admin/courseManagementApi";
 import { useGetAllAcademicDepartmentsQuery } from "@/redux/features/admin/departmentManagementApi";
-import { Component, useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-import QuillEditor from "@/components/form/QuilEditor";
+import { useEffect, useState } from "react";
 import RichTextEditor from "@/components/form/QuilEditor";
 
 type TParams = {
@@ -30,6 +25,7 @@ type TParams = {
 };
 
 const CourseUpdatePage = ({ params }: TParams) => {
+  console.log(params);
   const router = useRouter();
   const { data, isLoading, refetch } = useGetSingleCourseQuery(
     params?.courseId

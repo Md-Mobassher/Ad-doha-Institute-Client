@@ -1,15 +1,11 @@
-import assets from "@/assets";
-import DohaForm from "@/components/form/DohaForm";
-import DohaInput from "@/components/form/DohaInput";
-import DohaContainer from "@/components/ui/DohaContainer";
+import footerlogo from "@/assets/logo/footer_logo.png";
 import Title from "@/components/ui/Title";
-import { Call, Email, LocationCity, Map } from "@mui/icons-material";
+import { Call, Email } from "@mui/icons-material";
 import {
   Box,
   Button,
   Container,
   Divider,
-  Paper,
   Stack,
   Typography,
 } from "@mui/material";
@@ -19,7 +15,6 @@ import { FieldValues } from "react-hook-form";
 import NearMeIcon from "@mui/icons-material/NearMe";
 import { FaArrowRight, FaFacebook, FaYoutube } from "react-icons/fa";
 import SubTitle from "@/components/ui/SubTitle";
-import CardSubTitle from "@/components/ui/CardSubTitle";
 
 const Footer = () => {
   const handleSubscribe = async (value: FieldValues) => {
@@ -62,6 +57,7 @@ const Footer = () => {
               placeholder="Your Email Address"
             />
             <Button
+              // onClick={handleSubscribe}
               sx={{
                 borderRadius: "50px",
                 backgroundColor: "primary.main",
@@ -110,12 +106,7 @@ const Footer = () => {
             {/* logo */}
             <Box sx={{ width: "100%", height: "100%" }}>
               <Link href="/">
-                <Image
-                  src={assets.logo.footerlogo}
-                  width={250}
-                  height={50}
-                  alt="logo"
-                />
+                <Image src={footerlogo} width={250} height={50} alt="logo" />
               </Link>
               <Typography
                 component="p"

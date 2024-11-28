@@ -1,6 +1,6 @@
 import { Box, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import assets from "@/assets";
+import logo from "@/assets/logo/favicon.webp";
 import Link from "next/link";
 
 import LoginForm from "./LoginForm";
@@ -42,12 +42,7 @@ const LoginPage = () => {
           >
             <Box>
               <Link href="/">
-                <Image
-                  src={assets.logo.logo}
-                  width={60}
-                  height={60}
-                  alt="logo"
-                />
+                <Image src={logo} width={60} height={60} alt="logo" />
               </Link>
             </Box>
             <Box>

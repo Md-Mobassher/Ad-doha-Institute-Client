@@ -1,6 +1,6 @@
 import { Box, Stack } from "@mui/material";
 import Image from "next/image";
-import assets from "@/assets";
+import logo from "@/assets/logo/favicon.webp";
 import { aimObjectivesData } from "@/data/aimsObjectives";
 import DohaContainer from "@/components/ui/DohaContainer";
 import Title from "@/components/ui/Title";
@@ -30,7 +30,7 @@ const AboutSection = () => (
         }}
       >
         <Image
-          src={assets.logo.logo}
+          src={logo}
           width={400}
           height={400}
           alt="logo image of ad-doha"

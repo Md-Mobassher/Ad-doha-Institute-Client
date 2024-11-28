@@ -1,6 +1,6 @@
 import { Box, List, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import assets from "@/assets";
+import logo from "@/assets/logo/favicon.webp";
 import Link from "next/link";
 import { drawerItems } from "@/utils/drawerItems";
 import SidebarItem from "./SidebarItem";
@@ -30,7 +30,7 @@ const SideBar = () => {
         component={Link}
         href="/"
       >
-        <Image src={assets.logo.logo} width={40} height={40} alt="logo" />
+        <Image src={logo} width={40} height={40} alt="logo" />
         <Typography
           variant="h6"
           component="h2"

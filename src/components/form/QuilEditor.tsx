@@ -3,10 +3,6 @@ import Quill from "quill";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 
-if (typeof window !== "undefined" && Quill) {
-  const List = Quill.import("formats/list");
-  Quill.register(List, true);
-}
 interface RichTextEditorProps {
   value: string;
   placeholder: string;

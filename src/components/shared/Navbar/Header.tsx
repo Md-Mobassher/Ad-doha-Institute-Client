@@ -3,13 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Menu, { Item } from "./Menu";
-import assets from "@/assets";
 import { Box, Container } from "@mui/material";
 import LoginButton from "./LoginButton";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FaCross } from "react-icons/fa";
 import { X } from "@mui/icons-material";
+import headerlogo from "@/assets/logo/logo.png";
 
 interface HeaderProps {
   top?: number;
@@ -129,12 +128,7 @@ const Header: React.FC<HeaderProps> = ({ top, header, menu }) => {
             <div className="flex items-center  justify-between gap-1 flex-wrap">
               <Link href="/">
                 <div className="lg:w-[280px] md:w-[240px] w-[220px]">
-                  <Image
-                    src={assets.logo.headerlogo}
-                    width={280}
-                    height={70}
-                    alt="logo"
-                  />
+                  <Image src={headerlogo} width={280} height={70} alt="logo" />
                 </div>
               </Link>
               {/* Toggle button for mobile menu */}

@@ -2,6 +2,7 @@ export interface TCourse {
   _id: string;
   courseImage: any;
   courseName: string;
+  slug: string;
   medium: string;
   totalClasses: string;
   courseDuration: string;
@@ -18,21 +19,3 @@ export interface TCourse {
   upddatedAt?: string;
   __v?: number;
 }
-
-export const defaultCourseData: TCourse = {
-  _id: "",
-  courseName: "",
-  courseImage: null,
-  medium: "",
-  totalClasses: "",
-  courseDuration: "",
-  schedule: "",
-  classDuration: "",
-  fee: {
-    total: "",
-    admission: "",
-    monthly: "",
-  },
-  contact: "",
-  courseDescription: "",
-};

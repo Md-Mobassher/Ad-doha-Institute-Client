@@ -3,7 +3,7 @@ import DohaContainer from "@/components/ui/DohaContainer";
 import SubTitle from "@/components/ui/SubTitle";
 import Title from "@/components/ui/Title";
 import { aimObjectivesData } from "@/data/aimsObjectives";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import Image from "next/image";
 import CourseTitle2 from "../../courses/components/CourseTitle2";
 
@@ -52,7 +52,7 @@ const AimsObjectivesPage = () => {
               }}
             >
               <Image
-                src={assets.about.aim}
+                src={aimObjectivesData.aim.image}
                 alt={"aim"}
                 width={900}
                 height={400}
@@ -94,7 +94,7 @@ const AimsObjectivesPage = () => {
               }}
             >
               <Image
-                src={assets.about.objective}
+                src={aimObjectivesData.objectives.image}
                 alt={"aim"}
                 width={900}
                 height={400}

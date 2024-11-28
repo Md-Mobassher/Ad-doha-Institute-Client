@@ -6,8 +6,18 @@ import { Box, Card, Stack } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import DohaButton from "@/components/ui/DohaButton";
+import { TCourse } from "@/type";
 
-const CoursesSection = () => {
+const CoursesSection = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/courses`,
+    {
+      next: {
+        revalidate: 30,
+      },
+    }
+  );
+  const { data } = await res.json();
   return (
     <DohaContainer>
       <Stack
@@ -21,7 +31,7 @@ const CoursesSection = () => {
       </Stack>
 
       <Box className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-7 md:gap-6  gap-5 mt-8 mx-auto">
-        {coursesData.map((course) => (
+        {data?.map((course: TCourse) => (
           <Card
             key={course?._id}
             sx={{
@@ -34,6 +44,7 @@ const CoursesSection = () => {
           >
             <Image
               width={600}
+              height={400}
               src={course?.courseImage}
               alt="course image"
               className="border-b border-gray-300"
@@ -47,7 +58,7 @@ const CoursesSection = () => {
               }}
             >
               {/* <CardTitle title={course?.courseName} /> */}
-              <Link href={`/courses/${course.navigation}`}>
+              <Link href={`/courses/${course?.slug}`}>
                 <DohaButton btnTitle="রেজিস্টার" />
               </Link>
             </Box>
