@@ -58,31 +58,11 @@ export type TCardDetails = {
   link?: string;
 };
 
-export type TBook = {
-  _id: string;
-  title: string;
-  image: any;
-  url: string;
-};
-
-export type TAcademicDepartment = {
-  _id: string;
-  name: string;
-  image: string;
-  position: number;
-};
-export type TMember = {
-  _id: string;
-  image: any;
-  name: string;
-  designation: string;
-  navigate?: string;
-};
-
 export type IMeta = {
   page: number;
   limit: number;
   total: number;
+  totalPage?: number;
 };
 
 export type UserRole = keyof typeof USER_ROLE;

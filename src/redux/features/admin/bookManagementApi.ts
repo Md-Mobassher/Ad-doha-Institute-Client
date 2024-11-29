@@ -1,6 +1,6 @@
+import { IMeta, TBook } from "@/type";
 import { baseApi } from "../../api/baseApi";
 import { tagTypes } from "../../tag-Types";
-import { IMeta, TBook } from "../../../type/common";
 
 const booksApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
