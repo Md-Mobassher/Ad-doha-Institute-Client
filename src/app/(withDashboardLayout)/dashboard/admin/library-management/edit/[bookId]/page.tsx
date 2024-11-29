@@ -18,16 +18,20 @@ import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
+import { use } from "react";
 
 type TParams = {
-  params: {
+  params: Promise<{
     bookId: string;
-  };
+  }>;
 };
 
 const BookUpdatePage = ({ params }: TParams) => {
+  const unwrappedParams = use(params);
   const router = useRouter();
-  const { data, isLoading, refetch } = useGetSingleBookQuery(params?.bookId);
+  const { data, isLoading, refetch } = useGetSingleBookQuery(
+    unwrappedParams?.bookId
+  );
   const [updateBook, { isLoading: updating }] = useUpdateBookMutation();
   const { data: authorData, isLoading: authorLoading } = useGetAllAuthorsQuery(
     {}
@@ -71,7 +75,7 @@ const BookUpdatePage = ({ params }: TParams) => {
     // console.log(updatedBook);
     try {
       const res = await updateBook({
-        id: params.bookId,
+        id: unwrappedParams.bookId,
         values: updatedBook,
       }).unwrap();
       // console.log(res);

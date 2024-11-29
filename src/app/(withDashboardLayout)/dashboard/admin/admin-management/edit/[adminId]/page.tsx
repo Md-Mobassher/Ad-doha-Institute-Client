@@ -5,7 +5,6 @@ import DohaDatePicker from "@/components/form/DohaDatePicker";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
-import DeleteModal from "@/components/ui/DeletModal";
 import { BloodGroupOptions, genderOptions } from "@/constant/global";
 import {
   useGetSingleAdminQuery,
@@ -15,19 +14,22 @@ import { dateFormatter } from "@/utils/dateFormatter";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { use } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
 type TParams = {
-  params: {
+  params: Promise<{
     adminId: string;
-  };
+  }>;
 };
 
 const AdminUpdatePage = ({ params }: TParams) => {
+  const unwrappedParams = use(params);
   const router = useRouter();
-  const { data, isLoading, refetch } = useGetSingleAdminQuery(params?.adminId);
+  const { data, isLoading, refetch } = useGetSingleAdminQuery(
+    unwrappedParams?.adminId
+  );
   const [updateAdmin, { data: updateData }] = useUpdateAdminMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
@@ -36,7 +38,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
 
     try {
       const res = await updateAdmin({
-        id: params.adminId,
+        id: unwrappedParams.adminId,
         values,
       }).unwrap();
       // console.log(res);

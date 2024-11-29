@@ -8,27 +8,24 @@ import {
   useGetSingleBookQuery,
   useUpdateBookMutation,
 } from "@/redux/features/admin/bookManagementApi";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { use } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
 type TParams = {
-  params: {
+  params: Promise<{
     bookId: string;
-  };
+  }>;
 };
 
 const BookUpdatePage = ({ params }: TParams) => {
+  const unwrappedParams = use(params);
   const router = useRouter();
-  const { data, isLoading, refetch } = useGetSingleBookQuery(params?.bookId);
+  const { data, isLoading, refetch } = useGetSingleBookQuery(
+    unwrappedParams?.bookId
+  );
   const [updateBook, { isLoading: updating }] = useUpdateBookMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
@@ -36,7 +33,7 @@ const BookUpdatePage = ({ params }: TParams) => {
 
     try {
       const res = await updateBook({
-        id: params.bookId,
+        id: unwrappedParams.bookId,
         values,
       }).unwrap();
       // console.log(res);

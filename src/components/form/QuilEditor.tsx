@@ -1,5 +1,4 @@
-import React from "react";
-import Quill from "quill";
+import React, { useState, useEffect } from "react";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 
@@ -14,6 +13,16 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   placeholder,
   onChange,
 }) => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); // Set state when client-side
+  }, []);
+
+  if (!isClient) {
+    return <div>Loading...</div>; // Optional: show a loading message until client-side rendering
+  }
+
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -48,15 +57,17 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   ];
 
   return (
-    <ReactQuill
-      value={value || ""}
-      onChange={onChange}
-      modules={modules}
-      formats={formats}
-      theme="snow"
-      placeholder={placeholder || "Start writing..."}
-      className="h-[300px] mb-5 rounded"
-    />
+    <React.Fragment>
+      <ReactQuill
+        value={value || ""}
+        onChange={onChange}
+        modules={modules}
+        formats={formats}
+        theme="snow"
+        placeholder={placeholder || "Start writing..."}
+        className="h-[300px] mb-5 rounded"
+      />
+    </React.Fragment>
   );
 };
 

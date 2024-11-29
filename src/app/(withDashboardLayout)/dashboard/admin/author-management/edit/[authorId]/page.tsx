@@ -19,19 +19,21 @@ import {
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { use } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
 type TParams = {
-  params: {
+  params: Promise<{
     authorId: string;
-  };
+  }>;
 };
 
 const AuthorUpdatePage = ({ params }: TParams) => {
+  const unwrappedParams = use(params);
   const router = useRouter();
   const { data, isLoading, refetch } = useGetSingleAuthorQuery(
-    params?.authorId
+    unwrappedParams?.authorId
   );
   const [updateAuthor, { isLoading: updating }] = useUpdateAuthorMutation();
 
@@ -48,7 +50,7 @@ const AuthorUpdatePage = ({ params }: TParams) => {
 
     try {
       const res = await updateAuthor({
-        id: params.authorId,
+        id: unwrappedParams.authorId,
         values,
       }).unwrap();
       // console.log(res);

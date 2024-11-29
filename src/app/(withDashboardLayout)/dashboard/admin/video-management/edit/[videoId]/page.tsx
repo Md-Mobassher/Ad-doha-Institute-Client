@@ -9,22 +9,26 @@ import {
 } from "@/redux/features/admin/videoManagementApi";
 import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { use } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
 type TParams = {
-  params: {
+  params: Promise<{
     videoId: string;
-  };
+  }>;
 };
 
 const VideoUpdatePage = ({ params }: TParams) => {
+  const unwrappedParams = use(params);
   const router = useRouter();
-  const { data, isLoading, refetch } = useGetSingleVideoQuery(params?.videoId);
+  const { data, isLoading, refetch } = useGetSingleVideoQuery(
+    unwrappedParams?.videoId
+  );
   const [updateVideo, { isLoading: updating }] = useUpdateVideoMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    const id = params.videoId;
+    const id = unwrappedParams.videoId;
     const updatedData = {
       title: values.title,
       url: values.url,

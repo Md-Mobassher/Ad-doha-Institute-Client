@@ -11,19 +11,21 @@ import {
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { use } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
 type TParams = {
-  params: {
+  params: Promise<{
     opinionId: string;
-  };
+  }>;
 };
 
 const OpinionUpdatePage = ({ params }: TParams) => {
+  const unwrappedParams = use(params);
   const router = useRouter();
   const { data, isLoading, refetch } = useGetSingleOpinionQuery(
-    params?.opinionId
+    unwrappedParams?.opinionId
   );
   const [updateOpinion, { isLoading: updating }] = useUpdateOpinionMutation();
 
@@ -36,7 +38,7 @@ const OpinionUpdatePage = ({ params }: TParams) => {
         return;
       }
     }
-    const id = params?.opinionId;
+    const id = unwrappedParams?.opinionId;
     const updatedData = {
       name: values.name,
       image: imageUrl,

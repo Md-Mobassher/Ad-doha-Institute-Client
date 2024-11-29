@@ -15,20 +15,19 @@ import {
   useUpdateCourseMutation,
 } from "@/redux/features/admin/courseManagementApi";
 import { useGetAllAcademicDepartmentsQuery } from "@/redux/features/admin/departmentManagementApi";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import RichTextEditor from "@/components/form/QuilEditor";
 
 type TParams = {
-  params: {
+  params: Promise<{
     courseId: string;
-  };
+  }>;
 };
-
 const CourseUpdatePage = ({ params }: TParams) => {
-  console.log(params);
+  const unwrappedParams = use(params);
   const router = useRouter();
   const { data, isLoading, refetch } = useGetSingleCourseQuery(
-    params?.courseId
+    unwrappedParams?.courseId
   );
   const [content, setContent] = useState("");
   const [updateCourse, { isLoading: updating }] = useUpdateCourseMutation();
@@ -78,7 +77,7 @@ const CourseUpdatePage = ({ params }: TParams) => {
 
     try {
       const res = await updateCourse({
-        id: params.courseId,
+        id: unwrappedParams.courseId,
         values: updatedCourse,
       }).unwrap();
       // console.log("res" + res);

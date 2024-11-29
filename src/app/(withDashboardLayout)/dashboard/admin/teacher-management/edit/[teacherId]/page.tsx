@@ -11,19 +11,21 @@ import {
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { use } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
 type TParams = {
-  params: {
+  params: Promise<{
     teacherId: string;
-  };
+  }>;
 };
 
 const TeacherUpdatePage = ({ params }: TParams) => {
+  const unwrappedParams = use(params);
   const router = useRouter();
   const { data, isLoading, refetch } = useGetSingleTeacherQuery(
-    params?.teacherId
+    unwrappedParams?.teacherId
   );
   const [updateTeacher, { isLoading: updating }] = useUpdateTeacherMutation();
 
@@ -38,7 +40,7 @@ const TeacherUpdatePage = ({ params }: TParams) => {
     }
 
     try {
-      const id = params?.teacherId;
+      const id = unwrappedParams?.teacherId;
       const updatedData = {
         name: values.name,
         image: imageUrl,

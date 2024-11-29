@@ -10,19 +10,21 @@ import {
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { use } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
 type TParams = {
-  params: {
+  params: Promise<{
     departmentId: string;
-  };
+  }>;
 };
 
 const DepartmentUpdatePage = ({ params }: TParams) => {
+  const unwrappedParams = use(params);
   const router = useRouter();
   const { data, isLoading, refetch } = useGetSingleAcademicDepartmentQuery(
-    params?.departmentId
+    unwrappedParams?.departmentId
   );
   const [updateDepartment, { isLoading: updating }] =
     useUpdateAcademicDepartmentMutation();
@@ -44,7 +46,7 @@ const DepartmentUpdatePage = ({ params }: TParams) => {
 
     try {
       const res = await updateDepartment({
-        id: params.departmentId,
+        id: unwrappedParams.departmentId,
         updatedDepartment,
       });
       console.log(res);

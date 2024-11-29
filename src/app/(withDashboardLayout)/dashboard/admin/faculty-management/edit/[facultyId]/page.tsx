@@ -14,21 +14,22 @@ import { dateFormatter } from "@/utils/dateFormatter";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
+import { use } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
 
 type TParams = {
-  params: {
+  params: Promise<{
     facultyId: string;
-  };
+  }>;
 };
 
 const FacultyUpdatePage = ({ params }: TParams) => {
+  const unwrappedParams = use(params);
   const router = useRouter();
 
   const { data, isLoading, refetch } = useGetSingleFacultyQuery(
-    params?.facultyId
+    unwrappedParams?.facultyId
   );
   const [updateFaculty, { isLoading: updating }] = useUpdateFacultyMutation();
 
@@ -38,7 +39,7 @@ const FacultyUpdatePage = ({ params }: TParams) => {
 
     try {
       const res = await updateFaculty({
-        id: params.facultyId,
+        id: unwrappedParams.facultyId,
         values,
       }).unwrap();
       // console.log(res);

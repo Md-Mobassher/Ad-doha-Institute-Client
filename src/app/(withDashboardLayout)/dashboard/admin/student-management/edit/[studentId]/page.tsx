@@ -14,20 +14,22 @@ import { dateFormatter } from "@/utils/dateFormatter";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
+import { use } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
 type TParams = {
-  params: {
+  params: Promise<{
     studentId: string;
-  };
+  }>;
 };
 
 const StudentUpdatePage = ({ params }: TParams) => {
+  const unwrappedParams = use(params);
   const router = useRouter();
 
   const { data, isLoading, refetch } = useGetSingleStudentQuery(
-    params?.studentId
+    unwrappedParams?.studentId
   );
   const [updateStudent] = useUpdateStudentMutation();
 
@@ -37,7 +39,7 @@ const StudentUpdatePage = ({ params }: TParams) => {
 
     try {
       const res = await updateStudent({
-        id: params.studentId,
+        id: unwrappedParams.studentId,
         values,
       }).unwrap();
       // console.log(res);

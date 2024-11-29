@@ -11,19 +11,21 @@ import {
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { use } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
 type TParams = {
-  params: {
+  params: Promise<{
     committeeId: string;
-  };
+  }>;
 };
 
 const AdvisoryComitteeUpdatePage = ({ params }: TParams) => {
+  const unwrappedParams = use(params);
   const router = useRouter();
   const { data, isLoading, refetch } = useGetSingleAdvisoryComitteeQuery(
-    params?.committeeId
+    unwrappedParams?.committeeId
   );
   const [updateAdvisoryComittee, { isLoading: updating }] =
     useUpdateAdvisoryComitteeMutation();
@@ -39,7 +41,7 @@ const AdvisoryComitteeUpdatePage = ({ params }: TParams) => {
     }
 
     try {
-      const id = params?.committeeId;
+      const id = unwrappedParams?.committeeId;
       const updatedData = {
         name: values.name,
         image: imageUrl,
