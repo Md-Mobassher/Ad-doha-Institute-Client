@@ -108,7 +108,7 @@ const Footer = () => {
               <Link href="/">
                 <Image src={footerlogo} width={250} height={50} alt="logo" />
               </Link>
-              <Typography
+              {/* <Typography
                 component="p"
                 sx={{
                   fontSize: {
@@ -124,7 +124,7 @@ const Footer = () => {
                 }}
               >
                 একটি দাওয়াহ শিক্ষা ও সেবামুলক প্রতিষ্ঠান
-              </Typography>
+              </Typography> */}
             </Box>
 
             {/* contact */}
