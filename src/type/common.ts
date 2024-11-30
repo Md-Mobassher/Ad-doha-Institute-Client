@@ -96,6 +96,7 @@ export type TTeacher = {
   designation: string;
   image: any;
   position: number;
+  opinion?: string;
   createdAt: string;
   updatedAt: string;
   navigate?: string;

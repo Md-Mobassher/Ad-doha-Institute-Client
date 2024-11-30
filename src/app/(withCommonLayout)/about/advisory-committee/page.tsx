@@ -1,8 +1,8 @@
-import Member from "@/components/ui/Member";
 import { Box } from "@mui/material";
 import DohaContainer from "@/components/ui/DohaContainer";
 import PageTitle from "@/components/ui/PageTitle";
 import { TTeacher } from "@/type";
+import CommitteeMemeberCard from "@/components/ui/CommitteeMemberCard";
 
 const AdvisoryCommitteePage = async () => {
   const res = await fetch(
@@ -25,11 +25,7 @@ const AdvisoryCommitteePage = async () => {
         <Box className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-7">
           {advisoryCommitteData &&
             advisoryCommitteData.map((committee) => (
-              <Member
-                key={committee._id}
-                {...committee}
-                navigate={`/about/advisory-committee/${committee._id}`}
-              />
+              <CommitteeMemeberCard key={committee._id} member={committee} />
             ))}
         </Box>
       </DohaContainer>
