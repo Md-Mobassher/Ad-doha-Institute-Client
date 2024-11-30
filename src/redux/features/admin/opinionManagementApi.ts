@@ -1,6 +1,7 @@
 import { baseApi } from "../../api/baseApi";
 import { tagTypes } from "../../tag-Types";
-import { IMeta, TAcademicDepartment } from "../../../type/common";
+import { IMeta } from "../../../type/common";
+import { IDepartment } from "@/type";
 
 const opinionApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -19,7 +20,7 @@ const opinionApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      transformResponse: (response: TAcademicDepartment[], meta: IMeta) => {
+      transformResponse: (response: IDepartment[], meta: IMeta) => {
         return {
           departments: response,
           meta,

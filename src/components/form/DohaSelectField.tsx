@@ -1,3 +1,4 @@
+import { IItem } from "@/type";
 import {
   MenuItem,
   SxProps,
@@ -10,11 +11,6 @@ import {
 } from "@mui/material";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
-
-export interface IItem {
-  label: string;
-  value: string;
-}
 
 interface ITextField {
   name: string;

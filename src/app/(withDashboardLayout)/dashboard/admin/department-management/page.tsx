@@ -94,7 +94,9 @@ const DepartmentManagementPage = () => {
             ) : (
               <Image
                 alt="Department image"
-                src={assets.departments.englishLanguage}
+                src={
+                  "https://res.cloudinary.com/dvt8faj0s/image/upload/v1732036461/pngtree-no-image_wgj8uf.jpg"
+                }
                 width={50}
                 height={50}
               />

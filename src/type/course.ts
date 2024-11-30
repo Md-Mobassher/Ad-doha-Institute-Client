@@ -13,6 +13,7 @@ export interface TCourse {
     admission?: string;
     monthly?: string;
   };
+  feePaymentMethod: string;
   contact: string;
   courseDescription: string;
   createdAt?: string;

@@ -12,12 +12,12 @@ import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
 import CreateOpinionModal from "./components/CreateOpinionModal";
 import Image from "next/image";
-import assets from "@/assets";
-import DeleteModal from "@/components/ui/DeletModal";
+import avatar from "@/assets/avatar.webp";
 import {
   useDeleteOpinionMutation,
   useGetAllOpinionsQuery,
 } from "@/redux/features/admin/opinionManagementApi";
+import DeleteModal from "@/components/ui/DeletModal";
 
 const OpinionManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -85,12 +85,7 @@ const OpinionManagementPage = () => {
             {row?.image ? (
               <Image alt="Image" src={row?.image} width={50} height={50} />
             ) : (
-              <Image
-                alt="Image"
-                src={assets.icons.avatar}
-                width={50}
-                height={50}
-              />
+              <Image alt="Image" src={avatar} width={50} height={50} />
             )}
           </Box>
         );

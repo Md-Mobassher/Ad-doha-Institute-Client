@@ -31,39 +31,40 @@ const CoursesSection = async () => {
       </Stack>
 
       <Box className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-7 md:gap-6  gap-5 mt-8 mx-auto">
-        {data?.map((course: TCourse) => (
-          <Card
-            key={course?._id}
-            sx={{
-              border: "1px solid lightgray",
-              borderRadius: "8px",
-              ":hover": {
-                border: "1px solid #0F473C",
-              },
-            }}
-          >
-            <Image
-              width={600}
-              height={400}
-              src={course?.courseImage}
-              alt="course image"
-              className="border-b border-gray-300"
-            />
-            <Box
+        {data &&
+          data?.slice(0, 8)?.map((course: TCourse) => (
+            <Card
+              key={course?._id}
               sx={{
-                p: "20px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                border: "1px solid lightgray",
+                borderRadius: "8px",
+                ":hover": {
+                  border: "1px solid #0F473C",
+                },
               }}
             >
-              {/* <CardTitle title={course?.courseName} /> */}
-              <Link href={`/courses/${course?.slug}`}>
-                <DohaButton btnTitle="রেজিস্টার" />
-              </Link>
-            </Box>
-          </Card>
-        ))}
+              <Image
+                width={600}
+                height={400}
+                src={course?.courseImage}
+                alt="course image"
+                className="border-b border-gray-300"
+              />
+              <Box
+                sx={{
+                  p: "20px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {/* <CardTitle title={course?.courseName} /> */}
+                <Link href={`/courses/${course?._id}`}>
+                  <DohaButton btnTitle="রেজিস্টার" />
+                </Link>
+              </Box>
+            </Card>
+          ))}
       </Box>
     </DohaContainer>
   );

@@ -1,16 +1,18 @@
 import DohaContainer from "@/components/ui/DohaContainer";
 import MemberDetails from "@/components/ui/MemberDetails";
 import { TTeacher } from "@/type";
+import { use } from "react";
 
 type TParams = {
-  params: {
+  params: Promise<{
     facultyId: string;
-  };
+  }>;
 };
 
 const FacultyDetailsPage = async ({ params }: TParams) => {
+  const unwrappedParams = use(params);
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/teachers/${params?.facultyId}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/teachers/${unwrappedParams?.facultyId}`,
     {
       next: {
         revalidate: 30,

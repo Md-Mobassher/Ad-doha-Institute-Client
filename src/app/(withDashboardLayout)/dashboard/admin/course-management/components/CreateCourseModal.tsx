@@ -8,13 +8,13 @@ import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { IItem } from "../../../../../../components/form/DohaSelectField";
 import { useCreateCourseMutation } from "@/redux/features/admin/courseManagementApi";
 import { useGetAllAcademicDepartmentsQuery } from "@/redux/features/admin/departmentManagementApi";
 import { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import RichTextEditor from "@/components/form/QuilEditor";
+import { IItem } from "@/type";
 
 type TProps = {
   open: boolean;
@@ -244,13 +244,13 @@ const CreateCourseModal = ({ open, setOpen }: TProps) => {
               name="file"
             />
           </Grid>
-          <Grid item lg={12} md={12} sm={12} xs={12} mb={4}>
+          {/* <Grid item lg={12} md={12} sm={12} xs={12} mb={4}>
             <RichTextEditor
               value={content}
               onChange={handleChange}
               placeholder="Enter course description..."
             />
-          </Grid>
+          </Grid> */}
         </Grid>
         {creating ? (
           <Button

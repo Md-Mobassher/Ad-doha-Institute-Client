@@ -1,14 +1,13 @@
 "use client";
 
-import { TMember } from "@/type";
-import { Box, Typography } from "@mui/material";
+import { TTeacher } from "@/type";
+import { Box } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import CardTitle from "./CardTitle";
-import CardDetails from "./CardDetails";
 import CardSubTitle from "./CardSubTitle";
 
-const Member = ({ image, name, designation, navigate }: TMember) => {
+const Member = ({ image, name, designation, navigate }: TTeacher) => {
   const router = useRouter();
 
   const handleClick = () => {

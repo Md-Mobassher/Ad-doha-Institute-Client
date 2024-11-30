@@ -4,7 +4,7 @@ import LoadingPage from "@/app/loading";
 import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
-import DohaSelectField, { IItem } from "@/components/form/DohaSelectField";
+import DohaSelectField from "@/components/form/DohaSelectField";
 import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
@@ -17,6 +17,7 @@ import {
 import { useGetAllAcademicDepartmentsQuery } from "@/redux/features/admin/departmentManagementApi";
 import { use, useEffect, useState } from "react";
 import RichTextEditor from "@/components/form/QuilEditor";
+import { IItem } from "@/type";
 
 type TParams = {
   params: Promise<{

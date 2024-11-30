@@ -10,11 +10,11 @@ import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { Button, CircularProgress, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { IItem } from "../../../../../../components/form/DohaSelectField";
 import DohaDatePicker from "@/components/form/DohaDatePicker";
 import { FormatOptions, LanguageOptions } from "@/constant/global";
 import LoadingPage from "@/app/loading";
 import { dateFormatter } from "@/utils/dateFormatter";
+import { IItem } from "@/type";
 
 type TProps = {
   open: boolean;

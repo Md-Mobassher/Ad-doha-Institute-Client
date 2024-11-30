@@ -2,16 +2,18 @@ import DohaContainer from "@/components/ui/DohaContainer";
 import MemberDetails from "@/components/ui/MemberDetails";
 import { TTeacher } from "@/type";
 import { Box } from "@mui/material";
+import { use } from "react";
 
 type TParams = {
-  params: {
+  params: Promise<{
     committeeId: string;
-  };
+  }>;
 };
 
 const AdvisoryCommitteeDetailsPage = async ({ params }: TParams) => {
+  const unwrappedParams = use(params);
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/advisory-comittees/${params.committeeId}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/advisory-comittees/${unwrappedParams.committeeId}`,
     {
       next: {
         revalidate: 30,

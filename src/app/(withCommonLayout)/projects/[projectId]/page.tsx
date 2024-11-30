@@ -1,15 +1,17 @@
 import CardDetails from "@/components/ui/CardDetails";
 import { projectsData } from "@/data/projects";
+import { use } from "react";
 
 type TParamsProps = {
-  params: {
+  params: Promise<{
     projectId: string;
-  };
+  }>;
 };
 
 const ProjectDetailsPage = ({ params }: TParamsProps) => {
+  const unwrappedParams = use(params);
   const projectData = projectsData.find(
-    (project) => project?.navigation === params?.projectId
+    (project) => project?.navigation === unwrappedParams?.projectId
   );
 
   return (

@@ -1,7 +1,7 @@
-import { TMember } from "@/type";
+import { TTeacher } from "@/type";
 import Image from "next/image";
 
-const MemberDetails = ({ image, name, designation }: TMember) => {
+const MemberDetails = ({ image, name, designation }: TTeacher) => {
   return (
     <div className=" lg:flex md:flex justify-between items-center gap-10">
       <div className="w-full">

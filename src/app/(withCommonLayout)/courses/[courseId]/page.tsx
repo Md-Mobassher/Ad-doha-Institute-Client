@@ -14,17 +14,27 @@ import CourseTitle2 from "../components/CourseTitle2";
 import CourseTitle3 from "../components/CourseTitle3";
 import Link from "next/link";
 import CourseDetailsItem from "../components/CourseDetailsItem";
+import { use } from "react";
 
 type TParamsProps = {
-  params: {
+  params: Promise<{
     courseId: string;
-  };
+  }>;
 };
 
-const courseDetailsPage = ({ params }: TParamsProps) => {
-  const courseData: TCourse | undefined = coursesData?.find(
-    (course) => course?.navigation === params?.courseId
+const courseDetailsPage = async ({ params }: TParamsProps) => {
+  const unwrappedParams = use(params);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/courses/${unwrappedParams?.courseId}`,
+    {
+      next: {
+        revalidate: 30,
+      },
+    }
   );
+  const { data } = await res.json();
+  // console.log(data);
+  const courseData = (data as TCourse) || {};
 
   if (!courseData) {
     return <p>No Service Found</p>;
@@ -36,17 +46,13 @@ const courseDetailsPage = ({ params }: TParamsProps) => {
     classDuration,
     contact,
     courseImage,
+    courseDescription,
+    courseDuration,
     fee,
+    feePaymentMethod,
     medium,
-    navigation,
     schedule,
     totalClasses,
-    modules,
-    objectives,
-    outcomes,
-    targetAudience,
-    topics,
-    link,
   } = courseData;
 
   return (
@@ -98,7 +104,7 @@ const courseDetailsPage = ({ params }: TParamsProps) => {
             <CourseTitle2 title="ওরিয়েন্টেশন প্রোগ্রাম:" />
             <CourseTitle2 title="ক্লাস শুরু:" />
             <CourseTitle2 title="সর্বমোট ক্লাস:" details={totalClasses} />
-            <CourseTitle2 title="কোর্স ব্যপ্তি:" details={duration} />
+            <CourseTitle2 title="কোর্স ব্যপ্তি:" details={courseDuration} />
             <CourseTitle2 title="ক্লাসের সময়:" details={classDuration} />
             <CourseTitle2 title="যোগাযোগ:" details2={contact} />
 
@@ -111,41 +117,38 @@ const courseDetailsPage = ({ params }: TParamsProps) => {
             />
             <CourseTitle2 title="মাসিক ফি:" details={`${fee.monthly} টাকা`} />
             <CourseTitle2 title="সর্বমোট:" details2={`${fee?.total} টাকা`} />
-            <CourseTitle2
-              title="ফি পরিশোধের ধরন:"
-              details={`কেউ চাইলে পুরো কোর্স ফি (${fee?.total}) দিয়ে ভর্তি হতে পারে। কিংবা প্রথম ধাপে রেজিস্ট্রেশন ফি (${fee.admission}) টাকা ও মাসিক ফি (${fee.monthly}) টাকা দিয়ে ভর্তি হতে পারবে। দ্বিতীয় মাসে বাকি টাকা পরিশোধ করতে পারবে।`}
-            />
-            <Box component={Link} href={link as string} target="_blank">
-              <Button
-                sx={{
-                  mt: "25px",
-                  borderRadius: "10px",
-                  backgroundColor: "primary.main",
-                  color: "secondary.main",
-                  width: "100%",
-                  textSizeAdjust: "auto",
-                  ":hover": {
-                    backgroundColor: "success.main",
-                    color: "primary.main",
-                  },
-                  fontSize: {
-                    lg: "16px",
-                    md: "16px",
-                    sm: "16px",
-                    xs: "15px",
-                  },
-                  fontWeight: 600,
-                }}
-              >
-                আমাদের কোর্সে জয়েন করুন
-              </Button>
-            </Box>
+            <CourseTitle2 title="ফি পরিশোধের ধরন:" details={feePaymentMethod} />
+
+            <Button
+              sx={{
+                mt: "25px",
+                borderRadius: "10px",
+                backgroundColor: "primary.main",
+                color: "secondary.main",
+                width: "100%",
+                textSizeAdjust: "auto",
+                ":hover": {
+                  backgroundColor: "success.main",
+                  color: "primary.main",
+                },
+                fontSize: {
+                  lg: "16px",
+                  md: "16px",
+                  sm: "16px",
+                  xs: "15px",
+                },
+                fontWeight: 600,
+              }}
+            >
+              আমাদের কোর্সে জয়েন করুন
+            </Button>
+
             <Link href={"/"}></Link>
           </Box>
         </Stack>
       </DohaContainer>
 
-      {description && (
+      {/* {description && (
         <Box
           sx={{
             backgroundColor: "info.main",
@@ -230,7 +233,7 @@ const courseDetailsPage = ({ params }: TParamsProps) => {
             ))}
           </Box>
         </Box>
-      )}
+      )} */}
     </Box>
   );
 };

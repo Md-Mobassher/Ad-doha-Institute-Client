@@ -5,7 +5,7 @@ import DohaDatePicker from "@/components/form/DohaDatePicker";
 import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
-import DohaSelectField, { IItem } from "@/components/form/DohaSelectField";
+import DohaSelectField from "@/components/form/DohaSelectField";
 import { FormatOptions, LanguageOptions } from "@/constant/global";
 import { useGetAllAuthorsQuery } from "@/redux/features/admin/authorManagementApi";
 import { useGetAllBookcategorysQuery } from "@/redux/features/admin/bookCategoryManagementApi";
@@ -19,6 +19,7 @@ import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { use } from "react";
+import { IItem } from "@/type";
 
 type TParams = {
   params: Promise<{

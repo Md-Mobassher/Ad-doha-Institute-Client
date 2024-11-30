@@ -98,6 +98,7 @@ export type TTeacher = {
   position: number;
   createdAt: string;
   updatedAt: string;
+  navigate?: string;
 };
 
 export type TOpinion = {
@@ -107,3 +108,8 @@ export type TOpinion = {
   image: any;
   opinion: string;
 };
+
+export interface IItem {
+  label: string;
+  value: string | number;
+}

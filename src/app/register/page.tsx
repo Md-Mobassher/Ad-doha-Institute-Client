@@ -1,8 +1,8 @@
-import assets from "@/assets";
 import { Box, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import RegisterForm from "./RegisterForm";
+import logo from "@/assets/logo/favicon.webp";
 
 const RegisterPage = () => {
   return (
@@ -42,12 +42,7 @@ const RegisterPage = () => {
           >
             <Box>
               <Link href="/">
-                <Image
-                  src={assets.logo.logo}
-                  width={60}
-                  height={60}
-                  alt="logo"
-                />
+                <Image src={logo} width={60} height={60} alt="logo" />
               </Link>
             </Box>
             <Box>

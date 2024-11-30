@@ -11,7 +11,7 @@ import LoadingPage from "@/app/loading";
 import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
-import assets from "@/assets";
+import avatar from "@/assets/avatar.webp";
 import DeleteModal from "@/components/ui/DeletModal";
 import CreateTeacherModal from "./components/CreateTeacherModal";
 import {
@@ -86,12 +86,7 @@ const TeacherManagementPage = () => {
             {row?.image ? (
               <Image alt="Image" src={row?.image} width={50} height={50} />
             ) : (
-              <Image
-                alt="Image"
-                src={assets.icons.avatar}
-                width={50}
-                height={50}
-              />
+              <Image alt="Image" src={avatar} width={50} height={50} />
             )}
           </Box>
         );
