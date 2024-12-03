@@ -20,7 +20,7 @@ const AdminModal = ({ open, setOpen }: TProps) => {
 
   const handleFormSubmit = async (values: FieldValues) => {
     values.admin.dateOfBirth = dateFormatter(values.admin.dateOfBirth);
-    // console.log("Form Values:", values);
+    console.log("Form Values:", values);
 
     try {
       const res = await createAdmin(values).unwrap();

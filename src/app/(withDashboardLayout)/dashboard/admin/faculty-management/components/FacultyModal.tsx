@@ -40,7 +40,6 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
     faculty: {
       name: {
         firstName: "",
-        middleName: "",
         lastName: "",
       },
       designation: "Faculty",
@@ -73,15 +72,6 @@ const CreateFacultyModal = ({ open, setOpen }: TProps) => {
               fullWidth={true}
               type="text"
               name="faculty.name.firstName"
-              required
-            />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaInput
-              label="Middle Name"
-              fullWidth={true}
-              type="text"
-              name="faculty.name.middleName"
               required
             />
           </Grid>

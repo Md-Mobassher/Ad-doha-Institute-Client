@@ -46,16 +46,16 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           path: `${role}/admin-management`,
           icon: AdminPanelSettingsIcon,
         },
-        {
-          title: "Faculty Management",
-          path: `${role}/faculty-management`,
-          icon: GroupIcon,
-        },
-        {
-          title: "Student Management",
-          path: `${role}/student-management`,
-          icon: GroupsIcon,
-        },
+        // {
+        //   title: "Faculty Management",
+        //   path: `${role}/faculty-management`,
+        //   icon: GroupIcon,
+        // },
+        // {
+        //   title: "Student Management",
+        //   path: `${role}/student-management`,
+        //   icon: GroupsIcon,
+        // },
         {
           title: "Department Management",
           path: `${role}/department-management`,
@@ -116,16 +116,16 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           path: `${role}/admin-management`,
           icon: AdminPanelSettingsIcon,
         },
-        {
-          title: "Faculty Management",
-          path: `${role}/faculty-management`,
-          icon: GroupIcon,
-        },
-        {
-          title: "Student Management",
-          path: `${role}/student-management`,
-          icon: GroupsIcon,
-        },
+        // {
+        //   title: "Faculty Management",
+        //   path: `${role}/faculty-management`,
+        //   icon: GroupIcon,
+        // },
+        // {
+        //   title: "Student Management",
+        //   path: `${role}/student-management`,
+        //   icon: GroupsIcon,
+        // },
         {
           title: "Department Management",
           path: `${role}/department-management`,

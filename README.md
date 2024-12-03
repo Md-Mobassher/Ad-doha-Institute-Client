@@ -2,7 +2,7 @@
 
 ## Deployment
 
-- **Live Link**: [Ad-Doha Institute](https://ad-doha-org.vercel.app)
+- **Live Link**: [Ad-Doha Institute](https://ad-doha-institute.vercel.app)
 
 ## Technologies Used
 
@@ -10,6 +10,7 @@
 - **TypeScript**: Typed superset of JavaScript for enhanced developer productivity and code maintainability.
 - **Tailwind CSS**: Utility-first CSS framework for building custom designs with ease.
 - **Material Ui**: Material UI for building custom designs with ease.
+- **Redux**: Redux framework for global state management and api call.
 
 ## Getting Started
 

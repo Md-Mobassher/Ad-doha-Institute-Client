@@ -7,9 +7,9 @@ import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
 import { BloodGroupOptions, genderOptions } from "@/constant/global";
 import {
-  useGetSingleFacultyQuery,
-  useUpdateFacultyMutation,
-} from "@/redux/features/admin/facultyManagementApi";
+  useGetSingleAdminQuery,
+  useUpdateAdminMutation,
+} from "@/redux/features/admin/adminManagementApi";
 import { dateFormatter } from "@/utils/dateFormatter";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import dayjs from "dayjs";
@@ -20,34 +20,33 @@ import { toast } from "sonner";
 
 type TParams = {
   params: Promise<{
-    facultyId: string;
+    adminId: string;
   }>;
 };
 
-const FacultyUpdatePage = ({ params }: TParams) => {
+const AdminUpdatePage = ({ params }: TParams) => {
   const unwrappedParams = use(params);
   const router = useRouter();
-
-  const { data, isLoading, refetch } = useGetSingleFacultyQuery(
-    unwrappedParams?.facultyId
+  const { data, isLoading, refetch } = useGetSingleAdminQuery(
+    unwrappedParams?.adminId
   );
-  const [updateFaculty, { isLoading: updating }] = useUpdateFacultyMutation();
+  const [updateAdmin, { data: updateData }] = useUpdateAdminMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    values.faculty.dateOfBirth = dateFormatter(values.faculty.dateOfBirth);
+    values.admin.dateOfBirth = dateFormatter(values.admin.dateOfBirth);
     // console.log(values);
 
     try {
-      const res = await updateFaculty({
-        id: unwrappedParams.facultyId,
+      const res = await updateAdmin({
+        id: unwrappedParams.adminId,
         values,
       }).unwrap();
       // console.log(res);
 
       if (res?.id) {
-        toast.success(res.message || "faculty Updated Successfully!!!");
+        toast.success(res.message || "Admin Updated Successfully!!!");
         await refetch();
-        router.push("/dashboard/admin/faculty-management");
+        router.push("/dashboard/admin/admin-management");
       }
     } catch (err: any) {
       console.error(err);
@@ -55,7 +54,7 @@ const FacultyUpdatePage = ({ params }: TParams) => {
   };
 
   const defaultValues = {
-    faculty: {
+    admin: {
       name: {
         firstName: data?.name?.firstName || "",
         lastName: data?.name?.lastName || "",
@@ -83,7 +82,7 @@ const FacultyUpdatePage = ({ params }: TParams) => {
         textAlign="center"
         color={"primary.main"}
       >
-        Update Faculty Info
+        Update Admin Info
       </Typography>
       {isLoading ? (
         <LoadingPage />
@@ -98,17 +97,16 @@ const FacultyUpdatePage = ({ params }: TParams) => {
                 label="First Name"
                 fullWidth={true}
                 type="text"
-                name="faculty.name.firstName"
+                name="admin.name.firstName"
                 required
               />
             </Grid>
-
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <DohaInput
                 label="Last Name"
                 type="text"
                 fullWidth={true}
-                name="faculty.name.lastName"
+                name="admin.name.lastName"
                 required
               />
             </Grid>
@@ -117,7 +115,7 @@ const FacultyUpdatePage = ({ params }: TParams) => {
                 label="Designation"
                 type="text"
                 fullWidth={true}
-                name="faculty.designation"
+                name="admin.designation"
                 disabled
               />
             </Grid>
@@ -126,7 +124,7 @@ const FacultyUpdatePage = ({ params }: TParams) => {
                 label="ID"
                 type="text"
                 fullWidth={true}
-                name="faculty.id"
+                name="admin.id"
                 disabled
               />
             </Grid>
@@ -135,7 +133,7 @@ const FacultyUpdatePage = ({ params }: TParams) => {
                 label="Email"
                 type="email"
                 fullWidth={true}
-                name="faculty.email"
+                name="admin.email"
                 required
               />
             </Grid>
@@ -145,23 +143,20 @@ const FacultyUpdatePage = ({ params }: TParams) => {
                 items={genderOptions}
                 label="Gender"
                 fullWidth={true}
-                name="faculty.gender"
+                name="admin.gender"
                 sx={{ textAlign: "start" }}
                 required
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
-              <DohaDatePicker
-                name="faculty.dateOfBirth"
-                label="Date of Birth"
-              />
+              <DohaDatePicker name="admin.dateOfBirth" label="Date of Birth" />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <DohaInput
                 label="Contact Number"
                 type="number"
                 fullWidth={true}
-                name="faculty.contactNo"
+                name="admin.contactNo"
                 required
               />
             </Grid>
@@ -170,7 +165,7 @@ const FacultyUpdatePage = ({ params }: TParams) => {
                 label="Emergency Contact Number"
                 type="number"
                 fullWidth={true}
-                name="faculty.emergencyContactNo"
+                name="admin.emergencyContactNo"
                 required
               />
             </Grid>
@@ -179,7 +174,7 @@ const FacultyUpdatePage = ({ params }: TParams) => {
                 items={BloodGroupOptions}
                 label="Blood Group"
                 fullWidth={true}
-                name="faculty.bloodGroup"
+                name="admin.bloodGroup"
                 sx={{ textAlign: "start" }}
                 required
               />
@@ -189,7 +184,7 @@ const FacultyUpdatePage = ({ params }: TParams) => {
                 label="Present Address"
                 type="text"
                 fullWidth={true}
-                name="faculty.presentAddress"
+                name="admin.presentAddress"
                 required
               />
             </Grid>
@@ -198,7 +193,7 @@ const FacultyUpdatePage = ({ params }: TParams) => {
                 label="Permanent Address"
                 type="text"
                 fullWidth={true}
-                name="faculty.permanentAddress"
+                name="admin.permanentAddress"
                 required
               />
             </Grid>
@@ -209,9 +204,8 @@ const FacultyUpdatePage = ({ params }: TParams) => {
             }}
             fullWidth={true}
             type="submit"
-            disabled={updating}
           >
-            Update Faculty
+            Update Admin
           </Button>
         </DohaForm>
       )}
@@ -219,4 +213,4 @@ const FacultyUpdatePage = ({ params }: TParams) => {
   );
 };
 
-export default FacultyUpdatePage;
+export default AdminUpdatePage;
