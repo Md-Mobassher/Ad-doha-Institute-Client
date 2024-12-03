@@ -2,6 +2,23 @@ import { USER_ROLE } from "@/constant/role";
 import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 
+export type TGender = "male" | "female" | "other";
+export type TBloodGroup =
+  | "A+"
+  | "A-"
+  | "B+"
+  | "B-"
+  | "AB+"
+  | "AB-"
+  | "O+"
+  | "O-";
+
+export type TUserName = {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+};
+
 export type TCardProps = {
   _id: string;
   image?: string | any;
@@ -41,29 +58,11 @@ export type TCardDetails = {
   link?: string;
 };
 
-export type TBook = {
-  _id: string;
-  title: string;
-  image: any;
-  url: string;
-};
-export type TVideo = {
-  id: string;
-  title?: string;
-  url: string;
-};
-export type TMember = {
-  _id: string;
-  image: any;
-  name: string;
-  designation: string;
-  navigate?: string;
-};
-
 export type IMeta = {
   page: number;
   limit: number;
   total: number;
+  totalPage?: number;
 };
 
 export type UserRole = keyof typeof USER_ROLE;
@@ -96,6 +95,11 @@ export type TTeacher = {
   name: string;
   designation: string;
   image: any;
+  position: number;
+  opinion?: string;
+  createdAt: string;
+  updatedAt: string;
+  navigate?: string;
 };
 
 export type TOpinion = {
@@ -105,3 +109,8 @@ export type TOpinion = {
   image: any;
   opinion: string;
 };
+
+export interface IItem {
+  label: string;
+  value: string | number;
+}

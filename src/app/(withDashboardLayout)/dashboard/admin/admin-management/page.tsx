@@ -4,7 +4,7 @@ import { Avatar, Button, IconButton, Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import AdminModal from "./components/AdminModal";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Link from "next/link";
@@ -15,40 +15,45 @@ import {
   useGetAllAdminQuery,
 } from "@/redux/features/admin/adminManagementApi";
 import { useDebounced } from "@/redux/hooks";
+import DeleteModal from "@/components/ui/DeletModal";
 
 const AdminManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const query: Record<string, any> = {};
   const [searchTerm, setSearchTerm] = useState<string>("");
-  // console.log(searchTerm);
-
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState<string>("");
+  const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
+    page: 0,
+    pageSize: 25,
+  });
+  const query: Record<string, any> = {
+    page: paginationModel.page + 1,
+    limit: paginationModel.pageSize,
+  };
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
   });
-
   if (!!debouncedTerm) {
     query["searchTerm"] = searchTerm;
   }
-
   const { data, isLoading } = useGetAllAdminQuery({ ...query });
   const [deleteAdmin] = useDeleteAdminMutation();
 
   const admins = data?.admins;
   const meta = data?.meta;
-  // console.log(admins);
+  // console.log(data);
 
-  const handleDelete = async (id: string) => {
-    // console.log(id);
+  const handleDelete = async () => {
     try {
-      const res = await deleteAdmin(id).unwrap();
-
+      const res = await deleteAdmin(deleteId).unwrap();
       // console.log(res);
-      if (res?.id) {
+      if (res === null) {
         toast.success("Admin deleted successfully!!!");
       }
     } catch (err: any) {
-      console.error(err.message);
+      toast.error(err.message || "Failed to delete Admin!!!");
+      // console.error(err.message);
     }
   };
 
@@ -84,17 +89,29 @@ const AdminManagementPage = () => {
       renderCell: ({ row }) => {
         return (
           <Box>
-            <IconButton
-              onClick={() => handleDelete(row._id)}
-              aria-label="delete"
-            >
-              <DeleteIcon sx={{ color: "red" }} />
-            </IconButton>
-            <Link href={`/dashboard/admin/admin-management/edit/${row._id}`}>
-              <IconButton aria-label="delete">
-                <EditIcon />
-              </IconButton>
-            </Link>
+            {row.id === "A-0001" ? (
+              <></>
+            ) : (
+              <>
+                {" "}
+                <IconButton
+                  onClick={() => {
+                    setDeleteModalOpen(true);
+                    setDeleteId(row._id);
+                  }}
+                  aria-label="delete"
+                >
+                  <DeleteIcon sx={{ color: "red" }} />
+                </IconButton>
+                <Link
+                  href={`/dashboard/admin/admin-management/edit/${row._id}`}
+                >
+                  <IconButton aria-label="delete">
+                    <EditIcon />
+                  </IconButton>
+                </Link>
+              </>
+            )}
           </Box>
         );
       },
@@ -103,6 +120,12 @@ const AdminManagementPage = () => {
 
   return (
     <Box>
+      <DeleteModal
+        open={deleteModalOpen}
+        setOpen={setDeleteModalOpen}
+        onDeleteConfirm={handleDelete}
+      />
+
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -124,7 +147,16 @@ const AdminManagementPage = () => {
             overflow: "auto",
           }}
         >
-          <DataGrid rows={admins} columns={columns} />
+          <DataGrid
+            rows={admins}
+            columns={columns}
+            paginationModel={paginationModel}
+            onPaginationModelChange={setPaginationModel}
+            rowCount={meta?.total || 0}
+            paginationMode="server"
+            loading={isLoading}
+            pageSizeOptions={[25, 50, 100]}
+          />
         </Box>
       ) : (
         <LoadingPage />

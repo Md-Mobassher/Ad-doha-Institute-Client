@@ -49,17 +49,17 @@ export default function DohaModal({
           sx={{
             color: "primary.main",
             fontSize: {
-              lg: "40px",
-              md: "35px",
-              sm: "30px",
+              lg: "30px",
+              md: "30px",
+              sm: "28px",
               xs: "25px",
             },
             fontWeight: 600,
             background: "#f4f7fe",
             px: {
-              lg: "40px",
-              md: "35px",
-              sm: "30px",
+              lg: "24px",
+              md: "24px",
+              sm: "22px",
               xs: "20px",
             },
           }}

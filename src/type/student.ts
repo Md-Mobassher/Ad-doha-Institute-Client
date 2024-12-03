@@ -1,21 +1,5 @@
 import { z } from "zod";
-
-export type TGender = "male" | "female" | "other";
-export type TBloodGroup =
-  | "A+"
-  | "A-"
-  | "B+"
-  | "B-"
-  | "AB+"
-  | "AB-"
-  | "O+"
-  | "O-";
-
-export type TUserName = {
-  firstName: string;
-  middleName: string;
-  lastName: string;
-};
+import { TBloodGroup, TGender, TUserName } from "./common";
 
 export type TStudent = {
   id: string;
@@ -40,7 +24,7 @@ export const createUserNameValidationSchema = z.object({
   lastName: z.string().min(3).max(20),
 });
 
-export const createFacultyValidationSchema = z.object({
+export const createStudentValidationSchema = z.object({
   password: z.string().min(6).max(20).optional(),
   faculty: z.object({
     name: createUserNameValidationSchema,

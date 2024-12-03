@@ -6,6 +6,12 @@ export enum tagTypes {
   user = "user",
   book = "book",
   video = "video",
+  department = "department",
+  opinion = "opinion",
+  teacher = "teacher",
+  committee = "committee",
+  author = "author",
+  bookcategory = "bookcategory",
 }
 
 export const tagTypesList = [
@@ -16,4 +22,10 @@ export const tagTypesList = [
   tagTypes.user,
   tagTypes.book,
   tagTypes.video,
+  tagTypes.department,
+  tagTypes.opinion,
+  tagTypes.teacher,
+  tagTypes.committee,
+  tagTypes.author,
+  tagTypes.bookcategory,
 ];

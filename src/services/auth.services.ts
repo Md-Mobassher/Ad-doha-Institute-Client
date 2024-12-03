@@ -8,7 +8,7 @@ import {
 import { verifyToken } from "@/utils/verifyToken";
 
 export const storeUserInfo = ({ accessToken }: { accessToken: string }) => {
-  console.log(accessToken);
+  // console.log("accessToken", accessToken);
   return setToLocalStorage(authKey, accessToken);
 };
 

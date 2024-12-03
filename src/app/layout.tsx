@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <Providers>
-      <html lang="en" data-theme={"light"}>
+      <html lang="en" data-theme={"light"} suppressHydrationWarning>
         <body className={`${hindSiliguri.className}`}>
           <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
           <Toaster position="top-center" />

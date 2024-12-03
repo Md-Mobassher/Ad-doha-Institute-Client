@@ -13,10 +13,10 @@ import Link from "next/link";
 import { storeUserInfo } from "@/services/auth.services";
 import { userLogin } from "@/services/actions/userLogin";
 
-const validationSchema = z.object({
-  email: z.string().email("Please enter a valid email address!"),
-  password: z.string().min(6, "Must be at least 6 characters"),
-});
+// const validationSchema = z.object({
+//   email: z.string().email("Please enter a valid email address!"),
+//   password: z.string().min(6, "Must be at least 6 characters"),
+// });
 const defaultValues = {
   email: "",
   password: "",
@@ -69,7 +69,7 @@ const LoginForm = () => {
 
       <DohaForm
         onSubmit={handleLogin}
-        resolver={zodResolver(validationSchema)}
+        // resolver={zodResolver(validationSchema)}
         defaultValues={defaultValues}
       >
         <Grid container spacing={3} my={1}>

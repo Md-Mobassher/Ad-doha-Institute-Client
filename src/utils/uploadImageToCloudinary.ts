@@ -21,7 +21,7 @@ export const uploadImageToCloudinary = async (file: any) => {
   );
 
   const data = await res.json();
-  console.log(data);
+  // console.log(data);
   if (!data) {
     toast.error("Failed to upload image");
   }

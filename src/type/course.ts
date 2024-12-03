@@ -1,43 +1,22 @@
 export interface TCourse {
   _id: string;
-  navigation: string;
   courseImage: any;
   courseName: string;
-  medium?: string;
+  slug: string;
+  medium: string;
   totalClasses: string;
-  duration: string;
-  schedule: string[];
+  courseDuration: string;
+  schedule: string;
   classDuration: string;
   fee: {
     total: string;
     admission?: string;
     monthly?: string;
   };
+  feePaymentMethod: string;
   contact: string;
-  description: string;
-  objectives?: string[];
-  outcomes?: string[];
-  topics?: string[];
-  targetAudience?: string[];
-  modules?: string[];
-  link?: string;
+  courseDescription: string;
+  createdAt?: string;
+  upddatedAt?: string;
+  __v?: number;
 }
-
-export const defaultCourseData: TCourse = {
-  _id: "",
-  navigation: "",
-  courseName: "",
-  courseImage: null,
-  medium: "",
-  totalClasses: "",
-  duration: "",
-  schedule: [],
-  classDuration: "",
-  fee: {
-    total: "",
-    admission: "",
-    monthly: "",
-  },
-  contact: "",
-  description: "",
-};

@@ -5,8 +5,9 @@ const Details = ({ details }: { details: string }) => {
     <Typography
       component="p"
       fontSize={{
-        lg: "16px",
-        md: "16px",
+        xl: "18px",
+        lg: "17px",
+        md: "17px",
         sm: "16px",
         xs: "15px",
       }}

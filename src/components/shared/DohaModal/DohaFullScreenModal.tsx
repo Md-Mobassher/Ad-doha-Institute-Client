@@ -48,7 +48,7 @@ export default function DohaFullScreenModal({
           sx={{
             color: "primary.main",
             fontSize: {
-              lg: "40px",
+              lg: "35px",
               md: "35px",
               sm: "30px",
               xs: "25px",

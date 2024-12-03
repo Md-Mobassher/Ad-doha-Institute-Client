@@ -8,7 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FieldValues } from "react-hook-form";
 import { dateFormatter } from "@/utils/dateFormatter";
-import { modifyPayload } from "@/utils/modifyPayload";
 import { toast } from "sonner";
 import { userLogin } from "@/services/actions/userLogin";
 import { storeUserInfo } from "@/services/auth.services";
@@ -59,7 +58,6 @@ export const defaultValues = {
   student: {
     name: {
       firstName: "",
-      middleName: "",
       lastName: "",
     },
     email: "",
@@ -80,11 +78,9 @@ const RegisterForm = () => {
   const handleRegister = async (values: FieldValues) => {
     setIsLoading(true);
     values.student.dateOfBirth = dateFormatter(values.student.dateOfBirth);
-    // console.log(values);
-    const data = modifyPayload(values);
 
     try {
-      const res = await registerStudent(data);
+      const res = await registerStudent(values);
       // console.log(res);
       if (res?.data?.id) {
         setIsLoading(false);
@@ -118,14 +114,6 @@ const RegisterForm = () => {
               fullWidth={true}
               type="text"
               name="student.name.firstName"
-            />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaInput
-              label="Middle Name"
-              fullWidth={true}
-              type="text"
-              name="student.name.middleName"
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>

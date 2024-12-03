@@ -1,27 +1,45 @@
-import { TMember } from "@/type";
 import Image from "next/image";
+import { TTeacher } from "@/type";
+import { Box, Stack } from "@mui/material";
+import CardTitle from "./CardTitle";
+import CardSubTitle from "./CardSubTitle";
+import Details from "./Details";
 
-const MemberDetails = ({ image, name, designation }: TMember) => {
+interface MemberDetailsProps {
+  member: TTeacher | null;
+}
+
+const MemberDetails = ({ member }: MemberDetailsProps) => {
+  if (!member) return null;
+
+  const { image, name, designation, opinion } = member;
+
   return (
-    <div className=" lg:flex md:flex justify-between items-center gap-10">
-      <div className="w-full">
+    <Stack
+      direction={{ lg: "column", md: "column" }}
+      sx={{
+        gap: 2,
+        padding: "10px",
+      }}
+      alignItems="center"
+      justifyContent="center"
+    >
+      {image && (
         <Image
           src={image}
           alt={name}
-          className="rounded-lg border"
-          width={600}
+          className="rounded-t-lg"
+          width={300}
+          height={300}
         />
-      </div>
+      )}
 
-      <div className=" w-full lg:mt-0 mt-5">
-        <h3 className="lg:text-2xl text-xl text-primary font-bold mb-4 text-center md:text-start lg:text-start xl:text-start">
-          {name}
-        </h3>
-        <h5 className="text-md text-center md:text-start lg:text-start xl:text-start">
-          {designation}
-        </h5>
-      </div>
-    </div>
+      <Box p={1}>
+        <CardTitle title={name} />
+        <CardSubTitle title={designation} />
+        {opinion && <Details details={opinion} />}
+      </Box>
+    </Stack>
   );
 };
 

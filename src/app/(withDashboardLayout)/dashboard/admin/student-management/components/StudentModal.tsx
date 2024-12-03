@@ -6,7 +6,6 @@ import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenMod
 import { BloodGroupOptions, genderOptions } from "@/constant/global";
 import { useCreateStudentMutation } from "@/redux/features/admin/studentManagementApi";
 import { dateFormatter } from "@/utils/dateFormatter";
-import { modifyPayload } from "@/utils/modifyPayload";
 import { Button, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -23,9 +22,8 @@ const CreateStudentModal = ({ open, setOpen }: TProps) => {
     values.student.dateOfBirth = dateFormatter(values.student.dateOfBirth);
     // console.log("Form Values:", values);
 
-    const data = modifyPayload(values);
     try {
-      const res = await createStudent(data).unwrap();
+      const res = await createStudent(values).unwrap();
       // console.log(res);
 
       if (res[0]?.id) {

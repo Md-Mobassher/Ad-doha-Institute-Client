@@ -7,37 +7,36 @@ import {
   useGetSingleVideoQuery,
   useUpdateVideoMutation,
 } from "@/redux/features/admin/videoManagementApi";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { use } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
 type TParams = {
-  params: {
+  params: Promise<{
     videoId: string;
-  };
+  }>;
 };
 
 const VideoUpdatePage = ({ params }: TParams) => {
+  const unwrappedParams = use(params);
   const router = useRouter();
-  const { data, isLoading, refetch } = useGetSingleVideoQuery(params?.videoId);
+  const { data, isLoading, refetch } = useGetSingleVideoQuery(
+    unwrappedParams?.videoId
+  );
   const [updateVideo, { isLoading: updating }] = useUpdateVideoMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    console.log(values);
+    const id = unwrappedParams.videoId;
+    const updatedData = {
+      title: values.title,
+      url: values.url,
+      position: Number(values.position),
+    };
 
     try {
-      const res = await updateVideo({
-        id: params.videoId,
-        values,
-      }).unwrap();
+      const res = await updateVideo({ id, updatedData }).unwrap();
       // console.log(res);
 
       if (res?._id) {
@@ -53,38 +52,10 @@ const VideoUpdatePage = ({ params }: TParams) => {
   const defaultValues = {
     title: data?.title || "",
     url: data?.url || "",
+    position: data?.position || "",
   };
 
   return (
-    // <Box
-    //   sx={{
-    //     maxWidth: 600,
-    //     mx: "auto",
-    //     my: "auto",
-    //     pt: {
-    //       lg: 10,
-    //       md: 8,
-    //       sm: 4,
-    //       xs: 0,
-    //     },
-    //   }}
-    // >
-    //   <Typography
-    //     component="h4"
-    //     variant="h4"
-    //     my={2}
-    //     fontWeight={600}
-    //     textAlign="center"
-    //     color={"primary.main"}
-    //   >
-    //     Update Book Info
-    //   </Typography>
-    //   {isLoading ? (
-    //     <LoadingPage />
-    //   ) : (
-    //
-    //   )}
-    // </Box>
     <>
       {isLoading ? (
         <LoadingPage />
@@ -133,6 +104,14 @@ const VideoUpdatePage = ({ params }: TParams) => {
                   fullWidth={true}
                   type="text"
                   name="url"
+                />
+              </Grid>
+              <Grid item lg={12} md={12} sm={12} xs={12}>
+                <DohaInput
+                  label="Video Position"
+                  fullWidth={true}
+                  type="number"
+                  name="position"
                 />
               </Grid>
             </Grid>

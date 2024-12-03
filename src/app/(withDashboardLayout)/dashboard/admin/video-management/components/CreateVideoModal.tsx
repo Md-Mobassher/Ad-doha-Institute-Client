@@ -1,4 +1,3 @@
-import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaModal from "@/components/shared/DohaModal/DohaModal";
@@ -17,9 +16,13 @@ const CreateVideoModal = ({ open, setOpen }: TProps) => {
 
   const handleFormSubmit = async (values: FieldValues) => {
     // console.log("Form Values:", values);
-
+    const newVideo = {
+      title: values.title,
+      url: values.url,
+      position: Number(values.position),
+    };
     try {
-      const res = await createVideo(values).unwrap();
+      const res = await createVideo(newVideo).unwrap();
       // console.log(res);
       if (res?._id) {
         toast.success("Video created successfully!!!");
@@ -33,6 +36,7 @@ const CreateVideoModal = ({ open, setOpen }: TProps) => {
   const defaultValues = {
     title: "",
     url: "",
+    position: "",
   };
 
   return (
@@ -55,6 +59,15 @@ const CreateVideoModal = ({ open, setOpen }: TProps) => {
               fullWidth={true}
               type="text"
               name="url"
+              required
+            />
+          </Grid>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
+            <DohaInput
+              label="Video Position"
+              fullWidth={true}
+              type="number"
+              name="position"
               required
             />
           </Grid>

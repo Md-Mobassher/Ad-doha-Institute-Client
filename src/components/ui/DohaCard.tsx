@@ -57,15 +57,15 @@ const DohaCard = ({
         </Box>
         <Box px="20px" pt="20px">
           {title && <CardTitle title={title} />}
-          {details && <Details details={details} />}
+          {details && <Details details={`${details.slice(0, 145)}...`} />}
         </Box>
       </Box>
 
       <Box>
         {btnTitle && (
           <Stack
-            justifyContent="space-between"
-            alignItems="end"
+            justifyContent="center"
+            alignItems="center"
             direction="row"
             pt="10px"
             px="20px"

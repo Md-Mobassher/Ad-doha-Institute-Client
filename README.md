@@ -2,7 +2,7 @@
 
 ## Deployment
 
-- **Live Link**: [Ad-Doha Institute](https://ad-doha-institute.vercel.app)
+- **Live Link**: [Ad-Doha Institute](https://ad-doha-org.vercel.app)
 
 ## Technologies Used
 
@@ -18,13 +18,13 @@ To get a local copy of the project up and running, follow these steps:
 1. Clone the repository:
 
 ```
-git clone https://github.com/Md-Mobassher/next-project-template.git
+git clone https://github.com/Md-Mobassher/ad-doha.org.git
 ```
 
 2. Install dependencies:
 
 ```
-cd next-project-template yarn
+cd ad-doha.org yarn
 ```
 
 3. Set up environment variables:

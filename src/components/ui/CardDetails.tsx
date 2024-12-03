@@ -23,7 +23,7 @@ const CardDetails = ({
       <Box className="">
         <Container>
           {details && (
-            <Box className="max-w-3xl mx-auto lg:-mt-10 md:-mt-7 -mt-5 lg:mb-5 mb-8">
+            <Box className="max-w-6xl mx-auto lg:-mt-10 md:-mt-7 -mt-5 lg:mb-5 mb-8">
               <SubTitle title={details} />
             </Box>
           )}
@@ -45,52 +45,52 @@ const CardDetails = ({
                   </Link>
                 )}
                 {link && (
-                  <Link href={link as string}>
-                    <Stack
-                      direction="row"
-                      gap="30px"
-                      justifyContent={{
-                        lg: "start",
-                        md: "start",
-                        sm: "start",
-                        xs: "center",
+                  <Stack
+                    direction="row"
+                    gap="30px"
+                    justifyContent={{
+                      lg: "start",
+                      md: "start",
+                      sm: "start",
+                      xs: "center",
+                    }}
+                    alignItems="center"
+                    flexWrap="wrap"
+                    mt={3}
+                  >
+                    <Typography
+                      component="h3"
+                      variant="h3"
+                      fontSize={{
+                        lg: "22px",
+                        md: "21px",
+                        sm: "20px",
+                        xs: "18px",
                       }}
-                      alignItems="center"
-                      flexWrap="wrap"
-                      mt={3}
+                      color="primary.main"
+                      textAlign="center"
                     >
-                      <Typography
-                        component="h3"
-                        variant="h3"
-                        fontSize={{
-                          lg: "22px",
-                          md: "21px",
-                          sm: "20px",
-                          xs: "18px",
-                        }}
-                        color="primary.main"
-                        textAlign="center"
-                      >
-                        {title}
-                      </Typography>
-                      <Typography
-                        component="h3"
-                        variant="h3"
-                        sx={{
-                          fontSize: {
-                            lg: "16px",
-                            md: "16px",
-                            sm: "15px",
-                            xs: "14px",
-                          },
-                          color: "warning.main",
-                        }}
-                      >
-                        - সেবাটি পেতে{" "}
-                      </Typography>
+                      {title}
+                    </Typography>
+                    <Typography
+                      component="h3"
+                      variant="h3"
+                      sx={{
+                        fontSize: {
+                          lg: "16px",
+                          md: "16px",
+                          sm: "15px",
+                          xs: "14px",
+                        },
+                        color: "warning.main",
+                      }}
+                    >
+                      - সেবাটি পেতে{" "}
+                    </Typography>
+                    <Link href={link as string}>
                       <DohaButton btnTitle={btnTitle || "ক্লিক করুন"} />
-                    </Stack>
-                  </Link>
+                    </Link>
+                  </Stack>
                 )}
               </Box>
             </Box>

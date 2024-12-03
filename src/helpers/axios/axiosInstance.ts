@@ -2,23 +2,47 @@ import { authKey } from "@/constant/authkey";
 import setAccessToken from "@/services/actions/setAccessToken";
 import { getNewAccessToken } from "@/services/auth.services";
 import { IGenericErrorResponse, ResponseSuccessType } from "@/type";
-import { getFromLocalStorage, setToLocalStorage } from "@/utils/local-storage";
+import {
+  getFromLocalStorage,
+  setToLocalStorage,
+  removeFromLocalStorage,
+} from "@/utils/local-storage";
 import axios from "axios";
 import { toast } from "sonner";
 
-const instance = axios.create();
-instance.defaults.headers.post["Content-Type"] = "application/json";
-instance.defaults.headers["Accept"] = "application/json";
-instance.defaults.timeout = 60000;
+const instance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+  timeout: 60000,
+});
 
-// Add a request interceptor
+let isRefreshing = false;
+let failedQueue: any[] = [];
+
+// Helper to process the queue
+const processQueue = (error: any, token: string | null = null) => {
+  failedQueue.forEach((prom) => {
+    if (token) {
+      prom.resolve(token);
+    } else {
+      prom.reject(error);
+    }
+  });
+
+  failedQueue = [];
+};
+
+// Request Interceptor
 instance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
     const accessToken = getFromLocalStorage(authKey);
 
     if (accessToken) {
-      config.headers.Authorization = accessToken;
+      config.headers.Authorization = `${accessToken}`;
     }
     return config;
   },
@@ -41,29 +65,66 @@ instance.interceptors.response.use(
     return responseObject;
   },
   async function (error) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
-    // console.log(error);
-    toast.error(error?.response?.data?.message, { duration: 4000 });
-    const config = error.config;
-    // console.log(config);
-    if (error?.response?.status === 500 && !config.sent) {
-      config.sent = true;
-      const response = await getNewAccessToken();
-      const accessToken = response?.data?.accessToken;
-      config.headers["Authorization"] = accessToken;
-      setToLocalStorage(authKey, accessToken);
-      setAccessToken(accessToken);
-      return instance(config);
-    } else {
-      const responseObject: IGenericErrorResponse = {
-        statusCode: error?.response?.data?.statusCode || 500,
-        message: error?.response?.data?.message || "Something went wrong!!!",
-        errorMessages: error?.response?.data?.message,
-      };
-      // return Promise.reject(error);
-      return responseObject;
+    const originalRequest = error.config;
+
+    // Handle 401 Unauthorized or 403 Forbidden
+    if (
+      (error?.response?.status === 401 || error?.response?.status === 403) &&
+      !originalRequest._retry
+    ) {
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject });
+        })
+          .then((token) => {
+            originalRequest.headers.Authorization = `${token}`;
+            return instance(originalRequest);
+          })
+          .catch((err) => {
+            return Promise.reject(err);
+          });
+      }
+
+      originalRequest._retry = true;
+      isRefreshing = true;
+
+      try {
+        const response = await getNewAccessToken();
+        const newAccessToken = response?.data?.accessToken;
+
+        if (newAccessToken) {
+          setToLocalStorage(authKey, newAccessToken);
+          setAccessToken(newAccessToken);
+
+          instance.defaults.headers.Authorization = `${newAccessToken}`;
+          processQueue(null, newAccessToken);
+
+          return instance(originalRequest);
+        } else {
+          throw new Error("Failed to retrieve new access token");
+        }
+      } catch (refreshError) {
+        processQueue(refreshError, null);
+        removeFromLocalStorage(authKey);
+        window.location.href = "/login";
+        return Promise.reject(refreshError);
+      } finally {
+        isRefreshing = false;
+      }
     }
+
+    // General Error Handling
+    toast.error(error?.response?.data?.message || "Something went wrong!", {
+      duration: 4000,
+    });
+
+    const responseObject: IGenericErrorResponse = {
+      statusCode: error?.response?.data?.statusCode || 500,
+      message: error?.response?.data?.message || "Something went wrong!!!",
+      errorMessages: error?.response?.data?.errorMessages || [],
+    };
+
+    return Promise.reject(responseObject);
   }
 );
 

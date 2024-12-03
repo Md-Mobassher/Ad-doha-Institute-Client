@@ -9,6 +9,7 @@ import OpinionOfAlim from "./home/OpinionOfAlim";
 import TeachersPanel from "./home/TeachersPanel";
 import VideosSection from "./home/VideosSection";
 import EPathagar from "./home/EPathagar";
+import PreOrderBooks from "./home/PreOrderBooks";
 
 const HomePage = () => {
   return (
@@ -19,6 +20,7 @@ const HomePage = () => {
       <CoursesSection />
       <DepartmentsSection />
       <EPathagar />
+      <PreOrderBooks />
       <StudentsCornerSection />
       <OpinionOfAlim />
       <TeachersPanel />

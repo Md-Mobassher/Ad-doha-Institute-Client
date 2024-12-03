@@ -32,6 +32,10 @@ export const theme = createTheme({
           padding: "8px 16px",
           color: "white",
           fontFamily: "SolaimanLipi, serif",
+          boxShadow: "none",
+          ":hover": {
+            boxShadow: "none",
+          },
         },
       },
     },
@@ -72,7 +76,7 @@ export const theme = createTheme({
     body1: {
       color: "#0B1134",
       fontFamily: "SolaimanLipi, serif",
-      fontSize: "16px",
+      fontSize: "15px",
     },
     body2: {
       color: "#0B1134",

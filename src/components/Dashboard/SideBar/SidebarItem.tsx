@@ -25,17 +25,25 @@ const SidebarItem = ({ item }: IProps) => {
         sx={{
           ...(pathname === linkPath
             ? {
-                borderRight: "3px solid #22C55E",
+                borderRight: "5px solid #22C55E",
                 "& svg": {
                   color: " #22C55E",
                 },
+                fontSize: "14px",
+                fontWeight: 600,
               }
             : {}),
-          mb: 1,
+          p: 0,
+          ":hover": {
+            backgroundColor: " #22C55E",
+            color: "#fff",
+          },
         }}
       >
-        <ListItemButton>
-          <ListItemIcon>{item.icon && <item.icon />}</ListItemIcon>
+        <ListItemButton sx={{ px: "5px", py: "5px", gap: 0 }}>
+          <ListItemIcon sx={{ pl: "5px", pr: 0 }}>
+            {item.icon && <item.icon />}
+          </ListItemIcon>
           <ListItemText primary={item.title} />
         </ListItemButton>
       </ListItem>

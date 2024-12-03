@@ -1,12 +1,12 @@
+import { IMeta, TBook } from "@/type";
 import { baseApi } from "../../api/baseApi";
 import { tagTypes } from "../../tag-Types";
-import { IMeta, TBook } from "../../../type/common";
 
 const booksApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     createBook: build.mutation({
       query: (data) => ({
-        url: "/books/create",
+        url: "/books",
         method: "POST",
         data,
       }),
@@ -15,7 +15,7 @@ const booksApi = baseApi.injectEndpoints({
 
     getAllBooks: build.query({
       query: (arg: Record<string, any>) => ({
-        url: "/Books",
+        url: "/books",
         method: "GET",
         params: arg,
       }),

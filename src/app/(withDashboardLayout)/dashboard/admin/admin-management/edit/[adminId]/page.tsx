@@ -14,18 +14,22 @@ import { dateFormatter } from "@/utils/dateFormatter";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
+import { use } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
 type TParams = {
-  params: {
+  params: Promise<{
     adminId: string;
-  };
+  }>;
 };
 
 const AdminUpdatePage = ({ params }: TParams) => {
+  const unwrappedParams = use(params);
   const router = useRouter();
-  const { data, isLoading, refetch } = useGetSingleAdminQuery(params?.adminId);
+  const { data, isLoading, refetch } = useGetSingleAdminQuery(
+    unwrappedParams?.adminId
+  );
   const [updateAdmin, { data: updateData }] = useUpdateAdminMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
@@ -34,7 +38,7 @@ const AdminUpdatePage = ({ params }: TParams) => {
 
     try {
       const res = await updateAdmin({
-        id: params.adminId,
+        id: unwrappedParams.adminId,
         values,
       }).unwrap();
       // console.log(res);
@@ -53,7 +57,6 @@ const AdminUpdatePage = ({ params }: TParams) => {
     admin: {
       name: {
         firstName: data?.name?.firstName || "",
-        middleName: data?.name?.middleName || "",
         lastName: data?.name?.lastName || "",
       },
       designation: data?.designation || "",
@@ -95,15 +98,6 @@ const AdminUpdatePage = ({ params }: TParams) => {
                 fullWidth={true}
                 type="text"
                 name="admin.name.firstName"
-                required
-              />
-            </Grid>
-            <Grid item lg={4} md={6} sm={6} xs={12}>
-              <DohaInput
-                label="Middle Name"
-                fullWidth={true}
-                type="text"
-                name="admin.name.middleName"
                 required
               />
             </Grid>

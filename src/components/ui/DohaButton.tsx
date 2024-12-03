@@ -27,10 +27,9 @@ const DohaButton = ({ btnTitle, id, navigate, variant }: TButtonProps) => {
             border: "2px solid #0F473C",
             px: "16px",
             py: "4px",
-            textSizeAdjust: "auto",
             ":hover": {
               backgroundColor: "primary.main",
-              color: "secondary.main",
+              color: "#fff",
             },
             fontSize: {
               lg: "16px",
