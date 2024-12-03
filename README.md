@@ -9,7 +9,7 @@
 - **Next.js**: React framework for building server-side rendered and static web applications.
 - **TypeScript**: Typed superset of JavaScript for enhanced developer productivity and code maintainability.
 - **Tailwind CSS**: Utility-first CSS framework for building custom designs with ease.
-- **Daisy Ui**: Tailwind CSS Library for building custom designs with ease.
+- **Material Ui**: Material UI for building custom designs with ease.
 
 ## Getting Started
 
@@ -48,4 +48,4 @@ MIT License
 
 ## More Projects and Information
 
-👉 Explore additional projects and find out more about my work on my portfolio website: [Md Mobassher Hossain](https://mobassher.vercel.app) 
+👉 Explore additional projects and find out more about my work on my portfolio website: [Md Mobassher Hossain](https://mobassher.vercel.app)
