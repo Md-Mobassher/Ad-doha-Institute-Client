@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DohaButton from "@/components/ui/DohaButton";
 import { TCourse } from "@/type";
+import CoursePrice from "../courses/components/CoursePrice";
 
 const CoursesSection = async () => {
   const res = await fetch(
@@ -50,19 +51,19 @@ const CoursesSection = async () => {
                 alt="course image"
                 className="border-b border-gray-300"
               />
-              <Box
-                sx={{
-                  p: "20px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                px={1}
+                py={2}
               >
-                {/* <CardTitle title={course?.courseName} /> */}
+                <CoursePrice price={course?.fee?.total} />
+
                 <Link href={`/courses/${course?._id}`}>
                   <DohaButton btnTitle="রেজিস্টার" />
                 </Link>
-              </Box>
+              </Stack>
             </Card>
           ))}
       </Box>

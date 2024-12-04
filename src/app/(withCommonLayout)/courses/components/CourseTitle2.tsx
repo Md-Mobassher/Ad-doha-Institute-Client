@@ -13,7 +13,7 @@ const CourseTitle2 = ({ title, details, details2 }: TTitle2) => {
       justifyContent="start"
       alignItems="center"
       mt="1px"
-      gap="10px"
+      gap="14px"
     >
       <Typography
         component="p"
@@ -25,7 +25,6 @@ const CourseTitle2 = ({ title, details, details2 }: TTitle2) => {
         }}
         textAlign="start"
         fontWeight={700}
-        mr="4px"
       >
         {title}
       </Typography>

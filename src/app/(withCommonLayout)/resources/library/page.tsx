@@ -23,6 +23,7 @@ import Image from "next/image";
 import React, { useState, useMemo } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
+import NotMatch from "@/components/ui/NotMatch";
 
 const BooksPage = () => {
   const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false);
@@ -130,7 +131,8 @@ const BooksPage = () => {
             >
               {/* Categories */}
               <div className="mb-6 ">
-                <div className="flex justify-end items-center">
+                <div className="flex justify-between items-center mb-4">
+                  <Typography variant="h5">Filter By</Typography>
                   <IconButton
                     className="text-end"
                     onClick={handleToggleSidebar}
@@ -262,50 +264,46 @@ const BooksPage = () => {
 
           {/* Content */}
           <main className="flex-1">
-            <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6 min-h-[300px]">
-              {books?.books?.map((book) => (
-                <a
-                  key={book._id}
-                  href={book?.url}
-                  className="bg-white shadow-md rounded-lg p-4 flex flex-col hover:border-green-400 border border-gray-300 hover:shadow-2xl transition-all duration-300 hover:scale-105 "
-                  target="_blank"
-                >
-                  <div>
-                    {/* Image Wrapper with Fixed Size */}
-                    <div className="w-full h-[300px] bg-gray-200 rounded-lg mb-4 flex justify-center items-center overflow-hidden">
-                      <Image
-                        src={book.image}
-                        alt={book.title || "book"}
-                        width={150}
-                        height={300}
-                        className="object-cover w-full h-full"
-                      />
+            {books && books?.books?.length > 0 ? (
+              <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6 min-h-[300px]">
+                {books?.books?.map((book) => (
+                  <a
+                    key={book._id}
+                    href={book?.url}
+                    className="bg-white shadow-md rounded-lg p-4 flex flex-col hover:border-green-400 border border-gray-300 hover:shadow-2xl transition-all duration-300 hover:scale-105 "
+                    target="_blank"
+                  >
+                    <div>
+                      {/* Image Wrapper with Fixed Size */}
+                      <div className="w-full h-[300px] bg-gray-200 rounded-lg mb-4 flex justify-center items-center overflow-hidden">
+                        <Image
+                          src={book.image}
+                          alt={book.title || "book"}
+                          width={150}
+                          height={300}
+                          className="object-cover w-full h-full"
+                        />
+                      </div>
+                      <Typography
+                        variant="body1"
+                        className="font-bold mb-2 text-center"
+                      >
+                        {book.title}
+                      </Typography>
                     </div>
-                    <Typography
-                      variant="body1"
-                      className="font-bold mb-2 text-center"
-                    >
-                      {book.title}
-                    </Typography>
-                    {/* <Typography variant="body2" className="text-gray-600 mb-2">
-                    {book.authors?.name}
-                  </Typography>
-                  <div className="flex justify-between items-center">
-                    <Typography variant="body1" className="font-bold">
-                      $20
-                    </Typography>
-                    <Button
-                      variant="contained"
-                      size="small"
-                      className="bg-pink-500"
-                    >
-                      Read Book
-                    </Button>
-                  </div> */}
-                  </div>
-                </a>
-              ))}
-            </div>
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <Stack
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                height={300}
+              >
+                <NotMatch data={"Book"} />
+              </Stack>
+            )}
 
             {/* Pagination */}
             <Stack

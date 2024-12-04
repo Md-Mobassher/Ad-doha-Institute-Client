@@ -1,20 +1,16 @@
-import { coursesData } from "@/data/courses";
+"use client";
 import { TCourse } from "@/type/course";
 import { Box, Button, Stack } from "@mui/material";
 import Image from "next/image";
-import Title from "@/components/ui/Title";
 import DohaContainer from "@/components/ui/DohaContainer";
-import Details from "@/components/ui/Details";
-import CardTitle from "@/components/ui/CardTitle";
-import DetailsItem from "@/components/ui/DetailsItem";
 import PageTitle from "@/components/ui/PageTitle";
 import CourseTitle from "../components/CourseTitle";
 import CoursePrice from "../components/CoursePrice";
 import CourseTitle2 from "../components/CourseTitle2";
 import CourseTitle3 from "../components/CourseTitle3";
 import Link from "next/link";
-import CourseDetailsItem from "../components/CourseDetailsItem";
 import { use } from "react";
+import { useGetSingleCourseQuery } from "@/redux/features/admin/courseManagementApi";
 
 type TParamsProps = {
   params: Promise<{
@@ -22,18 +18,13 @@ type TParamsProps = {
   }>;
 };
 
-const courseDetailsPage = async ({ params }: TParamsProps) => {
+const CourseDetailsPage = ({ params }: TParamsProps) => {
   const unwrappedParams = use(params);
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/courses/${unwrappedParams?.courseId}`,
-    {
-      next: {
-        revalidate: 30,
-      },
-    }
+
+  const { data, isLoading, refetch } = useGetSingleCourseQuery(
+    unwrappedParams?.courseId
   );
-  const { data } = await res.json();
-  // console.log(data);
+
   const courseData = (data as TCourse) || {};
 
   if (!courseData) {
@@ -83,13 +74,15 @@ const courseDetailsPage = async ({ params }: TParamsProps) => {
               borderRadius: "10px",
             }}
           >
-            <Image
-              src={courseImage}
-              alt={courseName || "course Name"}
-              width={600}
-              height={600}
-              className="rounded-lg shadow-lg"
-            />
+            {courseImage && (
+              <Image
+                src={courseImage}
+                alt={courseName || "course Name"}
+                width={600}
+                height={600}
+                className="rounded-lg shadow-lg"
+              />
+            )}
           </Box>
           <Box width="100%">
             <CourseTitle title={courseName} />
@@ -113,11 +106,12 @@ const courseDetailsPage = async ({ params }: TParamsProps) => {
             </Box>
             <CourseTitle2
               title="রেজিস্ট্রেশন ফি:"
-              details={`${fee.admission} টাকা`}
+              details={`${fee?.admission} টাকা`}
             />
-            <CourseTitle2 title="মাসিক ফি:" details={`${fee.monthly} টাকা`} />
+            <CourseTitle2 title="মাসিক ফি:" details={`${fee?.monthly} টাকা`} />
             <CourseTitle2 title="সর্বমোট:" details2={`${fee?.total} টাকা`} />
-            <CourseTitle2 title="ফি পরিশোধের ধরন:" details={feePaymentMethod} />
+            <CourseTitle2 title="ফি পরিশোধের ধরন:" />
+            <CourseTitle2 details={feePaymentMethod} />
 
             <Button
               sx={{
@@ -238,4 +232,4 @@ const courseDetailsPage = async ({ params }: TParamsProps) => {
   );
 };
 
-export default courseDetailsPage;
+export default CourseDetailsPage;

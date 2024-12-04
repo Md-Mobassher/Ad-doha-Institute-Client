@@ -10,9 +10,9 @@ const CoursePrice = ({ price }: IPrice) => {
       component="p"
       sx={{
         fontSize: {
-          lg: "30px",
-          md: "28px",
-          sm: "24px",
+          lg: "28px",
+          md: "26px",
+          sm: "22px",
           xs: "20px",
         },
         fontWeight: 700,
