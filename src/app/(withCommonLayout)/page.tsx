@@ -21,7 +21,7 @@ const HomePage = () => {
       <DepartmentsSection />
       <EPathagar />
       <PreOrderBooks />
-      <StudentsCornerSection />
+      {/* <StudentsCornerSection /> */}
       <OpinionOfAlim />
       <TeachersPanel />
       <VideosSection />
