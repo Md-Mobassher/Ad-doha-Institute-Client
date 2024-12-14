@@ -236,34 +236,6 @@ const CoursePage = () => {
                 <Delete /> Clear
               </Button>
             </div>
-
-            {/* Authors */}
-            {/* <div className="">
-              <Typography variant="h6">AUTHORS</Typography>
-              <Divider />
-              <ul className="space-y-1 mt-3 max-h-[250px] overflow-y-auto mb-5">
-                {authors?.Authors?.map((author: IAuthor) => (
-                  <li key={author._id} className="flex items-center">
-                    <Radio
-                      size="medium"
-                      checked={filter.authors === author._id}
-                      onChange={() => {
-                        handleRemoveFilter();
-                        setFilter({ authors: author._id });
-                        setSelectedItem(author.name);
-                      }}
-                    />
-                    <span>{author.name}</span>
-                  </li>
-                ))}
-              </ul>
-              <Button
-                className="mt-10 w-full flex justify-center items-center gap-2"
-                onClick={handleRemoveFilter}
-              >
-                <Delete /> Clear
-              </Button>
-            </div> */}
           </aside>
 
           {/* Overlay for Small/Medium Devices */}
