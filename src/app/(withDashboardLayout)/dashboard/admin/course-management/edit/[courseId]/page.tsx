@@ -16,7 +16,6 @@ import {
 } from "@/redux/features/admin/courseManagementApi";
 import { useGetAllAcademicDepartmentsQuery } from "@/redux/features/admin/departmentManagementApi";
 import { use, useEffect, useState } from "react";
-import RichTextEditor from "@/components/form/QuilEditor";
 import { IItem } from "@/type";
 
 type TParams = {
@@ -282,11 +281,11 @@ const CourseUpdatePage = ({ params }: TParams) => {
                 />
               </Grid>
               <Grid item lg={12} md={12} sm={12} xs={12} mb={4}>
-                <RichTextEditor
+                {/* <RichTextEditor
                   value={content}
                   onChange={handleChange}
                   placeholder="Enter course description..."
-                />
+                /> */}
               </Grid>
             </Grid>
             {updating ? (

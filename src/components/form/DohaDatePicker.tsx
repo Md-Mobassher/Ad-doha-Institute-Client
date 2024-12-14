@@ -11,6 +11,7 @@ interface IDatePicker {
   label?: string;
   required?: boolean;
   fullWidth?: boolean;
+  disableFuture?: boolean;
   sx?: SxProps;
 }
 
@@ -20,6 +21,7 @@ const DohaDatePicker = ({
   label,
   required,
   fullWidth = true,
+  disableFuture = true,
   sx,
 }: IDatePicker) => {
   const { control } = useFormContext();
@@ -35,7 +37,7 @@ const DohaDatePicker = ({
             <DesktopDatePicker
               label={label}
               timezone="system"
-              disableFuture
+              disableFuture={disableFuture}
               {...field}
               onChange={(date) => onChange(date)}
               value={value ? dayjs(value) : null}
