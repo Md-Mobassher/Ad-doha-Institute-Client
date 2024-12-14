@@ -21,3 +21,9 @@ export const FormatOptions = Formats.map((item) => ({
   value: item,
   label: item,
 }));
+
+export const courseStatus = ["UPCOMING", "ONGOING", "ENDED"];
+export const courseStatusOptions = courseStatus.map((item) => ({
+  value: item,
+  label: item,
+}));

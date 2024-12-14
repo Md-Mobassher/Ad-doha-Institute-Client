@@ -20,3 +20,16 @@ export interface TCourse {
   upddatedAt?: string;
   __v?: number;
 }
+
+export interface IOfferedCourse {
+  _id?: string;
+  course: TCourse;
+  orientation: string;
+  admissionDeadline: string;
+  startDate: string;
+  endDate: string;
+  status: "UPCOMING" | "ONGOING" | "ENDED";
+  isDeleted: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}

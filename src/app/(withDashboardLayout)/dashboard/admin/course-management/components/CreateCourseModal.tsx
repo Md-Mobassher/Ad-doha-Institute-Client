@@ -5,16 +5,15 @@ import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
 import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenModal";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
-import { Button, CircularProgress, Grid, Typography } from "@mui/material";
+import { Button, CircularProgress, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { useCreateCourseMutation } from "@/redux/features/admin/courseManagementApi";
 import { useGetAllAcademicDepartmentsQuery } from "@/redux/features/admin/departmentManagementApi";
 import { useState } from "react";
-import "react-quill/dist/quill.snow.css";
-import dynamic from "next/dynamic";
-import RichTextEditor from "@/components/form/QuilEditor";
+
 import { IItem } from "@/type";
+import TipTapEditor from "@/components/form/TipTapEditor";
 
 type TProps = {
   open: boolean;
@@ -22,20 +21,22 @@ type TProps = {
 };
 
 const CreateCourseModal = ({ open, setOpen }: TProps) => {
-  const [content, setContent] = useState("");
+  const [editorContent, setEditorContent] = useState<string>("");
+
   const [createCourse, { isLoading: creating }] = useCreateCourseMutation();
   const { data: departmentData, isLoading: departmentLoading } =
     useGetAllAcademicDepartmentsQuery({});
-  const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
   const departments = departmentData?.departments?.map((department) => ({
     label: department.name,
     value: department?._id,
   }));
 
-  const handleChange = (content: string) => {
-    setContent(content);
+  const handleEditorChange = (content: string) => {
+    setEditorContent(content);
+    console.log("Editor Content:", content);
   };
+
   // console.log(authors, CourseCategoryData?.Coursecategorys);
   const handleFormSubmit = async (values: FieldValues) => {
     let imageUrl = "";
@@ -63,7 +64,7 @@ const CreateCourseModal = ({ open, setOpen }: TProps) => {
       },
       feePaymentMethod: values.feePaymentMethod,
       contact: values.contact,
-      courseDescription: content || "",
+      // courseDescription: content || "",
       courseImage:
         imageUrl ||
         "https://res.cloudinary.com/dvt8faj0s/image/upload/v1732036461/pngtree-no-image_wgj8uf.jpg",
@@ -76,7 +77,7 @@ const CreateCourseModal = ({ open, setOpen }: TProps) => {
       if (res?._id) {
         toast.success("Course created successfully!!!");
         setOpen(false);
-        setContent("");
+        setEditorContent("");
       }
     } catch (err: any) {
       toast.error(err.data || "Failed to create Course!!!");
@@ -244,13 +245,12 @@ const CreateCourseModal = ({ open, setOpen }: TProps) => {
               name="file"
             />
           </Grid>
-          {/* <Grid item lg={12} md={12} sm={12} xs={12} mb={4}>
-            <RichTextEditor
-              value={content}
-              onChange={handleChange}
-              placeholder="Enter course description..."
+          <Grid item lg={12} md={12} sm={12} xs={12} mb={4}>
+            <TipTapEditor
+              content={editorContent}
+              onUpdate={handleEditorChange}
             />
-          </Grid> */}
+          </Grid>
         </Grid>
         {creating ? (
           <Button
