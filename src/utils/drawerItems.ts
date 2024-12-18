@@ -142,6 +142,11 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           icon: AutoStoriesIcon,
         },
         {
+          title: "Enrolled Course",
+          path: `${role}/enrolled-course`,
+          icon: AutoStoriesIcon,
+        },
+        {
           title: "Teacher Management",
           path: `${role}/teacher-management`,
           icon: PeopleAltIcon,

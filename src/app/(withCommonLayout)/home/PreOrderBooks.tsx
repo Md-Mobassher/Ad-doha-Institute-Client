@@ -18,7 +18,7 @@ const PreOrderBooks = () => {
           alignItems="center"
           mb={4}
         >
-          <Title title="নতুন প্রকাশিত বই" />
+          <Title title="আমাদের প্রকাশিত বই" />
         </Stack>
         <Stack
           direction={{
@@ -53,13 +53,13 @@ const PreOrderBooks = () => {
             />
           </Box>
           <Box width="100%">
-            <Title title={"প্রি-অর্ডার করলেই পাচ্ছেন ৪০% ছাড়!"} />
+            <Title title={"অর্ডার করলেই পাচ্ছেন ৪০% ছাড়!"} />
             <Box mt={2} mb={5} display="flex" justifyContent="center">
               <CourseTitle3 />
             </Box>
-            <Details details="মহান আল্লাহর অশেষ রহমতে আপনাদের বহুল কাঙ্ক্ষিত ও প্রতীক্ষিত দুটি বই আমরা আপনাদের হাতে তুলে দেওয়ার প্রয়াস পাচ্ছি। আজ থেকে শুরু হচ্ছে প্রি-অর্ডার। আদ-দোহা ইনস্টিটিউট -এর প্রকাশিত দুটি বই প্রি-অর্ডার করলেই পাচ্ছেন ৪০% ছাড়!" />
+            <Details details="মহান আল্লাহর অশেষ রহমতে আপনাদের বহুল কাঙ্ক্ষিত ও প্রতীক্ষিত দুটি বই আমরা আপনাদের হাতে তুলে দেওয়ার প্রয়াস পাচ্ছি। আদ-দোহা ইনস্টিটিউট -এর প্রকাশিত দুটি বই অর্ডার করলেই পাচ্ছেন ৪০% ছাড়!" />
             <Box my={2}>
-              <Details details="প্রি-অর্ডার চলবে ০৩ নভেম্বর ২০২৪ পর্যন্ত। দুইটি বইয়ের মুদ্রিত মূল্য ২৩০ টাকা। প্রি-অর্ডারে পাচ্ছেন মাত্র ১৪০ টাকায়।" />
+              <Details details="দুইটি বইয়ের মুদ্রিত মূল্য ২৩০ টাকা। অর্ডারে পাচ্ছেন মাত্র ১৪০ টাকায়।" />
             </Box>
             <CourseTitle2 title="নোট :" />
             <Box mt={1} mb={2}>
@@ -68,9 +68,12 @@ const PreOrderBooks = () => {
             </Box>
             <CourseTitle2 title="পেমেন্ট করুন :" />
             <Box mt={1} mb={2}>
-              <Details details="বিকাশ / নগদ (পার্সোনাল) : 01916016099" />
+              <CourseTitle2
+                title="বিকাশ / নগদ (পার্সোনাল):"
+                details2={"01916016099"}
+              />
             </Box>
-            <CourseTitle2 title="প্রি-অর্ডার করতে নিচে ক্লিক করুন " />
+            <CourseTitle2 title="অর্ডার করতে নিচে ক্লিক করুন " />
             <Box
               component={Link}
               href={"https://forms.gle/5n4bcMovcxF2sDMQA"}
@@ -98,7 +101,7 @@ const PreOrderBooks = () => {
                   mt: 2,
                 }}
               >
-                প্রি-অর্ডার
+                অর্ডার
               </Button>
             </Box>
           </Box>

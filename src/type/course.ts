@@ -1,5 +1,9 @@
+import { TTeacher } from "./common";
+import { IDepartment } from "./department";
+
 export interface TCourse {
   _id: string;
+  academicDepartment: string;
   courseImage: any;
   courseName: string;
   slug: string;
@@ -23,7 +27,9 @@ export interface TCourse {
 
 export interface IOfferedCourse {
   _id?: string;
+  academicDepartment: IDepartment;
   course: TCourse;
+  faculty: TTeacher;
   orientation: string;
   admissionDeadline: string;
   startDate: string;
@@ -33,3 +39,26 @@ export interface IOfferedCourse {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export type IEnrolledCourse = {
+  _id?: string;
+  academicDepartment: string;
+  offeredCourse: string;
+  course: string;
+  student: string;
+  faculty: string;
+  isEnrolled: boolean;
+  courseMarks: TEnrolledCourseMarks;
+  grade: TGrade;
+  gradePoints: number;
+  isCompleted: boolean;
+};
+
+export type TGrade = "A" | "B" | "C" | "D" | "F" | "NA";
+
+export type TEnrolledCourseMarks = {
+  classTest1: number;
+  midTerm: number;
+  classTest2: number;
+  finalTerm: number;
+};

@@ -21,6 +21,7 @@ interface ITextField {
   sx?: SxProps;
   items?: IItem[];
   isMulti?: boolean;
+  onChange?: (e: any) => void;
 }
 
 const DohaSelectField = ({
@@ -32,6 +33,7 @@ const DohaSelectField = ({
   fullWidth = true,
   sx,
   isMulti = false,
+  onChange,
 }: ITextField) => {
   const { control, formState } = useFormContext();
   const isError = formState.errors[name] !== undefined;
@@ -53,7 +55,11 @@ const DohaSelectField = ({
             {...field}
             multiple={isMulti}
             value={field.value || (isMulti ? [] : "")}
-            onChange={(event) => field.onChange(event.target.value)}
+            onChange={(event) => {
+              const value = event.target.value;
+              field.onChange(value);
+              if (onChange) onChange(value);
+            }}
             label={label}
             renderValue={(selected) => {
               if (isMulti && Array.isArray(selected)) {
@@ -85,7 +91,10 @@ const DohaSelectField = ({
             {items?.map((item) => (
               <MenuItem key={item.value} value={item.value}>
                 {isMulti && (
-                  <Checkbox checked={field.value?.includes(item.value)} />
+                  <Checkbox
+                    sx={{ py: "1px", pr: "12px" }}
+                    checked={field.value?.includes(item.value)}
+                  />
                 )}
                 <ListItemText primary={item.label} />
               </MenuItem>

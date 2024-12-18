@@ -19,7 +19,7 @@ import {
 import CreateOfferedCourseModal from "./components/CreateOfferedCourseModal";
 import { formatDate } from "../../../../../utils/formatDate";
 
-const OfferedCourse = () => {
+const EnrolledCourse = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -235,4 +235,4 @@ const OfferedCourse = () => {
   );
 };
 
-export default OfferedCourse;
+export default EnrolledCourse;
