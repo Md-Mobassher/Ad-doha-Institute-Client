@@ -41,7 +41,6 @@ const OfferedCourseUpdatePage = ({ params }: TParams) => {
 
   const handleFormSubmit = async (values: FieldValues) => {
     const updateOfferedCourse = {
-      courseTitle: values.courseTitle,
       course: values.course,
       batch: values.batch,
       orientation: values.orientation,
@@ -70,7 +69,6 @@ const OfferedCourseUpdatePage = ({ params }: TParams) => {
   };
 
   const defaultValues = {
-    courseTitle: data?.courseTitle || "",
     course: data?.course?._id || "",
     batch: data?.batch || "",
     orientation: data?.orientation || "",
@@ -115,15 +113,6 @@ const OfferedCourseUpdatePage = ({ params }: TParams) => {
           <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
             <Grid container spacing={3} my={1}>
               <Grid item lg={6} md={6} sm={6} xs={12}>
-                <DohaInput
-                  label="Course Title"
-                  fullWidth={true}
-                  type="text"
-                  name="courseTitle"
-                  required
-                />
-              </Grid>
-              <Grid item lg={6} md={6} sm={6} xs={12}>
                 <DohaSelectField
                   label="Course"
                   fullWidth={true}
@@ -143,17 +132,17 @@ const OfferedCourseUpdatePage = ({ params }: TParams) => {
               </Grid>
               <Grid item lg={6} md={6} sm={6} xs={12}>
                 <DohaDatePicker
-                  label="Orientation"
+                  label="Admission Deadline"
                   fullWidth={true}
-                  name="orientation"
+                  name="admissionDeadline"
                   disableFuture={false}
                 />
               </Grid>
               <Grid item lg={6} md={6} sm={6} xs={12}>
                 <DohaDatePicker
-                  label="Admission Deadline"
+                  label="Orientation"
                   fullWidth={true}
-                  name="admissionDeadline"
+                  name="orientation"
                   disableFuture={false}
                 />
               </Grid>

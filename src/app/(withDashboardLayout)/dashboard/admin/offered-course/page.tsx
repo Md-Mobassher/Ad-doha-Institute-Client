@@ -12,7 +12,6 @@ import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
 import DeleteModal from "@/components/ui/DeletModal";
-import CreateCourseModal from "./components/CreateOfferedCourseModal";
 import {
   useDeleteOfferedCourseMutation,
   useGetAllOfferedCoursesQuery,
@@ -93,7 +92,7 @@ const OfferedCourse = () => {
     {
       field: "courseTitle",
       headerName: "Course Title",
-      flex: 2,
+      flex: 1,
       renderCell: ({ row }) => {
         return (
           <Box
@@ -102,7 +101,7 @@ const OfferedCourse = () => {
               marginBottom: "2px",
             }}
           >
-            {row?.courseTitle}
+            {row?.course?.courseName}
           </Box>
         );
       },

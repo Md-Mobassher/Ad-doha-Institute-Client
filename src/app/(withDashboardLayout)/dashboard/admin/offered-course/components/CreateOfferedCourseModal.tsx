@@ -42,7 +42,6 @@ const CreateOfferedCourseModal = ({ open, setOpen }: TProps) => {
   // console.log(authors, CourseCategoryData?.Coursecategorys);
   const handleFormSubmit = async (values: FieldValues) => {
     const newOfferedCourse = {
-      courseTitle: values.courseTitle,
       course: values.course,
       batch: values.batch,
       orientation: values.orientation,
@@ -67,7 +66,6 @@ const CreateOfferedCourseModal = ({ open, setOpen }: TProps) => {
   };
 
   const defaultValues = {
-    courseTitle: "",
     course: "",
     batch: "",
     orientation: "",
@@ -81,15 +79,6 @@ const CreateOfferedCourseModal = ({ open, setOpen }: TProps) => {
     <DohaModal open={open} setOpen={setOpen} title="Create Offered Course">
       <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
         <Grid container spacing={3} my={1}>
-          <Grid item lg={6} md={6} sm={6} xs={12}>
-            <DohaInput
-              label="Course Title"
-              fullWidth={true}
-              type="text"
-              name="courseTitle"
-              required
-            />
-          </Grid>
           <Grid item lg={6} md={6} sm={6} xs={12}>
             <DohaSelectField
               label="Course"
@@ -110,17 +99,17 @@ const CreateOfferedCourseModal = ({ open, setOpen }: TProps) => {
           </Grid>
           <Grid item lg={6} md={6} sm={6} xs={12}>
             <DohaDatePicker
-              label="Orientation"
+              label="Admission Deadline"
               fullWidth={true}
-              name="orientation"
+              name="admissionDeadline"
               disableFuture={false}
             />
           </Grid>
           <Grid item lg={6} md={6} sm={6} xs={12}>
             <DohaDatePicker
-              label="Admission Deadline"
+              label="Orientation"
               fullWidth={true}
-              name="admissionDeadline"
+              name="orientation"
               disableFuture={false}
             />
           </Grid>
