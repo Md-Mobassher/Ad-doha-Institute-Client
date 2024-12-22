@@ -15,7 +15,7 @@ const enrolledCoursesApi = baseApi.injectEndpoints({
 
     createEnrolledCourseByAdmin: build.mutation({
       query: (data) => ({
-        url: "/create-enrolled-courses",
+        url: "/enrolled-courses/create",
         method: "POST",
         data,
       }),
@@ -37,18 +37,40 @@ const enrolledCoursesApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.enrolledCourse],
     }),
 
-    getMyEnrolledCourse: build.query({
+    getSingleEnrolledCourse: build.query({
       query: (id) => ({
-        url: `/my-enrolled-courses`,
+        url: `/enrolled-courses/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.enrolledCourse],
+    }),
+
+    getMyEnrolledCourse: build.query({
+      query: () => ({
+        url: `/enrolled-courses/my-enrolled-courses`,
         method: "GET",
       }),
     }),
-
-    updateEnrolledCourseMarks: build.mutation({
+    updateEnrolledCourse: build.mutation({
       query: ({ id, values }) => ({
-        url: `/update-enrolled-course-marks/${id}`,
+        url: `/enrolled-courses/${id}`,
         method: "PATCH",
         data: values,
+      }),
+      invalidatesTags: [tagTypes.enrolledCourse],
+    }),
+    updateEnrolledCourseMarks: build.mutation({
+      query: ({ id, values }) => ({
+        url: `/enrolled-courses/update-marks`,
+        method: "PATCH",
+        data: values,
+      }),
+      invalidatesTags: [tagTypes.enrolledCourse],
+    }),
+    deleteEnrolledCourse: build.mutation({
+      query: (id) => ({
+        url: `/enrolled-courses/${id}`,
+        method: "DELETE",
       }),
       invalidatesTags: [tagTypes.enrolledCourse],
     }),
@@ -59,6 +81,9 @@ export const {
   useCreateEnrolledCourseMutation,
   useCreateEnrolledCourseByAdminMutation,
   useGetAllEnrolledCoursesQuery,
+  useGetSingleEnrolledCourseQuery,
+  useUpdateEnrolledCourseMutation,
   useGetMyEnrolledCourseQuery,
   useUpdateEnrolledCourseMarksMutation,
+  useDeleteEnrolledCourseMutation,
 } = enrolledCoursesApi;

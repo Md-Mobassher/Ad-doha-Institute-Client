@@ -7,78 +7,33 @@ import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { use, useEffect, useState } from "react";
+import { use } from "react";
 import { IItem } from "@/type";
-import DohaDatePicker from "@/components/form/DohaDatePicker";
-import { courseStatusOptions } from "@/constant/global";
+import { useGetAllOfferedCoursesQuery } from "@/redux/features/admin/offeredCourseManagementApi";
+import { useGetAllStudentsQuery } from "@/redux/features/admin/studentManagementApi";
 import {
-  useGetSingleOfferedCourseQuery,
-  useUpdateOfferedCourseMutation,
-} from "@/redux/features/admin/offeredCourseManagementApi";
-import { useGetAllCoursesQuery } from "@/redux/features/admin/courseManagementApi";
-import DohaInput from "@/components/form/DohaInput";
-import { useGetAllAcademicDepartmentsQuery } from "@/redux/features/admin/departmentManagementApi";
-import { useGetAllTeachersQuery } from "@/redux/features/admin/teacherManagementApi";
+  useGetSingleEnrolledCourseQuery,
+  useUpdateEnrolledCourseMutation,
+} from "@/redux/features/admin/enrolledCourseManagementApi";
+import { enrolStatusOptions } from "@/constant/global";
 
 type TParams = {
   params: Promise<{
     courseId: string;
   }>;
 };
-const OfferedCourseUpdatePage = ({ params }: TParams) => {
+const EnrolledCourseUpdatePage = ({ params }: TParams) => {
   const unwrappedParams = use(params);
   const router = useRouter();
-  const { data, isLoading, refetch } = useGetSingleOfferedCourseQuery(
+  const { data, isLoading, refetch } = useGetSingleEnrolledCourseQuery(
     unwrappedParams?.courseId
   );
   const [updateCourse, { isLoading: updating }] =
-    useUpdateOfferedCourseMutation();
-  const { data: courseData, isLoading: courseLoading } = useGetAllCoursesQuery(
-    {}
-  );
-  const { data: departmentData, isLoading: departmentLoading } =
-    useGetAllAcademicDepartmentsQuery({});
-  const { data: facultyData, isLoading: facultyLoading } =
-    useGetAllTeachersQuery({});
-
-  const departments = departmentData?.departments?.map((department) => ({
-    label: department?.name,
-    value: department?._id,
-  }));
-  const faculties = facultyData?.departments?.map((department) => ({
-    label: department?.name,
-    value: department?._id,
-  }));
-
-  const [selectedDepartment, setSelectedDepartment] = useState<string | null>(
-    null
-  );
-  const [filteredCourses, setFilteredCourses] = useState<IItem[]>([]);
-
-  const handleDepartmentChange = (value: string) => {
-    setSelectedDepartment(value);
-
-    // Filter courses by selected department
-    const filteredCourses = courseData?.courses
-      ?.filter((course) => course?.academicDepartment === value)
-      ?.map((course) => ({
-        label: course?.courseName,
-        value: course?._id,
-      }));
-    setFilteredCourses(filteredCourses as IItem[]);
-  };
+    useUpdateEnrolledCourseMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
     const updateOfferedCourse = {
-      academicDepartment: selectedDepartment,
-      course: values.course,
-      faculty: values.faculty,
-      batch: values.batch,
-      orientation: values.orientation,
-      admissionDeadline: values.admissionDeadline,
-      startDate: values.startDate,
-      endDate: values.endDate,
-      status: values.status,
+      isEnrolled: values.isEnrolled === "TRUE" ? true : false,
     };
 
     try {
@@ -89,31 +44,20 @@ const OfferedCourseUpdatePage = ({ params }: TParams) => {
       // console.log("res" + res);
 
       if (res?._id) {
-        toast.success(res.message || "Offered Course Updated Successfully!!!");
+        toast.success(res.message || "Enrolled Course Updated Successfully!!!");
         await refetch();
-        router.push("/dashboard/admin/offered-course");
+        router.push("/dashboard/admin/enrolled-course");
       }
     } catch (err: any) {
       console.error(err);
-      toast.error(err.data || "Failied to update Course!!!");
+      toast.error(err.data || "Failied to update enrolled-course!!!");
     }
   };
 
-  useEffect(() => {
-    if (courseData) {
-      handleDepartmentChange(data.academicDepartment);
-    }
-  }, [courseData]);
   const defaultValues = {
-    academicDepartment: data?.academicDepartment || "",
-    course: data?.course?._id || "",
-    faculty: data?.faculty || "",
-    batch: data?.batch || "",
-    orientation: data?.orientation || "",
-    admissionDeadline: data?.admissionDeadline || "",
-    startDate: data?.startDate || "",
-    endDate: data?.endDate || "",
-    status: data?.status || "",
+    offeredCourse: data?.offeredCourse || "",
+    student: data?.student || "",
+    isEnrolled: data?.isEnrolled || "",
   };
 
   return (
@@ -145,87 +89,17 @@ const OfferedCourseUpdatePage = ({ params }: TParams) => {
             textAlign="center"
             color={"primary.main"}
           >
-            Update Offered Course
+            Update Enrolled Course
           </Typography>
 
           <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
             <Grid container spacing={3} my={1}>
-              <Grid item lg={6} md={6} sm={6} xs={12}>
+              <Grid item lg={12} md={12} sm={12} xs={12}>
                 <DohaSelectField
-                  label="Academic Department"
+                  label="Is Enrolled"
                   fullWidth={true}
-                  items={departments as IItem[]}
-                  name="academicDepartment"
-                  required
-                  onChange={handleDepartmentChange}
-                />
-              </Grid>
-              <Grid item lg={6} md={6} sm={6} xs={12}>
-                <DohaSelectField
-                  label="Course"
-                  fullWidth={true}
-                  items={filteredCourses as IItem[]}
-                  name="course"
-                  required
-                />
-              </Grid>
-              <Grid item lg={6} md={6} sm={6} xs={12}>
-                <DohaSelectField
-                  label="Faculty"
-                  fullWidth={true}
-                  items={faculties as IItem[]}
-                  name="faculty"
-                  required
-                  isMulti={true}
-                />
-              </Grid>
-              <Grid item lg={6} md={6} sm={6} xs={12}>
-                <DohaInput
-                  label="Batch"
-                  fullWidth={true}
-                  type="text"
-                  name="batch"
-                  required
-                />
-              </Grid>
-              <Grid item lg={6} md={6} sm={6} xs={12}>
-                <DohaDatePicker
-                  label="Admission Deadline"
-                  fullWidth={true}
-                  name="admissionDeadline"
-                  disableFuture={false}
-                />
-              </Grid>
-              <Grid item lg={6} md={6} sm={6} xs={12}>
-                <DohaDatePicker
-                  label="Orientation"
-                  fullWidth={true}
-                  name="orientation"
-                  disableFuture={false}
-                />
-              </Grid>
-              <Grid item lg={6} md={6} sm={6} xs={12}>
-                <DohaDatePicker
-                  label="Start Date"
-                  fullWidth={true}
-                  name="startDate"
-                  disableFuture={false}
-                />
-              </Grid>
-              <Grid item lg={6} md={6} sm={6} xs={12}>
-                <DohaDatePicker
-                  label="End Date"
-                  fullWidth={true}
-                  name="endDate"
-                  disableFuture={false}
-                />
-              </Grid>
-              <Grid item lg={6} md={6} sm={6} xs={12}>
-                <DohaSelectField
-                  label="Status"
-                  fullWidth={true}
-                  items={courseStatusOptions as IItem[]}
-                  name="status"
+                  items={enrolStatusOptions as IItem[]}
+                  name="isEnrolled"
                   required
                 />
               </Grid>
@@ -248,7 +122,7 @@ const OfferedCourseUpdatePage = ({ params }: TParams) => {
                 fullWidth
                 type="submit"
               >
-                Update Offered Course
+                Update Enrolled Course
               </Button>
             )}
           </DohaForm>
@@ -258,4 +132,4 @@ const OfferedCourseUpdatePage = ({ params }: TParams) => {
   );
 };
 
-export default OfferedCourseUpdatePage;
+export default EnrolledCourseUpdatePage;

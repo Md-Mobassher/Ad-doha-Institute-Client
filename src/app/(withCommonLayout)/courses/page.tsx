@@ -28,6 +28,7 @@ import Link from "next/link";
 import DohaButton from "@/components/ui/DohaButton";
 import CoursePrice from "./components/CoursePrice";
 import NotMatch from "@/components/ui/NotMatch";
+import { useGetAllOfferedCoursesQuery } from "@/redux/features/admin/offeredCourseManagementApi";
 
 const CoursePage = () => {
   const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false);
@@ -96,7 +97,7 @@ const CoursePage = () => {
   }, [paginationModel, debouncedTerm, filter]);
 
   const { data: courses, isLoading: coursesLoading } =
-    useGetAllCoursesQuery(query);
+    useGetAllOfferedCoursesQuery(query);
 
   if (departmentsLoading || coursesLoading) return <LoadingPage />;
 
@@ -248,9 +249,9 @@ const CoursePage = () => {
 
           {/* Content */}
           <main className="flex-1">
-            {courses && courses?.courses?.length > 0 ? (
+            {courses && courses?.offeredCourses?.length > 0 ? (
               <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 min-h-[300px]">
-                {courses?.courses?.map((course) => (
+                {courses?.offeredCourses?.map((course) => (
                   <Card
                     key={course?._id}
                     sx={{
@@ -264,7 +265,7 @@ const CoursePage = () => {
                     <Image
                       width={600}
                       height={400}
-                      src={course?.courseImage}
+                      src={course?.course?.courseImage}
                       alt="course image"
                       className="border-b border-gray-300"
                     />
@@ -277,9 +278,9 @@ const CoursePage = () => {
                       py={2}
                     >
                       <Box mt={0}>
-                        <CoursePrice price={course?.fee?.total} />
+                        <CoursePrice price={course?.course?.fee?.total} />
                       </Box>
-                      <Link href={`/courses/${course?._id}`}>
+                      <Link href={`/courses/${course?.course?._id}`}>
                         <DohaButton btnTitle="রেজিস্টার" />
                       </Link>
                     </Stack>
