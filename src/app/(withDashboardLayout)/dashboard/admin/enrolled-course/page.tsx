@@ -8,16 +8,15 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Link from "next/link";
 import LoadingPage from "@/app/loading";
-import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
 import DeleteModal from "@/components/ui/DeletModal";
+import CreateEnrolledCourseModal from "./components/CreateEnrolledCourseModal";
 import {
-  useDeleteOfferedCourseMutation,
-  useGetAllOfferedCoursesQuery,
-} from "@/redux/features/admin/offeredCourseManagementApi";
-import CreateOfferedCourseModal from "./components/CreateOfferedCourseModal";
-import { formatDate } from "../../../../../utils/formatDate";
+  useDeleteEnrolledCourseMutation,
+  useGetAllEnrolledCoursesQuery,
+} from "@/redux/features/admin/enrolledCourseManagementApi";
+import { toast } from "sonner";
 
 const EnrolledCourse = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -42,15 +41,13 @@ const EnrolledCourse = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  const { data, isLoading } = useGetAllOfferedCoursesQuery({ ...query });
-  const [deleteCourse] = useDeleteOfferedCourseMutation();
-  console.log(data);
+  const { data, isLoading } = useGetAllEnrolledCoursesQuery({ ...query });
+  const [deleteCourse] = useDeleteEnrolledCourseMutation();
   if (!data) {
     <p>No Data Found</p>;
   }
-  const offeredCourses = data?.offeredCourses;
+  const enrolledCourses = data?.EnrolledCourses;
   const meta = data?.meta;
-  console.log(offeredCourses);
   const handleDelete = async () => {
     // console.log(id);
     try {
@@ -58,10 +55,10 @@ const EnrolledCourse = () => {
 
       console.log(res);
       if (res?.data === null) {
-        toast.success("Offered Course deleted successfully!!!");
+        toast.success("Enrolled Course deleted successfully!!!");
       }
     } catch (err: any) {
-      toast.error(err || "Failed to Delete Offered Course!!!");
+      toast.error(err || "Failed to Delete Enrolled Course!!!");
     }
   };
 
@@ -118,14 +115,14 @@ const EnrolledCourse = () => {
               marginBottom: "2px",
             }}
           >
-            {row?.batch}
+            {row?.offeredCourse?.batch}
           </Box>
         );
       },
     },
     {
-      field: "admissionDeadline",
-      headerName: "DeadLine",
+      field: "studentId",
+      headerName: "Student ID",
       flex: 1,
       renderCell: ({ row }) => {
         return (
@@ -135,25 +132,23 @@ const EnrolledCourse = () => {
               marginBottom: "2px",
             }}
           >
-            {formatDate(row?.admissionDeadline)}
+            {row?.student?.id}
           </Box>
         );
       },
     },
     {
-      field: "status",
-      headerName: "Status",
+      field: "isEnrolled",
+      headerName: "IsEnrolled",
       headerAlign: "center",
 
       align: "center",
       width: 150,
       renderCell: ({ row }) => {
-        if (row?.status === "UPCOMING")
-          return <Chip label={row?.status} color="primary" />;
-        else if (row?.status === "ONGOING")
-          return <Chip label={row?.status} color="success" />;
-        else if (row?.status === "ENDED")
-          return <Chip label={row?.status} color="error" />;
+        if (row?.isEnrolled === false)
+          return <Chip label="FALSE" color="error" />;
+        else if (row?.isEnrolled === true)
+          return <Chip label="TRUE" color="success" />;
       },
     },
 
@@ -175,7 +170,7 @@ const EnrolledCourse = () => {
             >
               <DeleteIcon sx={{ color: "red" }} />
             </IconButton>
-            <Link href={`/dashboard/admin/offered-course/edit/${row._id}`}>
+            <Link href={`/dashboard/admin/enrolled-course/edit/${row._id}`}>
               <IconButton aria-label="delete">
                 <EditIcon />
               </IconButton>
@@ -195,9 +190,12 @@ const EnrolledCourse = () => {
         mt={1}
       >
         <Button onClick={() => setIsModalOpen(true)}>
-          Create New Offered Course
+          Create Enrolled Course
         </Button>
-        <CreateOfferedCourseModal open={isModalOpen} setOpen={setIsModalOpen} />
+        <CreateEnrolledCourseModal
+          open={isModalOpen}
+          setOpen={setIsModalOpen}
+        />
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"
@@ -212,7 +210,7 @@ const EnrolledCourse = () => {
           }}
         >
           <DataGrid
-            rows={offeredCourses}
+            rows={enrolledCourses}
             columns={columns}
             getRowId={(row) => row._id}
             paginationModel={paginationModel}

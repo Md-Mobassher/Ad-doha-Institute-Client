@@ -27,3 +27,9 @@ export const courseStatusOptions = courseStatus.map((item) => ({
   value: item,
   label: item,
 }));
+
+export const enrolStatus = ["TRUE", "FALSE"];
+export const enrolStatusOptions = enrolStatus.map((item) => ({
+  value: item,
+  label: item,
+}));

@@ -29,6 +29,7 @@ export interface IOfferedCourse {
   _id?: string;
   academicDepartment: IDepartment;
   course: TCourse;
+  batch: string;
   faculty: TTeacher;
   orientation: string;
   admissionDeadline: string;
