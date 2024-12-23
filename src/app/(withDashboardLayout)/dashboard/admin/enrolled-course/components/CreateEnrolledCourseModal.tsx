@@ -4,7 +4,6 @@ import DohaSelectField from "@/components/form/DohaSelectField";
 import { Button, CircularProgress, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { useGetAllCoursesQuery } from "@/redux/features/admin/courseManagementApi";
 import { IItem } from "@/type";
 import DohaModal from "@/components/shared/DohaModal/DohaModal";
 import { useCreateEnrolledCourseByAdminMutation } from "@/redux/features/admin/enrolledCourseManagementApi";

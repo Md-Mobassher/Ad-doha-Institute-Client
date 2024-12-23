@@ -112,5 +112,5 @@ export type TOpinion = {
 
 export interface IItem {
   label: string;
-  value: string | number | boolean;
+  value: string | number;
 }

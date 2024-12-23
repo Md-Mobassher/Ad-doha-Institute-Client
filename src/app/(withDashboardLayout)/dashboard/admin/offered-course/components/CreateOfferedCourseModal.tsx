@@ -8,10 +8,7 @@ import { toast } from "sonner";
 import { useGetAllCoursesQuery } from "@/redux/features/admin/courseManagementApi";
 import { useGetAllAcademicDepartmentsQuery } from "@/redux/features/admin/departmentManagementApi";
 import { IItem } from "@/type";
-import {
-  useCreateOfferedCourseMutation,
-  useGetAllOfferedCoursesQuery,
-} from "@/redux/features/admin/offeredCourseManagementApi";
+import { useCreateOfferedCourseMutation } from "@/redux/features/admin/offeredCourseManagementApi";
 import DohaModal from "@/components/shared/DohaModal/DohaModal";
 import DohaDatePicker from "@/components/form/DohaDatePicker";
 import { courseStatusOptions } from "@/constant/global";
