@@ -11,9 +11,8 @@ import { toast } from "sonner";
 import { useCreateCourseMutation } from "@/redux/features/admin/courseManagementApi";
 import { useGetAllAcademicDepartmentsQuery } from "@/redux/features/admin/departmentManagementApi";
 import { useState } from "react";
-
 import { IItem } from "@/type";
-import TipTapEditor from "@/components/form/TipTapEditor";
+import RichTextEditor from "@/components/form/RichTextEditor";
 
 type TProps = {
   open: boolean;
@@ -22,7 +21,7 @@ type TProps = {
 
 const CreateCourseModal = ({ open, setOpen }: TProps) => {
   const [editorContent, setEditorContent] = useState<string>("");
-
+  const [content, setContent] = useState("");
   const [createCourse, { isLoading: creating }] = useCreateCourseMutation();
   const { data: departmentData, isLoading: departmentLoading } =
     useGetAllAcademicDepartmentsQuery({});
@@ -32,9 +31,8 @@ const CreateCourseModal = ({ open, setOpen }: TProps) => {
     value: department?._id,
   }));
 
-  const handleEditorChange = (content: string) => {
-    setEditorContent(content);
-    console.log("Editor Content:", content);
+  const handleChange = (content: string) => {
+    setContent(content);
   };
 
   // console.log(authors, CourseCategoryData?.Coursecategorys);
@@ -246,9 +244,10 @@ const CreateCourseModal = ({ open, setOpen }: TProps) => {
             />
           </Grid>
           <Grid item lg={12} md={12} sm={12} xs={12} mb={4}>
-            <TipTapEditor
-              content={editorContent}
-              onUpdate={handleEditorChange}
+            <RichTextEditor
+              placeholder="Enter Course Description..."
+              value={content}
+              onChange={handleChange}
             />
           </Grid>
         </Grid>

@@ -46,10 +46,10 @@ const academicDepartmentsApi = baseApi.injectEndpoints({
     }),
 
     updateAcademicDepartment: build.mutation({
-      query: ({ id, values }) => ({
+      query: ({ id, updatedData }) => ({
         url: `/academic-departments/${id}`,
         method: "PATCH",
-        data: values,
+        data: updatedData,
       }),
       invalidatesTags: [tagTypes.department],
     }),

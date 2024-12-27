@@ -112,27 +112,27 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           icon: DashboardIcon,
         },
         {
-          title: "Admin Management",
+          title: "Admin ",
           path: `${role}/admin-management`,
           icon: AdminPanelSettingsIcon,
         },
         {
-          title: "Faculty Management",
+          title: "Faculty ",
           path: `${role}/faculty-management`,
           icon: GroupIcon,
         },
         {
-          title: "Student Management",
+          title: "Student ",
           path: `${role}/student-management`,
           icon: GroupsIcon,
         },
         {
-          title: "Department Management",
+          title: "Department ",
           path: `${role}/department-management`,
           icon: WorkspacesIcon,
         },
         {
-          title: "Course Management",
+          title: "Course ",
           path: `${role}/course-management`,
           icon: AutoStoriesIcon,
         },
@@ -147,37 +147,37 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           icon: AutoStoriesIcon,
         },
         {
-          title: "Teacher Management",
+          title: "Teacher ",
           path: `${role}/teacher-management`,
           icon: PeopleAltIcon,
         },
         {
-          title: "Advisory Committee Management",
+          title: "Advisory Committee ",
           path: `${role}/advisory-committee-management`,
           icon: PeopleOutlineIcon,
         },
         {
-          title: "Opinion Management",
+          title: "Opinion ",
           path: `${role}/opinion-management`,
           icon: CommentIcon,
         },
         {
-          title: "Author Management",
+          title: "Author ",
           path: `${role}/author-management`,
           icon: LibraryBooksIcon,
         },
         {
-          title: "Book Category Management",
+          title: "Book Category ",
           path: `${role}/book-category-management`,
           icon: LibraryBooksIcon,
         },
         {
-          title: "Library Management",
+          title: "Library ",
           path: `${role}/library-management`,
           icon: LibraryBooksIcon,
         },
         {
-          title: "Video Management",
+          title: "Video ",
           path: `${role}/video-management`,
           icon: OndemandVideoIcon,
         }
