@@ -1,6 +1,7 @@
 "use client";
 
 import LoadingPage from "@/app/loading";
+import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import {
@@ -35,23 +36,21 @@ const DepartmentUpdatePage = ({ params }: TParams) => {
       imageUrl = await uploadImageToCloudinary(values.file);
       if (!imageUrl) {
         toast.error(`Failed to upload image! Please try again.`);
-        return;
       }
     }
-    const updatedDepartment = {
+    const id = unwrappedParams.departmentId;
+    const updatedData = {
       name: values.name,
       image: imageUrl,
       position: Number(values.position),
     };
+    console.log("updated", updatedData);
 
     try {
-      const res = await updateDepartment({
-        id: unwrappedParams.departmentId,
-        updatedDepartment,
-      });
+      const res = await updateDepartment({ id, updatedData });
       console.log(res);
 
-      if (res?.data?.success === true) {
+      if (res?.data?._id) {
         toast.success(
           res?.data?.message || "Academic Department Updated Successfully!!!"
         );
@@ -127,12 +126,16 @@ const DepartmentUpdatePage = ({ params }: TParams) => {
               </Grid>
 
               <Grid item lg={12} md={12} sm={12} xs={12}>
-                <DohaInput
-                  label="Academic Department Image"
-                  fullWidth={true}
-                  type="text"
-                  name="image"
-                  required
+                <DohaFileUploader
+                  sx={{
+                    width: "100%",
+                    backgroundColor: "success.main",
+                    ":hover": {
+                      backgroundColor: "primary.main",
+                    },
+                  }}
+                  label="image"
+                  name="file"
                 />
               </Grid>
             </Grid>

@@ -42,7 +42,6 @@ const CourseDetailsPage = ({ params }: TParamsProps) => {
     fee,
     feePaymentMethod,
     medium,
-    schedule,
     totalClasses,
   } = courseData;
 
@@ -134,7 +133,7 @@ const CourseDetailsPage = ({ params }: TParamsProps) => {
                 fontWeight: 600,
               }}
             >
-              আমাদের কোর্সে জয়েন করুন
+              কোর্সে জয়েন করুন
             </Button>
 
             <Link href={"/"}></Link>
@@ -142,92 +141,12 @@ const CourseDetailsPage = ({ params }: TParamsProps) => {
         </Stack>
       </DohaContainer>
 
-      {/* {description && (
-        <Box
-          sx={{
-            backgroundColor: "info.main",
-          }}
-        >
-          <DohaContainer>
-            <CardTitle title="কোর্স পরিচিতি " />
-            <CourseTitle2 details={description} />
-          </DohaContainer>
-        </Box>
-      )}
-
-      {topics && (
-        <DohaContainer>
-          <Box pb={2}>
-            <CardTitle title="কোর্সের বিষয়বস্তু" />
-          </Box>
-          <Box maxWidth={800} mx="auto">
-            {topics?.map((item, index) => (
-              <CourseDetailsItem key={index} item={item} />
-            ))}
-          </Box>
-        </DohaContainer>
-      )}
-
-      {objectives && (
-        <Box>
-          <DohaContainer>
-            <CardTitle title="কোর্সের উদ্দেশ্য" />
-
-            <Box maxWidth={800} mx="auto" mt={2}>
-              {objectives?.map((item, index) => (
-                <CourseDetailsItem key={index} item={item} />
-              ))}
-            </Box>
-          </DohaContainer>
-        </Box>
-      )}
-
-      {outcomes && (
-        <Box
-          sx={{
-            backgroundColor: "info.main",
-          }}
-        >
-          <DohaContainer>
-            <CardTitle title="কোর্স থেকে যা অর্জন হবে " />
-
-            <Box maxWidth={800} mx="auto" mt={2}>
-              {outcomes?.map((item, index) => (
-                <CourseDetailsItem key={index} item={item} />
-              ))}
-            </Box>
-          </DohaContainer>
-        </Box>
-      )}
-
-      {targetAudience && (
-        <Box
-          sx={{
-            backgroundColor: "info.main",
-          }}
-        >
-          <DohaContainer>
-            <CardTitle title="এই কোর্সটি কাদের জন্য" />
-            <Box maxWidth={800} mx="auto" mt={2}>
-              {targetAudience?.map((item, index) => (
-                <CourseDetailsItem key={index} item={item} />
-              ))}
-            </Box>
-          </DohaContainer>
-        </Box>
-      )}
-      {modules && (
-        <Box py={5}>
-          <Box pb={2}>
-            <CardTitle title="কোর্স মডিউল " />
-          </Box>
-          <Box maxWidth={800} mx="auto">
-            {modules?.map((item, index) => (
-              <CourseDetailsItem key={index} item={item} />
-            ))}
-          </Box>
-        </Box>
-      )} */}
+      <DohaContainer>
+        <div
+          className=" p-4 "
+          dangerouslySetInnerHTML={{ __html: courseDescription }}
+        />
+      </DohaContainer>
     </Box>
   );
 };

@@ -101,7 +101,7 @@ const OfferedCourseUpdatePage = ({ params }: TParams) => {
 
   useEffect(() => {
     if (courseData) {
-      handleDepartmentChange(data.academicDepartment);
+      handleDepartmentChange(data?.academicDepartment);
     }
   }, [courseData]);
   const defaultValues = {
