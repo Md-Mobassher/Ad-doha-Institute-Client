@@ -9,8 +9,6 @@ import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { use } from "react";
 import { IItem } from "@/type";
-import { useGetAllOfferedCoursesQuery } from "@/redux/features/admin/offeredCourseManagementApi";
-import { useGetAllStudentsQuery } from "@/redux/features/admin/studentManagementApi";
 import {
   useGetSingleEnrolledCourseQuery,
   useUpdateEnrolledCourseMutation,

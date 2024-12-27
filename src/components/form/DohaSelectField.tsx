@@ -81,10 +81,10 @@ const DohaSelectField = ({
               "& .MuiSelect-select": {
                 display: "flex",
                 alignItems: "center",
-                padding: "8px 14px", // Adjust padding for alignment
+                padding: "8px 14px",
               },
               "& .MuiOutlinedInput-root": {
-                height: "40px", // Match height with other fields
+                height: "40px",
               },
             }}
           >
@@ -93,7 +93,10 @@ const DohaSelectField = ({
                 {isMulti && (
                   <Checkbox
                     sx={{ py: "1px", pr: "12px" }}
-                    checked={field.value?.includes(item.value)}
+                    checked={
+                      Array.isArray(field.value) &&
+                      field.value.includes(item.value)
+                    }
                   />
                 )}
                 <ListItemText primary={item.label} />
