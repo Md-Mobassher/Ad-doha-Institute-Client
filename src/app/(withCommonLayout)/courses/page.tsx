@@ -2,9 +2,8 @@
 import LoadingPage from "@/app/loading";
 import DohaContainer from "@/components/ui/DohaContainer";
 import Title from "@/components/ui/Title";
-import { useGetAllAuthorsQuery } from "@/redux/features/admin/authorManagementApi";
 import { useDebounced } from "@/redux/hooks";
-import { IAuthor, IDepartment } from "@/type";
+import { IDepartment } from "@/type";
 import { Delete } from "@mui/icons-material";
 import {
   Box,
@@ -19,10 +18,9 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-import React, { useState, useMemo, useEffect, use } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useGetAllCoursesQuery } from "@/redux/features/admin/courseManagementApi";
 import { useGetAllAcademicDepartmentsQuery } from "@/redux/features/admin/departmentManagementApi";
 import Link from "next/link";
 import DohaButton from "@/components/ui/DohaButton";

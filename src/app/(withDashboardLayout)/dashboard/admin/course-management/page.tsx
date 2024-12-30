@@ -12,7 +12,6 @@ import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
 import DeleteModal from "@/components/ui/DeletModal";
-import NorthEastIcon from "@mui/icons-material/NorthEast";
 import CreateCourseModal from "./components/CreateCourseModal";
 import {
   useDeleteCourseMutation,
@@ -50,13 +49,12 @@ const CourseMangementPage = () => {
   }
   const courses = data?.courses;
   const meta = data?.meta;
-  console.log(courses);
+
   const handleDelete = async () => {
     // console.log(id);
     try {
       const res = await deleteCourse(deleteId).unwrap();
 
-      console.log(res);
       if (res?.data === null) {
         toast.success("Course deleted successfully!!!");
       }

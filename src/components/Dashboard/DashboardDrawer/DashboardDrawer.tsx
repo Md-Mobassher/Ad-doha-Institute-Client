@@ -149,6 +149,7 @@ export default function DashboardDrawer({
           flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
+          backgroundColor: "#F4F7FE",
         }}
       >
         <Toolbar />

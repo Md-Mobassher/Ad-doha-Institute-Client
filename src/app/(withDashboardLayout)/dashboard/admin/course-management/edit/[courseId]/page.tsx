@@ -116,7 +116,6 @@ const CourseUpdatePage = ({ params }: TParams) => {
     contact: data?.contact || "",
   };
 
-  console.log("content" + content);
   return (
     <>
       {isLoading ? (
