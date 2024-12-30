@@ -12,7 +12,14 @@ import { useCreateCourseMutation } from "@/redux/features/admin/courseManagement
 import { useGetAllAcademicDepartmentsQuery } from "@/redux/features/admin/departmentManagementApi";
 import { useState } from "react";
 import { IItem } from "@/type";
-import RichTextEditor from "@/components/form/RichTextEditor";
+import dynamic from "next/dynamic";
+
+const RichTextEditor = dynamic(
+  () => import("@/components/form/RichTextEditor"),
+  {
+    ssr: false, // Disables SSR for this component
+  }
+);
 
 type TProps = {
   open: boolean;
