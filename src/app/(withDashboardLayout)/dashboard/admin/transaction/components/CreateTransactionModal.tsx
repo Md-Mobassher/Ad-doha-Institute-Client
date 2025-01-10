@@ -6,24 +6,27 @@ import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { IItem } from "@/type";
 import DohaModal from "@/components/shared/DohaModal/DohaModal";
-import { useCreateEnrolledCourseByAdminMutation } from "@/redux/features/admin/enrolledCourseManagementApi";
+
 import { useGetAllOfferedCoursesQuery } from "@/redux/features/admin/offeredCourseManagementApi";
 import { useGetAllStudentsQuery } from "@/redux/features/admin/studentManagementApi";
-import { useGetAllTransactionsQuery } from "@/redux/features/admin/transactionManagementApi";
+import { useCreateTransactionByAdminMutation } from "@/redux/features/admin/transactionManagementApi";
+import DohaInput from "@/components/form/DohaInput";
+import { paymentMethodOptions, paymentStatusOptions } from "@/constant/global";
+import { useState } from "react";
 
 type TProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const CreateEnrolledCourseModal = ({ open, setOpen }: TProps) => {
-  const [createCourse, { isLoading: creating }] =
-    useCreateEnrolledCourseByAdminMutation();
+const CreateTransactionModal = ({ open, setOpen }: TProps) => {
+  const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
   const { data: offeredCourseData, isLoading: offeredCourseLoading } =
     useGetAllOfferedCoursesQuery({});
   const { data: studentData, isLoading: facultyLoading } =
     useGetAllStudentsQuery({});
-  const { data: transactionData, isLoading } = useGetAllTransactionsQuery({});
+  const [createTransaction, { isLoading: creating }] =
+    useCreateTransactionByAdminMutation();
 
   const offeredCourses = offeredCourseData?.offeredCourses?.map((course) => ({
     label: course?.course?.courseName + " " + "(ব্যাচ-" + course?.batch + ")",
@@ -33,41 +36,44 @@ const CreateEnrolledCourseModal = ({ open, setOpen }: TProps) => {
     label: student?.fullName,
     value: student?._id,
   }));
-  const transactions = transactionData?.Transactions?.map((student) => ({
-    label: student?.transactionId,
-    value: student?._id,
-  }));
 
   // console.log(authors, CourseCategoryData?.Coursecategorys);
   const handleFormSubmit = async (values: FieldValues) => {
-    const newEnrolledCourse = {
+    const newTransaction = {
       offeredCourse: values.offeredCourse,
-      student: values.student,
-      transaction: values.transaction,
+      amount: Number(values.amount),
+      studentId: values.studentId,
+      transactionId: values.transactionId,
+      phoneNumber: values.phoneNumber,
+      paymentMethod: values.paymentMethod,
+      paymentStatus: values.paymentStatus,
     };
 
-    // console.log("newCourse", newEnrolledCourse);
+    console.log("newTransaction", newTransaction);
     try {
-      const res = await createCourse(newEnrolledCourse).unwrap();
-      // console.log(res);
+      const res = await createTransaction(newTransaction).unwrap();
+      console.log(res);
       if (res?._id) {
-        toast.success("Enrolled Course created successfully!!!");
+        toast.success("Transaction created successfully!!!");
         setOpen(false);
       }
     } catch (err: any) {
-      toast.error(err.data || "Failed to create Enrolled Course!!!");
+      toast.error(err.data || "Failed to create Transaction!!!");
       // console.error(err);
     }
+  };
+
+  const handleCourseChange = (value: string) => {
+    setSelectedCourse(value);
   };
 
   const defaultValues = {
     offeredCourse: "",
     student: "",
-    transaction: "",
   };
 
   return (
-    <DohaModal open={open} setOpen={setOpen} title="Create Enrolled Course">
+    <DohaModal open={open} setOpen={setOpen} title="Create Transaction">
       <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
         <Grid container spacing={3} my={1}>
           <Grid item lg={12} md={12} sm={12} xs={12}>
@@ -77,24 +83,60 @@ const CreateEnrolledCourseModal = ({ open, setOpen }: TProps) => {
               items={offeredCourses as IItem[]}
               name="offeredCourse"
               required
+              onChange={handleCourseChange}
             />
           </Grid>
-
           <Grid item lg={12} md={12} sm={12} xs={12}>
-            <DohaSelectField
-              label="Student"
+            <DohaInput
+              label="Amount of Course"
               fullWidth={true}
-              items={students as IItem[]}
-              name="student"
+              type="text"
+              name="amount"
               required
             />
           </Grid>
           <Grid item lg={12} md={12} sm={12} xs={12}>
             <DohaSelectField
-              label="Transaction"
+              label="Student"
               fullWidth={true}
-              items={transactions as IItem[]}
-              name="transaction"
+              items={students as IItem[]}
+              name="studentId"
+              required
+            />
+          </Grid>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
+            <DohaInput
+              label="Transaction Id"
+              fullWidth={true}
+              type="text"
+              name="transactionId"
+              required
+            />
+          </Grid>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
+            <DohaInput
+              label="Phone Number (Using Transaction)"
+              fullWidth={true}
+              type="number"
+              name="phoneNumber"
+              required
+            />
+          </Grid>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
+            <DohaSelectField
+              label="Payment Method"
+              fullWidth={true}
+              items={paymentMethodOptions as IItem[]}
+              name="paymentMethod"
+              required
+            />
+          </Grid>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
+            <DohaSelectField
+              label="Payment Status"
+              fullWidth={true}
+              items={paymentStatusOptions as IItem[]}
+              name="paymentStatus"
               required
             />
           </Grid>
@@ -117,7 +159,7 @@ const CreateEnrolledCourseModal = ({ open, setOpen }: TProps) => {
             fullWidth
             type="submit"
           >
-            Create Enrolled Course
+            Create Transaction
           </Button>
         )}
       </DohaForm>
@@ -125,4 +167,4 @@ const CreateEnrolledCourseModal = ({ open, setOpen }: TProps) => {
   );
 };
 
-export default CreateEnrolledCourseModal;
+export default CreateTransactionModal;

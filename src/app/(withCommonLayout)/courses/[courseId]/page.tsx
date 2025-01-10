@@ -112,31 +112,31 @@ const CourseDetailsPage = ({ params }: TParamsProps) => {
             <CourseTitle2 title="ফি পরিশোধের ধরন:" />
             <CourseTitle2 details={feePaymentMethod} />
 
-            <Button
-              sx={{
-                mt: "25px",
-                borderRadius: "10px",
-                backgroundColor: "primary.main",
-                color: "secondary.main",
-                width: "100%",
-                textSizeAdjust: "auto",
-                ":hover": {
-                  backgroundColor: "success.main",
-                  color: "primary.main",
-                },
-                fontSize: {
-                  lg: "16px",
-                  md: "16px",
-                  sm: "16px",
-                  xs: "15px",
-                },
-                fontWeight: 600,
-              }}
-            >
-              কোর্সে জয়েন করুন
-            </Button>
-
-            <Link href={"/"}></Link>
+            <Link href={"/payment"}>
+              <Button
+                sx={{
+                  mt: "25px",
+                  borderRadius: "10px",
+                  backgroundColor: "primary.main",
+                  color: "secondary.main",
+                  width: "100%",
+                  textSizeAdjust: "auto",
+                  ":hover": {
+                    backgroundColor: "success.main",
+                    color: "primary.main",
+                  },
+                  fontSize: {
+                    lg: "16px",
+                    md: "16px",
+                    sm: "16px",
+                    xs: "15px",
+                  },
+                  fontWeight: 600,
+                }}
+              >
+                কোর্সে জয়েন করুন
+              </Button>
+            </Link>
           </Box>
         </Stack>
       </DohaContainer>
