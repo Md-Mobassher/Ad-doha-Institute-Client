@@ -104,6 +104,7 @@ const OfferedCourseUpdatePage = ({ params }: TParams) => {
       handleDepartmentChange(data?.academicDepartment);
     }
   }, [courseData]);
+
   const defaultValues = {
     academicDepartment: data?.academicDepartment || "",
     course: data?.course?._id || "",

@@ -16,6 +16,7 @@ import CommentIcon from "@mui/icons-material/Comment";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import WorkspacesIcon from "@mui/icons-material/Workspaces";
+import { Money } from "@mui/icons-material";
 
 export const drawerItems = (role: UserRole): DrawerItem[] => {
   const roleMenus: DrawerItem[] = [];
@@ -145,6 +146,11 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           title: "Enrolled Course",
           path: `${role}/enrolled-course`,
           icon: AutoStoriesIcon,
+        },
+        {
+          title: "Transaction",
+          path: `${role}/transaction`,
+          icon: Money,
         },
         {
           title: "Teacher ",

@@ -11,6 +11,7 @@ type TInputProps = {
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
+  defaultValue?: string | number; // Added defaultValue prop
 };
 
 const DohaInput = ({
@@ -22,12 +23,14 @@ const DohaInput = ({
   sx,
   disabled,
   required,
+  defaultValue = "", // Set default value
 }: TInputProps) => {
   const { control } = useFormContext();
   return (
     <Controller
       control={control}
       name={name}
+      defaultValue={defaultValue} // Pass defaultValue to Controller
       render={({ field, fieldState: { error } }) => (
         <TextField
           {...field}
