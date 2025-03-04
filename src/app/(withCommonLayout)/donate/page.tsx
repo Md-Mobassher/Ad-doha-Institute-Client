@@ -5,7 +5,7 @@ import Title from "@/components/ui/Title";
 import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import CourseTitle2 from "../courses/components/CourseTitle2";
-import { aimObjectivesData } from "@/data/aimsObjectives";
+import DonateTitle from "@/components/ui/DonateTitle";
 
 const DonatePage = () => {
   return (
@@ -59,32 +59,44 @@ const DonatePage = () => {
           </Stack>
         </Stack>
 
-        <Stack
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          gap={{ lg: "30px", md: "30px", sm: "20px", xs: "15px" }}
-          flexWrap="wrap"
-          mt={6}
-        >
+        <Box mt={{ lg: 12, md: 10, sm: 8, xs: 6 }}>
           <Title title="দান-সদাকাহ পাঠানোর মাধ্যম " />
-          <Typography
-            component="p"
-            sx={{
-              fontSize: {
-                xl: "20px",
-                lg: "20px",
-                md: "18px",
-                sm: "18px",
-                xs: "16px",
-              },
-              fontWeight: "600",
-              textAlign: "center",
-              color: "warning.main",
-            }}
-          >
-            নগদ / বিকাশ : +8801916-016099
-          </Typography>
+        </Box>
+        <Stack
+          maxWidth={{ lg: "80%", md: "100%", sm: "100%", xs: "100%" }}
+          direction={{ lg: "row", md: "row", sm: "column", xs: "column" }}
+          justifyContent="space-between"
+          alignItems="start"
+          gap={{ lg: "30px", md: "30px", sm: "20px", xs: "20px" }}
+          mt={{ lg: 6, md: 6, sm: 4, xs: 3 }}
+          mx={"auto"}
+        >
+          <Box width={"100%"}>
+            <DonateTitle title="Account No:" details="20502670203230516" />
+            <DonateTitle title="Account Name:" details="AD DOHA INSTITUTE" />
+            <DonateTitle title="Routing Number:" details="125263377" />
+            <Typography
+              component="p"
+              mt={"4px"}
+              sx={{
+                fontSize: {
+                  xl: "19px",
+                  lg: "18px",
+                  md: "17px",
+                  sm: "16px",
+                  xs: "15px",
+                },
+                fontWeight: "600",
+                color: "warning.main",
+              }}
+            >
+              Islami bank Bangladesh limited Mohammadpur Krishi
+              Market Branch, Dhaka.
+            </Typography>
+          </Box>
+          <Box width={"100%"}>
+            <DonateTitle title="BKASH / NAGAD:" details="+8801916-016099" />
+          </Box>
         </Stack>
       </DohaContainer>
     </Box>
