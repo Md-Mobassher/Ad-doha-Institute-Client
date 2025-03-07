@@ -47,30 +47,28 @@ const DepartmentsSection: React.FC = () => {
           <CourseTitle3 />
         </Stack>
 
-        <Box sx={{ flexGrow: 1, p: 2 }}>
-          <Grid
-            container
-            spacing={2}
-            sx={{
-              "--Grid-borderWidth": "1px",
-              borderTop: "var(--Grid-borderWidth) solid",
-              borderLeft: "var(--Grid-borderWidth) solid",
-              borderColor: "divider",
-              "& > div": {
-                borderRight: "var(--Grid-borderWidth) solid",
-                borderBottom: "var(--Grid-borderWidth) solid",
-                borderColor: "divider",
-              },
-            }}
-          >
+        <Box sx={{ flexGrow: 1, p: 2 }} width="100%">
+          <Grid container spacing={2}>
             {departments.map((department: IDepartment) => (
               <Grid
                 key={department._id}
                 {...{ xs: 6, sm: 4, md: 2.4, lg: 2.4, xl: 2.4 }}
                 minHeight={160}
+                mx={"auto"}
+                sx={{
+                  "--Grid-borderWidth": "1px",
+                  borderTop: "var(--Grid-borderWidth) solid",
+                  borderLeft: "var(--Grid-borderWidth) solid",
+                  borderColor: "divider",
+                  "& > div": {
+                    borderRight: "var(--Grid-borderWidth) solid",
+                    borderBottom: "var(--Grid-borderWidth) solid",
+                    borderColor: "divider",
+                  },
+                }}
               >
                 <Box
-                  className="text-center p-5 bg-white cursor-pointer"
+                  className="text-center lg:p-5 md:p-4 p-2 bg-white cursor-pointer h-full"
                   onClick={() => handleDepartmentClick(department._id)}
                 >
                   <Box className="hover:scale-110 transition-all duration-300 flex flex-col items-center">
@@ -86,7 +84,12 @@ const DepartmentsSection: React.FC = () => {
                       sx={{
                         color: "primary.main",
                         boxShadow: "none",
-                        fontSize: "16px",
+                        fontSize: {
+                          lg: "16px",
+                          md: "15px",
+                          sm: "14px",
+                          xs: "14px",
+                        },
                         fontWeight: 600,
                         px: "10px",
                         display: "flex",
