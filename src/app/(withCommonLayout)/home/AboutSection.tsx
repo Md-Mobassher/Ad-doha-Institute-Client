@@ -25,8 +25,8 @@ const AboutSection = () => (
         width={{
           lg: 400,
           md: 400,
-          sm: 380,
-          xs: 220,
+          sm: 350,
+          xs: 100,
         }}
       >
         <Image

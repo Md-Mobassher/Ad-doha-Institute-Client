@@ -19,9 +19,9 @@ const DohaContainer = ({
           px: {
             xl: "0px",
             lg: "60px",
-            md: "50px",
+            md: "30px",
             sm: "16px",
-            xs: "8px",
+            xs: "0px",
           },
         }}
       >

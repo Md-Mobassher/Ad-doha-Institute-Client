@@ -54,11 +54,16 @@ const PreOrderBooks = () => {
           </Box>
           <Box width="100%">
             <Title title={"অর্ডার করলেই পাচ্ছেন ৪০% ছাড়!"} />
-            <Box mt={2} mb={5} display="flex" justifyContent="center">
+            <Box
+              mt={2}
+              mb={{ lg: 5, md: 4, sm: 4, xs: 3 }}
+              display="flex"
+              justifyContent="center"
+            >
               <CourseTitle3 />
             </Box>
             <Details details="মহান আল্লাহর অশেষ রহমতে আপনাদের বহুল কাঙ্ক্ষিত ও প্রতীক্ষিত দুটি বই আমরা আপনাদের হাতে তুলে দেওয়ার প্রয়াস পাচ্ছি। আদ-দোহা ইনস্টিটিউট -এর প্রকাশিত দুটি বই অর্ডার করলেই পাচ্ছেন ৪০% ছাড়!" />
-            <Box my={2}>
+            <Box my={{ lg: "16px", md: "14px", sm: "12px", xs: "10px" }}>
               <Details details="দুইটি বইয়ের মুদ্রিত মূল্য ২৩০ টাকা। অর্ডারে পাচ্ছেন মাত্র ১৪০ টাকায়।" />
             </Box>
             <CourseTitle2 title="নোট :" />

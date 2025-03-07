@@ -6,6 +6,7 @@ import {
   Button,
   Container,
   Divider,
+  Grid2,
   Stack,
   Typography,
 } from "@mui/material";
@@ -32,6 +33,7 @@ const Footer = () => {
         sx={{
           pb: "5px",
           pt: "30px",
+          mx: "auto",
         }}
       >
         <Stack
@@ -88,20 +90,25 @@ const Footer = () => {
       <Divider />
 
       {/* footer 2 */}
-      <Box sx={{ pt: "35px" }}>
+      <Box sx={{ pt: "30px" }}>
         <Container>
-          <Stack
-            direction={{
-              xl: "row",
-              lg: "row",
-              md: "row",
-              sm: "column",
-              xs: "column",
+          <Box
+            display={"grid"}
+            gridTemplateColumns={{
+              lg: "1fr 1fr 1fr 1fr",
+              md: "1fr 1fr 1fr ",
+              sm: "1fr 1fr",
+              xs: "1fr",
             }}
-            justifyContent="space-between"
-            alignItems="stretch"
-            mb={4}
+            mb={2}
             gap={2}
+            px={{
+              xl: "0px",
+              lg: "40px",
+              md: "20px",
+              sm: "14px",
+              xs: "0px",
+            }}
           >
             {/* logo */}
             <Box sx={{ width: "100%", height: "100%" }}>
@@ -363,7 +370,7 @@ const Footer = () => {
                 </Typography>
               </Stack>
             </Box>
-          </Stack>
+          </Box>
         </Container>
       </Box>
 

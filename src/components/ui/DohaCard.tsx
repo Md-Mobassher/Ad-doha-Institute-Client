@@ -55,7 +55,7 @@ const DohaCard = ({
             className="bg-white rounded-t-lg"
           />
         </Box>
-        <Box px="20px" pt="20px">
+        <Box px={{ lg: "20px", md: "18px", sm: "16px", xs: "14px" }} pt="20px">
           {title && <CardTitle title={title} />}
           {details && <Details details={`${details.slice(0, 145)}...`} />}
         </Box>

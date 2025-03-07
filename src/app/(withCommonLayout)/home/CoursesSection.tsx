@@ -31,7 +31,7 @@ const CoursesSection = async () => {
         <SubTitle title="এক-নজরে দেখে নিন আমাদের বাছাইকৃত কোর্সগুলো" />
       </Stack>
 
-      <Box className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-7 md:gap-6  gap-5 mt-8 mx-auto">
+      <Box className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 lg:gap-6 md:gap-5  gap-5 mt-8 mx-auto">
         {data &&
           data?.slice(0, 8)?.map((course: TCourse) => (
             <Card
@@ -44,18 +44,31 @@ const CoursesSection = async () => {
                 },
               }}
             >
-              <Image
-                width={600}
-                height={400}
-                src={course?.courseImage}
-                alt="course image"
-                className="border-b border-gray-300"
-              />
+              <Box
+                sx={{
+                  width: "100%",
+                  height: { lg: "300px", md: "280px", sm: "auto", xs: "auto" },
+                  overflow: "hidden",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  src={course?.courseImage}
+                  alt="course image"
+                  width={600}
+                  height={400}
+                  style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                  className="border-b border-gray-300"
+                />
+              </Box>
+
               <Stack
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
-                px={1}
+                px={2}
                 py={2}
               >
                 <CoursePrice price={course?.fee?.total} />

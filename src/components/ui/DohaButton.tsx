@@ -25,17 +25,22 @@ const DohaButton = ({ btnTitle, id, navigate, variant }: TButtonProps) => {
             backgroundColor: "secondary.main",
             color: "primary.main",
             border: "2px solid #0F473C",
-            px: "16px",
-            py: "4px",
+            px: { lg: "16px", md: "14px", sm: "12px", xs: "10px" },
+            py: {
+              lg: "4px",
+              md: "4px",
+              sm: "3px",
+              xs: "3px",
+            },
             ":hover": {
               backgroundColor: "primary.main",
               color: "#fff",
             },
             fontSize: {
               lg: "16px",
-              md: "16px",
-              sm: "16px",
-              xs: "15px",
+              md: "15px",
+              sm: "14px",
+              xs: "14px",
             },
             fontWeight: 600,
           }}
@@ -43,7 +48,7 @@ const DohaButton = ({ btnTitle, id, navigate, variant }: TButtonProps) => {
         >
           {btnTitle}
 
-          <FaArrowRight className=" ml-2" />
+          <FaArrowRight className=" md:ml-2 ml-1" />
         </Button>
       )}
     </>
