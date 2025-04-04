@@ -13,10 +13,10 @@ import Link from "next/link";
 import { storeUserInfo } from "@/services/auth.services";
 import { userLogin } from "@/services/actions/userLogin";
 
-// const validationSchema = z.object({
-//   email: z.string().email("Please enter a valid email address!"),
-//   password: z.string().min(6, "Must be at least 6 characters"),
-// });
+const validationSchema = z.object({
+  email: z.string().email("Please enter a valid email address!"),
+  password: z.string().min(6, "Must be at least 6 characters"),
+});
 const defaultValues = {
   email: "",
   password: "",
@@ -69,11 +69,11 @@ const LoginForm = () => {
 
       <DohaForm
         onSubmit={handleLogin}
-        // resolver={zodResolver(validationSchema)}
+        resolver={zodResolver(validationSchema)}
         defaultValues={defaultValues}
       >
         <Grid container spacing={3} my={1}>
-          <Grid item md={6} sm={6} xs={12}>
+          <Grid item md={12} sm={12} xs={12}>
             <DohaInput
               name="email"
               label="Email"
@@ -81,7 +81,7 @@ const LoginForm = () => {
               fullWidth={true}
             />
           </Grid>
-          <Grid item md={6} sm={6} xs={12}>
+          <Grid item md={12} sm={12} xs={12}>
             <DohaInput
               name="password"
               label="Password"
@@ -98,7 +98,7 @@ const LoginForm = () => {
           fontWeight={400}
           color="primary"
         >
-          পাসওয়ার্ড ভুলে গেছেন?
+          Forgot Password?
         </Typography>
 
         {isLoading ? (
@@ -119,14 +119,14 @@ const LoginForm = () => {
             fullWidth
             type="submit"
           >
-            লগইন
+            Login
           </Button>
         )}
 
         <Typography component="p" fontWeight={500}>
-          একাউন্ট নেই?{" "}
+          Don&rsquo;t have an account?{" "}
           <Link href="/register" className="text-green-500">
-            নতুন একাউন্ট তৈরী করুন
+            Create a new account.
           </Link>
         </Typography>
       </DohaForm>

@@ -21,28 +21,12 @@ import { useState } from "react";
 
 export const nameValidationSchema = z.object({
   firstName: z.string().min(1, "Please enter your first name!"),
-  middleName: z.string().min(1, "Please enter your middle name!"),
   lastName: z.string().min(1, "Please enter your last name!"),
-});
-export const studentValidationSchema = z.object({
-  name: nameValidationSchema,
-  email: z.string().email("Please enter a valid email address!"),
-  gender: z.string(),
-  dateOfBirth: z.string().refine((date) => dayjs(date).isValid(), {
-    message: "Please enter a valid date!",
-  }),
-  contactNo: z
-    .string()
-    .regex(/^\d{11}$/, "Please provide a valid phone number!"),
-  emergencyContactNo: z
-    .string()
-    .regex(/^\d{11}$/, "Please provide a valid phone number!"),
-  bloodGroup: z.string(),
-  presentAddress: z.string().min(3, "Please enter your present address!"),
-  permanentAddress: z.string().min(1, "Please enter your permanent address!"),
 });
 
 export const validationSchema = z.object({
+  name: nameValidationSchema,
+  email: z.string().email("Please enter a valid email address!"),
   password: z
     .string()
     .min(6, "Must be at least 6 characters")
@@ -50,25 +34,15 @@ export const validationSchema = z.object({
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/,
       "Password must contain at least one uppercase letter, one lowercase letter, and one digit"
     ),
-  student: studentValidationSchema,
 });
 
 export const defaultValues = {
-  password: "",
-  student: {
-    name: {
-      firstName: "",
-      lastName: "",
-    },
-    email: "",
-    gender: "",
-    dateOfBirth: dayjs().toString(),
-    contactNo: "",
-    emergencyContactNo: "",
-    bloodGroup: "",
-    presentAddress: "",
-    permanentAddress: "",
+  name: {
+    firstName: "",
+    lastName: "",
   },
+  email: "",
+  password: "",
 };
 
 const RegisterForm = () => {
@@ -108,92 +82,50 @@ const RegisterForm = () => {
         defaultValues={defaultValues}
       >
         <Grid container spacing={3} my={1}>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
+          <Grid item md={6} sm={6} xs={12}>
             <DohaInput
               label="First Name"
               fullWidth={true}
               type="text"
-              name="student.name.firstName"
+              name="name.firstName"
             />
           </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
+          <Grid item md={6} sm={6} xs={12}>
             <DohaInput
               label="Last Name"
               type="text"
               fullWidth={true}
-              name="student.name.lastName"
+              name="name.lastName"
             />
           </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
+          <Grid item md={6} sm={6} xs={12}>
             <DohaInput
+              name="email"
               label="Email"
               type="email"
               fullWidth={true}
-              name="student.email"
             />
           </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
+          <Grid item md={6} sm={6} xs={12}>
             <DohaInput
+              name="password"
               label="Password"
               type="password"
               fullWidth={true}
-              name="password"
-            />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaSelectField
-              items={genderOptions}
-              label="Gender"
-              fullWidth={true}
-              name="student.gender"
-              sx={{ textAlign: "start" }}
-            />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaDatePicker name="student.dateOfBirth" label="Date of Birth" />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaInput
-              label="Contact Number"
-              type="number"
-              fullWidth={true}
-              name="student.contactNo"
-            />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaInput
-              label="Emergency Contact Number"
-              type="number"
-              fullWidth={true}
-              name="student.emergencyContactNo"
-            />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaSelectField
-              items={BloodGroupOptions}
-              label="Blood Group"
-              fullWidth={true}
-              name="student.bloodGroup"
-              sx={{ textAlign: "start" }}
-            />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaInput
-              label="Present Address"
-              type="text"
-              fullWidth={true}
-              name="student.presentAddress"
-            />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaInput
-              label="Parmanent Address"
-              type="text"
-              fullWidth={true}
-              name="student.permanentAddress"
             />
           </Grid>
         </Grid>
+
+        <Typography
+          my={1}
+          textAlign="end"
+          component="p"
+          fontWeight={400}
+          color="primary"
+        >
+          Forgot Password?
+        </Typography>
+
         {isLoading ? (
           <Button
             disabled
@@ -207,19 +139,19 @@ const RegisterForm = () => {
         ) : (
           <Button
             sx={{
-              margin: "16px 0px",
+              margin: "10px 0px",
             }}
-            fullWidth={true}
+            fullWidth
             type="submit"
           >
-            রেজিষ্টার
+            Register
           </Button>
         )}
 
-        <Typography component="p" fontWeight={300}>
-          আপনার কি ইতিমধ্যে একটি একাউন্ট আছে?{" "}
+        <Typography component="p" fontWeight={500}>
+          Already have an account?{" "}
           <Link href="/login" className="text-green-500">
-            লগিন
+            Login.
           </Link>
         </Typography>
       </DohaForm>
