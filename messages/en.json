@@ -1,0 +1,55 @@
+{
+  "HomePage": {
+    "metaTitle": "Home | Ad-doha Institute",
+    "metaKeywords": "home, ad-doha, institute, education, learning",
+    "metaDescription": "Welcome to the home page of Ad-doha Institute.",
+    "aboutSec": {
+      "title": "Ad-doha Institute",
+      "description": "Bangladesh is a Muslim majority country. Islam came to this country through Arab and non-Arab preachers, scholars, Sufi saints, and businessmen. Although Bangladesh is a Muslim-majority country, most people in this country cannot read the Quran and lack religious knowledge. As a result, instead of developing a good character and religious mindset, they are being led astray. Especially thousands of impoverished and semi-educated Muslims are unknowingly joining various false ideologies and sects. Various reports indicate that more than half a crore (five million) Muslims have converted to other religions. Besides, many Muslims are losing their faith by falling into the clutches of fake Sufi saints. In this situation, Ad-Doha Institute was established on January 10, 2022, with the aim of providing basic Islamic education to Muslims and protecting their faith.",
+      "list1": "Dawah",
+      "list2": "Education",
+      "list3": "Service"
+    },
+
+    "projectSec": {
+      "title": "Our Activities",
+      "projectsData": [
+        {
+          "_id": "1",
+          "title": "Dawah",
+          "image": "/images/দাওয়াহ.jpg",
+          "details": "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
+          "description": [
+            "ইসলামের সুমহান বাণী ও বিশ্বশান্তির বার্তাকে জাতি, ধর্ম, বর্ণ নির্বিশেষে প্রত্যেকের মাঝে পৌঁছে দেয়"
+          ],
+          "btnTitle": "Details"
+        },
+        {
+          "_id": "2",
+          "title": "Education",
+          "image": "/images/শিক্ষা.jpg",
+          "details": "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
+          "description": [
+            "ইসলামের সুমহান বাণী ও বিশ্বশান্তির বার্তাকে জাতি, ধর্ম, বর্ণ নির্বিশেষে প্রত্যেকের মাঝে পৌঁছে দেয়"
+          ],
+          "btnTitle": "Details"
+        },
+        {
+          "_id": "3",
+          "title": "Service",
+          "image": "/images/সেবা.jpg",
+          "details": "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
+          "description": [
+            "ইসলামের সুমহান বাণী ও বিশ্বশান্তির বার্তাকে জাতি, ধর্ম, বর্ণ নির্বিশেষে প্রত্যেকের মাঝে পৌঁছে দেয় "
+          ],
+          "btnTitle": "Details"
+        }
+      ]
+    },
+    "courseSec": {
+      "title": "Popular Courses",
+      "subTitle": "Take a look at our selected courses at a glance",
+      "btnTitle": "Register"
+    }
+  }
+}

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import "swiper/css";
@@ -8,29 +7,45 @@ import "swiper/css/scrollbar";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { Toaster } from "sonner";
 import Providers from "@/lib/Provider/Providers";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 
 const hindSiliguri = Hind_Siliguri({
   weight: ["400", "600", "700"],
   subsets: ["latin", "bengali"],
 });
 
-export const metadata: Metadata = {
-  title: "Ad-doha Institute",
-  description:
-    "Ad-doha Institute; An educational, research, dawah and service institution.",
-};
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  const messages = await getMessages({ locale });
+  const title = messages?.HomePage?.metaTitle;
+  const description = messages?.HomePage?.metaDescription;
 
-export default function RootLayout({
+  return {
+    title,
+    description,
+  };
+}
+
+export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
     <Providers>
-      <html lang="en" data-theme={"light"} suppressHydrationWarning>
+      <html lang={locale} data-theme={"light"} suppressHydrationWarning>
         <body className={`${hindSiliguri.className}`}>
-          <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
-          <Toaster position="top-center" />
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+            <Toaster position="top-center" />
+          </NextIntlClientProvider>
         </body>
       </html>
     </Providers>

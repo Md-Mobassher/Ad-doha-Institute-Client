@@ -1,13 +1,13 @@
 import DohaContainer from "@/components/ui/DohaContainer";
 import SubTitle from "@/components/ui/SubTitle";
 import Title from "@/components/ui/Title";
-import { coursesData } from "@/data/courses";
 import { Box, Card, Stack } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import DohaButton from "@/components/ui/DohaButton";
 import { TCourse } from "@/type";
 import CoursePrice from "../courses/components/CoursePrice";
+import { getTranslations } from "next-intl/server";
 
 const CoursesSection = async () => {
   const res = await fetch(
@@ -19,6 +19,9 @@ const CoursesSection = async () => {
     }
   );
   const { data } = await res.json();
+
+  const t = await getTranslations("HomePage");
+
   return (
     <DohaContainer>
       <Stack
@@ -27,13 +30,13 @@ const CoursesSection = async () => {
         alignItems="center"
         mb={4}
       >
-        <Title title="জনপ্রিয় কোর্সসমূহ" />
-        <SubTitle title="এক-নজরে দেখে নিন আমাদের বাছাইকৃত কোর্সগুলো" />
+        <Title title={t("courseSec.title")} />
+        <SubTitle title={t("courseSec.subTitle")} />
       </Stack>
 
       <Box className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 lg:gap-6 md:gap-5  gap-5 mt-8 mx-auto">
         {data &&
-          data?.slice(0, 8)?.map((course: TCourse) => (
+          data?.slice(0, 4)?.map((course: TCourse) => (
             <Card
               key={course?._id}
               sx={{
@@ -74,7 +77,7 @@ const CoursesSection = async () => {
                 <CoursePrice price={course?.fee?.total} />
 
                 <Link href={`/courses/${course?._id}`}>
-                  <DohaButton btnTitle="রেজিস্টার" />
+                  <DohaButton btnTitle={t("courseSec.btnTitle")} />
                 </Link>
               </Stack>
             </Card>

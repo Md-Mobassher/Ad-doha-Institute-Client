@@ -2,7 +2,7 @@
 
 ## Deployment
 
-- **Live Link**: [Ad-Doha Institute](https://ad-doha-org.vercel.app)
+- **Live Link**: [Ad-Doha Institute](https://ad-doha-institute.vercel.app)
 
 ## Technologies Used
 
@@ -18,7 +18,7 @@ To get a local copy of the project up and running, follow these steps:
 1. Clone the repository:
 
 ```
-git clone https://github.com/Md-Mobassher/ad-doha.org.git
+git clone https://github.com/Md-Mobassher/Ad-doha-Institute-Client.git
 ```
 
 2. Install dependencies:

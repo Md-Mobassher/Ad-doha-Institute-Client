@@ -1,10 +1,13 @@
 import Title from "@/components/ui/Title";
 import Slider from "@/components/ui/Slider";
 import Container from "@/components/ui/DohaContainer";
-import { projectsData } from "@/data/projects";
 import { Box, Stack } from "@mui/material";
+import { useTranslations } from "next-intl";
 
 const ProjectsSection = () => {
+  const t = useTranslations("HomePage");
+  const translatedProjects = t.raw("projectSec.projectsData") as any[];
+
   return (
     <Box
       sx={{
@@ -18,14 +21,13 @@ const ProjectsSection = () => {
           alignItems="center"
           mb={4}
         >
-          <Title title="আমাদের কার্যক্রম" />
+          <Title title={t("projectSec.title")} />
         </Stack>
 
         <Box>
           <Slider
-            items={projectsData}
+            items={translatedProjects}
             slidesPerView={3}
-            btnTitle="বিস্তারিত"
             navigate="projects"
           />
         </Box>

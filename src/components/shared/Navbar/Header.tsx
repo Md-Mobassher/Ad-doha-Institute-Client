@@ -9,6 +9,7 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { X } from "@mui/icons-material";
 import headerlogo from "@/assets/logo/logo.png";
+import LanguageSwitcher from "@/components/common/LanguageSwitcher";
 
 interface HeaderProps {
   top?: number;
@@ -145,8 +146,10 @@ const Header: React.FC<HeaderProps> = ({ top, header, menu }) => {
               <div className="hidden md:block ">
                 {menu === 1 && <Menu items={menus} />}
               </div>
-              <div className="hidden md:block ">
+              <div className="hidden md:inline-flex ">
+                {/* Language Toggle */}
                 <LoginButton />
+                <LanguageSwitcher />
               </div>
             </div>
 
@@ -155,6 +158,8 @@ const Header: React.FC<HeaderProps> = ({ top, header, menu }) => {
               <div className="md:hidden ">
                 <Menu items={menus} />
                 <LoginButton />
+                {/* Language Toggle */}
+                <LanguageSwitcher />
               </div>
             )}
           </Container>
