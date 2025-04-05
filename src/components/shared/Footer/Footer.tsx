@@ -1,3 +1,4 @@
+"use client";
 import footerlogo from "@/assets/logo/footer_logo.png";
 import Title from "@/components/ui/Title";
 import { Call, Email } from "@mui/icons-material";
@@ -16,8 +17,11 @@ import { FieldValues } from "react-hook-form";
 import NearMeIcon from "@mui/icons-material/NearMe";
 import { FaArrowRight, FaFacebook, FaYoutube } from "react-icons/fa";
 import SubTitle from "@/components/ui/SubTitle";
+import { useTranslations } from "next-intl";
 
 const Footer = () => {
+  const t = useTranslations("Footer");
+
   const handleSubscribe = async (value: FieldValues) => {
     console.log(value);
   };
@@ -42,8 +46,8 @@ const Footer = () => {
           alignItems="center"
           mb={4}
         >
-          <Title title="সাবস্ক্রাইব করুন" />
-          <SubTitle title="সর্বশেষ খবর বা আপডেট পেতে এখনই সাবস্ক্রাইব করুন" />
+          <Title title={t("title")} />
+          <SubTitle title={t("subTitle")} />
           <Box
             mt={2}
             display="flex"
@@ -56,10 +60,10 @@ const Footer = () => {
               type="email"
               className=" px-6 border-0 focus:outline-none w-[80%]"
               name="email"
-              placeholder="Your Email Address"
+              placeholder={t("inputPlaceholder")}
             />
             <Button
-              // onClick={handleSubscribe}
+              onClick={handleSubscribe}
               sx={{
                 borderRadius: "50px",
                 backgroundColor: "primary.main",
@@ -81,7 +85,7 @@ const Footer = () => {
                 fontWeight: 600,
               }}
             >
-              সাবস্ক্রাইব
+              {t("btnTitle")}
               <FaArrowRight className=" ml-2" />
             </Button>
           </Box>
@@ -166,7 +170,7 @@ const Footer = () => {
                   color: "primary.main",
                 }}
               >
-                যোগাযোগ
+                {t("contact.title")}
               </Typography>
               <Typography
                 component="h6"
@@ -184,7 +188,7 @@ const Footer = () => {
                   color: "primary.main",
                 }}
               >
-                <Email sx={{ mr: "8px" }} /> addohainstitution@gmail.com
+                <Email sx={{ mr: "8px" }} /> {t("contact.email")}
               </Typography>
               <Typography
                 component="h6"
@@ -202,7 +206,7 @@ const Footer = () => {
                   color: "primary.main",
                 }}
               >
-                <Call sx={{ mr: "8px" }} /> +88 01916-016099
+                <Call sx={{ mr: "8px" }} /> {t("contact.phone")}
               </Typography>
               <Typography
                 component="p"
@@ -219,8 +223,7 @@ const Footer = () => {
                   color: "primary.main",
                 }}
               >
-                <NearMeIcon sx={{ mr: "8px" }} /> ভিশন ভিলেজ, হাজি আউয়াল
-                মার্কেট, ভাকুর্তা, সাভার, ঢাকা
+                <NearMeIcon sx={{ mr: "8px" }} /> {t("contact.address")}
               </Typography>
             </Box>
 
@@ -256,7 +259,7 @@ const Footer = () => {
                   color: "primary.main",
                 }}
               >
-                সরাসরি লিঙ্ক
+                {t("link.title")}
               </Typography>
               <Typography
                 component="a"
@@ -273,7 +276,7 @@ const Footer = () => {
                   color: "primary.main",
                 }}
               >
-                শর্তাবলী
+                {t("link.link1")}
               </Typography>
               <Typography
                 component="a"
@@ -290,7 +293,7 @@ const Footer = () => {
                   color: "primary.main",
                 }}
               >
-                গোপনীয়তা নীতি
+                {t("link.link2")}
               </Typography>
             </Box>
 
@@ -327,7 +330,7 @@ const Footer = () => {
                   color: "primary.main",
                 }}
               >
-                সোশ্যাল মিডিয়া
+                {t("social.title")}
               </Typography>
               <Stack direction="row" gap="16px">
                 <Typography
@@ -402,8 +405,8 @@ const Footer = () => {
               textAlign="center"
               color="secondary.main"
             >
-              স্বত্ব &copy; {new Date().getFullYear()} | আদ-দোহা ইনস্টিটিউট,
-              সর্ব স্বত্ব সংরক্ষিত
+              {t("copyright.title")} &copy; {new Date().getFullYear()}{" "}
+              {t("copyright.title2")}
             </Typography>
             <p>---</p>{" "}
             <Typography
@@ -413,14 +416,14 @@ const Footer = () => {
               textAlign="center"
               color="secondary.main"
             >
-              কারিগরি সহায়তায়{" "}
+              {t("copyright.assistance")}{" "}
               <Link
                 href="https://mobassher.vercel.app"
                 target="_blank"
                 rel="noreferrer"
                 className="text-[#FAE4BF]"
               >
-                মোঃ মোবাশ্বের হোসেন
+                {t("copyright.name")}
               </Link>
             </Typography>
           </Stack>

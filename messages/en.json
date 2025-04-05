@@ -50,6 +50,59 @@
       "title": "Popular Courses",
       "subTitle": "Take a look at our selected courses at a glance",
       "btnTitle": "Register"
+    },
+    "departmentSec": {
+      "title": "Our Departments"
+    },
+    "eLibrarySec": {
+      "title": "Sayyid Abul Hasan Ali Nadvi E-Library",
+      "details1": "Knowledge means education. And books are the vehicle of education. Therefore, as the writing, publishing and marketing of books increases, the kingdom of light will also increase. For this, books should be read individually and collectively. Nowadays, due to the excessive buzz on social media, we do not understand anything about books outside of textbooks. Allah Almighty says in the Holy Quran, ‘Read in the name of your Lord, who created. Who taught by the pen. He taught man that which he did not know.’ (Surah Al-Alaq, verses-1,4,5)...",
+      "details2": "To gain systematic and complete knowledge on various subjects and to gain complete mental peace, it is definitely necessary to read books. In this era of fitnah, practicing religion online makes one's faith doubtful. Strengthening faith and maintaining one's faith with one's own conscience and intellect in the search for truth is possible only through reading books. For that purpose, Ad-Doha Institute has collected the best books written in Bengali and English and enriched the Syed Abul Hasan Ali Nadvi E-Library. Which is open to all readers.",
+      "btnTitle": "E-Library"
+    },
+    "publishedBook": {
+      "title": "Our Published Books",
+      "title2": "Get 40% off when you order!",
+      "details1": "",
+      "details2": "",
+      "btnTitle": "E-Library"
+    },
+    "opinionsSec": {
+      "title": "Opinions of Scholars"
+    },
+    "teachersSec": {
+      "title": "Respected Scholars"
+    },
+    "videoSec": {
+      "title": "Videos",
+      "btnTitle": "All Videos"
+    }
+  },
+  "Footer": {
+    "title": "Subscribe",
+    "subTitle": "Subscribe now to get the latest news or updates",
+    "inputPlaceholder": "Enter your email address",
+    "btnTitle": "Subscribe",
+    "contact": {
+      "title": "Contact",
+      "email": "addohainstitution@gmail.com",
+      "phone": "+88 01916-016099",
+      "address": "Vision Village, Haji Awal Market, Bhakurta, Savar, Dhaka"
+    },
+    "link": {
+      "title": "Direct Link",
+      "link1": "Terms",
+      "link2": "Privacy Policy"
+    },
+    "social": {
+      "title": "Social Media"
+    },
+    "copyright": {
+      "title": "Copyright",
+      "title2": " | Ad-Doha Institute, All Rights Reserved",
+
+      "assistance": "Technical Assistance",
+      "name": "Md. Mobasher Hossain"
     }
   }
 }

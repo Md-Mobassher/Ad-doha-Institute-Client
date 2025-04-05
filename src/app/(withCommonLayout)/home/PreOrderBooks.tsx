@@ -7,8 +7,11 @@ import Details from "@/components/ui/Details";
 import Link from "next/link";
 import CourseTitle2 from "../courses/components/CourseTitle2";
 import preOrder from "@/assets/resourses/books/preorderbooks.jpg";
+import { useTranslations } from "next-intl";
 
 const PreOrderBooks = () => {
+  const t = useTranslations("HomePage");
+
   return (
     <Box>
       <DohaContainer>
@@ -18,7 +21,7 @@ const PreOrderBooks = () => {
           alignItems="center"
           mb={4}
         >
-          <Title title="আমাদের প্রকাশিত বই" />
+          <Title title={t("publishedBook.title")} />
         </Stack>
         <Stack
           direction={{
@@ -53,7 +56,7 @@ const PreOrderBooks = () => {
             />
           </Box>
           <Box width="100%">
-            <Title title={"অর্ডার করলেই পাচ্ছেন ৪০% ছাড়!"} />
+            <Title title={t("publishedBook.title2")} />
             <Box
               mt={2}
               mb={{ lg: 5, md: 4, sm: 4, xs: 3 }}
@@ -106,7 +109,7 @@ const PreOrderBooks = () => {
                   mt: 2,
                 }}
               >
-                অর্ডার
+                {t("publishedBook.btnTitle")}
               </Button>
             </Box>
           </Box>

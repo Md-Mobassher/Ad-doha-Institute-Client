@@ -3,8 +3,11 @@ import Teachers from "./Teachers";
 import DohaContainer from "@/components/ui/DohaContainer";
 import Title from "@/components/ui/Title";
 import { TTeacher } from "@/type";
+import { getTranslations } from "next-intl/server";
 
 const TeachersPanel = async () => {
+  const t = await getTranslations("HomePage");
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/teachers`,
     {
@@ -26,7 +29,7 @@ const TeachersPanel = async () => {
           alignItems="center"
           mb={4}
         >
-          <Title title="সম্মানিত ওস্তাজবৃন্দ" />
+          <Title title={t("teachersSec.title")} />
         </Stack>
 
         <Teachers teachers={teachers} />

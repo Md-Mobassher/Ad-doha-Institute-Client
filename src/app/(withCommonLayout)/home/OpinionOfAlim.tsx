@@ -3,8 +3,10 @@ import Title from "@/components/ui/Title";
 import Opinions from "./Opinions";
 import { Box } from "@mui/material";
 import { IOpinion } from "@/type";
+import { getTranslations } from "next-intl/server";
 
 const OpinionOfAlim = async () => {
+  const t = await getTranslations("HomePage");
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/opinions`,
     {
@@ -19,7 +21,7 @@ const OpinionOfAlim = async () => {
   return (
     <Box>
       <DohaContainer>
-        <Title title="আলিমদের মতামত" />
+        <Title title={t("opinionsSec.title")} />
 
         <Box mt={4}>
           <Opinions opinions={opinions} />
