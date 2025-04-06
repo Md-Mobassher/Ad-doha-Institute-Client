@@ -30,7 +30,13 @@ const CardDetails = ({
 
           <Box className="md:flex flex-wrap justify-between items-start rounded-lg min-h-80 lg:p-8">
             <Box className="lg:w-[45%] md:w-[45%] w-full rounded-lg border border-gray-300">
-              <Image src={image} alt={title} className="mx-auto rounded-lg" />
+              <Image
+                src={image}
+                alt={title}
+                className="mx-auto rounded-lg"
+                width={800}
+                height={500}
+              />
             </Box>
 
             <Box className="lg:w-[45%] md:w-[45%] w-full lg:mt-0 mt-8">

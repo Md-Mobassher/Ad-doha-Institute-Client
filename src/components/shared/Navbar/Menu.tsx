@@ -1,6 +1,11 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import useUserInfo from "@/hooks/useUserInfo";
+import { useTranslations } from "next-intl";
+import { logoutUser } from "@/services/actions/logoutUser";
+import LanguageSwitcher from "@/components/common/LanguageSwitcher";
 
 type SubItem = {
   title: string;
@@ -20,10 +25,17 @@ type MenuProps = {
 
 const Menu: React.FC<MenuProps> = ({ items }) => {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+  const router = useRouter();
+  const userInfo = useUserInfo();
+  const t = useTranslations("Header");
+
+  const handleLogOut = () => {
+    logoutUser(router);
+  };
 
   return (
     <div className="z-20 block sticky top-0 w-full">
-      <div className="flex lg:flex-row md:flex-row flex-col lg:justify-center lg:items-center">
+      <div className="flex lg:flex-row md:flex-row flex-col lg:justify-end lg:items-center lg:gap-1 md:gap-0.5 gap-0 flex-wrap">
         {items.map((item, index) => (
           <div
             key={index}
@@ -33,7 +45,7 @@ const Menu: React.FC<MenuProps> = ({ items }) => {
           >
             <Link
               href={item.link}
-              className="p-2 text-white hover:text-[#0F473C] block hover:bg-[#F7F3E7] font-semibold lg:rounded-full px-4 py-2"
+              className="p-2 text-white hover:text-[#0F473C] block hover:bg-[#F7F3E7] font-semibold lg:rounded-full lg:px-3 md:px-2 px-2 py-2"
             >
               {item.title}
             </Link>
@@ -58,6 +70,31 @@ const Menu: React.FC<MenuProps> = ({ items }) => {
             )}
           </div>
         ))}
+        {userInfo?.userId ? (
+          <Link
+            href={"/dashboard"}
+            className="lg:rounded-full lg:px-4 md:px-3 px-2 py-2 text-white hover:text-[#0F473C] inline hover:bg-[#F7F3E7] font-semibold"
+          >
+            {t("LoginBtn.dashboard")}
+          </Link>
+        ) : null}
+
+        {userInfo?.userId ? (
+          <h5
+            onClick={() => handleLogOut()}
+            className="lg:rounded-full lg:px-4 md:px-3 px-2 py-2 text-white hover:text-[#0F473C]  hover:bg-[#F7F3E7] font-semibold cursor-pointer"
+          >
+            {t("LoginBtn.logout")}
+          </h5>
+        ) : (
+          <Link
+            href={"/login"}
+            className="lg:rounded-full lg:px-4 md:px-3 px-2 py-2 text-white hover:text-[#0F473C] hover:bg-[#F7F3E7] font-semibold"
+          >
+            {t("LoginBtn.login")}
+          </Link>
+        )}
+        <LanguageSwitcher />
       </div>
     </div>
   );

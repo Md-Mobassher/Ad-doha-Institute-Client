@@ -9,7 +9,6 @@ const Slider = ({
   items,
   spaceBetween,
   slidesPerView,
-  btnTitle,
   btnTitle2,
   navigate,
 }: TSliderProps) => {
@@ -49,7 +48,7 @@ const Slider = ({
         <SwiperSlide className=" mb-12 h-full " key={item._id}>
           <DohaCard
             {...item}
-            btnTitle={btnTitle}
+            btnTitle={item.btnTitle}
             navigate={navigate}
             btnTitle2={btnTitle2}
             link={item.link}

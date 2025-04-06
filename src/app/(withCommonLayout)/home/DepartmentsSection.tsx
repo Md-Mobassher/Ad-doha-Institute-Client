@@ -8,10 +8,12 @@ import Title from "@/components/ui/Title";
 import CourseTitle3 from "../courses/components/CourseTitle3";
 import { IDepartment } from "@/type";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const DepartmentsSection: React.FC = () => {
   const router = useRouter();
   const [departments, setDepartments] = useState<IDepartment[]>([]);
+  const t = useTranslations("HomePage");
 
   useEffect(() => {
     const fetchDepartments = async () => {
@@ -43,7 +45,7 @@ const DepartmentsSection: React.FC = () => {
           mb={4}
           gap={2}
         >
-          <Title title="আমাদের বিভাগসমূহ" />
+          <Title title={t("departmentSec.title")} />
           <CourseTitle3 />
         </Stack>
 

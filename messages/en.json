@@ -1,0 +1,375 @@
+{
+  "HomePage": {
+    "metaTitle": "Home | Ad-doha Institute",
+    "metaDescription": "Welcome to the home page of Ad-doha Institute.",
+    "aboutSec": {
+      "title": "Ad-doha Institute",
+      "description": "Bangladesh is a Muslim majority country. Islam came to this country through Arab and non-Arab preachers, scholars, Sufi saints, and businessmen. Although Bangladesh is a Muslim-majority country, most people in this country cannot read the Quran and lack religious knowledge. As a result, instead of developing a good character and religious mindset, they are being led astray. Especially thousands of impoverished and semi-educated Muslims are unknowingly joining various false ideologies and sects. Various reports indicate that more than half a crore (five million) Muslims have converted to other religions. Besides, many Muslims are losing their faith by falling into the clutches of fake Sufi saints. In this situation, Ad-Doha Institute was established on January 10, 2022, with the aim of providing basic Islamic education to Muslims and protecting their faith.",
+      "list1": "Dawah",
+      "list2": "Education",
+      "list3": "Service"
+    },
+
+    "projectSec": {
+      "title": "Our Activities",
+      "projectsData": [
+        {
+          "_id": "1",
+          "title": "Dawah",
+          "image": "/images/project/দাওয়াহ.jpg",
+          "navigation": "dawah",
+          "details": "The existence of Islam in human life depends on the work of Da'wah. All the prophets and messengers that Allah Almighty has sent throughout the ages were responsible for delivering the message of Islam to people. Only Da'wah can unlock the locks of worldly and hereafter welfare and success. Only Da'wah can unlock the doors of humanity's conscience and human development and growth. Da'wah means the work of propagating Islam. It is through Da'wah that Islam spreads widely. The Muslim nation expands. In the present day, there is no opportunity to underestimate the importance of delivering the message of Islam to others. Therefore, Ad-Doha Institute is working tirelessly in the Da'wah field to deliver the great message of Islam and the message of world peace to everyone, regardless of race, religion, or color.",
+          "description": [
+            "To deliver the great message of Islam and the message of world peace to everyone, regardless of race, religion, or color.",
+            "To present the authentic perspective of Islam in mosques and madrasas in different areas...",
+            "To record and disseminate documentary footage of discussion programs related to dawah through social media.",
+            "To establish dawah centers in different areas of Bangladesh.",
+            "To spread the call to Islam throughout the country through knowledgeable da'is.",
+            "To develop mosque-based da'wah activities."
+          ],
+          "btnTitle": "Details"
+        },
+        {
+          "_id": "2",
+          "title": "Education",
+          "image": "/images/project/শিক্ষা.jpg",
+          "navigation": "education",
+          "details": "The importance of education in Islam is immense. The first revelation that was revealed to the Holy Prophet (peace and blessings of Allah be upon him) in the Cave of Hira is, ‘Read, in the name of your Lord who created. He created man from a clot of blood.’ -Surah Al-Alaq: 1-2 The purpose of education in Islam is to develop the son of Adam into a human being. Only humans have the ability to know the unknown through education and to use what they know to discover the unknown. The education that gives self-identity, shapes people as honest and good citizens, and helps them to be benevolent, benevolent and devoted to Allah is true education. Education illuminates the human heart, reveals insight, and creates foresight. Reading and studying are one of the means for learning and acquiring knowledge. Therefore, Ad-Doha has organized various training courses online and offline to develop wise scholars and dedicated Da'is Al-Allah for people of all walks of life, including teaching the authentic Quran, as well as contemporary teaching on Da'wah, Sirah, comparative theology, apostate sects, basic IT, contemporary world, psychology, management, and English language education.",
+          "description": [
+            "To introduce nationwide formal and informal primary education (Maktab) for children to spread basic education at the primary level.",
+            "To introduce nationwide adult education (Maktab) to educate adults.",
+            "To organize basic Islamic education courses offline and online for people of all classes and professions.",
+            "To organize offline and online authentic Quran education courses for people of all classes and professions.",
+            "To organize online and offline training courses to form skilled and timely da'is.",
+            "To formulate modern and up-to-date curricula and textbooks containing the basic teachings of the Quran and Sunnah to develop wise scholars and da'is illa Allah.",
+            "To organize online and offline Arabic and English language education courses."
+          ],
+          "btnTitle": "Details"
+        },
+        {
+          "_id": "3",
+          "title": "Service",
+          "image": "/images/project/সেবা.jpg",
+          "navigation": "service",
+          "details": "Humans are the greatest and most dignified creation of the great Creator. Islam has specifically defined the responsibilities and duties of humans towards humans. Therefore, standing by the helpless, keeping track of them, and coming forward in their distress; is the responsibility of a believer. In times of human crisis, the Ad-Doha Institute is working to serve distressed humanity with various service initiatives including the rehabilitation of new Muslims.",
+          "description": [
+            "Conditional assistance is provided to landless, helpless, indigent, poor new Muslims and poor people in building houses.",
+            "In addition to teaching necessary skills in the workplace, assistance is provided to helpless and poor people according to their qualifications by providing rickshaws, vans, and necessary equipment to make them self-reliant.",
+            "Conditional medical assistance is provided to new Muslims and poor Muslims who are unable to bear the cost of treatment.",
+            "Educational assistance is provided to helpless new Muslims and poor students at various levels.",
+            "Financial assistance to helpless, poor new Muslims and poor Muslims and conditional loans are provided to make them self-reliant.",
+            "All kinds of legal assistance are provided to new Muslims, including getting their affidavits, ID card corrections, and lawsuits.",
+            "Marriage arrangements are made for new Muslims to establish ties with their new families and society.",
+            "New Muslims are provided with assistance in undergoing circumcision in accordance with the Sunnah."
+          ],
+          "btnTitle": "Details"
+        }
+      ]
+    },
+    "courseSec": {
+      "title": "Popular Courses",
+      "subTitle": "Take a look at our selected courses at a glance",
+      "btnTitle": "Register"
+    },
+    "departmentSec": {
+      "title": "Our Departments"
+    },
+    "eLibrarySec": {
+      "title": "Sayyid Abul Hasan Ali Nadvi E-Library",
+      "details1": "Knowledge means education. And books are the vehicle of education. Therefore, as the writing, publishing and marketing of books increases, the kingdom of light will also increase. For this, books should be read individually and collectively. Nowadays, due to the excessive buzz on social media, we do not understand anything about books outside of textbooks. Allah Almighty says in the Holy Quran, ‘Read in the name of your Lord, who created. Who taught by the pen. He taught man that which he did not know.’ (Surah Al-Alaq, verses-1,4,5)...",
+      "details2": "To gain systematic and complete knowledge on various subjects and to gain complete mental peace, it is definitely necessary to read books. In this era of fitnah, practicing religion online makes one's faith doubtful. Strengthening faith and maintaining one's faith with one's own conscience and intellect in the search for truth is possible only through reading books. For that purpose, Ad-Doha Institute has collected the best books written in Bengali and English and enriched the Syed Abul Hasan Ali Nadvi E-Library. Which is open to all readers.",
+      "btnTitle": "E-Library"
+    },
+    "publishedBook": {
+      "title": "Our Published Books",
+      "title2": "Get 40% off when you order!",
+      "details1": "",
+      "details2": "",
+      "btnTitle": "E-Library"
+    },
+    "opinionsSec": {
+      "title": "Opinions of Scholars"
+    },
+    "teachersSec": {
+      "title": "Respected Scholars"
+    },
+    "videoSec": {
+      "title": "Videos",
+      "btnTitle": "All Videos"
+    }
+  },
+  "AboutPage": {
+    "pageTitle": {
+      "title": "Ad-Doha Institute",
+      "details": "An educational, research, da'wah and service institution."
+    },
+
+    "intro": {
+      "title": "Introduction",
+      "details": "Bangladesh is a Muslim-majority country. Islam came to this country through Arab and non-Arab da'is, scholars, pirs, mashaykhs and businessmen. Although Bangladesh is a Muslim-majority country, most of the people in this country cannot read the Quran and are not religiously knowledgeable. As a result, instead of having a good character and religious mentality, they are being led astray. Thousands of Muslims, especially those who are poor and semi-educated, are being included in various false ideologies and sects without understanding. Various reports have revealed that more than half a crore Muslims have been converted to other religions. In addition, many Muslims are falling into the clutches of hypocritical pirs and losing their faith. In such a situation, the Ad-Doha Institute was established on January 10, 2022, with the aim of providing Muslims with basic Islamic education and protecting their faith."
+    },
+
+    "aim": {
+      "metaTitle": "Our goal & Objectives | Ad-doha Institute",
+      "metaDescription": "Welcome to the Our goal & Objectives page of Ad-doha Institute.",
+      "title": "Our goal",
+      "details": "Following the footsteps of the great teacher and guide of mankind, the messenger of freedom and peace of mankind, the great Prophet Muhammad (PBUH), and achieve the satisfaction of Allah Almighty by properly performing dawah, education and service work.",
+      "image": "/images/about/aim.png"
+    },
+
+    "objectives": {
+      "title": "Our objective",
+      "details": "To provide students with timely education by combining religious and modern education. To develop the people of the country as good citizens and socially conscious through education that integrates modern and religious values. To convey the basic ideals of Islam to all classes of people by conducting dawah activities. To develop a dawah mentality among Muslims. To extend a helping hand and service to all classes of people, including new Muslims, helpless, distressed, poor and helpless people.",
+      "image": "/images/about/uddesso.png"
+    },
+
+    "futurePlan": {
+      "title": "Our future plan",
+      "details": "To achieve the goals and objectives of Ad-Doha Institute, to create multi-dimensional educational institutions and Dawah centers nationwide. From where fundamentally educational, Dawah and service activities will be conducted. Several steps will be taken in each place to implement all these activities. For example, educational institutions will be built with a curriculum combining religious and modern education from the first to the fifth grade. In addition to the educational institutions, there will be a mosque, an Islamic (Sayyid Abul Hasan Ali Nadvi Rah.) Library, a guest house, a training center, a residential hostel. In addition, there will be a good system of children's Maktab, adult education and separate Quran education for women. In addition, educational institutions and Dawah centers will be built in certain regions based on districts and divisions. Such as Bandarban, Madhupur, Tangail, Jamalpur, Mymensingh, Narayanganj, Rangpur, Jessore and Patuakhali. An educational institution and a Dawah center will be established in each of these regions. A local trust will be formed and these educational institutions or Dawah centers will be managed independently through that trust. The Ad-Doha Institute will only work as a partner."
+    },
+
+    "advisoryCommittee": {
+      "title": "Advisory Committee",
+      "metaTitle": "Advisory Committee | Ad-Doha Institute",
+      "metaDescription": "Welcome to the Ad-Doha Institute's Advisory Committee page."
+    },
+    "boardOfDirector": {
+      "title": "Board of Directors",
+      "metaTitle": "Board of Directors | Ad-Doha Institute",
+      "metaDescription": "Welcome to the Ad-Doha Institute Board of Directors page."
+    },
+    "faculty": {
+      "title": "Teachers Panel",
+      "metaTitle": "Teacher Panel | Ad-Doha Institute",
+      "metaDescription": "Welcome to the Ad-Doha Institute's Teacher Panel page."
+    }
+  },
+  "ServicesPage": {
+    "metaTitle": "Services | Ad-doha Institute",
+    "metaDescription": "Welcome to the home page of Ad-doha Institute.",
+    "pageTitle": "Our Services",
+    "servicesData": [
+      {
+        "_id": "4-1",
+        "title": "Assistance in housing construction",
+        "metaTitle": "Assistance in housing construction | Ad-doha Institute",
+        "metaDescription": "Assistance in housing construction | Ad-doha Institute",
+        "image": "/images/services/বাসস্থান র্নিমাণে সহায়তা.jpg",
+        "details": "Conditional assistance is provided for the construction of housing for landless, helpless, indigent, poor, non-Muslims and poor people.",
+        "description": [],
+        "navigation": "assistance-in-housing-construction",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/t3HZBojMiW3osbnk8"
+      },
+      {
+        "_id": "4-2",
+        "title": "Employment assistance",
+        "metaTitle": "Employment assistance | Ad-doha Institute",
+        "metaDescription": "Employment assistance | Ad-doha Institute",
+        "image": "/images/services/কর্মসংস্থান সহায়তা.jpg",
+        "details": "In addition to teaching necessary skills in the workplace, we also provide rickshaws, vans, and necessary materials to help helpless and poor people to become self-reliant according to their qualifications ",
+        "description": [],
+        "navigation": "employment-ssistance",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/pzvZh2YaYEvbiRgx5"
+      },
+      {
+        "_id": "4-3",
+        "title": "Medical Assistance",
+        "metaTitle": "Medical Assistance | Ad-doha Institute",
+        "metaDescription": "Medical Assistance | Ad-doha Institute",
+        "image": "/images/services/চিকিৎসা সহায়তা.jpg",
+        "details": "Medical assistance is provided to new Muslims and poor Muslims who are unable to bear the cost of treatment, subject to conditions.",
+        "description": [],
+        "navigation": "medical-assistance",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/mQ3PMkdQwgobDSrT9"
+      },
+      {
+        "_id": "4-4",
+        "title": "Educational Assistance",
+        "metaTitle": "Educational Assistance | Ad-doha Institute",
+        "metaDescription": "Educational Assistance | Ad-doha Institute",
+        "image": "/images/services/শিক্ষা সহায়তা.jpg",
+        "details": "Educational assistance is provided at various levels for helpless new Muslims and poor students.",
+        "description": [],
+        "navigation": "educational-assistance",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/ZReS37ghqpgintKW8"
+      },
+      {
+        "_id": "4-5",
+        "title": "Karje Hasanah",
+        "metaTitle": "Karje Hasanah | Ad-doha Institute",
+        "metaDescription": "Karje Hasanah | Ad-doha Institute",
+        "image": "/images/services/কর্জে হাসানাহ.jpg",
+        "details": "Karje Hasanah is provided to help helpless, poor new Muslims and poor Muslims financially and to make them self-reliant, subject to conditions.",
+        "description": [],
+        "navigation": "korze-hasanah",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/muoeHNor5uS7ocEb7"
+      },
+      {
+        "_id": "4-6",
+        "title": "Legal aid",
+        "metaTitle": "Legal aid | Ad-doha Institute",
+        "metaDescription": "Legal aid | Ad-doha Institute",
+        "image": "/images/services/আইনি সহায়তা.jpg",
+        "details": "New Muslims are provided with all kinds of legal aid, including affidavits, ID card corrections, and lawsuits.",
+        "description": [],
+        "navigation": "legal-aid",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/TmC9uJLYAL6RKZHU9"
+      },
+      {
+        "_id": "4-7",
+        "title": "Marriage",
+        "metaTitle": "Marriage | Ad-doha Institute",
+        "metaDescription": "Marriage | Ad-doha Institute",
+        "image": "/images/services/বিয়ে.jpg",
+        "details": "Marriage is arranged for new Muslims to bond with their new family and society.",
+        "description": [],
+        "navigation": "marriage",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/MNmTRFoEwuVaKcad7"
+      },
+      {
+        "_id": "4-8",
+        "title": "Sunnah circumcision",
+        "metaTitle": "Sunnah circumcision | Ad-doha Institute",
+        "metaDescription": "Sunnah circumcision | Ad-doha Institute",
+        "image": "/images/services/সুন্নতে খাৎনা.jpg",
+        "details": "New Muslims are assisted in getting circumcised in the Sunnah.",
+        "description": [],
+        "navigation": "sunnah-circumcision",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/q63ar3KEhpTm7Scn6"
+      }
+    ]
+  },
+  "DonatePage": {
+    "metaTitle": "Donation | Ad-doha Institute",
+    "metaDescription": "Welcome to the Donate page of Ad-doha Institute.",
+    "pageTitle": "Donation",
+    "details1": "Ad-Doha Institute conducts various social activities including Dawah, education and service. This requires a lot of money. Only a nominal fee is charged for the importance of students from the education field; which is not enough to conduct our other activities. As a result, it becomes difficult to conduct our activities smoothly.",
+    "details2": "A lot of money is needed in various sectors such as implementing our educational programs, meeting the needs of students, preaching, publishing, services, etc. Your sincere cooperation is very important to accelerate and advance our programs. Through joint cooperation, we will be able to reach our goal, InshaAllah. Therefore, a sincere appeal to the charitable religious brothers - you will come forward for the welfare of the institute by providing the maximum cooperation you can to advance this important religious work. We are hopeful that you will support the institute through any means, including donations (one-time, monthly, annual), for the sake of the pleasure of Allah Almighty. May Allah Almighty accept it. May He reward everyone well. Amen!",
+    "image": "/images/donation/dan.jpg",
+    "methodTitle": "Methods of sending donations"
+  },
+  "Footer": {
+    "title": "Subscribe",
+    "subTitle": "Subscribe now to get the latest news or updates",
+    "inputPlaceholder": "Enter your email address",
+    "btnTitle": "Subscribe",
+    "contact": {
+      "title": "Contact",
+      "email": "addohainstitution@gmail.com",
+      "phone": "+88 01916-016099",
+      "address": "Vision Village, Haji Awal Market, Bhakurta, Savar, Dhaka"
+    },
+    "link": {
+      "title": "Direct Link",
+      "link1": "Terms",
+      "link2": "Privacy Policy"
+    },
+    "social": {
+      "title": "Social Media"
+    },
+    "copyright": {
+      "title": "Copyright",
+      "title2": " | Ad-Doha Institute, All Rights Reserved",
+
+      "assistance": "Technical Assistance",
+      "name": "Md. Mobasher Hossain"
+    }
+  },
+  "Header": {
+    "Menu": [
+      {
+        "title": "Home",
+        "link": "/"
+      },
+      {
+        "title": "About Us",
+        "link": "#",
+        "option": "sub",
+        "subItems": [
+          {
+            "title": "Aim & Objectives",
+            "link": "/about/aims-&-objectives"
+          },
+          { "title": "Board of Director", "link": "/about/board-of-director" },
+          {
+            "title": "Advisory Committee",
+            "link": "/about/advisory-committee"
+          },
+          { "title": "Faculty", "link": "/about/faculty" }
+        ]
+      },
+      { "title": "Courses", "link": "/courses" },
+      {
+        "title": "Services",
+        "link": "/services",
+        "option": "sub",
+        "subItems": [
+          {
+            "title": "Assistance in Housing Construction",
+            "link": "/services/assistance-in-housing-construction"
+          },
+          {
+            "title": "Employment Assistance",
+            "link": "/services/employment-ssistance"
+          },
+          {
+            "title": "Medical Assistance",
+            "link": "/services/medical-assistance"
+          },
+          {
+            "title": "Educational Assistance",
+            "link": "/services/educational-assistance"
+          },
+          { "title": "Korze Hasanah", "link": "/services/korze-hasanah" },
+          { "title": "Legal Aid", "link": "/services/legal-aid" },
+          { "title": "Marriage", "link": "/services/marriage" },
+          {
+            "title": "Sunnah Circumcision",
+            "link": "/services/sunnah-circumcision"
+          }
+        ]
+      },
+      {
+        "title": "Resources",
+        "link": "#",
+        "option": "sub",
+        "subItems": [
+          {
+            "title": "Libray",
+            "link": "/resources/library"
+          },
+          {
+            "title": "Videos",
+            "link": "/resources/videos"
+          },
+          {
+            "title": "Gallery",
+            "link": "/resources/gallery"
+          },
+          { "title": "Blog", "link": "/resources/blog" }
+        ]
+      },
+      {
+        "title": "Contact",
+        "link": "/contact"
+      },
+      {
+        "title": "Donate",
+        "link": "/donate"
+      }
+    ],
+    "LoginBtn": {
+      "dashboard": "Dashboard",
+      "login": "Login",
+      "logout": "Logout"
+    }
+  }
+}
