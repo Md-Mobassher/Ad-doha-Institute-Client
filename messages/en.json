@@ -110,6 +110,8 @@
     },
 
     "aim": {
+      "metaTitle": "Our goal & Objectives | Ad-doha Institute",
+      "metaDescription": "Welcome to the Our goal & Objectives page of Ad-doha Institute.",
       "title": "Our goal",
       "details": "Following the footsteps of the great teacher and guide of mankind, the messenger of freedom and peace of mankind, the great Prophet Muhammad (PBUH), and achieve the satisfaction of Allah Almighty by properly performing dawah, education and service work.",
       "image": "/images/about/aim.png"
@@ -127,14 +129,132 @@
     },
 
     "advisoryCommittee": {
-      "title": "Advisory Committee"
+      "title": "Advisory Committee",
+      "metaTitle": "Advisory Committee | Ad-Doha Institute",
+      "metaDescription": "Welcome to the Ad-Doha Institute's Advisory Committee page."
     },
     "boardOfDirector": {
-      "title": "Board of Directors"
+      "title": "Board of Directors",
+      "metaTitle": "Board of Directors | Ad-Doha Institute",
+      "metaDescription": "Welcome to the Ad-Doha Institute Board of Directors page."
     },
     "faculty": {
-      "title": "Teachers Panel"
+      "title": "Teachers Panel",
+      "metaTitle": "Teacher Panel | Ad-Doha Institute",
+      "metaDescription": "Welcome to the Ad-Doha Institute's Teacher Panel page."
     }
+  },
+  "ServicesPage": {
+    "metaTitle": "Services | Ad-doha Institute",
+    "metaDescription": "Welcome to the home page of Ad-doha Institute.",
+    "pageTitle": "Our Services",
+    "servicesData": [
+      {
+        "_id": "4-1",
+        "title": "Assistance in housing construction",
+        "metaTitle": "Assistance in housing construction | Ad-doha Institute",
+        "metaDescription": "Assistance in housing construction | Ad-doha Institute",
+        "image": "/images/services/বাসস্থান র্নিমাণে সহায়তা.jpg",
+        "details": "Conditional assistance is provided for the construction of housing for landless, helpless, indigent, poor, non-Muslims and poor people.",
+        "description": [],
+        "navigation": "assistance-in-housing-construction",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/t3HZBojMiW3osbnk8"
+      },
+      {
+        "_id": "4-2",
+        "title": "Employment assistance",
+        "metaTitle": "Employment assistance | Ad-doha Institute",
+        "metaDescription": "Employment assistance | Ad-doha Institute",
+        "image": "/images/services/কর্মসংস্থান সহায়তা.jpg",
+        "details": "In addition to teaching necessary skills in the workplace, we also provide rickshaws, vans, and necessary materials to help helpless and poor people to become self-reliant according to their qualifications ",
+        "description": [],
+        "navigation": "employment-ssistance",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/pzvZh2YaYEvbiRgx5"
+      },
+      {
+        "_id": "4-3",
+        "title": "Medical Assistance",
+        "metaTitle": "Medical Assistance | Ad-doha Institute",
+        "metaDescription": "Medical Assistance | Ad-doha Institute",
+        "image": "/images/services/চিকিৎসা সহায়তা.jpg",
+        "details": "Medical assistance is provided to new Muslims and poor Muslims who are unable to bear the cost of treatment, subject to conditions.",
+        "description": [],
+        "navigation": "medical-assistance",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/mQ3PMkdQwgobDSrT9"
+      },
+      {
+        "_id": "4-4",
+        "title": "Educational Assistance",
+        "metaTitle": "Educational Assistance | Ad-doha Institute",
+        "metaDescription": "Educational Assistance | Ad-doha Institute",
+        "image": "/images/services/শিক্ষা সহায়তা.jpg",
+        "details": "Educational assistance is provided at various levels for helpless new Muslims and poor students.",
+        "description": [],
+        "navigation": "educational-assistance",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/ZReS37ghqpgintKW8"
+      },
+      {
+        "_id": "4-5",
+        "title": "Karje Hasanah",
+        "metaTitle": "Karje Hasanah | Ad-doha Institute",
+        "metaDescription": "Karje Hasanah | Ad-doha Institute",
+        "image": "/images/services/কর্জে হাসানাহ.jpg",
+        "details": "Karje Hasanah is provided to help helpless, poor new Muslims and poor Muslims financially and to make them self-reliant, subject to conditions.",
+        "description": [],
+        "navigation": "korze-hasanah",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/muoeHNor5uS7ocEb7"
+      },
+      {
+        "_id": "4-6",
+        "title": "Legal aid",
+        "metaTitle": "Legal aid | Ad-doha Institute",
+        "metaDescription": "Legal aid | Ad-doha Institute",
+        "image": "/images/services/আইনি সহায়তা.jpg",
+        "details": "New Muslims are provided with all kinds of legal aid, including affidavits, ID card corrections, and lawsuits.",
+        "description": [],
+        "navigation": "legal-aid",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/TmC9uJLYAL6RKZHU9"
+      },
+      {
+        "_id": "4-7",
+        "title": "Marriage",
+        "metaTitle": "Marriage | Ad-doha Institute",
+        "metaDescription": "Marriage | Ad-doha Institute",
+        "image": "/images/services/বিয়ে.jpg",
+        "details": "Marriage is arranged for new Muslims to bond with their new family and society.",
+        "description": [],
+        "navigation": "marriage",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/MNmTRFoEwuVaKcad7"
+      },
+      {
+        "_id": "4-8",
+        "title": "Sunnah circumcision",
+        "metaTitle": "Sunnah circumcision | Ad-doha Institute",
+        "metaDescription": "Sunnah circumcision | Ad-doha Institute",
+        "image": "/images/services/সুন্নতে খাৎনা.jpg",
+        "details": "New Muslims are assisted in getting circumcised in the Sunnah.",
+        "description": [],
+        "navigation": "sunnah-circumcision",
+        "btnTitle": "Details",
+        "link": "https://forms.gle/q63ar3KEhpTm7Scn6"
+      }
+    ]
+  },
+  "DonatePage": {
+    "metaTitle": "Donation | Ad-doha Institute",
+    "metaDescription": "Welcome to the Donate page of Ad-doha Institute.",
+    "pageTitle": "Donation",
+    "details1": "Ad-Doha Institute conducts various social activities including Dawah, education and service. This requires a lot of money. Only a nominal fee is charged for the importance of students from the education field; which is not enough to conduct our other activities. As a result, it becomes difficult to conduct our activities smoothly.",
+    "details2": "A lot of money is needed in various sectors such as implementing our educational programs, meeting the needs of students, preaching, publishing, services, etc. Your sincere cooperation is very important to accelerate and advance our programs. Through joint cooperation, we will be able to reach our goal, InshaAllah. Therefore, a sincere appeal to the charitable religious brothers - you will come forward for the welfare of the institute by providing the maximum cooperation you can to advance this important religious work. We are hopeful that you will support the institute through any means, including donations (one-time, monthly, annual), for the sake of the pleasure of Allah Almighty. May Allah Almighty accept it. May He reward everyone well. Amen!",
+    "image": "/images/donation/dan.jpg",
+    "methodTitle": "Methods of sending donations"
   },
   "Footer": {
     "title": "Subscribe",

@@ -11,18 +11,13 @@ import VideosSection from "./home/VideosSection";
 import EPathagar from "./home/EPathagar";
 import PreOrderBooks from "./home/PreOrderBooks";
 import { getMessages } from "next-intl/server";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 
 type Props = {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  // read route params
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const messages = await getMessages({ locale });
   const title = messages?.HomePage?.metaTitle;

@@ -4,6 +4,24 @@ import { Box, Stack } from "@mui/material";
 import DohaContainer from "@/components/ui/DohaContainer";
 import PageTitle from "@/components/ui/PageTitle";
 import { useTranslations } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { Metadata } from "next";
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const messages = await getMessages({ locale });
+  const title = messages?.AboutPage?.boardOfDirector?.metaTitle;
+  const description = messages?.AboutPage?.boardOfDirector?.metaDescription;
+
+  return {
+    title,
+    description,
+  };
+}
 
 const BoardOfDirectorPage = () => {
   const t = useTranslations("AboutPage");

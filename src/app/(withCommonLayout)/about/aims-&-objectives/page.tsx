@@ -1,12 +1,28 @@
-import assets from "@/assets";
 import DohaContainer from "@/components/ui/DohaContainer";
 import SubTitle from "@/components/ui/SubTitle";
 import Title from "@/components/ui/Title";
-import { aimObjectivesData } from "@/data/aimsObjectives";
 import { Box, Stack } from "@mui/material";
 import Image from "next/image";
 import CourseTitle2 from "../../courses/components/CourseTitle2";
 import { useTranslations } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { Metadata } from "next";
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const messages = await getMessages({ locale });
+  const title = messages?.AboutPage?.aim?.metaTitle;
+  const description = messages?.AboutPage?.aim?.metaDescription;
+
+  return {
+    title,
+    description,
+  };
+}
 
 const AimsObjectivesPage = () => {
   const t = useTranslations("AboutPage");
