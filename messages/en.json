@@ -1,7 +1,6 @@
 {
   "HomePage": {
     "metaTitle": "Home | Ad-doha Institute",
-    "metaKeywords": "home, ad-doha, institute, education, learning",
     "metaDescription": "Welcome to the home page of Ad-doha Institute.",
     "aboutSec": {
       "title": "Ad-doha Institute",
@@ -18,6 +17,7 @@
           "_id": "1",
           "title": "Dawah",
           "image": "/images/দাওয়াহ.jpg",
+          "navigation": "dawah",
           "details": "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
           "description": [
             "ইসলামের সুমহান বাণী ও বিশ্বশান্তির বার্তাকে জাতি, ধর্ম, বর্ণ নির্বিশেষে প্রত্যেকের মাঝে পৌঁছে দেয়"
@@ -28,6 +28,7 @@
           "_id": "2",
           "title": "Education",
           "image": "/images/শিক্ষা.jpg",
+          "navigation": "education",
           "details": "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
           "description": [
             "ইসলামের সুমহান বাণী ও বিশ্বশান্তির বার্তাকে জাতি, ধর্ম, বর্ণ নির্বিশেষে প্রত্যেকের মাঝে পৌঁছে দেয়"
@@ -38,6 +39,7 @@
           "_id": "3",
           "title": "Service",
           "image": "/images/সেবা.jpg",
+          "navigation": "service",
           "details": "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
           "description": [
             "ইসলামের সুমহান বাণী ও বিশ্বশান্তির বার্তাকে জাতি, ধর্ম, বর্ণ নির্বিশেষে প্রত্যেকের মাঝে পৌঁছে দেয় "
@@ -103,6 +105,95 @@
 
       "assistance": "Technical Assistance",
       "name": "Md. Mobasher Hossain"
+    }
+  },
+  "Header": {
+    "Menu": [
+      {
+        "title": "Home",
+        "link": "/"
+      },
+      {
+        "title": "About Us",
+        "link": "#",
+        "option": "sub",
+        "subItems": [
+          {
+            "title": "Aim & Objectives",
+            "link": "/about/aims-&-objectives"
+          },
+          { "title": "Board of Director", "link": "/about/board-of-director" },
+          {
+            "title": "Advisory Committee",
+            "link": "/about/advisory-committee"
+          },
+          { "title": "Faculty", "link": "/about/faculty" }
+        ]
+      },
+      { "title": "Courses", "link": "/courses" },
+      {
+        "title": "Services",
+        "link": "/services",
+        "option": "sub",
+        "subItems": [
+          {
+            "title": "Assistance in Housing Construction",
+            "link": "/services/assistance-in-housing-construction"
+          },
+          {
+            "title": "Employment Assistance",
+            "link": "/services/employment-ssistance"
+          },
+          {
+            "title": "Medical Assistance",
+            "link": "/services/medical-assistance"
+          },
+          {
+            "title": "Educational Assistance",
+            "link": "/services/educational-assistance"
+          },
+          { "title": "Korze Hasanah", "link": "/services/korze-hasanah" },
+          { "title": "Legal Aid", "link": "/services/legal-aid" },
+          { "title": "Marriage", "link": "/services/marriage" },
+          {
+            "title": "Sunnah Circumcision",
+            "link": "/services/sunnah-circumcision"
+          }
+        ]
+      },
+      {
+        "title": "Resources",
+        "link": "#",
+        "option": "sub",
+        "subItems": [
+          {
+            "title": "Libray",
+            "link": "/resources/library"
+          },
+          {
+            "title": "Videos",
+            "link": "/resources/videos"
+          },
+          {
+            "title": "Gallery",
+            "link": "/resources/gallery"
+          },
+          { "title": "Blog", "link": "/resources/blog" }
+        ]
+      },
+      {
+        "title": "Contact",
+        "link": "/contact"
+      },
+      {
+        "title": "Donate",
+        "link": "/donate"
+      }
+    ],
+    "LoginBtn": {
+      "dashboard": "Dashboard",
+      "login": "Login",
+      "logout": "Logout"
     }
   }
 }

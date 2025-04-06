@@ -16,8 +16,7 @@ const ProjectPage = () => {
             <DohaCard
               key={project._id}
               {...project}
-              navigate="projects"
-              btnTitle={t("projectSec.btnTitle")}
+              btnTitle={project.btnTitle}
             />
           ))}
         </div>

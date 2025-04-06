@@ -29,7 +29,7 @@ const VideosSection = async () => {
         <Title title={t("videoSec.title")} />
         <DohaButton
           btnTitle={t("videoSec.btnTitle")}
-          navigate="resourses/videos"
+          navigate="resources/videos"
         />
       </Stack>
 

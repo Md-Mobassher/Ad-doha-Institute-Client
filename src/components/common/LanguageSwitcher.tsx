@@ -41,9 +41,9 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <div className="inline-flex my-auto h-8 border rounded overflow-hidden">
+    <div className="flex w-[70px] my-auto h-8 border rounded overflow-hidden md:ml-0 ml-2">
       <button
-        className={`px-2 py-1 font-semibold inline transition ${
+        className={`w-full py-1 px-1.5 font-semibold inline transition ${
           locale === "bn"
             ? "bg-[#F7F3E7] text-[#0F473C]"
             : "bg-[#0F473C] text-[#F7F3E7]"
@@ -53,7 +53,7 @@ export default function LanguageSwitcher() {
         বাং
       </button>
       <button
-        className={`px-2 py-1 font-semibold inline transition ${
+        className={`w-full py-1 px-1.5 font-semibold inline transition ${
           locale === "en"
             ? "bg-[#F7F3E7] text-[#0F473C]"
             : "bg-[#0F473C] text-[#F7F3E7]"

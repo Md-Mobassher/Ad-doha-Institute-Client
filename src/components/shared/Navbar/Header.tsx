@@ -2,14 +2,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Menu, { Item } from "./Menu";
+import Menu from "./Menu";
 import { Box, Container } from "@mui/material";
-import LoginButton from "./LoginButton";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { X } from "@mui/icons-material";
 import headerlogo from "@/assets/logo/logo.png";
 import LanguageSwitcher from "@/components/common/LanguageSwitcher";
+import { useTranslations } from "next-intl";
 
 interface HeaderProps {
   top?: number;
@@ -17,84 +17,11 @@ interface HeaderProps {
   menu?: number;
 }
 
-const menus: Item[] = [
-  {
-    title: "হোম",
-    link: "/",
-  },
-  {
-    title: "আমাদের সম্পর্কে",
-    link: "#",
-    option: "sub",
-    subItems: [
-      {
-        title: "লক্ষ্য ও উদ্দেশ্য",
-        link: "/about/aims-&-objectives",
-      },
-      { title: "পরিচালনা পর্ষদ", link: "/about/board-of-director" },
-      { title: "উপদেষ্টা কমিটি", link: "/about/advisory-committee" },
-      { title: "শিক্ষক প্যানেল", link: "/about/faculty" },
-    ],
-  },
-  { title: "কোর্স", link: "/courses" },
-  {
-    title: "সেবা",
-    link: "/services",
-    option: "sub",
-    subItems: [
-      {
-        title: "বাসস্থান নির্মাণে সহায়তা",
-        link: "/services/assistance-in-housing-construction",
-      },
-      {
-        title: "কর্মসংস্থান সহায়তা",
-        link: "/services/employment-ssistance",
-      },
-      {
-        title: "চিকিৎসা সহায়তা",
-        link: "/services/medical-assistance",
-      },
-      {
-        title: "শিক্ষা সহায়তা",
-        link: "/services/educational-assistance",
-      },
-      { title: "কর্জে হাসানাহ", link: "/services/korze-hasanah" },
-      { title: "আইনী সহায়তা", link: "/services/legal-aid" },
-      { title: "বিয়ে", link: "/services/marriage" },
-      {
-        title: "সুন্নাতে খাৎনা",
-        link: "/services/sunnah-circumcision",
-      },
-    ],
-  },
-  {
-    title: "রিসোর্স",
-    link: "#",
-    option: "sub",
-    subItems: [
-      {
-        title: "পাঠাগার",
-        link: "/resources/library",
-      },
-      {
-        title: "ভিডিও",
-        link: "/resources/videos",
-      },
-      {
-        title: "গ্যালারী",
-        link: "/resources/gallery",
-      },
-      { title: "ব্লগ", link: "/resources/blog" },
-    ],
-  },
-  {
-    title: "যোগাযোগ",
-    link: "/contact",
-  },
-];
-
 const Header: React.FC<HeaderProps> = ({ top, header, menu }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const t = useTranslations("Header");
+  const menus = t.raw("Menu") as any[];
 
   return (
     <>
@@ -126,8 +53,8 @@ const Header: React.FC<HeaderProps> = ({ top, header, menu }) => {
               },
             }}
           >
-            <div className="flex items-center  justify-between gap-1 flex-wrap">
-              <Link href="/">
+            <div className="flex items-center  justify-between">
+              <Link href="/" className="">
                 <div className="lg:w-[280px] md:w-[240px] w-[220px]">
                   <Image src={headerlogo} width={280} height={70} alt="logo" />
                 </div>
@@ -143,13 +70,8 @@ const Header: React.FC<HeaderProps> = ({ top, header, menu }) => {
                   <GiHamburgerMenu className="size-7 " />
                 )}
               </button>
-              <div className="hidden md:block ">
+              <div className="hidden md:flex  flex-wrap">
                 {menu === 1 && <Menu items={menus} />}
-              </div>
-              <div className="hidden md:inline-flex ">
-                {/* Language Toggle */}
-                <LoginButton />
-                <LanguageSwitcher />
               </div>
             </div>
 
@@ -157,9 +79,6 @@ const Header: React.FC<HeaderProps> = ({ top, header, menu }) => {
             {mobileMenuOpen && (
               <div className="md:hidden ">
                 <Menu items={menus} />
-                <LoginButton />
-                {/* Language Toggle */}
-                <LanguageSwitcher />
               </div>
             )}
           </Container>

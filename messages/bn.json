@@ -1,7 +1,6 @@
 {
   "HomePage": {
     "metaTitle": "হোম | আদ-দোহা ইনস্টিটিউট",
-    "metaKeywords": "হোম, আদ-দোহা, ইনস্টিটিউট, শিক্ষা",
     "metaDescription": "আদ-দোহা ইনস্টিটিউট এর হোম পেজে স্বাগতম।",
     "aboutSec": {
       "title": "আদ-দোহা ইনস্টিটিউট",
@@ -121,8 +120,94 @@
       "title": "স্বত্ব",
       "title2": " | আদ-দোহা ইনস্টিটিউট, সর্ব স্বত্ব সংরক্ষিত",
 
-      "assistance": "কারিগরি সহায়তায়  ",
+      "assistance": "কারিগরি সহায়তায়",
       "name": "মোঃ মোবাশ্বের হোসেন"
+    }
+  },
+  "Header": {
+    "Menu": [
+      {
+        "title": "হোম",
+        "link": "/"
+      },
+      {
+        "title": "আমাদের সম্পর্কে",
+        "link": "#",
+        "option": "sub",
+        "subItems": [
+          {
+            "title": "লক্ষ্য ও উদ্দেশ্য",
+            "link": "/about/aims-&-objectives"
+          },
+          { "title": "পরিচালনা পর্ষদ", "link": "/about/board-of-director" },
+          { "title": "উপদেষ্টা কমিটি", "link": "/about/advisory-committee" },
+          { "title": "শিক্ষক প্যানেল", "link": "/about/faculty" }
+        ]
+      },
+      { "title": "কোর্স", "link": "/courses" },
+      {
+        "title": "সেবা",
+        "link": "/services",
+        "option": "sub",
+        "subItems": [
+          {
+            "title": "বাসস্থান নির্মাণে সহায়তা",
+            "link": "/services/assistance-in-housing-construction"
+          },
+          {
+            "title": "কর্মসংস্থান সহায়তা",
+            "link": "/services/employment-ssistance"
+          },
+          {
+            "title": "চিকিৎসা সহায়তা",
+            "link": "/services/medical-assistance"
+          },
+          {
+            "title": "শিক্ষা সহায়তা",
+            "link": "/services/educational-assistance"
+          },
+          { "title": "কর্জে হাসানাহ", "link": "/services/korze-hasanah" },
+          { "title": "আইনী সহায়তা", "link": "/services/legal-aid" },
+          { "title": "বিয়ে", "link": "/services/marriage" },
+          {
+            "title": "সুন্নাতে খাৎনা",
+            "link": "/services/sunnah-circumcision"
+          }
+        ]
+      },
+      {
+        "title": "রিসোর্স",
+        "link": "#",
+        "option": "sub",
+        "subItems": [
+          {
+            "title": "পাঠাগার",
+            "link": "/resources/library"
+          },
+          {
+            "title": "ভিডিও",
+            "link": "/resources/videos"
+          },
+          {
+            "title": "গ্যালারী",
+            "link": "/resources/gallery"
+          },
+          { "title": "ব্লগ", "link": "/resources/blog" }
+        ]
+      },
+      {
+        "title": "যোগাযোগ",
+        "link": "/contact"
+      },
+      {
+        "title": "ডোনেট",
+        "link": "/donate"
+      }
+    ],
+    "LoginBtn": {
+      "dashboard": "ড্যাশবোর্ড",
+      "login": "লগইন",
+      "logout": "লগআউট"
     }
   }
 }

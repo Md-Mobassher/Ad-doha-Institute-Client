@@ -11,20 +11,25 @@ import VideosSection from "./home/VideosSection";
 import EPathagar from "./home/EPathagar";
 import PreOrderBooks from "./home/PreOrderBooks";
 import { getMessages } from "next-intl/server";
+import { Metadata, ResolvingMetadata } from "next";
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: string };
-}) {
+type Props = {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const { locale } = await params;
   const messages = await getMessages({ locale });
   const title = messages?.HomePage?.metaTitle;
-  const metaKeywords = messages?.HomePage?.metaKeywords;
   const description = messages?.HomePage?.metaDescription;
 
   return {
     title,
-    metaKeywords,
     description,
   };
 }

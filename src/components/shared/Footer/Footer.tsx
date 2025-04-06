@@ -423,6 +423,7 @@ const Footer = () => {
                 rel="noreferrer"
                 className="text-[#FAE4BF]"
               >
+                {" "}
                 {t("copyright.name")}
               </Link>
             </Typography>
