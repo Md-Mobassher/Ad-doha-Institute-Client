@@ -51,8 +51,6 @@ const RegisterForm = () => {
 
   const handleRegister = async (values: FieldValues) => {
     setIsLoading(true);
-    values.student.dateOfBirth = dateFormatter(values.student.dateOfBirth);
-
     try {
       const res = await registerStudent(values);
       // console.log(res);
