@@ -16,33 +16,51 @@
         {
           "_id": "1",
           "title": "Dawah",
-          "image": "/images/দাওয়াহ.jpg",
+          "image": "/images/project/দাওয়াহ.jpg",
           "navigation": "dawah",
-          "details": "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
+          "details": "The existence of Islam in human life depends on the work of Da'wah. All the prophets and messengers that Allah Almighty has sent throughout the ages were responsible for delivering the message of Islam to people. Only Da'wah can unlock the locks of worldly and hereafter welfare and success. Only Da'wah can unlock the doors of humanity's conscience and human development and growth. Da'wah means the work of propagating Islam. It is through Da'wah that Islam spreads widely. The Muslim nation expands. In the present day, there is no opportunity to underestimate the importance of delivering the message of Islam to others. Therefore, Ad-Doha Institute is working tirelessly in the Da'wah field to deliver the great message of Islam and the message of world peace to everyone, regardless of race, religion, or color.",
           "description": [
-            "ইসলামের সুমহান বাণী ও বিশ্বশান্তির বার্তাকে জাতি, ধর্ম, বর্ণ নির্বিশেষে প্রত্যেকের মাঝে পৌঁছে দেয়"
+            "To deliver the great message of Islam and the message of world peace to everyone, regardless of race, religion, or color.",
+            "To present the authentic perspective of Islam in mosques and madrasas in different areas...",
+            "To record and disseminate documentary footage of discussion programs related to dawah through social media.",
+            "To establish dawah centers in different areas of Bangladesh.",
+            "To spread the call to Islam throughout the country through knowledgeable da'is.",
+            "To develop mosque-based da'wah activities."
           ],
           "btnTitle": "Details"
         },
         {
           "_id": "2",
           "title": "Education",
-          "image": "/images/শিক্ষা.jpg",
+          "image": "/images/project/শিক্ষা.jpg",
           "navigation": "education",
-          "details": "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
+          "details": "The importance of education in Islam is immense. The first revelation that was revealed to the Holy Prophet (peace and blessings of Allah be upon him) in the Cave of Hira is, ‘Read, in the name of your Lord who created. He created man from a clot of blood.’ -Surah Al-Alaq: 1-2 The purpose of education in Islam is to develop the son of Adam into a human being. Only humans have the ability to know the unknown through education and to use what they know to discover the unknown. The education that gives self-identity, shapes people as honest and good citizens, and helps them to be benevolent, benevolent and devoted to Allah is true education. Education illuminates the human heart, reveals insight, and creates foresight. Reading and studying are one of the means for learning and acquiring knowledge. Therefore, Ad-Doha has organized various training courses online and offline to develop wise scholars and dedicated Da'is Al-Allah for people of all walks of life, including teaching the authentic Quran, as well as contemporary teaching on Da'wah, Sirah, comparative theology, apostate sects, basic IT, contemporary world, psychology, management, and English language education.",
           "description": [
-            "ইসলামের সুমহান বাণী ও বিশ্বশান্তির বার্তাকে জাতি, ধর্ম, বর্ণ নির্বিশেষে প্রত্যেকের মাঝে পৌঁছে দেয়"
+            "To introduce nationwide formal and informal primary education (Maktab) for children to spread basic education at the primary level.",
+            "To introduce nationwide adult education (Maktab) to educate adults.",
+            "To organize basic Islamic education courses offline and online for people of all classes and professions.",
+            "To organize offline and online authentic Quran education courses for people of all classes and professions.",
+            "To organize online and offline training courses to form skilled and timely da'is.",
+            "To formulate modern and up-to-date curricula and textbooks containing the basic teachings of the Quran and Sunnah to develop wise scholars and da'is illa Allah.",
+            "To organize online and offline Arabic and English language education courses."
           ],
           "btnTitle": "Details"
         },
         {
           "_id": "3",
           "title": "Service",
-          "image": "/images/সেবা.jpg",
+          "image": "/images/project/সেবা.jpg",
           "navigation": "service",
-          "details": "To convey the good message of Islam and the message of world peace to every non-Muslim living in Bangladesh.",
+          "details": "Humans are the greatest and most dignified creation of the great Creator. Islam has specifically defined the responsibilities and duties of humans towards humans. Therefore, standing by the helpless, keeping track of them, and coming forward in their distress; is the responsibility of a believer. In times of human crisis, the Ad-Doha Institute is working to serve distressed humanity with various service initiatives including the rehabilitation of new Muslims.",
           "description": [
-            "ইসলামের সুমহান বাণী ও বিশ্বশান্তির বার্তাকে জাতি, ধর্ম, বর্ণ নির্বিশেষে প্রত্যেকের মাঝে পৌঁছে দেয় "
+            "Conditional assistance is provided to landless, helpless, indigent, poor new Muslims and poor people in building houses.",
+            "In addition to teaching necessary skills in the workplace, assistance is provided to helpless and poor people according to their qualifications by providing rickshaws, vans, and necessary equipment to make them self-reliant.",
+            "Conditional medical assistance is provided to new Muslims and poor Muslims who are unable to bear the cost of treatment.",
+            "Educational assistance is provided to helpless new Muslims and poor students at various levels.",
+            "Financial assistance to helpless, poor new Muslims and poor Muslims and conditional loans are provided to make them self-reliant.",
+            "All kinds of legal assistance are provided to new Muslims, including getting their affidavits, ID card corrections, and lawsuits.",
+            "Marriage arrangements are made for new Muslims to establish ties with their new families and society.",
+            "New Muslims are provided with assistance in undergoing circumcision in accordance with the Sunnah."
           ],
           "btnTitle": "Details"
         }
@@ -78,6 +96,44 @@
     "videoSec": {
       "title": "Videos",
       "btnTitle": "All Videos"
+    }
+  },
+  "AboutPage": {
+    "pageTitle": {
+      "title": "Ad-Doha Institute",
+      "details": "An educational, research, da'wah and service institution."
+    },
+
+    "intro": {
+      "title": "Introduction",
+      "details": "Bangladesh is a Muslim-majority country. Islam came to this country through Arab and non-Arab da'is, scholars, pirs, mashaykhs and businessmen. Although Bangladesh is a Muslim-majority country, most of the people in this country cannot read the Quran and are not religiously knowledgeable. As a result, instead of having a good character and religious mentality, they are being led astray. Thousands of Muslims, especially those who are poor and semi-educated, are being included in various false ideologies and sects without understanding. Various reports have revealed that more than half a crore Muslims have been converted to other religions. In addition, many Muslims are falling into the clutches of hypocritical pirs and losing their faith. In such a situation, the Ad-Doha Institute was established on January 10, 2022, with the aim of providing Muslims with basic Islamic education and protecting their faith."
+    },
+
+    "aim": {
+      "title": "Our goal",
+      "details": "Following the footsteps of the great teacher and guide of mankind, the messenger of freedom and peace of mankind, the great Prophet Muhammad (PBUH), and achieve the satisfaction of Allah Almighty by properly performing dawah, education and service work.",
+      "image": "/images/about/aim.png"
+    },
+
+    "objectives": {
+      "title": "Our objective",
+      "details": "To provide students with timely education by combining religious and modern education. To develop the people of the country as good citizens and socially conscious through education that integrates modern and religious values. To convey the basic ideals of Islam to all classes of people by conducting dawah activities. To develop a dawah mentality among Muslims. To extend a helping hand and service to all classes of people, including new Muslims, helpless, distressed, poor and helpless people.",
+      "image": "/images/about/uddesso.png"
+    },
+
+    "futurePlan": {
+      "title": "Our future plan",
+      "details": "To achieve the goals and objectives of Ad-Doha Institute, to create multi-dimensional educational institutions and Dawah centers nationwide. From where fundamentally educational, Dawah and service activities will be conducted. Several steps will be taken in each place to implement all these activities. For example, educational institutions will be built with a curriculum combining religious and modern education from the first to the fifth grade. In addition to the educational institutions, there will be a mosque, an Islamic (Sayyid Abul Hasan Ali Nadvi Rah.) Library, a guest house, a training center, a residential hostel. In addition, there will be a good system of children's Maktab, adult education and separate Quran education for women. In addition, educational institutions and Dawah centers will be built in certain regions based on districts and divisions. Such as Bandarban, Madhupur, Tangail, Jamalpur, Mymensingh, Narayanganj, Rangpur, Jessore and Patuakhali. An educational institution and a Dawah center will be established in each of these regions. A local trust will be formed and these educational institutions or Dawah centers will be managed independently through that trust. The Ad-Doha Institute will only work as a partner."
+    },
+
+    "advisoryCommittee": {
+      "title": "Advisory Committee"
+    },
+    "boardOfDirector": {
+      "title": "Board of Directors"
+    },
+    "faculty": {
+      "title": "Teachers Panel"
     }
   },
   "Footer": {

@@ -6,29 +6,32 @@ import { aimObjectivesData } from "@/data/aimsObjectives";
 import { Box, Stack } from "@mui/material";
 import Image from "next/image";
 import CourseTitle2 from "../../courses/components/CourseTitle2";
+import { useTranslations } from "next-intl";
 
 const AimsObjectivesPage = () => {
+  const t = useTranslations("AboutPage");
+
   return (
     <Box>
       <Box
         sx={{ textAlign: "center", py: "40px", backgroundColor: "info.main" }}
       >
-        <Title title={aimObjectivesData.pageTitle.title} />
-        <SubTitle title={aimObjectivesData.pageTitle.details} />
+        <Title title={t("pageTitle.title")} />
+        <SubTitle title={t("pageTitle.details")} />
       </Box>
 
       {/* Into */}
       <DohaContainer>
-        <Title title={aimObjectivesData.intro.title} />
+        <Title title={t("intro.title")} />
         <Box mt={3}>
-          <CourseTitle2 details={aimObjectivesData.intro.details} />
+          <CourseTitle2 details={t("intro.details")} />
         </Box>
       </DohaContainer>
 
       {/* aim */}
       <Box sx={{ textAlign: "center", backgroundColor: "info.main" }}>
         <DohaContainer>
-          <Title title={aimObjectivesData.aim.title} />
+          <Title title={t("aim.title")} />
           <Stack
             direction={{
               lg: "row-reverse",
@@ -52,7 +55,7 @@ const AimsObjectivesPage = () => {
               }}
             >
               <Image
-                src={aimObjectivesData.aim.image}
+                src={t("aim.image")}
                 alt={"aim"}
                 width={900}
                 height={400}
@@ -60,7 +63,7 @@ const AimsObjectivesPage = () => {
               />
             </Box>
             <Box width="100%">
-              <CourseTitle2 details={aimObjectivesData.aim.details} />
+              <CourseTitle2 details={t("aim.details")} />
             </Box>
           </Stack>
         </DohaContainer>
@@ -69,7 +72,7 @@ const AimsObjectivesPage = () => {
       {/* objectives */}
       <Box sx={{ textAlign: "center" }}>
         <DohaContainer>
-          <Title title={aimObjectivesData.objectives.title} />
+          <Title title={t("objectives.title")} />
           <Stack
             mt={3}
             direction={{
@@ -94,7 +97,7 @@ const AimsObjectivesPage = () => {
               }}
             >
               <Image
-                src={aimObjectivesData.objectives.image}
+                src={t("objectives.image")}
                 alt={"aim"}
                 width={900}
                 height={400}
@@ -102,7 +105,7 @@ const AimsObjectivesPage = () => {
               />
             </Box>
             <Box width="100%">
-              <CourseTitle2 details={aimObjectivesData.objectives.details} />
+              <CourseTitle2 details={t("objectives.details")} />
             </Box>
           </Stack>
         </DohaContainer>
@@ -110,9 +113,9 @@ const AimsObjectivesPage = () => {
 
       {/* future */}
       <DohaContainer>
-        <Title title={aimObjectivesData.futurePlan.title} />
+        <Title title={t("futurePlan.title")} />
         <Box mt={3}>
-          <CourseTitle2 details={aimObjectivesData.futurePlan.details} />
+          <CourseTitle2 details={t("futurePlan.details")} />
         </Box>
       </DohaContainer>
     </Box>

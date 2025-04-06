@@ -3,8 +3,11 @@ import FacultyCard from "@/components/ui/FacultyCard";
 import PageTitle from "@/components/ui/PageTitle";
 import { TTeacher } from "@/type";
 import { Box } from "@mui/material";
+import { getTranslations } from "next-intl/server";
 
 const FacultyPage = async () => {
+  const t = await getTranslations("AboutPage");
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/teachers`,
     {
@@ -20,7 +23,7 @@ const FacultyPage = async () => {
   return (
     <>
       <Box>
-        <PageTitle title={"শিক্ষকবৃন্দ"} />
+        <PageTitle title={t("faculty.title")} />
 
         <DohaContainer>
           <Box className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-7">

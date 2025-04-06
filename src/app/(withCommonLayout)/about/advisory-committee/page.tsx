@@ -3,8 +3,10 @@ import DohaContainer from "@/components/ui/DohaContainer";
 import PageTitle from "@/components/ui/PageTitle";
 import { TTeacher } from "@/type";
 import CommitteeMemeberCard from "@/components/ui/CommitteeMemberCard";
+import { getTranslations } from "next-intl/server";
 
 const AdvisoryCommitteePage = async () => {
+  const t = await getTranslations("AboutPage");
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/advisory-comittees`,
     {
@@ -19,7 +21,7 @@ const AdvisoryCommitteePage = async () => {
 
   return (
     <Box>
-      <PageTitle title={"উপদেষ্টা কমিটি"} />
+      <PageTitle title={t("advisoryCommittee.title")} />
 
       <DohaContainer>
         <Box className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-7">
