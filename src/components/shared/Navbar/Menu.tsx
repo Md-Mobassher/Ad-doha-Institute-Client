@@ -73,7 +73,7 @@ const Menu: React.FC<MenuProps> = ({ items }) => {
         {userInfo?.userId ? (
           <Link
             href={"/dashboard"}
-            className="lg:rounded-full lg:px-4 md:px-3 px-2 py-2 text-white hover:text-[#0F473C] inline hover:bg-[#F7F3E7] font-semibold"
+            className="lg:rounded-full lg:px-3 md:px-2 px-2 py-2 text-white hover:text-[#0F473C] inline hover:bg-[#F7F3E7] font-semibold"
           >
             {t("LoginBtn.dashboard")}
           </Link>
@@ -82,14 +82,14 @@ const Menu: React.FC<MenuProps> = ({ items }) => {
         {userInfo?.userId ? (
           <h5
             onClick={() => handleLogOut()}
-            className="lg:rounded-full lg:px-4 md:px-3 px-2 py-2 text-white hover:text-[#0F473C]  hover:bg-[#F7F3E7] font-semibold cursor-pointer"
+            className="lg:rounded-full lg:px-3 md:px-2 px-2 py-2 text-white hover:text-[#0F473C]  hover:bg-[#F7F3E7] font-semibold cursor-pointer"
           >
             {t("LoginBtn.logout")}
           </h5>
         ) : (
           <Link
             href={"/login"}
-            className="lg:rounded-full lg:px-4 md:px-3 px-2 py-2 text-white hover:text-[#0F473C] hover:bg-[#F7F3E7] font-semibold"
+            className="lg:rounded-full lg:px-3 md:px-2 px-2 py-2 text-white hover:text-[#0F473C] hover:bg-[#F7F3E7] font-semibold"
           >
             {t("LoginBtn.login")}
           </Link>

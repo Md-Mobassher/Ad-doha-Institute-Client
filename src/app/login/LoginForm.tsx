@@ -102,7 +102,9 @@ const LoginForm = () => {
             fontWeight={400}
             color="primary"
           >
-            Forgot Password?
+            <Link href="/forgot-password" className="text-green-600">
+              Forgot Password?
+            </Link>
           </Typography>
           <div className="flex justify-between gap-6">
             <Button
@@ -139,7 +141,7 @@ const LoginForm = () => {
 
           <Typography component="p" fontWeight={500}>
             Don&rsquo;t have an account?{" "}
-            <Link href="/register" className="text-green-500">
+            <Link href="/register" className="text-green-600">
               Create a new account.
             </Link>
           </Typography>

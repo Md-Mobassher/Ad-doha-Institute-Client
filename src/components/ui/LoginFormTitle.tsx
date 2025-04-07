@@ -3,7 +3,7 @@ import Image from "next/image";
 import logo from "@/assets/logo/favicon.webp";
 import Link from "next/link";
 
-const LoginFormTitle = () => {
+const LoginFormTitle = ({ title }: { title?: string }) => {
   return (
     <Stack
       sx={{
@@ -11,6 +11,17 @@ const LoginFormTitle = () => {
         alignItems: "center",
       }}
     >
+      {title && (
+        <Typography
+          component="h4"
+          variant="h4"
+          fontWeight={600}
+          mb="5px"
+          color="primary.main"
+        >
+          {title}
+        </Typography>
+      )}
       <Box>
         <Link href="/">
           <Image src={logo} width={60} height={60} alt="logo" />
@@ -19,10 +30,10 @@ const LoginFormTitle = () => {
       <Box>
         <Link href="/">
           <Typography
-            component="h4"
-            variant="h4"
+            component="h5"
+            variant="h5"
             fontWeight={600}
-            mt="12px"
+            mt="10px"
             mb="4px"
             color="black"
           >

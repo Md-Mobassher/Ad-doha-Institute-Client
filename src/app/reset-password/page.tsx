@@ -1,9 +1,8 @@
 import { Box, Container, Stack } from "@mui/material";
-
-import LoginForm from "./LoginForm";
 import LoginFormTitle from "@/components/ui/LoginFormTitle";
+import ResetPasswordForm from "./ResetPasswordForm";
 
-const LoginPage = () => {
+const ResetPasswordPage = () => {
   return (
     <Container>
       <Stack
@@ -32,13 +31,12 @@ const LoginPage = () => {
             textAlign: "center",
           }}
         >
-          <LoginFormTitle title="Login" />
-
-          <LoginForm />
+          <LoginFormTitle title="Reset Password" />
+          <ResetPasswordForm />
         </Box>
       </Stack>
     </Container>
   );
 };
 
-export default LoginPage;
+export default ResetPasswordPage;

@@ -37,7 +37,7 @@ const RegisterPage = () => {
             textAlign: "center",
           }}
         >
-          <LoginFormTitle />
+          <LoginFormTitle title="Register" />
 
           <RegisterForm />
         </Box>

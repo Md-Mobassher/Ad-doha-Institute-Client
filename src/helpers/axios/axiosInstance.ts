@@ -1,7 +1,7 @@
 import { authKey } from "@/constant/authkey";
 import setAccessToken from "@/services/actions/setAccessToken";
 import { getNewAccessToken } from "@/services/auth.services";
-import { IGenericErrorResponse, ResponseSuccessType } from "@/type";
+import { IGenericErrorResponse } from "@/type";
 import {
   getFromLocalStorage,
   setToLocalStorage,
@@ -56,13 +56,14 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   //@ts-ignore
   function (response) {
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
-    const responseObject: ResponseSuccessType = {
+    response.data = {
+      success: response?.data?.success,
+      statusCode: response?.data?.statusCode,
+      message: response?.data?.message,
       data: response?.data?.data,
       meta: response?.data?.meta,
     };
-    return responseObject;
+    return response;
   },
   async function (error) {
     const originalRequest = error.config;
