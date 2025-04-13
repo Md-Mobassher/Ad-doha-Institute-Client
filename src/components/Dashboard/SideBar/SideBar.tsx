@@ -1,20 +1,26 @@
+"use client";
 import { Box, List, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import logo from "@/assets/logo/favicon.webp";
 import Link from "next/link";
 import { drawerItems } from "@/utils/drawerItems";
 import SidebarItem from "./SidebarItem";
-import { getUserInfo } from "@/services/auth.services";
 import { useEffect, useState } from "react";
 import { UserRole } from "@/type";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useAppSelector } from "@/redux/hooks";
 
 const SideBar = () => {
   const [userRole, setUserRole] = useState("");
+  const user = useAppSelector(selectCurrentUser);
+
+  // console.log(userRole);
 
   useEffect(() => {
-    const { role } = getUserInfo() as any;
-    setUserRole(role);
-  }, []);
+    if (!user) return;
+
+    setUserRole(user.role);
+  }, [user]);
 
   return (
     <Box>

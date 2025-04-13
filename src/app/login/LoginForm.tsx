@@ -10,9 +10,14 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
-import { storeUserInfo } from "@/services/auth.services";
-import { userLogin } from "@/services/actions/userLogin";
 import DemoCredentialModal from "@/components/common/DemoCredentialModal";
+import { jwtDecode } from "jwt-decode";
+import { TUser } from "@/utils/tokenHelper";
+import { useUserLoginMutation } from "@/redux/features/auth/authApi";
+import { useAppDispatch } from "@/redux/hooks";
+import { setUser } from "@/redux/features/auth/authSlice";
+import { setCookie } from "@/utils/cookieHelper";
+import { authRefreshKey } from "@/constant/authkey";
 
 const validationSchema = z.object({
   email: z.string().email("Please enter a valid email address!"),
@@ -24,30 +29,34 @@ const defaultValues = {
 };
 
 const LoginForm = () => {
-  const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
-  const [error, setError] = useState("");
+  const [loginUser, { isLoading }] = useUserLoginMutation();
+  const dispatch = useAppDispatch();
 
   const handleLogin = async (values: FieldValues) => {
-    setIsLoading(true);
-
     try {
-      const res = await userLogin(values);
-      if (res?.data?.accessToken) {
-        setIsLoading(false);
-        toast.success(res?.message);
-        storeUserInfo({ accessToken: res?.data?.accessToken });
+      const result = await loginUser(values).unwrap();
+
+      // Check for success correctly
+      if (result?.success) {
+        toast.success(result?.message);
+
+        // Extract the access token correctly
+        const accessToken = result.data.accessToken;
+        const decodedToken = jwtDecode(accessToken) as TUser;
+
+        // Store user in Redux correctly
+        dispatch(setUser({ user: decodedToken, token: accessToken }));
+        setCookie(authRefreshKey, result?.data?.refreshToken, 30);
+
+        // Reset form & Navigate
         router.push("/dashboard");
       } else {
-        setError(res.message);
-        setIsLoading(false);
-        toast.error(res?.message);
-        // console.log(res);
+        toast.error(result?.message);
       }
     } catch (err: any) {
-      console.error(err.message);
-      setIsLoading(false);
+      console.error("login error", err);
       toast.error(err?.message);
     }
   };
@@ -55,22 +64,6 @@ const LoginForm = () => {
   return (
     <>
       <Box>
-        {error && (
-          <Box>
-            <Typography
-              sx={{
-                backgroundColor: "red",
-                padding: "1px",
-                borderRadius: "2px",
-                color: "white",
-                marginTop: "8px",
-              }}
-            >
-              {error}
-            </Typography>
-          </Box>
-        )}
-
         <DohaForm
           onSubmit={handleLogin}
           resolver={zodResolver(validationSchema)}

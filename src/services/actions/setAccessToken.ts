@@ -1,13 +1,13 @@
 "use server";
 
-import { authKey } from "@/constant/authkey";
+import { authAccessKey } from "@/constant/authkey";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 const setAccessToken = async (token: string, option?: any) => {
   const cookieStore = await cookies();
 
-  cookieStore.set(authKey, token);
+  cookieStore.set(authAccessKey, token);
   if (option && option.passwordChangeRequired) {
     redirect("/dashboard/change-password");
   }

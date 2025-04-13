@@ -41,7 +41,7 @@ export const axiosBaseQuery =
       return {
         error: {
           status: err.response?.status || 500,
-          data: err.response?.data || err.message || "Something went wrong!",
+          message: err.response?.data || err.message || "Something went wrong!",
         },
       };
     }

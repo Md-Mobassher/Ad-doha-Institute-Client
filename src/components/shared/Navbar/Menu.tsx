@@ -2,10 +2,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import useUserInfo from "@/hooks/useUserInfo";
 import { useTranslations } from "next-intl";
 import { logoutUser } from "@/services/actions/logoutUser";
 import LanguageSwitcher from "@/components/common/LanguageSwitcher";
+import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 type SubItem = {
   title: string;
@@ -26,11 +27,14 @@ type MenuProps = {
 const Menu: React.FC<MenuProps> = ({ items }) => {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const router = useRouter();
-  const userInfo = useUserInfo();
+  const dispatch = useAppDispatch();
   const t = useTranslations("Header");
 
+  const user = useAppSelector(selectCurrentUser);
+
   const handleLogOut = () => {
-    logoutUser(router);
+    dispatch(logout());
+    router.push("/");
   };
 
   return (
@@ -70,7 +74,7 @@ const Menu: React.FC<MenuProps> = ({ items }) => {
             )}
           </div>
         ))}
-        {userInfo?.userId ? (
+        {user ? (
           <Link
             href={"/dashboard"}
             className="lg:rounded-full lg:px-3 md:px-2 px-2 py-2 text-white hover:text-[#0F473C] inline hover:bg-[#F7F3E7] font-semibold"
@@ -79,7 +83,7 @@ const Menu: React.FC<MenuProps> = ({ items }) => {
           </Link>
         ) : null}
 
-        {userInfo?.userId ? (
+        {user ? (
           <h5
             onClick={() => handleLogOut()}
             className="lg:rounded-full lg:px-3 md:px-2 px-2 py-2 text-white hover:text-[#0F473C]  hover:bg-[#F7F3E7] font-semibold cursor-pointer"

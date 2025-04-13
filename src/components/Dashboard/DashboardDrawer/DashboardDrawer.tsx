@@ -13,9 +13,9 @@ import SideBar from "../SideBar/SideBar";
 import { Avatar, Badge, Stack } from "@mui/material";
 import AccountMenu from "../AccountMenu/AccountMenu";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import { useGetSingleUserQuery } from "@/redux/features/userApi";
+import { useGetMYProfileQuery } from "@/redux/features/myProfile";
 
-const drawerWidth = 240;
+const drawerWidth = 220;
 
 export default function DashboardDrawer({
   children,
@@ -40,8 +40,9 @@ export default function DashboardDrawer({
     }
   };
 
-  const { data, isLoading } = useGetSingleUserQuery({});
-  // console.log(data);
+  const { data, isLoading } = useGetMYProfileQuery({});
+
+  console.log("profile", data);
 
   return (
     <Box sx={{ display: "flex" }}>

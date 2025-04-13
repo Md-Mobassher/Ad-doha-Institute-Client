@@ -1,7 +1,8 @@
-import { authKey } from "@/constant/authkey";
+import { authAccessKey, authRefreshKey } from "@/constant/authkey";
 import setAccessToken from "@/services/actions/setAccessToken";
 import { getNewAccessToken } from "@/services/auth.services";
 import { IGenericErrorResponse } from "@/type";
+import { getCookie, removeCookie } from "@/utils/cookieHelper";
 import {
   getFromLocalStorage,
   setToLocalStorage,
@@ -20,41 +21,23 @@ const instance = axios.create({
 });
 
 let isRefreshing = false;
-let failedQueue: any[] = [];
-
-// Helper to process the queue
-const processQueue = (error: any, token: string | null = null) => {
-  failedQueue.forEach((prom) => {
-    if (token) {
-      prom.resolve(token);
-    } else {
-      prom.reject(error);
-    }
-  });
-
-  failedQueue = [];
-};
 
 // Request Interceptor
 instance.interceptors.request.use(
   function (config) {
-    // Do something before request is sent
-    const accessToken = getFromLocalStorage(authKey);
-
+    const accessToken = getCookie(authAccessKey);
     if (accessToken) {
       config.headers.Authorization = `${accessToken}`;
     }
     return config;
   },
   function (error) {
-    // Do something with request error
     return Promise.reject(error);
   }
 );
 
-// Add a response interceptor
+// Response Interceptor
 instance.interceptors.response.use(
-  //@ts-ignore
   function (response) {
     response.data = {
       success: response?.data?.success,
@@ -66,55 +49,24 @@ instance.interceptors.response.use(
     return response;
   },
   async function (error) {
-    const originalRequest = error.config;
+    console.log("instance", error);
+    if (error?.response?.status === 401 || error?.response?.status === 403) {
+      removeCookie(authAccessKey);
+      removeCookie(authRefreshKey);
 
-    // Handle 401 Unauthorized or 403 Forbidden
-    if (
-      (error?.response?.status === 401 || error?.response?.status === 403) &&
-      !originalRequest._retry
-    ) {
-      if (isRefreshing) {
-        return new Promise((resolve, reject) => {
-          failedQueue.push({ resolve, reject });
-        })
-          .then((token) => {
-            originalRequest.headers.Authorization = `${token}`;
-            return instance(originalRequest);
-          })
-          .catch((err) => {
-            return Promise.reject(err);
-          });
-      }
+      toast.error(
+        error?.response?.data?.message ||
+          "Unauthorized access. Please login again.",
+        { duration: 4000 }
+      );
 
-      originalRequest._retry = true;
-      isRefreshing = true;
-
-      try {
-        const response = await getNewAccessToken();
-        const newAccessToken = response?.data?.accessToken;
-
-        if (newAccessToken) {
-          setToLocalStorage(authKey, newAccessToken);
-          setAccessToken(newAccessToken);
-
-          instance.defaults.headers.Authorization = `${newAccessToken}`;
-          processQueue(null, newAccessToken);
-
-          return instance(originalRequest);
-        } else {
-          throw new Error("Failed to retrieve new access token");
-        }
-      } catch (refreshError) {
-        processQueue(refreshError, null);
-        removeFromLocalStorage(authKey);
+      setTimeout(() => {
         window.location.href = "/login";
-        return Promise.reject(refreshError);
-      } finally {
-        isRefreshing = false;
-      }
+      }, 1000);
+
+      return Promise.reject();
     }
 
-    // General Error Handling
     toast.error(error?.response?.data?.message || "Something went wrong!", {
       duration: 4000,
     });
@@ -124,7 +76,7 @@ instance.interceptors.response.use(
       message: error?.response?.data?.message || "Something went wrong!!!",
       errorMessages: error?.response?.data?.errorMessages || [],
     };
-
+    console.log("resobj", responseObject);
     return Promise.reject(responseObject);
   }
 );
