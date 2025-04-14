@@ -30,8 +30,8 @@ const VideoManagementPage = () => {
     page: paginationModel.page + 1,
     limit: paginationModel.pageSize,
   };
-  const { data, isLoading } = useGetAllVideosQuery({ ...query });
-  const [deleteVideo] = useDeleteVideoMutation();
+  const { data: videos, isLoading } = useGetAllVideosQuery({ ...query });
+  const [deleteVideo, { isLoading: isDeleting }] = useDeleteVideoMutation();
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
@@ -41,20 +41,12 @@ const VideoManagementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  if (!data) {
-    <p>No Data Found</p>;
-  }
-  const videos = data?.videos;
-  const meta = data?.meta;
-  // console.log(videos);
-
   const handleDelete = async () => {
-    // console.log(id);
     try {
       const res = await deleteVideo(deleteId).unwrap();
       // console.log(res);
-      if (res === null) {
-        toast.success("Video deleted successfully!!!");
+      if (res.success) {
+        toast.success(res?.message || "Video deleted successfully!!!");
       }
     } catch (err: any) {
       toast.error(err.message || "Failed to delete Video!!!");
@@ -103,7 +95,7 @@ const VideoManagementPage = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => setIsModalOpen(true)}>Create New Video</Button>
+        <Button onClick={() => setIsModalOpen(true)}>Create Video</Button>
         <CreateVideoModal open={isModalOpen} setOpen={setIsModalOpen} />
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -111,29 +103,28 @@ const VideoManagementPage = () => {
           placeholder="Search Video"
         />
       </Stack>
-      {!isLoading ? (
-        <Box
-          my={2}
-          sx={{
-            overflow: "auto",
-          }}
-        >
-          <DataGrid
-            rows={videos}
-            columns={columns}
-            getRowId={(row) => row._id}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            rowCount={meta?.total || 0}
-            paginationMode="server"
-            loading={isLoading}
-            pageSizeOptions={[25, 50, 100]}
-          />
-        </Box>
-      ) : (
-        <LoadingPage />
-      )}
+
+      <Box
+        my={2}
+        sx={{
+          overflow: "auto",
+        }}
+      >
+        <DataGrid
+          rows={videos?.data || []}
+          columns={columns}
+          getRowId={(row) => row._id}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          rowCount={videos?.meta?.total || 0}
+          paginationMode="server"
+          loading={isLoading || isDeleting}
+          pageSizeOptions={[25, 50, 100]}
+        />
+      </Box>
+
       <DeleteModal
+        loading={isDeleting}
         open={deleteModalOpen}
         setOpen={setDeleteModalOpen}
         onDeleteConfirm={handleDelete}

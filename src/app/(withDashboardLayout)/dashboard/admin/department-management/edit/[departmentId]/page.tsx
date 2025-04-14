@@ -1,6 +1,7 @@
 "use client";
 
 import LoadingPage from "@/app/loading";
+import SubmitButton from "@/components/common/SubmitButton";
 import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
@@ -24,14 +25,14 @@ type TParams = {
 const DepartmentUpdatePage = ({ params }: TParams) => {
   const unwrappedParams = use(params);
   const router = useRouter();
-  const { data, isLoading, refetch } = useGetSingleAcademicDepartmentQuery(
+  const { data: department, isLoading } = useGetSingleAcademicDepartmentQuery(
     unwrappedParams?.departmentId
   );
   const [updateDepartment, { isLoading: updating }] =
     useUpdateAcademicDepartmentMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    let imageUrl = data?.image || "";
+    let imageUrl = department?.data?.image || "";
     if (values.file) {
       imageUrl = await uploadImageToCloudinary(values.file);
       if (!imageUrl) {
@@ -44,17 +45,16 @@ const DepartmentUpdatePage = ({ params }: TParams) => {
       image: imageUrl,
       position: Number(values.position),
     };
-    console.log("updated", updatedData);
 
     try {
-      const res = await updateDepartment({ id, updatedData });
-      console.log(res);
+      const res = await updateDepartment({ id, updatedData }).unwrap();
+      // console.log(res);
 
-      if (res?.data?._id) {
+      if (res?.success) {
         toast.success(
-          res?.data?.message || "Academic Department Updated Successfully!!!"
+          res?.message || "Academic Department Updated Successfully!!!"
         );
-        await refetch();
+
         router.push("/dashboard/admin/department-management");
       } else {
         toast.error(
@@ -67,9 +67,9 @@ const DepartmentUpdatePage = ({ params }: TParams) => {
   };
 
   const defaultValues = {
-    name: data?.name || "",
-    position: data?.position || "",
-    image: data?.image || "",
+    name: department?.data?.name || "",
+    position: department?.data?.position || "",
+    image: department?.data?.image || "",
   };
 
   return (
@@ -139,27 +139,7 @@ const DepartmentUpdatePage = ({ params }: TParams) => {
                 />
               </Grid>
             </Grid>
-            {updating ? (
-              <Button
-                disabled
-                fullWidth
-                sx={{
-                  margin: "16px 0px",
-                }}
-              >
-                <CircularProgress thickness={6} />;
-              </Button>
-            ) : (
-              <Button
-                sx={{
-                  margin: "16px 0px",
-                }}
-                fullWidth
-                type="submit"
-              >
-                Update Department
-              </Button>
-            )}
+            <SubmitButton label="Update Department" loading={updating} isEdit />
           </DohaForm>
         </Box>
       )}

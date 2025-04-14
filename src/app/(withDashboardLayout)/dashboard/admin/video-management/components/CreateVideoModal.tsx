@@ -24,12 +24,15 @@ const CreateVideoModal = ({ open, setOpen }: TProps) => {
     try {
       const res = await createVideo(newVideo).unwrap();
       // console.log(res);
-      if (res?._id) {
-        toast.success("Video created successfully!!!");
+      if (res?.success) {
+        toast.success(res?.message || "Video created successfully!!!");
         setOpen(false);
+      } else {
+        toast.error(res?.message || "Failed to update video!!!");
       }
     } catch (err: any) {
-      console.error(err);
+      // console.error(err);
+      toast.error(err?.message || "Failed to update video!!!");
     }
   };
 

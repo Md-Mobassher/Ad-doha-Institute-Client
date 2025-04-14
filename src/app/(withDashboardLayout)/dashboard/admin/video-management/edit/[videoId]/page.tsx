@@ -1,8 +1,10 @@
 "use client";
 
 import LoadingPage from "@/app/loading";
+import SubmitButton from "@/components/common/SubmitButton";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
+import Title from "@/components/ui/Title";
 import {
   useGetSingleVideoQuery,
   useUpdateVideoMutation,
@@ -22,7 +24,7 @@ type TParams = {
 const VideoUpdatePage = ({ params }: TParams) => {
   const unwrappedParams = use(params);
   const router = useRouter();
-  const { data, isLoading, refetch } = useGetSingleVideoQuery(
+  const { data: video, isLoading } = useGetSingleVideoQuery(
     unwrappedParams?.videoId
   );
   const [updateVideo, { isLoading: updating }] = useUpdateVideoMutation();
@@ -39,20 +41,22 @@ const VideoUpdatePage = ({ params }: TParams) => {
       const res = await updateVideo({ id, updatedData }).unwrap();
       // console.log(res);
 
-      if (res?._id) {
+      if (res?.success) {
         toast.success(res.message || "Video Updated Successfully!!!");
-        await refetch();
         router.push("/dashboard/admin/video-management");
+      } else {
+        toast.error(res.message || "Failed to update Video!!!");
       }
     } catch (err: any) {
-      console.error(err);
+      // console.error(err);
+      toast.error(err.message || "Failed to update Video!!!");
     }
   };
 
   const defaultValues = {
-    title: data?.title || "",
-    url: data?.url || "",
-    position: data?.position || "",
+    title: video?.data?.title || "",
+    url: video?.data?.url || "",
+    position: video?.data?.position || "",
   };
 
   return (
@@ -76,16 +80,7 @@ const VideoUpdatePage = ({ params }: TParams) => {
             borderRadius: "10px",
           }}
         >
-          <Typography
-            component="h4"
-            variant="h4"
-            mb={3}
-            fontWeight={600}
-            textAlign="center"
-            color={"primary.main"}
-          >
-            Update Video Info
-          </Typography>
+          <Title title="Update Video" />
 
           <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
             <Grid container spacing={3} my={1}>
@@ -115,27 +110,7 @@ const VideoUpdatePage = ({ params }: TParams) => {
                 />
               </Grid>
             </Grid>
-            {updating ? (
-              <Button
-                disabled
-                fullWidth
-                sx={{
-                  margin: "16px 0px",
-                }}
-              >
-                <CircularProgress thickness={6} />;
-              </Button>
-            ) : (
-              <Button
-                sx={{
-                  margin: "16px 0px",
-                }}
-                fullWidth
-                type="submit"
-              >
-                Update Video
-              </Button>
-            )}
+            <SubmitButton label="Update Video" loading={updating} isEdit />
           </DohaForm>
         </Box>
       )}
