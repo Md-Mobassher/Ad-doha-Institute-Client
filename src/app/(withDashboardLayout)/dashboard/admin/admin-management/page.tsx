@@ -37,11 +37,9 @@ const AdminManagementPage = () => {
   if (!!debouncedTerm) {
     query["searchTerm"] = searchTerm;
   }
-  const { data, isLoading } = useGetAllAdminQuery({ ...query });
+  const { data: admins, isLoading } = useGetAllAdminQuery({ ...query });
   const [deleteAdmin] = useDeleteAdminMutation();
 
-  const admins = data?.admins;
-  const meta = data?.meta;
   // console.log(data);
 
   const handleDelete = async () => {
@@ -148,11 +146,11 @@ const AdminManagementPage = () => {
           }}
         >
           <DataGrid
-            rows={admins}
+            rows={admins?.data}
             columns={columns}
             paginationModel={paginationModel}
             onPaginationModelChange={setPaginationModel}
-            rowCount={meta?.total || 0}
+            rowCount={admins?.meta?.total || 0}
             paginationMode="server"
             loading={isLoading}
             pageSizeOptions={[25, 50, 100]}

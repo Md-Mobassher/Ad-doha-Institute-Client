@@ -19,12 +19,12 @@ const coursesApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      transformResponse: (response: TCourse[], meta: IMeta) => {
-        return {
-          courses: response,
-          meta,
-        };
-      },
+      // transformResponse: (response: TCourse[], meta: IMeta) => {
+      //   return {
+      //     courses: response,
+      //     meta,
+      //   };
+      // },
       providesTags: [tagTypes.course],
     }),
 

@@ -1,13 +1,6 @@
 import { authAccessKey, authRefreshKey } from "@/constant/authkey";
-import setAccessToken from "@/services/actions/setAccessToken";
-import { getNewAccessToken } from "@/services/auth.services";
 import { IGenericErrorResponse } from "@/type";
 import { getCookie, removeCookie } from "@/utils/cookieHelper";
-import {
-  getFromLocalStorage,
-  setToLocalStorage,
-  removeFromLocalStorage,
-} from "@/utils/local-storage";
 import axios from "axios";
 import { toast } from "sonner";
 
@@ -19,8 +12,6 @@ const instance = axios.create({
   },
   timeout: 60000,
 });
-
-let isRefreshing = false;
 
 // Request Interceptor
 instance.interceptors.request.use(
@@ -41,15 +32,15 @@ instance.interceptors.response.use(
   function (response) {
     response.data = {
       success: response?.data?.success,
-      statusCode: response?.data?.statusCode,
+      statusCode: response?.status,
       message: response?.data?.message,
       data: response?.data?.data,
       meta: response?.data?.meta,
     };
+
     return response;
   },
   async function (error) {
-    console.log("instance", error);
     if (error?.response?.status === 401 || error?.response?.status === 403) {
       removeCookie(authAccessKey);
       removeCookie(authRefreshKey);
@@ -76,7 +67,7 @@ instance.interceptors.response.use(
       message: error?.response?.data?.message || "Something went wrong!!!",
       errorMessages: error?.response?.data?.errorMessages || [],
     };
-    console.log("resobj", responseObject);
+    console.log("instance", responseObject);
     return Promise.reject(responseObject);
   }
 );

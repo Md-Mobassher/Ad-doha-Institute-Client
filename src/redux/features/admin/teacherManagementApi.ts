@@ -20,12 +20,12 @@ const teachersApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      transformResponse: (response: IDepartment[], meta: IMeta) => {
-        return {
-          departments: response,
-          meta,
-        };
-      },
+      // transformResponse: (response: IDepartment[], meta: IMeta) => {
+      //   return {
+      //     departments: response,
+      //     meta,
+      //   };
+      // },
       providesTags: [tagTypes.teacher],
     }),
 

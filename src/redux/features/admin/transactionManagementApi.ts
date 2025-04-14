@@ -19,12 +19,12 @@ const transactionApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      transformResponse: (response: ITransaction[], meta: IMeta) => {
-        return {
-          Transactions: response,
-          meta,
-        };
-      },
+      // transformResponse: (response: ITransaction[], meta: IMeta) => {
+      //   return {
+      //     Transactions: response,
+      //     meta,
+      //   };
+      // },
       providesTags: [tagTypes.transaction],
     }),
 

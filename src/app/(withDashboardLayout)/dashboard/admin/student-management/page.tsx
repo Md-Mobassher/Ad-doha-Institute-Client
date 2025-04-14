@@ -40,12 +40,9 @@ const StudentManagementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  const { data, isLoading } = useGetAllStudentsQuery({ ...query });
+  // mutation
+  const { data: students, isLoading } = useGetAllStudentsQuery({ ...query });
   const [deleteStudent] = useDeleteStudentMutation();
-
-  const students = data?.students;
-  const meta = data?.meta;
-  // console.log(students);
 
   const handleDelete = async () => {
     // console.log(id);
@@ -137,11 +134,11 @@ const StudentManagementPage = () => {
           }}
         >
           <DataGrid
-            rows={students}
+            rows={students?.data || []}
             columns={columns}
             paginationModel={paginationModel}
             onPaginationModelChange={setPaginationModel}
-            rowCount={meta?.total || 0}
+            rowCount={students?.meta?.total || 0}
             paginationMode="server"
             loading={isLoading}
             pageSizeOptions={[25, 50, 100]}

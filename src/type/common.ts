@@ -76,6 +76,9 @@ export interface DrawerItem {
 }
 
 export type ResponseSuccessType = {
+  success?: boolean;
+  message?: string;
+  statusCode?: number;
   data: any;
   meta?: IMeta;
 };

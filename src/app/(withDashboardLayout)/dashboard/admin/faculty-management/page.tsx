@@ -41,12 +41,9 @@ const FacultyManagementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  const { data, isLoading } = useGetAllFacultyQuery({ ...query });
+  /* mutation */
+  const { data: faculties, isLoading } = useGetAllFacultyQuery({ ...query });
   const [deleteFaculty] = useDeleteFacultyMutation();
-
-  const faculties = data?.faculties;
-  const meta = data?.meta;
-  // console.log(faculties);
 
   const handleDelete = async () => {
     // console.log(id);
@@ -138,11 +135,11 @@ const FacultyManagementPage = () => {
           }}
         >
           <DataGrid
-            rows={faculties}
+            rows={faculties?.data || []}
             columns={columns}
             paginationModel={paginationModel}
             onPaginationModelChange={setPaginationModel}
-            rowCount={meta?.total || 0}
+            rowCount={faculties?.meta?.total || 0}
             paginationMode="server"
             loading={isLoading}
             pageSizeOptions={[25, 50, 100]}

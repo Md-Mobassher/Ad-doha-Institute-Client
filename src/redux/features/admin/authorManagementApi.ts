@@ -19,12 +19,12 @@ const authorsApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      transformResponse: (response: IAuthor[], meta: IMeta) => {
-        return {
-          Authors: response,
-          meta,
-        };
-      },
+      // transformResponse: (response: IAuthor[], meta: IMeta) => {
+      //   return {
+      //     Authors: response,
+      //     meta,
+      //   };
+      // },
       providesTags: [tagTypes.author],
     }),
 

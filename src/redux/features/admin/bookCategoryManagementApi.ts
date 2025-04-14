@@ -20,12 +20,12 @@ const BookcategoryCategoryApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      transformResponse: (response: TBookcategory[], meta: IMeta) => {
-        return {
-          Bookcategorys: response,
-          meta,
-        };
-      },
+      // transformResponse: (response: TBookcategory[], meta: IMeta) => {
+      //   return {
+      //     Bookcategorys: response,
+      //     meta,
+      //   };
+      // },
       providesTags: [tagTypes.bookcategory],
     }),
 

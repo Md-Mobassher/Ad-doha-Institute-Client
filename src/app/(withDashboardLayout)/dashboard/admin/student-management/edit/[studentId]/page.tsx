@@ -1,6 +1,7 @@
 "use client";
 
 import LoadingPage from "@/app/loading";
+import SubmitButton from "@/components/common/SubmitButton";
 import DohaDatePicker from "@/components/form/DohaDatePicker";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
@@ -17,6 +18,7 @@ import { useRouter } from "next/navigation";
 import { use } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
+import Title from "@/components/ui/Title";
 
 type TParams = {
   params: Promise<{
@@ -28,10 +30,10 @@ const StudentUpdatePage = ({ params }: TParams) => {
   const unwrappedParams = use(params);
   const router = useRouter();
 
-  const { data, isLoading, refetch } = useGetSingleStudentQuery(
+  const { data: student, isLoading } = useGetSingleStudentQuery(
     unwrappedParams?.studentId
   );
-  const [updateStudent] = useUpdateStudentMutation();
+  const [updateStudent, { isLoading: isEditing }] = useUpdateStudentMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
     values.student.dateOfBirth = dateFormatter(values.student.dateOfBirth);
@@ -44,9 +46,8 @@ const StudentUpdatePage = ({ params }: TParams) => {
       }).unwrap();
       // console.log(res);
 
-      if (res?.id) {
+      if (res?.success) {
         toast.success(res.message || "Student Updated Successfully!!!");
-        await refetch();
         router.push("/dashboard/admin/student-management");
       }
     } catch (err: any) {
@@ -57,40 +58,31 @@ const StudentUpdatePage = ({ params }: TParams) => {
   const defaultValues = {
     student: {
       name: {
-        firstName: data?.name?.firstName || "",
-        middleName: data?.name?.middleName || "",
-        lastName: data?.name?.lastName || "",
+        firstName: student?.data?.name?.firstName || "",
+        lastName: student?.data?.name?.lastName || "",
       },
-      id: data?.id || "",
-      email: data?.email || "",
-      gender: data?.gender || "",
-      dateOfBirth: dayjs(data?.dateOfBirth) || "",
-      contactNo: data?.contactNo || "",
-      emergencyContactNo: data?.emergencyContactNo || "",
-      bloodGroup: data?.bloodGroup || "",
-      presentAddress: data?.presentAddress || "",
-      permanentAddress: data?.permanentAddress || "",
+      id: student?.data?.id || "",
+      email: student?.data?.email || "",
+      gender: student?.data?.gender || "",
+      dateOfBirth: dayjs(student?.data?.dateOfBirth) || "",
+      contactNo: student?.data?.contactNo || "",
+      emergencyContactNo: student?.data?.emergencyContactNo || "",
+      bloodGroup: student?.data?.bloodGroup || "",
+      presentAddress: student?.data?.presentAddress || "",
+      permanentAddress: student?.data?.permanentAddress || "",
     },
   };
 
   return (
-    <Box>
-      <Typography
-        component="h4"
-        variant="h4"
-        my={2}
-        fontWeight={600}
-        textAlign="center"
-        color={"primary.main"}
-      >
-        Update Student Info
-      </Typography>
+    <Box py={1}>
+      <Title title="Update Student Info" />
+
       {isLoading ? (
         <LoadingPage />
       ) : (
         <DohaForm
           onSubmit={handleFormSubmit}
-          defaultValues={data && defaultValues}
+          defaultValues={student && defaultValues}
         >
           <Grid container spacing={3} my={1}>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -102,15 +94,7 @@ const StudentUpdatePage = ({ params }: TParams) => {
                 required
               />
             </Grid>
-            <Grid item lg={4} md={6} sm={6} xs={12}>
-              <DohaInput
-                label="Middle Name"
-                fullWidth={true}
-                type="text"
-                name="student.name.middleName"
-                required
-              />
-            </Grid>
+
             <Grid item lg={4} md={6} sm={6} xs={12}>
               <DohaInput
                 label="Last Name"
@@ -202,15 +186,7 @@ const StudentUpdatePage = ({ params }: TParams) => {
               />
             </Grid>
           </Grid>
-          <Button
-            sx={{
-              margin: "16px 0px",
-            }}
-            fullWidth={true}
-            type="submit"
-          >
-            Update Student
-          </Button>
+          <SubmitButton label="Update Student" loading={isEditing} isEdit />
         </DohaForm>
       )}
     </Box>

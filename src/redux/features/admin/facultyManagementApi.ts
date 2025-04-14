@@ -21,12 +21,12 @@ const facultiesApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      transformResponse: (response: TFaculty[], meta: IMeta) => {
-        return {
-          faculties: response,
-          meta,
-        };
-      },
+      // transformResponse: (response: TFaculty[], meta: IMeta) => {
+      //   return {
+      //     faculties: response,
+      //     meta,
+      //   };
+      // },
       providesTags: [tagTypes.faculty],
     }),
 

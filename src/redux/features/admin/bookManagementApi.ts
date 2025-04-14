@@ -19,12 +19,12 @@ const booksApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      transformResponse: (response: TBook[], meta: IMeta) => {
-        return {
-          books: response,
-          meta,
-        };
-      },
+      // transformResponse: (response: TBook[], meta: IMeta) => {
+      //   return {
+      //     books: response,
+      //     meta,
+      //   };
+      // },
       providesTags: [tagTypes.book],
     }),
 

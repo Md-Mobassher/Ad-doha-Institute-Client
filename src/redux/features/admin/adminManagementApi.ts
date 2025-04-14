@@ -1,7 +1,5 @@
 import { baseApi } from "@/redux/api/baseApi";
 import { tagTypes } from "../../tag-Types";
-import { TAdmin } from "@/type/admin";
-import { IMeta } from "@/type";
 
 const adminsApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -20,12 +18,12 @@ const adminsApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      transformResponse: (response: TAdmin[], meta: IMeta) => {
-        return {
-          admins: response,
-          meta,
-        };
-      },
+      // transformResponse: (response: TAdmin[], meta: IMeta) => {
+      //   return {
+      //     admins: response,
+      //     meta,
+      //   };
+      // },
       providesTags: [tagTypes.admin],
     }),
 

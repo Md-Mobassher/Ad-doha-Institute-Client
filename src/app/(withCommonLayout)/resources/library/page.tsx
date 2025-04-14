@@ -6,7 +6,7 @@ import { useGetAllAuthorsQuery } from "@/redux/features/admin/authorManagementAp
 import { useGetAllBookcategorysQuery } from "@/redux/features/admin/bookCategoryManagementApi";
 import { useGetAllBooksQuery } from "@/redux/features/admin/bookManagementApi";
 import { useDebounced } from "@/redux/hooks";
-import { IAuthor, TBookcategory } from "@/type";
+import { IAuthor, TBook, TBookcategory } from "@/type";
 import { Delete } from "@mui/icons-material";
 import {
   Box,
@@ -28,21 +28,21 @@ import NotMatch from "@/components/ui/NotMatch";
 const BooksPage = () => {
   const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const { data: categories, isLoading: categoryLoading } =
-    useGetAllBookcategorysQuery({});
-  const { data: authors, isLoading: authorLoading } = useGetAllAuthorsQuery({});
+  const [filter, setFilter] = useState<Record<string, any>>({});
+  const [selectedItem, setSelectedItem] = useState<string>("");
   const [paginationModel, setPaginationModel] = useState({
     page: 1,
     pageSize: 12,
   });
 
-  const [filter, setFilter] = useState<Record<string, any>>({});
-  const [selectedItem, setSelectedItem] = useState<string>("");
-
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
   });
+
+  const { data: categories, isLoading: categoryLoading } =
+    useGetAllBookcategorysQuery({});
+  const { data: authors, isLoading: authorLoading } = useGetAllAuthorsQuery({});
 
   const handlePaginationChange = (
     event: React.ChangeEvent<unknown>,
@@ -143,7 +143,7 @@ const BooksPage = () => {
                 <Typography variant="h6">CATEGORIES</Typography>
                 <Divider />
                 <ul className="space-y-1 mt-3 max-h-[250px] overflow-y-auto mb-4">
-                  {categories?.Bookcategorys?.map((category: TBookcategory) => (
+                  {categories?.data?.map((category: TBookcategory) => (
                     <li key={category._id} className="flex items-center">
                       <Radio
                         size="medium"
@@ -171,7 +171,7 @@ const BooksPage = () => {
                 <Typography variant="h6">AUTHORS</Typography>
                 <Divider />
                 <ul className="space-y-1 mt-3 max-h-[250px] overflow-y-auto mb-5">
-                  {authors?.Authors?.map((author: IAuthor) => (
+                  {authors?.data?.map((author: IAuthor) => (
                     <li key={author._id} className="flex items-center">
                       <Radio
                         size="medium"
@@ -202,7 +202,7 @@ const BooksPage = () => {
               <Typography variant="h6">CATEGORIES</Typography>
               <Divider />
               <ul className="space-y-1 mt-3 max-h-[250px] overflow-y-auto mb-4">
-                {categories?.Bookcategorys?.map((category: TBookcategory) => (
+                {categories?.data?.map((category: TBookcategory) => (
                   <li key={category._id} className="flex items-center">
                     <Radio
                       size="medium"
@@ -230,7 +230,7 @@ const BooksPage = () => {
               <Typography variant="h6">AUTHORS</Typography>
               <Divider />
               <ul className="space-y-1 mt-3 max-h-[250px] overflow-y-auto mb-5">
-                {authors?.Authors?.map((author: IAuthor) => (
+                {authors?.data?.map((author: IAuthor) => (
                   <li key={author._id} className="flex items-center">
                     <Radio
                       size="medium"
@@ -264,9 +264,9 @@ const BooksPage = () => {
 
           {/* Content */}
           <main className="flex-1">
-            {books && books?.books?.length > 0 ? (
+            {books && books?.data?.length > 0 ? (
               <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6 min-h-[300px]">
-                {books?.books?.map((book) => (
+                {books?.data?.map((book: TBook) => (
                   <a
                     key={book._id}
                     href={book?.url}

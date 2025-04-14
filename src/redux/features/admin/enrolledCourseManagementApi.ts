@@ -28,12 +28,12 @@ const enrolledCoursesApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      transformResponse: (response: IEnrolledCourse[], meta: IMeta) => {
-        return {
-          EnrolledCourses: response,
-          meta,
-        };
-      },
+      // transformResponse: (response: IEnrolledCourse[], meta: IMeta) => {
+      //   return {
+      //     EnrolledCourses: response,
+      //     meta,
+      //   };
+      // },
       providesTags: [tagTypes.enrolledCourse],
     }),
 

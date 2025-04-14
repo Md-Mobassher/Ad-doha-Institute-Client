@@ -3,7 +3,7 @@ import LoadingPage from "@/app/loading";
 import DohaContainer from "@/components/ui/DohaContainer";
 import Title from "@/components/ui/Title";
 import { useDebounced } from "@/redux/hooks";
-import { IDepartment } from "@/type";
+import { IDepartment, IOfferedCourse, TCourse } from "@/type";
 import { Delete } from "@mui/icons-material";
 import {
   Box,
@@ -27,24 +27,46 @@ import DohaButton from "@/components/ui/DohaButton";
 import CoursePrice from "./components/CoursePrice";
 import NotMatch from "@/components/ui/NotMatch";
 import { useGetAllOfferedCoursesQuery } from "@/redux/features/admin/offeredCourseManagementApi";
+import { useGetAllCoursesQuery } from "@/redux/features/admin/courseManagementApi";
 
 const CoursePage = () => {
   const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const { data: departments, isLoading: departmentsLoading } =
-    useGetAllAcademicDepartmentsQuery({});
+  const [filter, setFilter] = useState<Record<string, any>>({});
+  const [selectedItem, setSelectedItem] = useState<string>("");
   const [paginationModel, setPaginationModel] = useState({
     page: 1,
     pageSize: 9,
   });
 
-  const [filter, setFilter] = useState<Record<string, any>>({});
-  const [selectedItem, setSelectedItem] = useState<string>("");
-
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
   });
+
+  // Build query dynamically
+  const query = useMemo(() => {
+    const queryObj: Record<string, any> = {
+      page: paginationModel.page,
+      limit: paginationModel.pageSize,
+    };
+
+    if (debouncedTerm) {
+      queryObj["searchTerm"] = debouncedTerm;
+    }
+
+    if (filter.department) {
+      queryObj["academicDepartment"] = filter?.department;
+    }
+
+    return queryObj;
+  }, [paginationModel, debouncedTerm, filter]);
+
+  const { data: departments, isLoading: departmentsLoading } =
+    useGetAllAcademicDepartmentsQuery({});
+
+  const { data: courses, isLoading: coursesLoading } =
+    useGetAllOfferedCoursesQuery(query);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -75,27 +97,6 @@ const CoursePage = () => {
   const handleToggleSidebar = () => {
     setSidebarOpen((prev) => !prev);
   };
-
-  // Build query dynamically
-  const query = useMemo(() => {
-    const queryObj: Record<string, any> = {
-      page: paginationModel.page,
-      limit: paginationModel.pageSize,
-    };
-
-    if (debouncedTerm) {
-      queryObj["searchTerm"] = debouncedTerm;
-    }
-
-    if (filter.department) {
-      queryObj["academicDepartment"] = filter?.department;
-    }
-
-    return queryObj;
-  }, [paginationModel, debouncedTerm, filter]);
-
-  const { data: courses, isLoading: coursesLoading } =
-    useGetAllOfferedCoursesQuery(query);
 
   if (departmentsLoading || coursesLoading) return <LoadingPage />;
 
@@ -153,7 +154,7 @@ const CoursePage = () => {
                 <Divider />
                 <ul className="space-y-1 mt-3 max-h-[250px] overflow-y-auto mb-4">
                   {departments &&
-                    departments?.departments?.map((department: IDepartment) => (
+                    departments?.data?.map((department: IDepartment) => (
                       <li key={department?._id} className="flex items-center">
                         <Radio
                           size="medium"
@@ -213,7 +214,7 @@ const CoursePage = () => {
               <Divider />
               <ul className="space-y-1 mt-3 max-h-[250px] overflow-y-auto mb-4">
                 {departments &&
-                  departments?.departments?.map((department: IDepartment) => (
+                  departments?.data?.map((department: IDepartment) => (
                     <li key={department._id} className="flex items-center">
                       <Radio
                         size="medium"
@@ -247,9 +248,9 @@ const CoursePage = () => {
 
           {/* Content */}
           <main className="flex-1">
-            {courses && courses?.offeredCourses?.length > 0 ? (
+            {courses && courses?.length > 0 ? (
               <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 min-h-[300px]">
-                {courses?.offeredCourses?.map((course) => (
+                {courses?.data?.map((course: IOfferedCourse) => (
                   <Card
                     key={course?._id}
                     sx={{

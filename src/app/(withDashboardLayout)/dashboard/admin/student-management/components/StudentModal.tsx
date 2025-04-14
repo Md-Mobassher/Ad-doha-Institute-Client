@@ -1,3 +1,4 @@
+import SubmitButton from "@/components/common/SubmitButton";
 import DohaDatePicker from "@/components/form/DohaDatePicker";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
@@ -19,15 +20,17 @@ const CreateStudentModal = ({ open, setOpen }: TProps) => {
   const [createStudent, { isLoading }] = useCreateStudentMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    values.student.dateOfBirth = dateFormatter(values.student.dateOfBirth);
-    // console.log("Form Values:", values);
+    values.student.dateOfBirth = values.student.dateOfBirth
+      ? dateFormatter(values.student.dateOfBirth)
+      : "";
+    console.log("Form Values:", values);
 
     try {
       const res = await createStudent(values).unwrap();
-      // console.log(res);
+      console.log(res);
 
-      if (res[0]?.id) {
-        toast.success("Student Created Successfully!!!");
+      if (res?.success) {
+        toast.success(res.message || "Student Created Successfully!!!");
         setOpen(false);
       }
     } catch (err: any) {
@@ -40,7 +43,6 @@ const CreateStudentModal = ({ open, setOpen }: TProps) => {
     student: {
       name: {
         firstName: "",
-        middleName: "",
         lastName: "",
       },
       email: "",
@@ -71,15 +73,7 @@ const CreateStudentModal = ({ open, setOpen }: TProps) => {
               required
             />
           </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaInput
-              label="Middle Name"
-              fullWidth={true}
-              type="text"
-              name="student.name.middleName"
-              required
-            />
-          </Grid>
+
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
               label="Last Name"
@@ -115,7 +109,6 @@ const CreateStudentModal = ({ open, setOpen }: TProps) => {
               fullWidth={true}
               name="student.gender"
               sx={{ textAlign: "start" }}
-              required
             />
           </Grid>
 
@@ -128,7 +121,6 @@ const CreateStudentModal = ({ open, setOpen }: TProps) => {
               type="number"
               fullWidth={true}
               name="student.contactNo"
-              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -137,7 +129,6 @@ const CreateStudentModal = ({ open, setOpen }: TProps) => {
               type="number"
               fullWidth={true}
               name="student.emergencyContactNo"
-              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -147,7 +138,6 @@ const CreateStudentModal = ({ open, setOpen }: TProps) => {
               fullWidth={true}
               name="student.bloodGroup"
               sx={{ textAlign: "start" }}
-              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -156,7 +146,6 @@ const CreateStudentModal = ({ open, setOpen }: TProps) => {
               type="text"
               fullWidth={true}
               name="student.presentAddress"
-              required
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -165,20 +154,11 @@ const CreateStudentModal = ({ open, setOpen }: TProps) => {
               type="text"
               fullWidth={true}
               name="student.permanentAddress"
-              required
             />
           </Grid>
         </Grid>
-        <Button
-          sx={{
-            margin: "16px 0px",
-          }}
-          fullWidth={true}
-          type="submit"
-          disabled={isLoading}
-        >
-          Create A New Student
-        </Button>
+
+        <SubmitButton label="Create Student" loading={isLoading} />
       </DohaForm>
     </DohaFullScreenModal>
   );
