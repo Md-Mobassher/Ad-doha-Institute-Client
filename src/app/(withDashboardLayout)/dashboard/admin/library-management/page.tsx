@@ -1,19 +1,12 @@
 "use client";
 
-import {
-  Button,
-  IconButton,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, IconButton, Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Link from "next/link";
-import LoadingPage from "@/app/loading";
 import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
 import {
@@ -48,26 +41,21 @@ const BookManagementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  const { data, isLoading } = useGetAllBooksQuery({ ...query });
-  const [deleteBook] = useDeleteBookMutation();
-  // console.log(data);
-  if (!data) {
-    <p>No Data Found</p>;
-  }
-  const books = data?.books;
-  const meta = data?.meta;
+  const { data: books, isLoading } = useGetAllBooksQuery({ ...query });
+  const [deleteBook, { isLoading: isDeleting }] = useDeleteBookMutation();
 
   const handleDelete = async () => {
-    // console.log(id);
     try {
       const res = await deleteBook(deleteId).unwrap();
-
       // console.log(res);
-      if (res?.id) {
-        toast.success("Book deleted successfully!!!");
+      if (res?.success) {
+        toast.success(res?.message || "Book deleted successfully!!!");
+      } else {
+        toast.error(res?.message || "Failed to delete book!!!");
       }
     } catch (err: any) {
-      console.error(err.message);
+      // console.error(err.message);
+      toast.error(err?.message || "Failed to delete book!!!");
     }
   };
 
@@ -140,7 +128,7 @@ const BookManagementPage = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => setIsModalOpen(true)}>Create New Book</Button>
+        <Button onClick={() => setIsModalOpen(true)}>Create Book</Button>
         <CreateBookModal open={isModalOpen} setOpen={setIsModalOpen} />
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -148,29 +136,27 @@ const BookManagementPage = () => {
           placeholder="Search Book"
         />
       </Stack>
-      {!isLoading ? (
-        <Box
-          my={2}
-          sx={{
-            overflow: "auto",
-          }}
-        >
-          <DataGrid
-            rows={books}
-            columns={columns}
-            getRowId={(row) => row._id}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            rowCount={meta?.total || 0}
-            paginationMode="server"
-            loading={isLoading}
-            pageSizeOptions={[25, 50, 100]}
-          />
-        </Box>
-      ) : (
-        <LoadingPage />
-      )}
+      <Box
+        my={2}
+        sx={{
+          overflow: "auto",
+        }}
+      >
+        <DataGrid
+          rows={books?.data || []}
+          columns={columns}
+          getRowId={(row) => row._id}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          rowCount={books?.meta?.total || 0}
+          paginationMode="server"
+          loading={isLoading || isDeleting}
+          pageSizeOptions={[25, 50, 100]}
+        />
+      </Box>
+
       <DeleteModal
+        loading={isDeleting}
         open={deleteModalOpen}
         setOpen={setDeleteModalOpen}
         onDeleteConfirm={handleDelete}

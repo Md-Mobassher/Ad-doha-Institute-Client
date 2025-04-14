@@ -1,13 +1,10 @@
 "use client";
 
-import { Button, IconButton, Stack, TextField } from "@mui/material";
+import { Button, Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import Link from "next/link";
-import LoadingPage from "@/app/loading";
+import avatar from "@/assets/avatar.webp";
 import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
@@ -15,15 +12,16 @@ import {
   useDeleteAuthorMutation,
   useGetAllAuthorsQuery,
 } from "@/redux/features/admin/authorManagementApi";
-import CreateAuthorModal from "./components/CreateAuthorModal";
+import AuthorModal from "./AuthorModal";
 import { Facebook, Instagram, LinkedIn, Twitter } from "@mui/icons-material";
 import DeleteModal from "@/components/common/DeletModal";
+import EditDeleteButton from "@/components/common/EditDeleteButton";
 
 const AuthorManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [deleteId, setDeleteId] = useState<string>("");
+  const [selectedData, setSelectedData] = useState<any>({});
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
     page: 0,
     pageSize: 25,
@@ -40,28 +38,42 @@ const AuthorManagementPage = () => {
   if (!!debouncedTerm) {
     query["searchTerm"] = searchTerm;
   }
-
-  const { data, isLoading } = useGetAllAuthorsQuery({ ...query });
-  const [deleteAuthor] = useDeleteAuthorMutation();
-  // console.log(data);
-  if (!data) {
-    <p>No Data Found</p>;
-  }
-  const Authors = data?.Authors;
-  const meta = data?.meta;
+  const { data: authors, isLoading } = useGetAllAuthorsQuery({ ...query });
+  const [deleteAuthor, { isLoading: isDeleting }] = useDeleteAuthorMutation();
 
   const handleDelete = async () => {
     try {
-      const res = await deleteAuthor(deleteId).unwrap();
+      const res = await deleteAuthor(selectedData?._id).unwrap();
       // console.log(res);
-      if (res === null) {
-        toast.success("Author deleted successfully!!!");
-        setDeleteId("");
+      if (res?.success) {
+        toast.success(res?.message || "Author deleted successfully!!!");
+        setSelectedData(null);
+      } else {
+        toast.error(res.message || "Failed to delete Author!!!");
       }
     } catch (err: any) {
       toast.error(err.message || "Failed to delete Author!!!");
-      setDeleteId("");
+      setSelectedData(null);
     }
+  };
+
+  // Add Modal Open
+  const openAddModal = () => {
+    setSelectedData(null);
+    setIsModalOpen(true);
+  };
+
+  // Edit Modal Open
+  const openEditModal = (data: any) => {
+    console.log(data);
+    setSelectedData(data);
+    setIsModalOpen(true);
+  };
+
+  // Delete Modal Open
+  const openDeleteModal = (data: any) => {
+    setDeleteModalOpen(true);
+    setSelectedData(data);
   };
 
   const columns: GridColDef[] = [
@@ -76,13 +88,11 @@ const AuthorManagementPage = () => {
               marginTop: "5px",
             }}
           >
-            <Image
-              alt="Author image"
-              src={row?.image}
-              width={150}
-              height={180}
-            />
-            ;
+            {row?.image ? (
+              <Image alt="Image" src={row?.image} width={50} height={50} />
+            ) : (
+              <Image alt="Image" src={avatar} width={50} height={50} />
+            )}
           </Box>
         );
       },
@@ -167,22 +177,10 @@ const AuthorManagementPage = () => {
       align: "center",
       renderCell: ({ row }) => {
         return (
-          <Box>
-            <IconButton
-              onClick={() => {
-                setDeleteModalOpen(true);
-                setDeleteId(row?._id);
-              }}
-              aria-label="delete"
-            >
-              <DeleteIcon sx={{ color: "red" }} />
-            </IconButton>
-            <Link href={`/dashboard/admin/author-management/edit/${row?._id}`}>
-              <IconButton aria-label="delete">
-                <EditIcon />
-              </IconButton>
-            </Link>
-          </Box>
+          <EditDeleteButton
+            onEdit={() => openEditModal(row)}
+            onDelete={() => openDeleteModal(row)}
+          />
         );
       },
     },
@@ -196,37 +194,40 @@ const AuthorManagementPage = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => setIsModalOpen(true)}>Create New Author</Button>
-        <CreateAuthorModal open={isModalOpen} setOpen={setIsModalOpen} />
+        <Button onClick={() => openAddModal()}>Create Author</Button>
+        <AuthorModal
+          open={isModalOpen}
+          setOpen={setIsModalOpen}
+          data={selectedData}
+        />
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"
           placeholder="Search Author"
         />
       </Stack>
-      {!isLoading ? (
-        <Box
-          my={2}
-          sx={{
-            overflow: "auto",
-          }}
-        >
-          <DataGrid
-            rows={Authors}
-            columns={columns}
-            getRowId={(row) => row._id}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            rowCount={meta?.total || 0}
-            paginationMode="server"
-            loading={isLoading}
-            pageSizeOptions={[25, 50, 100]}
-          />
-        </Box>
-      ) : (
-        <LoadingPage />
-      )}
+
+      <Box
+        my={2}
+        sx={{
+          overflow: "auto",
+        }}
+      >
+        <DataGrid
+          rows={authors?.data || []}
+          columns={columns}
+          getRowId={(row) => row._id}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          rowCount={authors?.meta?.total || 0}
+          paginationMode="server"
+          loading={isLoading || isDeleting}
+          pageSizeOptions={[25, 50, 100]}
+        />
+      </Box>
+
       <DeleteModal
+        loading={isDeleting}
         open={deleteModalOpen}
         setOpen={setDeleteModalOpen}
         onDeleteConfirm={handleDelete}

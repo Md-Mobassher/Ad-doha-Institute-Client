@@ -1,8 +1,10 @@
 "use client";
 
 import LoadingPage from "@/app/loading";
+import SubmitButton from "@/components/common/SubmitButton";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
+import Title from "@/components/ui/Title";
 import {
   useGetSingleBookcategoryQuery,
   useUpdateBookcategoryMutation,
@@ -22,10 +24,10 @@ type TParams = {
 const BookCategoryUpdatePage = ({ params }: TParams) => {
   const unwrappedParams = use(params);
   const router = useRouter();
-  const { data, isLoading, refetch } = useGetSingleBookcategoryQuery(
+  const { data: bookCategory, isLoading } = useGetSingleBookcategoryQuery(
     unwrappedParams?.bookCategoryId
   );
-  const [updateBookCategory, { isLoading: updating }] =
+  const [updateBookCategory, { isLoading: isUpdating }] =
     useUpdateBookcategoryMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
@@ -38,18 +40,20 @@ const BookCategoryUpdatePage = ({ params }: TParams) => {
       }).unwrap();
       // console.log(res);
 
-      if (res?._id) {
+      if (res?.success) {
         toast.success(res.message || "Book Category Updated Successfully!!!");
-        await refetch();
         router.push("/dashboard/admin/book-category-management");
+      } else {
+        toast.error(res?.message || "Failed to update BookCategory!!!");
       }
     } catch (err: any) {
-      console.error(err);
+      // console.error(err);
+      toast.error(err?.message || "Failed to update BookCategory!!!");
     }
   };
 
   const defaultValues = {
-    categoryName: data?.categoryName || "",
+    categoryName: bookCategory?.data?.categoryName || "",
   };
 
   return (
@@ -73,16 +77,7 @@ const BookCategoryUpdatePage = ({ params }: TParams) => {
             borderRadius: "10px",
           }}
         >
-          <Typography
-            component="h4"
-            variant="h4"
-            mb={3}
-            fontWeight={600}
-            textAlign="center"
-            color={"primary.main"}
-          >
-            Update Book Category
-          </Typography>
+          <Title title="Update Book Category" />
 
           <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
             <Grid container spacing={3} my={1}>
@@ -96,27 +91,11 @@ const BookCategoryUpdatePage = ({ params }: TParams) => {
                 />
               </Grid>
             </Grid>
-            {updating ? (
-              <Button
-                disabled
-                fullWidth
-                sx={{
-                  margin: "10px 0px",
-                }}
-              >
-                <CircularProgress thickness={6} />;
-              </Button>
-            ) : (
-              <Button
-                sx={{
-                  margin: "10px 0px",
-                }}
-                fullWidth
-                type="submit"
-              >
-                Update Book Category
-              </Button>
-            )}
+            <SubmitButton
+              label="Update Book Category"
+              loading={isUpdating}
+              isEdit
+            />
           </DohaForm>
         </Box>
       )}

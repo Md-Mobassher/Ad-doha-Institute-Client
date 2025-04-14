@@ -1,4 +1,4 @@
-export interface IAuthor {
+export type TAuthor = {
   _id: string;
   name: string;
   image: string;
@@ -13,4 +13,4 @@ export interface IAuthor {
     linkedin?: string;
   };
   books?: string[];
-}
+};

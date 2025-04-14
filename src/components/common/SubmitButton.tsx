@@ -3,13 +3,14 @@ import { FaSpinner } from "react-icons/fa";
 
 interface SubmitButtonProps {
   isEdit?: boolean;
+  data?: any;
   label?: string;
   loading?: boolean;
 }
 
 const SubmitButton: React.FC<SubmitButtonProps> = ({
-  isEdit = false,
-  label = "Submit",
+  data = null,
+  label,
   loading = false,
 }) => {
   return (
@@ -23,11 +24,11 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
     >
       {loading ? (
         <span className="flex justify-center items-center gap-3">
-          {isEdit ? "Updating" : "Creating"}{" "}
+          {data ? "Updating" : "Creating"}{" "}
           <FaSpinner className="animate-spin text-lg" />
         </span>
       ) : (
-        <span>{label}</span>
+        <span>{`${data ? "Update" : "Create"}  ${label}`}</span>
       )}
     </Button>
   );

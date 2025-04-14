@@ -39,20 +39,22 @@ const BookCategoryManagementPage = () => {
     query["searchTerm"] = debouncedTerm;
   }
 
-  const { data, isLoading } = useGetAllBookcategorysQuery(query);
-  const [deleteBookCategory] = useDeleteBookcategoryMutation();
-
-  const bookCategorys = data?.Bookcategorys || [];
-  const meta = data?.meta;
+  const { data: bookCategories, isLoading } =
+    useGetAllBookcategorysQuery(query);
+  const [deleteBookCategory, { isLoading: isDeleting }] =
+    useDeleteBookcategoryMutation();
 
   const handleDelete = async () => {
     try {
       const res = await deleteBookCategory(deleteId).unwrap();
-      if (res?.id) {
-        toast.success("BookCategory deleted successfully!!!");
+      if (res?.success) {
+        toast.success(res?.message || "BookCategory deleted successfully!!!");
+      } else {
+        toast.error(res?.message || "Failed to delete BookCategory!!!");
       }
     } catch (err: any) {
-      console.error(err.message);
+      // console.error(err.message);
+      toast.error(err?.message || "Failed to delete BookCategory!!!");
     }
   };
 
@@ -97,7 +99,7 @@ const BookCategoryManagementPage = () => {
         mt={1}
       >
         <Button onClick={() => setIsModalOpen(true)}>
-          Create New BookCategory
+          Create Book Category
         </Button>
         <CreateBookCategoryModal open={isModalOpen} setOpen={setIsModalOpen} />
         <TextField
@@ -106,24 +108,23 @@ const BookCategoryManagementPage = () => {
           placeholder="Search BookCategory"
         />
       </Stack>
-      {!isLoading ? (
-        <Box my={2} sx={{ overflow: "auto" }}>
-          <DataGrid
-            rows={bookCategorys}
-            columns={columns}
-            getRowId={(row) => row._id}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            rowCount={meta?.total || 0}
-            paginationMode="server"
-            loading={isLoading}
-            pageSizeOptions={[25, 50, 100]}
-          />
-        </Box>
-      ) : (
-        <LoadingPage />
-      )}
+
+      <Box my={2} sx={{ overflow: "auto" }}>
+        <DataGrid
+          rows={bookCategories?.data}
+          columns={columns}
+          getRowId={(row) => row._id}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          rowCount={bookCategories?.meta?.total || 0}
+          paginationMode="server"
+          loading={isLoading || isDeleting}
+          pageSizeOptions={[25, 50, 100]}
+        />
+      </Box>
+
       <DeleteModal
+        loading={isDeleting}
         open={deleteModalOpen}
         setOpen={setDeleteModalOpen}
         onDeleteConfirm={handleDelete}

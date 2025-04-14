@@ -1,59 +1,79 @@
+import SubmitButton from "@/components/common/SubmitButton";
 import DohaDatePicker from "@/components/form/DohaDatePicker";
 import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenModal";
-import { useCreateAuthorMutation } from "@/redux/features/admin/authorManagementApi";
+import {
+  useCreateAuthorMutation,
+  useUpdateAuthorMutation,
+} from "@/redux/features/admin/authorManagementApi";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
-import { Button, CircularProgress, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
 type TProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  data?: any;
 };
 
-const CreateAuthorModal = ({ open, setOpen }: TProps) => {
-  const [createAuthor, { isLoading: creating }] = useCreateAuthorMutation();
+const AuthorModal = ({ open, setOpen, data }: TProps) => {
+  const [createAuthor, { isLoading: isCreating }] = useCreateAuthorMutation();
+  const [updateAuthor, { isLoading: isUpdating }] = useUpdateAuthorMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    // console.log("Form Values:", values);
-    let imageUrl = "";
-    if (values.file) {
-      imageUrl = await uploadImageToCloudinary(values.file);
-    }
-    if (imageUrl) {
-      values.image = imageUrl;
-    } else {
-      delete values.image;
-    }
-
     try {
-      const res = await createAuthor(values).unwrap();
-      // console.log(res);
-      if (res?._id) {
-        toast.success("Author created successfully!!!");
-        setOpen(false);
+      let result;
+      let imageUrl = data?.image || "";
+      if (values.file) {
+        imageUrl = await uploadImageToCloudinary(values.file);
+      }
+      if (data) {
+        const id = data._id;
+        if (imageUrl) {
+          values.image = imageUrl;
+        } else {
+          delete values.image;
+        }
+        result = await updateAuthor({ id, values }).unwrap();
+        // console.log("edit", result);
+        if (result?.success) {
+          toast.success(result?.message || "Opinion Updated Successfully!!!");
+        }
+      } else {
+        if (imageUrl) {
+          values.image = imageUrl;
+        } else {
+          delete values.image;
+        }
+
+        result = await createAuthor(values).unwrap();
+        // console.log("add", result);
+        if (result?.success) {
+          toast.success(result?.message || "Author created successfully!!!");
+        }
       }
     } catch (err: any) {
-      console.error(err);
-      toast.error(err?.data || "Failed to create Author!!!");
+      toast.error(err?.message || "Something went wrong!!!");
+    } finally {
+      setOpen(false);
     }
   };
 
   const defaultValues = {
-    name: "",
+    name: data ? data?.name : "",
     image: "",
-    biography: "",
-    birthDate: "",
-    nationality: "",
-    website: "",
+    biography: data ? data?.biography : "",
+    birthDate: data ? data?.birthDate : "",
+    nationality: data ? data?.nationality : "",
+    website: data ? data?.website : "",
     socialLinks: {
-      facebook: "",
-      twitter: "",
-      instagram: "",
-      linkedin: "",
+      facebook: data ? data?.socialLinks?.facebook : "",
+      twitter: data ? data?.socialLinks?.twitter : "",
+      instagram: data ? data?.socialLinks?.instagram : "",
+      linkedin: data ? data?.socialLinks?.linkedin : "",
     },
   };
 
@@ -61,7 +81,7 @@ const CreateAuthorModal = ({ open, setOpen }: TProps) => {
     <DohaFullScreenModal
       open={open}
       setOpen={setOpen}
-      title="Create New Author"
+      title={`${data ? "Update Author" : "Create Author"}`}
     >
       <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
         <Grid container spacing={3} my={1}>
@@ -152,30 +172,14 @@ const CreateAuthorModal = ({ open, setOpen }: TProps) => {
             />
           </Grid>
         </Grid>
-        {creating ? (
-          <Button
-            disabled
-            fullWidth
-            sx={{
-              margin: "10px 0px",
-            }}
-          >
-            <CircularProgress thickness={6} />;
-          </Button>
-        ) : (
-          <Button
-            sx={{
-              margin: "10px 0px",
-            }}
-            fullWidth
-            type="submit"
-          >
-            Create A Author
-          </Button>
-        )}
+        <SubmitButton
+          label="Author"
+          loading={isCreating || isUpdating}
+          data={data}
+        />
       </DohaForm>
     </DohaFullScreenModal>
   );
 };
 
-export default CreateAuthorModal;
+export default AuthorModal;

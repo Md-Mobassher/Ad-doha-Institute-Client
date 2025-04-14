@@ -1,10 +1,10 @@
-import { IAuthor } from "./author";
+import { TAuthor } from "./author";
 
 export type TBook = {
   _id: string;
   title: string;
   category: string;
-  authors?: IAuthor;
+  authors?: TAuthor;
   image: string;
   url: string;
   publishedDate?: string;

@@ -6,7 +6,7 @@ import { useGetAllAuthorsQuery } from "@/redux/features/admin/authorManagementAp
 import { useGetAllBookcategorysQuery } from "@/redux/features/admin/bookCategoryManagementApi";
 import { useGetAllBooksQuery } from "@/redux/features/admin/bookManagementApi";
 import { useDebounced } from "@/redux/hooks";
-import { IAuthor, TBook, TBookcategory } from "@/type";
+import { TAuthor, TBook, TBookcategory } from "@/type";
 import { Delete } from "@mui/icons-material";
 import {
   Box,
@@ -171,7 +171,7 @@ const BooksPage = () => {
                 <Typography variant="h6">AUTHORS</Typography>
                 <Divider />
                 <ul className="space-y-1 mt-3 max-h-[250px] overflow-y-auto mb-5">
-                  {authors?.data?.map((author: IAuthor) => (
+                  {authors?.data?.map((author: TAuthor) => (
                     <li key={author._id} className="flex items-center">
                       <Radio
                         size="medium"
@@ -230,7 +230,7 @@ const BooksPage = () => {
               <Typography variant="h6">AUTHORS</Typography>
               <Divider />
               <ul className="space-y-1 mt-3 max-h-[250px] overflow-y-auto mb-5">
-                {authors?.data?.map((author: IAuthor) => (
+                {authors?.data?.map((author: TAuthor) => (
                   <li key={author._id} className="flex items-center">
                     <Radio
                       size="medium"

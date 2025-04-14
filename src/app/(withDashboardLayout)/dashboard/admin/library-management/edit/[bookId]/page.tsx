@@ -19,7 +19,8 @@ import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { use } from "react";
-import { IItem } from "@/type";
+import { TAuthor, IItem, TBookcategory } from "@/type";
+import SubmitButton from "@/components/common/SubmitButton";
 
 type TParams = {
   params: Promise<{
@@ -30,32 +31,32 @@ type TParams = {
 const BookUpdatePage = ({ params }: TParams) => {
   const unwrappedParams = use(params);
   const router = useRouter();
-  const { data, isLoading, refetch } = useGetSingleBookQuery(
+  const { data: book, isLoading } = useGetSingleBookQuery(
     unwrappedParams?.bookId
   );
-  const [updateBook, { isLoading: updating }] = useUpdateBookMutation();
+  const [updateBook, { isLoading: isUpdating }] = useUpdateBookMutation();
   const { data: authorData, isLoading: authorLoading } = useGetAllAuthorsQuery(
     {}
   );
   const { data: bookCategoryData, isLoading: categoryLoading } =
     useGetAllBookcategorysQuery({});
 
-  const categories = bookCategoryData?.Bookcategorys?.map((category) => ({
+  const categories = bookCategoryData?.data?.map((category: TBookcategory) => ({
     label: category?.categoryName,
     value: category?._id,
   }));
-  const authors = authorData?.Authors?.map((author) => ({
+  const authors = authorData?.Authors?.map((author: TAuthor) => ({
     label: author?.name,
     value: author?._id,
   }));
   // console.log(authors);
 
   const handleFormSubmit = async (values: FieldValues) => {
-    let imageUrl = data?.image || "";
+    let imageUrl = book?.data?.image || "";
     if (values.file) {
       imageUrl = await uploadImageToCloudinary(values.file);
       if (!imageUrl) {
-        toast.error(`Failed to upload image! Please try again.`);
+        toast.error(`Failed to upload image!.`);
       }
     }
     const updatedBook = {
@@ -81,31 +82,32 @@ const BookUpdatePage = ({ params }: TParams) => {
       }).unwrap();
       // console.log(res);
 
-      if (res?._id) {
+      if (res?.success) {
         toast.success(res.message || "Book Updated Successfully!!!");
-        await refetch();
         router.push("/dashboard/admin/library-management");
+      } else {
+        toast.error(res.message || "Failed to update Book!!!");
       }
     } catch (err: any) {
-      console.error(err);
-      toast.error(err.data || "Failied to update Book!!!");
+      // console.error(err);
+      toast.error(err.data || "Failed to update Book!!!");
     }
   };
 
   const defaultValues = {
-    title: data?.title || "",
-    category: data?.category || "",
-    authors: data?.authors || "",
-    image: data?.image || "",
-    url: data?.url || "",
-    publishedDate: data?.publishedDate || "",
-    publisher: data?.publisher || "",
-    description: data?.description || "",
-    price: data?.price || "",
-    stock: data?.stock || "",
-    language: data?.language || "",
-    pageCount: data?.pageCount || "",
-    format: data?.format || "",
+    title: book?.data?.title || "",
+    category: book?.data?.category || "",
+    authors: book?.data?.authors || "",
+    image: book?.data?.image || "",
+    url: book?.data?.url || "",
+    publishedDate: book?.data?.publishedDate || "",
+    publisher: book?.data?.publisher || "",
+    description: book?.data?.description || "",
+    price: book?.data?.price || "",
+    stock: book?.data?.stock || "",
+    language: book?.data?.language || "",
+    pageCount: book?.data?.pageCount || "",
+    format: book?.data?.format || "",
   };
 
   return (
@@ -254,27 +256,7 @@ const BookUpdatePage = ({ params }: TParams) => {
                 />
               </Grid>
             </Grid>
-            {updating ? (
-              <Button
-                disabled
-                fullWidth
-                sx={{
-                  margin: "10px 0px",
-                }}
-              >
-                <CircularProgress thickness={6} />;
-              </Button>
-            ) : (
-              <Button
-                sx={{
-                  margin: "10px 0px",
-                }}
-                fullWidth
-                type="submit"
-              >
-                Update Book
-              </Button>
-            )}
+            <SubmitButton label="Update Book" loading={isUpdating} isEdit />
           </DohaForm>
         </Box>
       )}

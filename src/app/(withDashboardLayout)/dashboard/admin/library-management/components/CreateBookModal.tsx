@@ -13,7 +13,8 @@ import { toast } from "sonner";
 import DohaDatePicker from "@/components/form/DohaDatePicker";
 import { FormatOptions, LanguageOptions } from "@/constant/global";
 import { dateFormatter } from "@/utils/dateFormatter";
-import { IItem } from "@/type";
+import { TAuthor, IItem, TBookcategory } from "@/type";
+import SubmitButton from "@/components/common/SubmitButton";
 
 type TProps = {
   open: boolean;
@@ -21,18 +22,18 @@ type TProps = {
 };
 
 const CreateBookModal = ({ open, setOpen }: TProps) => {
-  const [createBook, { isLoading: creating }] = useCreateBookMutation();
+  const [createBook, { isLoading: isCreating }] = useCreateBookMutation();
   const { data: authorData, isLoading: authorLoading } = useGetAllAuthorsQuery(
     {}
   );
   const { data: bookCategoryData, isLoading: categoryLoading } =
     useGetAllBookcategorysQuery({});
 
-  const categories = bookCategoryData?.Bookcategorys?.map((category) => ({
+  const categories = bookCategoryData?.data?.map((category: TBookcategory) => ({
     label: category?.categoryName,
     value: category?._id,
   }));
-  const authors = authorData?.Authors?.map((author) => ({
+  const authors = authorData?.data?.map((author: TAuthor) => ({
     label: author?.name,
     value: author?._id,
   }));
@@ -78,12 +79,14 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
     try {
       const res = await createBook(newBook).unwrap();
       // console.log(res);
-      if (res?._id) {
-        toast.success("Book created successfully!!!");
+      if (res?.success) {
+        toast.success(res.message || "Book created successfully!!!");
         setOpen(false);
+      } else {
+        toast.error(res.message || "Failed to create Book!!!");
       }
     } catch (err: any) {
-      toast.error(err.data || "Failed to create Book!!!");
+      toast.error(err.message || "Failed to create Book!!!");
       // console.error(err);
     }
   };
@@ -103,10 +106,6 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
     pageCount: "",
     format: "",
   };
-
-  // if (authorLoading || categoryLoading) {
-  //   return <LoadingPage />;
-  // }
 
   return (
     <DohaFullScreenModal open={open} setOpen={setOpen} title="Create New Book">
@@ -224,27 +223,7 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
             />
           </Grid>
         </Grid>
-        {creating ? (
-          <Button
-            disabled
-            fullWidth
-            sx={{
-              margin: "10px 0px",
-            }}
-          >
-            <CircularProgress thickness={6} />;
-          </Button>
-        ) : (
-          <Button
-            sx={{
-              margin: "10px 0px",
-            }}
-            fullWidth
-            type="submit"
-          >
-            Create A Book
-          </Button>
-        )}
+        <SubmitButton label="Create Book" loading={isCreating} />
       </DohaForm>
     </DohaFullScreenModal>
   );

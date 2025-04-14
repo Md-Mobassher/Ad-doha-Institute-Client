@@ -1,8 +1,9 @@
+import SubmitButton from "@/components/common/SubmitButton";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaModal from "@/components/shared/DohaModal/DohaModal";
 import { useCreateBookcategoryMutation } from "@/redux/features/admin/bookCategoryManagementApi";
-import { Button, CircularProgress, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -12,19 +13,22 @@ type TProps = {
 };
 
 const CreateBookCategoryModal = ({ open, setOpen }: TProps) => {
-  const [createBookCategory, { isLoading: creating }] =
+  const [createBookCategory, { isLoading: isCreating }] =
     useCreateBookcategoryMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
     try {
       const res = await createBookCategory(values).unwrap();
       // console.log(res);
-      if (res?._id) {
-        toast.success("Book Category created successfully!!!");
+      if (res?.success) {
+        toast.success(res?.message || "Book Category created successfully!!!");
         setOpen(false);
+      } else {
+        toast.error(res?.message || "Failed to create BookCategory!!!");
       }
     } catch (err: any) {
-      console.error(err);
+      // console.error(err);
+      toast.error(err?.message || "Failed to create BookCategory!!!");
     }
   };
 
@@ -46,27 +50,7 @@ const CreateBookCategoryModal = ({ open, setOpen }: TProps) => {
             />
           </Grid>
         </Grid>
-        {creating ? (
-          <Button
-            disabled
-            fullWidth
-            sx={{
-              margin: "10px 0px",
-            }}
-          >
-            <CircularProgress thickness={6} />;
-          </Button>
-        ) : (
-          <Button
-            sx={{
-              margin: "10px 0px",
-            }}
-            fullWidth
-            type="submit"
-          >
-            Create A Book Category
-          </Button>
-        )}
+        <SubmitButton label="Create Book Category" loading={isCreating} />
       </DohaForm>
     </DohaModal>
   );
