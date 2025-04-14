@@ -9,7 +9,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import Link from "next/link";
 import LoadingPage from "@/app/loading";
 import { useDebounced } from "@/redux/hooks";
-import DeleteModal from "@/components/ui/DeletModal";
+import DeleteModal from "@/components/common/DeletModal";
 import {
   useDeleteEnrolledCourseMutation,
   useGetAllEnrolledCoursesQuery,

@@ -37,11 +37,6 @@ export const axiosBaseQuery =
       const err = axiosError as AxiosError;
 
       // Ensure the error matches the expected shape
-      return {
-        error: {
-          status: err.response?.status || 500,
-          message: err.response?.data || err.message || "Something went wrong!",
-        },
-      };
+      return { error: err };
     }
   };

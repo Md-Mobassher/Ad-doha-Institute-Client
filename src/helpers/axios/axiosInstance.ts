@@ -41,6 +41,7 @@ instance.interceptors.response.use(
     return response;
   },
   async function (error) {
+    // console.log(error);
     if (error?.response?.status === 401 || error?.response?.status === 403) {
       removeCookie(authAccessKey);
       removeCookie(authRefreshKey);
@@ -63,11 +64,12 @@ instance.interceptors.response.use(
     });
 
     const responseObject: IGenericErrorResponse = {
+      success: false,
       statusCode: error?.response?.data?.statusCode || 500,
       message: error?.response?.data?.message || "Something went wrong!!!",
-      errorMessages: error?.response?.data?.errorMessages || [],
+      errorSources: error?.response?.data?.errorSources || [],
     };
-    console.log("instance", responseObject);
+    // console.log("instance", responseObject);
     return Promise.reject(responseObject);
   }
 );

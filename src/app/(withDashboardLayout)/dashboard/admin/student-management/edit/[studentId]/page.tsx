@@ -130,7 +130,6 @@ const StudentUpdatePage = ({ params }: TParams) => {
                 fullWidth={true}
                 name="student.gender"
                 sx={{ textAlign: "start" }}
-                required
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -145,7 +144,6 @@ const StudentUpdatePage = ({ params }: TParams) => {
                 type="number"
                 fullWidth={true}
                 name="student.contactNo"
-                required
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -154,7 +152,6 @@ const StudentUpdatePage = ({ params }: TParams) => {
                 type="number"
                 fullWidth={true}
                 name="student.emergencyContactNo"
-                required
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -164,7 +161,6 @@ const StudentUpdatePage = ({ params }: TParams) => {
                 fullWidth={true}
                 name="student.bloodGroup"
                 sx={{ textAlign: "start" }}
-                required
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -173,7 +169,6 @@ const StudentUpdatePage = ({ params }: TParams) => {
                 type="text"
                 fullWidth={true}
                 name="student.presentAddress"
-                required
               />
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -182,7 +177,6 @@ const StudentUpdatePage = ({ params }: TParams) => {
                 type="text"
                 fullWidth={true}
                 name="student.permanentAddress"
-                required
               />
             </Grid>
           </Grid>

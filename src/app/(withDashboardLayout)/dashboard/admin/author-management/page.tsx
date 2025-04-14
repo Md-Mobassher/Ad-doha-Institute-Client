@@ -17,7 +17,7 @@ import {
 } from "@/redux/features/admin/authorManagementApi";
 import CreateAuthorModal from "./components/CreateAuthorModal";
 import { Facebook, Instagram, LinkedIn, Twitter } from "@mui/icons-material";
-import DeleteModal from "@/components/ui/DeletModal";
+import DeleteModal from "@/components/common/DeletModal";
 
 const AuthorManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

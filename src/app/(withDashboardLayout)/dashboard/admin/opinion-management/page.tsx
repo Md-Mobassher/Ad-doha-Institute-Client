@@ -17,7 +17,7 @@ import {
   useDeleteOpinionMutation,
   useGetAllOpinionsQuery,
 } from "@/redux/features/admin/opinionManagementApi";
-import DeleteModal from "@/components/ui/DeletModal";
+import DeleteModal from "@/components/common/DeletModal";
 
 const OpinionManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

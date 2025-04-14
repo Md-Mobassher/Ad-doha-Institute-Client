@@ -10,7 +10,7 @@ import Link from "next/link";
 import LoadingPage from "@/app/loading";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
-import DeleteModal from "@/components/ui/DeletModal";
+import DeleteModal from "@/components/common/DeletModal";
 import CreateEnrolledCourseModal from "./components/CreateEnrolledCourseModal";
 import {
   useDeleteEnrolledCourseMutation,

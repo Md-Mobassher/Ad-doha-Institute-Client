@@ -6,8 +6,9 @@ import DohaSelectField from "@/components/form/DohaSelectField";
 import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenModal";
 import { BloodGroupOptions, genderOptions } from "@/constant/global";
 import { useCreateStudentMutation } from "@/redux/features/admin/studentManagementApi";
+import { cleanPayload } from "@/utils/cleanPayload";
 import { dateFormatter } from "@/utils/dateFormatter";
-import { Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -20,13 +21,17 @@ const CreateStudentModal = ({ open, setOpen }: TProps) => {
   const [createStudent, { isLoading }] = useCreateStudentMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
+    console.log("values", values);
+
+    const cleanedData = cleanPayload(values);
+    console.log("cleanData", cleanedData);
     values.student.dateOfBirth = values.student.dateOfBirth
       ? dateFormatter(values.student.dateOfBirth)
       : "";
-    console.log("Form Values:", values);
+    console.log("Form Values:", cleanedData);
 
     try {
-      const res = await createStudent(values).unwrap();
+      const res = await createStudent(cleanedData).unwrap();
       console.log(res);
 
       if (res?.success) {
@@ -46,13 +51,13 @@ const CreateStudentModal = ({ open, setOpen }: TProps) => {
         lastName: "",
       },
       email: "",
-      gender: "",
-      dateOfBirth: "",
-      contactNo: "",
-      emergencyContactNo: "",
-      bloodGroup: "",
-      presentAddress: "",
-      permanentAddress: "",
+      gender: null,
+      dateOfBirth: null,
+      contactNo: null,
+      emergencyContactNo: null,
+      bloodGroup: null,
+      presentAddress: null,
+      permanentAddress: null,
     },
   };
 

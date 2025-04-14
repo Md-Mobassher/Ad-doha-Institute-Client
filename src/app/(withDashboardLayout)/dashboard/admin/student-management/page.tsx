@@ -15,7 +15,7 @@ import {
   useGetAllStudentsQuery,
 } from "@/redux/features/admin/studentManagementApi";
 import CreateStudentModal from "./components/StudentModal";
-import DeleteModal from "@/components/ui/DeletModal";
+import DeleteModal from "@/components/common/DeletModal";
 
 const StudentManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -42,7 +42,7 @@ const StudentManagementPage = () => {
 
   // mutation
   const { data: students, isLoading } = useGetAllStudentsQuery({ ...query });
-  const [deleteStudent] = useDeleteStudentMutation();
+  const [deleteStudent, { isLoading: isDeleting }] = useDeleteStudentMutation();
 
   const handleDelete = async () => {
     // console.log(id);
@@ -50,8 +50,8 @@ const StudentManagementPage = () => {
       const res = await deleteStudent(deleteId).unwrap();
 
       // console.log(res);
-      if (res?.id) {
-        toast.success("Student deleted successfully!!!");
+      if (res?.success) {
+        toast.success(res?.message || "Student deleted successfully!!!");
       }
     } catch (err: any) {
       console.error(err.message);
@@ -126,28 +126,27 @@ const StudentManagementPage = () => {
           placeholder="Search Student"
         />
       </Stack>
-      {!isLoading ? (
-        <Box
-          my={2}
-          sx={{
-            overflow: "auto",
-          }}
-        >
-          <DataGrid
-            rows={students?.data || []}
-            columns={columns}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            rowCount={students?.meta?.total || 0}
-            paginationMode="server"
-            loading={isLoading}
-            pageSizeOptions={[25, 50, 100]}
-          />
-        </Box>
-      ) : (
-        <LoadingPage />
-      )}
+
+      <Box
+        my={2}
+        sx={{
+          overflow: "auto",
+        }}
+      >
+        <DataGrid
+          rows={students?.data || []}
+          columns={columns}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          rowCount={students?.meta?.total || 0}
+          paginationMode="server"
+          loading={isLoading || isDeleting}
+          pageSizeOptions={[25, 50, 100]}
+        />
+      </Box>
+
       <DeleteModal
+        loading={isDeleting}
         open={deleteModalOpen}
         setOpen={setDeleteModalOpen}
         onDeleteConfirm={handleDelete}

@@ -15,7 +15,7 @@ import {
   useGetAllFacultyQuery,
 } from "@/redux/features/admin/facultyManagementApi";
 import CreateFacultyModal from "./components/FacultyModal";
-import DeleteModal from "@/components/ui/DeletModal";
+import DeleteModal from "@/components/common/DeletModal";
 
 const FacultyManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

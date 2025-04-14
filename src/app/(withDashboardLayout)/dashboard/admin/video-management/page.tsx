@@ -15,7 +15,7 @@ import {
   useGetAllVideosQuery,
 } from "@/redux/features/admin/videoManagementApi";
 import CreateVideoModal from "./components/CreateVideoModal";
-import DeleteModal from "@/components/ui/DeletModal";
+import DeleteModal from "@/components/common/DeletModal";
 
 const VideoManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

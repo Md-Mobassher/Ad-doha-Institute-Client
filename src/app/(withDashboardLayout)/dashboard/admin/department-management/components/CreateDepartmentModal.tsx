@@ -1,3 +1,4 @@
+import SubmitButton from "@/components/common/SubmitButton";
 import DohaFileUploader from "@/components/form/DohaFileUploader";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
@@ -24,6 +25,10 @@ const CreateDepartmentModal = ({ open, setOpen }: TProps) => {
   };
 
   const handleFormSubmit = async (values: FieldValues) => {
+    if (!values.file) {
+      toast.error("Please select a file!!!");
+      return;
+    }
     const imageUrl = await uploadImageToCloudinary(values.file);
     if (!imageUrl) {
       toast.error("Failed to upload image!!!");
@@ -40,12 +45,18 @@ const CreateDepartmentModal = ({ open, setOpen }: TProps) => {
     try {
       const res = await createDepartment(newDepartment).unwrap();
       // console.log(res);
-      if (res?._id) {
-        toast.success("Academic Department created successfully!!!");
+      if (res?.success) {
+        toast.success(
+          res?.message || "Academic Department created successfully!!!"
+        );
         setOpen(false);
       }
     } catch (err: any) {
       console.error(err);
+      toast.error(
+        err?.message || "Academic Department created successfully!!!"
+      );
+      setOpen(false);
     }
   };
 
@@ -86,27 +97,7 @@ const CreateDepartmentModal = ({ open, setOpen }: TProps) => {
             />
           </Grid>
         </Grid>
-        {creating ? (
-          <Button
-            disabled
-            fullWidth
-            sx={{
-              margin: "10px 0px",
-            }}
-          >
-            <CircularProgress thickness={6} />;
-          </Button>
-        ) : (
-          <Button
-            sx={{
-              margin: "16px 0px",
-            }}
-            fullWidth={true}
-            type="submit"
-          >
-            Create New Department
-          </Button>
-        )}
+        <SubmitButton label="Create Department" loading={creating} />
       </DohaForm>
     </DohaModal>
   );

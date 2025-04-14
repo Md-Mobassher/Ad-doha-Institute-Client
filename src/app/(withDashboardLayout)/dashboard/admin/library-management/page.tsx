@@ -22,7 +22,7 @@ import {
 } from "@/redux/features/admin/bookManagementApi";
 import Image from "next/image";
 import CreateBookModal from "./components/CreateBookModal";
-import DeleteModal from "@/components/ui/DeletModal";
+import DeleteModal from "@/components/common/DeletModal";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 
 const BookManagementPage = () => {

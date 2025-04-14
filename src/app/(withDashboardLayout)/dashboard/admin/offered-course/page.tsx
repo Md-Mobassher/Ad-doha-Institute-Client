@@ -11,7 +11,7 @@ import LoadingPage from "@/app/loading";
 import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
-import DeleteModal from "@/components/ui/DeletModal";
+import DeleteModal from "@/components/common/DeletModal";
 import {
   useDeleteOfferedCourseMutation,
   useGetAllOfferedCoursesQuery,

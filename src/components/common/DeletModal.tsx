@@ -1,12 +1,13 @@
 import * as React from "react";
 import { Button, DialogActions, DialogContentText } from "@mui/material";
 import DohaModal from "../shared/DohaModal/DohaModal";
+import { FaSpinner } from "react-icons/fa";
 
 type DeleteModalProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onDeleteConfirm: () => void;
-
+  loading?: boolean;
   title?: string;
 };
 
@@ -14,6 +15,7 @@ export default function DeleteModal({
   open,
   setOpen,
   onDeleteConfirm,
+  loading,
   title = "Delete Confirmation",
 }: DeleteModalProps) {
   const handleClose = () => {
@@ -32,8 +34,19 @@ export default function DeleteModal({
       </DialogContentText>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleDelete} color="error" variant="contained">
-          Delete
+        <Button
+          disabled={loading}
+          onClick={handleDelete}
+          color="error"
+          variant="contained"
+        >
+          {loading ? (
+            <span className="flex justify-center items-center gap-3">
+              Deleting <FaSpinner className="animate-spin text-lg pl-1" />
+            </span>
+          ) : (
+            <span>Delete</span>
+          )}
         </Button>
       </DialogActions>
     </DohaModal>

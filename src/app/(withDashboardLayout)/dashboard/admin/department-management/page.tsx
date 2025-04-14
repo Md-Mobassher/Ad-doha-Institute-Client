@@ -7,7 +7,6 @@ import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Link from "next/link";
-import LoadingPage from "@/app/loading";
 import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
 import {
@@ -16,8 +15,7 @@ import {
 } from "@/redux/features/admin/departmentManagementApi";
 import CreateDepartmentModal from "./components/CreateDepartmentModal";
 import Image from "next/image";
-import assets from "@/assets";
-import DeleteModal from "@/components/ui/DeletModal";
+import DeleteModal from "@/components/common/DeletModal";
 
 const DepartmentManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -42,25 +40,22 @@ const DepartmentManagementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  const { data, isLoading } = useGetAllAcademicDepartmentsQuery({ ...query });
-  const [deleteAcademicDepartment] = useDeleteAcademicDepartmentMutation();
-  // console.log(data);
-  if (!data) {
-    <p>No Data Found</p>;
-  }
-
-  const academicDepartment = data?.departments;
-
-  const meta = data?.meta;
-  // console.log(academicDepartment
+  const { data: academicDepartments, isLoading } =
+    useGetAllAcademicDepartmentsQuery({ ...query });
+  const [deleteAcademicDepartment, { isLoading: isDeleting }] =
+    useDeleteAcademicDepartmentMutation();
 
   const handleDelete = async () => {
     // console.log(deleteId);
     try {
       const res = await deleteAcademicDepartment(deleteId).unwrap();
       // console.log(res);
-      if (res === null) {
-        toast.success("Academic Department deleted successfully!!!");
+      if (res.success) {
+        toast.success(
+          res?.message || "Academic Department deleted successfully!!!"
+        );
+      } else {
+        toast.error(res?.message || "Failed to delete Academic Department!!!");
       }
     } catch (err: any) {
       toast.error(err.message || "Failed to delete Academic Department!!!");
@@ -156,29 +151,28 @@ const DepartmentManagementPage = () => {
           placeholder="Search"
         />
       </Stack>
-      {!isLoading ? (
-        <Box
-          my={2}
-          sx={{
-            overflow: "auto",
-          }}
-        >
-          <DataGrid
-            rows={academicDepartment}
-            columns={columns}
-            getRowId={(row) => row._id}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            rowCount={meta?.total || 0}
-            paginationMode="server"
-            loading={isLoading}
-            pageSizeOptions={[25, 50, 100]}
-          />
-        </Box>
-      ) : (
-        <LoadingPage />
-      )}
+
+      <Box
+        my={2}
+        sx={{
+          overflow: "auto",
+        }}
+      >
+        <DataGrid
+          rows={academicDepartments?.data || []}
+          columns={columns}
+          getRowId={(row) => row._id}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          rowCount={academicDepartments?.meta?.total || 0}
+          paginationMode="server"
+          loading={isLoading || isDeleting}
+          pageSizeOptions={[25, 50, 100]}
+        />
+      </Box>
+
       <DeleteModal
+        loading={isDeleting}
         open={deleteModalOpen}
         setOpen={setDeleteModalOpen}
         onDeleteConfirm={handleDelete}

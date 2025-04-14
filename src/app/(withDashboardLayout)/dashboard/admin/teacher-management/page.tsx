@@ -12,7 +12,7 @@ import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
 import avatar from "@/assets/avatar.webp";
-import DeleteModal from "@/components/ui/DeletModal";
+import DeleteModal from "@/components/common/DeletModal";
 import CreateTeacherModal from "./components/CreateTeacherModal";
 import {
   useDeleteTeacherMutation,
