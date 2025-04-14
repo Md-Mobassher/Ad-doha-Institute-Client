@@ -1,9 +1,9 @@
-const StudentPage = () => {
+const StudentDashboard = () => {
   return (
     <div>
-      <h1>This is StudentPage component</h1>
+      <h1>This is Student Dashboard Page component</h1>
     </div>
   );
 };
 
-export default StudentPage;
+export default StudentDashboard;

@@ -42,8 +42,6 @@ export default function DashboardDrawer({
 
   const { data, isLoading } = useGetMYProfileQuery({});
 
-  console.log("profile", data);
-
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -83,7 +81,7 @@ export default function DashboardDrawer({
                 component="div"
                 sx={{ color: "rgba(11, 17, 52, 0.6)" }}
               >
-                Hi, {isLoading ? "Loading..." : data?.fullName},
+                Hi, {isLoading ? "Loading..." : data?.data?.fullName},
               </Typography>
               <Typography
                 variant="h6"

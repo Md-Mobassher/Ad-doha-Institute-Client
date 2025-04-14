@@ -7,8 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import DemoCredentialModal from "@/components/common/DemoCredentialModal";
 import { jwtDecode } from "jwt-decode";
@@ -31,8 +31,17 @@ const defaultValues = {
 const LoginForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
+
   const [loginUser, { isLoading }] = useUserLoginMutation();
   const dispatch = useAppDispatch();
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error");
+
+  useEffect(() => {
+    if (error === "unauthorized") {
+      toast.error("Access denied. Please log in with appropriate credentials.");
+    }
+  }, [error]);
 
   const handleLogin = async (values: FieldValues) => {
     try {
