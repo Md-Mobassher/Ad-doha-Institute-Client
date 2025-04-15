@@ -22,14 +22,6 @@ const OpinionModal = ({ open, setOpen, data }: TProps) => {
   const [createOpinion, { isLoading: isCreating }] = useCreateOpinionMutation();
   const [updateOpinion, { isLoading: isUpdating }] = useUpdateOpinionMutation();
 
-  const defaultValues = {
-    name: data ? data?.name : "",
-    designation: data ? data?.designation : "",
-    image: data ? data?.image : "",
-    opinion: data ? data?.opinion : "",
-    position: data ? data?.position : "",
-  };
-
   const handleFormSubmit = async (values: FieldValues) => {
     try {
       let result;
@@ -75,6 +67,14 @@ const OpinionModal = ({ open, setOpen, data }: TProps) => {
     } finally {
       setOpen(false);
     }
+  };
+
+  const defaultValues = {
+    name: data ? data?.name : "",
+    designation: data ? data?.designation : "",
+    image: data ? data?.image : "",
+    opinion: data ? data?.opinion : "",
+    position: data ? data?.position : "",
   };
 
   return (
@@ -137,7 +137,7 @@ const OpinionModal = ({ open, setOpen, data }: TProps) => {
           </Grid>
         </Grid>
         <SubmitButton
-          label="Create Opinion"
+          label="Opinion"
           loading={isCreating || isUpdating}
           data={data}
         />

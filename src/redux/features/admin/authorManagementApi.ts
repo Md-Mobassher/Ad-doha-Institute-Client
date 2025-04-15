@@ -1,4 +1,3 @@
-import { TAuthor, IMeta } from "@/type";
 import { baseApi } from "../../api/baseApi";
 import { tagTypes } from "../../tag-Types";
 

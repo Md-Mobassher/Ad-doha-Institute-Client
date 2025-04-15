@@ -43,7 +43,9 @@ export default function DohaModal({
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
-        sx={{ ...sx }}
+        sx={{
+          ...sx,
+        }}
       >
         <DialogTitle
           sx={{

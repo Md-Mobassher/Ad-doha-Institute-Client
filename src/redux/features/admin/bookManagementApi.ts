@@ -1,12 +1,13 @@
-import { IMeta, TBook } from "@/type";
 import { baseApi } from "../../api/baseApi";
 import { tagTypes } from "../../tag-Types";
+
+const URL = "/books";
 
 const booksApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     createBook: build.mutation({
       query: (data) => ({
-        url: "/books",
+        url: `/${URL}`,
         method: "POST",
         data,
       }),
@@ -15,7 +16,7 @@ const booksApi = baseApi.injectEndpoints({
 
     getAllBooks: build.query({
       query: (arg: Record<string, any>) => ({
-        url: "/books",
+        url: `/${URL}`,
         method: "GET",
         params: arg,
       }),
@@ -30,7 +31,7 @@ const booksApi = baseApi.injectEndpoints({
 
     getSingleBook: build.query({
       query: (id) => ({
-        url: `/books/${id}`,
+        url: `/${URL}/${id}`,
         method: "GET",
       }),
       providesTags: [tagTypes.book],
@@ -38,17 +39,17 @@ const booksApi = baseApi.injectEndpoints({
 
     deleteBook: build.mutation({
       query: (id) => ({
-        url: `/books/${id}`,
+        url: `/${URL}/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: [tagTypes.book],
     }),
 
     updateBook: build.mutation({
-      query: ({ id, values }) => ({
-        url: `/books/${id}`,
+      query: ({ id, updatedData }) => ({
+        url: `/${URL}/${id}`,
         method: "PATCH",
-        data: values,
+        data: updatedData,
       }),
       invalidatesTags: [tagTypes.book],
     }),

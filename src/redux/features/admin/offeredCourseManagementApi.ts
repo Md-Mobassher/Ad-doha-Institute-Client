@@ -1,6 +1,5 @@
 import { baseApi } from "@/redux/api/baseApi";
 import { tagTypes } from "@/redux/tag-Types";
-import { IMeta, IOfferedCourse } from "@/type";
 
 const offeredCoursesApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

@@ -1,7 +1,5 @@
 import { baseApi } from "../../api/baseApi";
 import { tagTypes } from "../../tag-Types";
-import { IMeta } from "../../../type/common";
-import { IDepartment } from "@/type";
 
 const opinionApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

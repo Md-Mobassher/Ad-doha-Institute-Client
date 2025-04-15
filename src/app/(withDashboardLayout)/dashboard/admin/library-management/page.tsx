@@ -14,15 +14,17 @@ import {
   useGetAllBooksQuery,
 } from "@/redux/features/admin/bookManagementApi";
 import Image from "next/image";
-import CreateBookModal from "./components/CreateBookModal";
+import BookModal from "./BookModal";
 import DeleteModal from "@/components/common/DeletModal";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
+import avatar from "@/assets/avatar.webp";
+import EditDeleteButton from "@/components/common/EditDeleteButton";
 
 const BookManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [deleteId, setDeleteId] = useState<string>("");
+  const [selectedData, setSelectedData] = useState<any>({});
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
     page: 0,
     pageSize: 25,
@@ -31,7 +33,6 @@ const BookManagementPage = () => {
     page: paginationModel.page + 1,
     limit: paginationModel.pageSize,
   };
-
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
@@ -46,7 +47,7 @@ const BookManagementPage = () => {
 
   const handleDelete = async () => {
     try {
-      const res = await deleteBook(deleteId).unwrap();
+      const res = await deleteBook(selectedData?._id).unwrap();
       // console.log(res);
       if (res?.success) {
         toast.success(res?.message || "Book deleted successfully!!!");
@@ -57,6 +58,25 @@ const BookManagementPage = () => {
       // console.error(err.message);
       toast.error(err?.message || "Failed to delete book!!!");
     }
+  };
+
+  // Add Modal Open
+  const openAddModal = () => {
+    setSelectedData(null);
+    setIsModalOpen(true);
+  };
+
+  // Edit Modal Open
+  const openEditModal = (data: any) => {
+    console.log(data);
+    setSelectedData(data);
+    setIsModalOpen(true);
+  };
+
+  // Delete Modal Open
+  const openDeleteModal = (data: any) => {
+    setDeleteModalOpen(true);
+    setSelectedData(data);
   };
 
   const columns: GridColDef[] = [
@@ -72,7 +92,11 @@ const BookManagementPage = () => {
               marginBottom: "2px",
             }}
           >
-            <Image alt="Book image" src={row?.image} width={50} height={50} />;
+            {row?.image ? (
+              <Image alt="Image" src={row?.image} width={50} height={50} />
+            ) : (
+              <Image alt="Image" src={avatar} width={50} height={50} />
+            )}
           </Box>
         );
       },
@@ -99,22 +123,10 @@ const BookManagementPage = () => {
       align: "center",
       renderCell: ({ row }) => {
         return (
-          <Box>
-            <IconButton
-              onClick={() => {
-                setDeleteModalOpen(true);
-                setDeleteId(row?._id);
-              }}
-              aria-label="delete"
-            >
-              <DeleteIcon sx={{ color: "red" }} />
-            </IconButton>
-            <Link href={`/dashboard/admin/library-management/edit/${row._id}`}>
-              <IconButton aria-label="delete">
-                <EditIcon />
-              </IconButton>
-            </Link>
-          </Box>
+          <EditDeleteButton
+            onEdit={() => openEditModal(row)}
+            onDelete={() => openDeleteModal(row)}
+          />
         );
       },
     },
@@ -128,8 +140,12 @@ const BookManagementPage = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => setIsModalOpen(true)}>Create Book</Button>
-        <CreateBookModal open={isModalOpen} setOpen={setIsModalOpen} />
+        <Button onClick={() => openAddModal()}>Create Book</Button>
+        <BookModal
+          open={isModalOpen}
+          setOpen={setIsModalOpen}
+          data={selectedData}
+        />
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"

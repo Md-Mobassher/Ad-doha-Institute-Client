@@ -5,29 +5,31 @@ import DohaSelectField from "@/components/form/DohaSelectField";
 import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenModal";
 import { useGetAllAuthorsQuery } from "@/redux/features/admin/authorManagementApi";
 import { useGetAllBookcategorysQuery } from "@/redux/features/admin/bookCategoryManagementApi";
-import { useCreateBookMutation } from "@/redux/features/admin/bookManagementApi";
+import {
+  useCreateBookMutation,
+  useUpdateBookMutation,
+} from "@/redux/features/admin/bookManagementApi";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
-import { Button, CircularProgress, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import DohaDatePicker from "@/components/form/DohaDatePicker";
 import { FormatOptions, LanguageOptions } from "@/constant/global";
-import { dateFormatter } from "@/utils/dateFormatter";
 import { TAuthor, IItem, TBookcategory } from "@/type";
 import SubmitButton from "@/components/common/SubmitButton";
 
 type TProps = {
+  data?: any;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const CreateBookModal = ({ open, setOpen }: TProps) => {
+const BookModal = ({ open, setOpen, data }: TProps) => {
   const [createBook, { isLoading: isCreating }] = useCreateBookMutation();
-  const { data: authorData, isLoading: authorLoading } = useGetAllAuthorsQuery(
-    {}
-  );
-  const { data: bookCategoryData, isLoading: categoryLoading } =
-    useGetAllBookcategorysQuery({});
+  const [updateBook, { isLoading: isUpdating }] = useUpdateBookMutation();
+
+  const { data: authorData } = useGetAllAuthorsQuery({});
+  const { data: bookCategoryData } = useGetAllBookcategorysQuery({});
 
   const categories = bookCategoryData?.data?.map((category: TBookcategory) => ({
     label: category?.categoryName,
@@ -38,15 +40,44 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
     value: author?._id,
   }));
 
-  // console.log(authors, bookCategoryData?.Bookcategorys);
   const handleFormSubmit = async (values: FieldValues) => {
-    const imageUrl = await uploadImageToCloudinary(values.file);
-    if (!imageUrl) {
-      toast.error("Failed to upload image!!!");
-    }
-    let newBook;
-    imageUrl
-      ? (newBook = {
+    try {
+      let result;
+      let imageUrl = data ? data?.image : "";
+      if (values.file) {
+        imageUrl = await uploadImageToCloudinary(values.file);
+        if (!imageUrl) {
+          toast.error(`Failed to upload image! Please try again.`);
+        }
+      }
+      delete values.file;
+      console.log(values);
+      if (data) {
+        const id = data._id;
+        const updatedData = {
+          title: values.title,
+          category: values.category,
+          authors: values.authors,
+          image: imageUrl || "",
+          url: values.url,
+          publishedDate: values.publishedDate,
+          publisher: values.publisher,
+          description: values.description,
+          price: Number(values.price) || 0,
+          stock: Number(values.stock) || 0,
+          language: values.language || "Bangla",
+          pageCount: Number(values.pageCount) || 1,
+          format: values.format || "Ebook",
+        };
+
+        console.log("update", updatedData);
+        result = await updateBook({ id, updatedData }).unwrap();
+        console.log("edit", result);
+        if (result?.success) {
+          toast.success(result?.message || "Book Updated Successfully!!!");
+        }
+      } else {
+        const newOpinion = {
           title: values.title,
           category: values.category,
           authors: values.authors,
@@ -60,55 +91,43 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
           language: values.language || "Bangla",
           pageCount: Number(values.pageCount) || 1,
           format: values.format || "Ebook",
-        })
-      : (newBook = {
-          title: values.title,
-          category: values.category,
-          authors: values.authors,
-          url: values.url,
-          publishedDate: dateFormatter(values.publishedDate),
-          publisher: values.publisher,
-          description: values.description,
-          price: Number(values.price) || 0,
-          stock: Number(values.stock) || 0,
-          language: values.language || "Bangla",
-          pageCount: Number(values.pageCount) || 1,
-          format: values.format || "Ebook",
-        });
-    console.log("newBook", newBook);
-    try {
-      const res = await createBook(newBook).unwrap();
-      // console.log(res);
-      if (res?.success) {
-        toast.success(res.message || "Book created successfully!!!");
-        setOpen(false);
-      } else {
-        toast.error(res.message || "Failed to create Book!!!");
+        };
+
+        result = await createBook(newOpinion).unwrap();
+        // console.log("add", result);
+        if (result?.success) {
+          toast.success(result?.message || "Book created successfully!!!");
+        }
       }
     } catch (err: any) {
-      toast.error(err.message || "Failed to create Book!!!");
-      // console.error(err);
+      toast.error(err?.message || "Something went wrong!!!");
+    } finally {
+      setOpen(false);
     }
   };
 
   const defaultValues = {
-    title: "",
-    category: "",
-    authors: "",
-    image: "",
-    url: "",
-    publishedDate: "",
-    publisher: "",
-    description: "",
-    price: "",
-    stock: "",
-    language: "",
-    pageCount: "",
-    format: "",
+    title: data ? data?.title : "",
+    category: data ? data?.category?._id : "",
+    authors: data ? data?.authors?.map((item: any) => item?._id) : "",
+    image: data ? data?.image : "",
+    url: data ? data?.url : "",
+    publishedDate: data ? data?.publishedDate : "",
+    publisher: data ? data?.publisher : "",
+    description: data ? data?.description : "",
+    price: data ? data?.price : "",
+    stock: data ? data?.stock : "",
+    language: data ? data?.language : "",
+    pageCount: data ? data?.pageCount : "",
+    format: data ? data?.format : "",
   };
 
   return (
-    <DohaFullScreenModal open={open} setOpen={setOpen} title="Create New Book">
+    <DohaFullScreenModal
+      open={open}
+      setOpen={setOpen}
+      title={`${data ? "Update Book" : "Create Book"}`}
+    >
       <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
         <Grid container spacing={3} my={1}>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -189,7 +208,7 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
               label="Language"
               fullWidth={true}
               items={LanguageOptions as IItem[] | []}
-              name="Language"
+              name="language"
             />
           </Grid>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -222,11 +241,15 @@ const CreateBookModal = ({ open, setOpen }: TProps) => {
               name="file"
             />
           </Grid>
-        </Grid>
-        <SubmitButton label="Create Book" loading={isCreating} />
+        </Grid>{" "}
+        <SubmitButton
+          label="Book"
+          loading={isCreating || isUpdating}
+          data={data}
+        />
       </DohaForm>
     </DohaFullScreenModal>
   );
 };
 
-export default CreateBookModal;
+export default BookModal;
