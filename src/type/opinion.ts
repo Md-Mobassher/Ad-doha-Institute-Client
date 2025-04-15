@@ -1,4 +1,4 @@
-export interface IOpinion {
+export type TOpinion = {
   _id: string;
   name: string;
   image: string;
@@ -7,4 +7,4 @@ export interface IOpinion {
   position: number;
   createdAt: string;
   updatedAt: string;
-}
+};

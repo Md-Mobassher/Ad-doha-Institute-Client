@@ -1,28 +1,22 @@
 "use client";
 
-import { Button, Chip, IconButton, Stack, TextField } from "@mui/material";
+import { Button, Chip, Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import Link from "next/link";
-import LoadingPage from "@/app/loading";
 import { useDebounced } from "@/redux/hooks";
 import DeleteModal from "@/components/common/DeletModal";
-import {
-  useDeleteEnrolledCourseMutation,
-  useGetAllEnrolledCoursesQuery,
-} from "@/redux/features/admin/enrolledCourseManagementApi";
+import { useDeleteEnrolledCourseMutation } from "@/redux/features/admin/enrolledCourseManagementApi";
 import { toast } from "sonner";
-import CreateTransactionModal from "./components/CreateTransactionModal";
+import TransactionModal from "./TransactionModal";
 import { useGetAllTransactionsQuery } from "@/redux/features/admin/transactionManagementApi";
+import EditDeleteButton from "@/components/common/EditDeleteButton";
 
 const TransactionPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [deleteId, setDeleteId] = useState<string>("");
+  const [selectedData, setSelectedData] = useState<any>({});
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
     page: 0,
     pageSize: 25,
@@ -31,7 +25,6 @@ const TransactionPage = () => {
     page: paginationModel.page + 1,
     limit: paginationModel.pageSize,
   };
-
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
@@ -41,25 +34,44 @@ const TransactionPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  const { data, isLoading } = useGetAllTransactionsQuery({ ...query });
-  const [deleteCourse] = useDeleteEnrolledCourseMutation();
-  if (!data) {
-    <p>No Data Found</p>;
-  }
-  const transactions = data?.Transactions;
-  const meta = data?.meta;
-  const handleDelete = async () => {
-    // console.log(id);
-    try {
-      const res = await deleteCourse(deleteId).unwrap();
+  const { data: transactions, isLoading } = useGetAllTransactionsQuery({
+    ...query,
+  });
+  const [deleteCourse, { isLoading: isDeleting }] =
+    useDeleteEnrolledCourseMutation();
 
-      console.log(res);
-      if (res?.data === null) {
-        toast.success("Transaction deleted successfully!!!");
+  const handleDelete = async () => {
+    try {
+      const res = await deleteCourse(selectedData?._id).unwrap();
+      // console.log(res);
+      if (res?.success) {
+        toast.success(res?.message || "Transaction deleted successfully!!!");
+        setSelectedData(null);
+      } else {
+        toast.error(res.message || "Failed to delete Transaction!!!");
       }
     } catch (err: any) {
-      toast.error(err || "Failed to Delete Transaction!!!");
+      toast.error(err.message || "Failed to delete Transaction!!!");
+      setSelectedData(null);
     }
+  };
+
+  // Add Modal Open
+  const openAddModal = () => {
+    setSelectedData(null);
+    setIsModalOpen(true);
+  };
+
+  // Edit Modal Open
+  const openEditModal = (data: any) => {
+    setSelectedData(data);
+    setIsModalOpen(true);
+  };
+
+  // Delete Modal Open
+  const openDeleteModal = (data: any) => {
+    setDeleteModalOpen(true);
+    setSelectedData(data);
   };
 
   const columns: GridColDef[] = [
@@ -160,22 +172,10 @@ const TransactionPage = () => {
       align: "center",
       renderCell: ({ row }) => {
         return (
-          <Box>
-            <IconButton
-              onClick={() => {
-                setDeleteModalOpen(true);
-                setDeleteId(row?._id);
-              }}
-              aria-label="delete"
-            >
-              <DeleteIcon sx={{ color: "red" }} />
-            </IconButton>
-            <Link href={`/dashboard/admin/transaction/edit/${row._id}`}>
-              <IconButton aria-label="delete">
-                <EditIcon />
-              </IconButton>
-            </Link>
-          </Box>
+          <EditDeleteButton
+            onEdit={() => openEditModal(row)}
+            onDelete={() => openDeleteModal(row)}
+          />
         );
       },
     },
@@ -189,37 +189,40 @@ const TransactionPage = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => setIsModalOpen(true)}>Create Transaction</Button>
-        <CreateTransactionModal open={isModalOpen} setOpen={setIsModalOpen} />
+        <Button onClick={() => openAddModal()}>Create Transaction</Button>
+        <TransactionModal
+          open={isModalOpen}
+          setOpen={setIsModalOpen}
+          data={selectedData}
+        />
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"
           placeholder="Search Transaction"
         />
       </Stack>
-      {!isLoading ? (
-        <Box
-          my={2}
-          sx={{
-            overflow: "auto",
-          }}
-        >
-          <DataGrid
-            rows={transactions}
-            columns={columns}
-            getRowId={(row) => row._id}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            rowCount={meta?.total || 0}
-            paginationMode="server"
-            loading={isLoading}
-            pageSizeOptions={[25, 50, 100]}
-          />
-        </Box>
-      ) : (
-        <LoadingPage />
-      )}
+
+      <Box
+        my={2}
+        sx={{
+          overflow: "auto",
+        }}
+      >
+        <DataGrid
+          rows={transactions?.data || []}
+          columns={columns}
+          getRowId={(row) => row._id}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          rowCount={transactions?.meta?.total || 0}
+          paginationMode="server"
+          loading={isLoading || isDeleting}
+          pageSizeOptions={[25, 50, 100]}
+        />
+      </Box>
+
       <DeleteModal
+        loading={isDeleting}
         open={deleteModalOpen}
         setOpen={setDeleteModalOpen}
         onDeleteConfirm={handleDelete}

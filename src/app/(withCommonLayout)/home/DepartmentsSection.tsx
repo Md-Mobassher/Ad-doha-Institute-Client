@@ -6,13 +6,13 @@ import { useState, useEffect } from "react";
 import DohaContainer from "@/components/ui/DohaContainer";
 import Title from "@/components/ui/Title";
 import CourseTitle3 from "../courses/components/CourseTitle3";
-import { IDepartment } from "@/type";
+import { TDepartment } from "@/type";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 const DepartmentsSection: React.FC = () => {
   const router = useRouter();
-  const [departments, setDepartments] = useState<IDepartment[]>([]);
+  const [departments, setDepartments] = useState<TDepartment[]>([]);
   const t = useTranslations("HomePage");
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const DepartmentsSection: React.FC = () => {
 
         <Box sx={{ flexGrow: 1, p: 2 }} width="100%">
           <Grid container spacing={2}>
-            {departments.map((department: IDepartment) => (
+            {departments.map((department: TDepartment) => (
               <Grid
                 key={department._id}
                 {...{ xs: 6, sm: 4, md: 2.4, lg: 2.4, xl: 2.4 }}

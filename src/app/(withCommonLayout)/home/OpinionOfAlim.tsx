@@ -2,7 +2,7 @@ import DohaContainer from "@/components/ui/DohaContainer";
 import Title from "@/components/ui/Title";
 import Opinions from "./Opinions";
 import { Box } from "@mui/material";
-import { IOpinion } from "@/type";
+import { TOpinion } from "@/type";
 import { getTranslations } from "next-intl/server";
 
 const OpinionOfAlim = async () => {
@@ -17,7 +17,7 @@ const OpinionOfAlim = async () => {
   );
   const { data } = await res.json();
   // console.log(data);
-  const opinions = (data as IOpinion[]) || [];
+  const opinions = (data as TOpinion[]) || [];
   return (
     <Box>
       <DohaContainer>

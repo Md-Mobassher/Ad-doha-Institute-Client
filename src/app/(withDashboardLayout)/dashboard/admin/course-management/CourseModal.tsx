@@ -5,14 +5,18 @@ import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
 import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenModal";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
-import { Button, CircularProgress, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { useCreateCourseMutation } from "@/redux/features/admin/courseManagementApi";
+import {
+  useCreateCourseMutation,
+  useUpdateCourseMutation,
+} from "@/redux/features/admin/courseManagementApi";
 import { useGetAllAcademicDepartmentsQuery } from "@/redux/features/admin/departmentManagementApi";
 import { useState } from "react";
-import { IItem } from "@/type";
+import { TDepartment, TItem } from "@/type";
 import dynamic from "next/dynamic";
+import SubmitButton from "@/components/common/SubmitButton";
 
 const RichTextEditor = dynamic(
   () => import("@/components/form/RichTextEditor"),
@@ -22,18 +26,21 @@ const RichTextEditor = dynamic(
 );
 
 type TProps = {
+  data?: any;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const CreateCourseModal = ({ open, setOpen }: TProps) => {
-  const [editorContent, setEditorContent] = useState<string>("");
+const CourseModal = ({ open, setOpen, data }: TProps) => {
   const [content, setContent] = useState("");
-  const [createCourse, { isLoading: creating }] = useCreateCourseMutation();
-  const { data: departmentData, isLoading: departmentLoading } =
-    useGetAllAcademicDepartmentsQuery({});
 
-  const departments = departmentData?.departments?.map((department) => ({
+  // mutation
+  const [createCourse, { isLoading: isCreating }] = useCreateCourseMutation();
+  const [updateCourse, { isLoading: isUpdating }] = useUpdateCourseMutation();
+
+  const { data: departmentData } = useGetAllAcademicDepartmentsQuery({});
+
+  const departments = departmentData?.data?.map((department: TDepartment) => ({
     label: department.name,
     value: department?._id,
   }));
@@ -42,81 +49,105 @@ const CreateCourseModal = ({ open, setOpen }: TProps) => {
     setContent(content);
   };
 
-  // console.log(authors, CourseCategoryData?.Coursecategorys);
   const handleFormSubmit = async (values: FieldValues) => {
-    let imageUrl = "";
-    if (values.file) {
-      imageUrl = await uploadImageToCloudinary(values.file);
-      if (!imageUrl) {
-        toast.error("Failed to upload image!!!");
-        // return;
-      }
-    }
-
-    const newCourse = {
-      academicDepartment: values.academicDepartment,
-      courseName: values.courseName,
-      slug: values.slug,
-      medium: values.medium,
-      totalClasses: values.totalClasses,
-      courseDuration: values.courseDuration,
-      schedule: values.schedule,
-      classDuration: values.classDuration,
-      fee: {
-        total: values.fee.total,
-        admission: values.fee.admission,
-        monthly: values.fee.monthly,
-      },
-      feePaymentMethod: values.feePaymentMethod,
-      contact: values.contact,
-      // courseDescription: content || "",
-      courseImage:
-        imageUrl ||
-        "https://res.cloudinary.com/dvt8faj0s/image/upload/v1732036461/pngtree-no-image_wgj8uf.jpg",
-    };
-
-    console.log("newCourse", newCourse);
     try {
-      const res = await createCourse(newCourse).unwrap();
-      console.log(res);
-      if (res?._id) {
-        toast.success("Course created successfully!!!");
-        setOpen(false);
-        setEditorContent("");
+      let result;
+      let imageUrl = data ? data?.image : "";
+      if (values.file) {
+        imageUrl = await uploadImageToCloudinary(values.file);
+        if (!imageUrl) {
+          toast.error(`Failed to upload image! Please try again.`);
+        }
+      }
+      delete values.file;
+      console.log(values);
+      if (data) {
+        const id = data._id;
+        const updatedData = {
+          academicDepartment: values.academicDepartment,
+          courseName: values.courseName,
+          slug: values.slug,
+          medium: values.medium,
+          totalClasses: values.totalClasses,
+          courseDuration: values.courseDuration,
+          schedule: values.schedule,
+          classDuration: values.classDuration,
+          fee: {
+            total: values.fee.total,
+            admission: values.fee.admission,
+            monthly: values.fee.monthly,
+          },
+          feePaymentMethod: values.feePaymentMethod,
+          contact: values.contact,
+          courseDescription: content || data ? data?.name : "",
+          courseImage:
+            imageUrl ||
+            "https://res.cloudinary.com/dvt8faj0s/image/upload/v1732036461/pngtree-no-image_wgj8uf.jpg",
+        };
+
+        result = await updateCourse({ id, updatedData }).unwrap();
+        // console.log("edit", result);
+        if (result?.success) {
+          toast.success(result?.message || "Book Updated Successfully!!!");
+        }
+      } else {
+        const newCourse = {
+          academicDepartment: values.academicDepartment,
+          courseName: values.courseName,
+          slug: values.slug,
+          medium: values.medium,
+          totalClasses: values.totalClasses,
+          courseDuration: values.courseDuration,
+          schedule: values.schedule,
+          classDuration: values.classDuration,
+          fee: {
+            total: values.fee.total,
+            admission: values.fee.admission,
+            monthly: values.fee.monthly,
+          },
+          feePaymentMethod: values.feePaymentMethod,
+          contact: values.contact,
+          courseDescription: content || data ? data?.name : "",
+          courseImage:
+            imageUrl ||
+            "https://res.cloudinary.com/dvt8faj0s/image/upload/v1732036461/pngtree-no-image_wgj8uf.jpg",
+        };
+        result = await createCourse(newCourse).unwrap();
+        // console.log("add", result);
+        if (result?.success) {
+          toast.success(result?.message || "Book created successfully!!!");
+        }
       }
     } catch (err: any) {
-      toast.error(err.data || "Failed to create Course!!!");
-      // console.error(err);
+      toast.error(err?.message || "Something went wrong!!!");
+    } finally {
+      setOpen(false);
     }
   };
 
   const defaultValues = {
-    academicDepartment: "",
-    courseName: "",
-    slug: "",
-    medium: "",
-    totalClasses: "",
-    courseDuration: "",
-    schedule: "",
-    classDuration: "",
+    academicDepartment: data ? data?.academicDepartment : "",
+    courseName: data ? data?.courseName : "",
+    slug: data ? data?.slug : "",
+    medium: data ? data?.medium : "",
+    totalClasses: data ? data?.totalClasses : "",
+    courseDuration: data ? data?.courseDuration : "",
+    schedule: data ? data?.schedule : "",
+    classDuration: data ? data?.classDuration : "",
     fee: {
-      total: "",
-      admission: "",
-      monthly: "",
+      total: data ? data?.fee?.total : "",
+      admission: data ? data?.fee?.admission : "",
+      monthly: data ? data?.fee?.monthly : "",
     },
-    feePaymentMethod: "",
-    contact: "",
+    feePaymentMethod: data ? data?.feePaymentMethod : "",
+    contact: data ? data?.contact : "",
   };
-
-  // if (authorLoading || categoryLoading) {
-  //   return <LoadingPage />;
-  // }
 
   return (
     <DohaFullScreenModal
       open={open}
       setOpen={setOpen}
-      title="Create New Course"
+      title={`${data ? "Update Course" : "Create Course"}`}
     >
       <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
         <Grid container spacing={3} my={1}>
@@ -134,7 +165,7 @@ const CreateCourseModal = ({ open, setOpen }: TProps) => {
             <DohaSelectField
               label="Department"
               fullWidth={true}
-              items={departments as IItem[]}
+              items={departments as TItem[]}
               name="academicDepartment"
               required
             />
@@ -258,30 +289,14 @@ const CreateCourseModal = ({ open, setOpen }: TProps) => {
             />
           </Grid>
         </Grid>
-        {creating ? (
-          <Button
-            disabled
-            fullWidth
-            sx={{
-              margin: "10px 0px",
-            }}
-          >
-            <CircularProgress thickness={6} />;
-          </Button>
-        ) : (
-          <Button
-            sx={{
-              margin: "10px 0px",
-            }}
-            fullWidth
-            type="submit"
-          >
-            Create New Course
-          </Button>
-        )}
+        <SubmitButton
+          label="Course"
+          loading={isCreating || isUpdating}
+          data={data}
+        />
       </DohaForm>
     </DohaFullScreenModal>
   );
 };
 
-export default CreateCourseModal;
+export default CourseModal;

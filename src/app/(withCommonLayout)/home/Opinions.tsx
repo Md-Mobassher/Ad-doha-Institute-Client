@@ -3,11 +3,11 @@
 import { Box } from "@mui/material";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { IOpinion } from "@/type";
+import { TOpinion } from "@/type";
 import MemberCard from "@/components/ui/OpinionCard";
 
 interface OpinionProps {
-  opinions: IOpinion[];
+  opinions: TOpinion[];
 }
 
 const Opinions = ({ opinions }: OpinionProps) => {

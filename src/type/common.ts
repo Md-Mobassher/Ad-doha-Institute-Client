@@ -58,7 +58,7 @@ export type TCardDetails = {
   link?: string;
 };
 
-export type IMeta = {
+export type TMeta = {
   page: number;
   limit: number;
   total: number;
@@ -80,17 +80,17 @@ export type ResponseSuccessType = {
   message?: string;
   statusCode?: number;
   data: any;
-  meta?: IMeta;
+  meta?: TMeta;
 };
 
-export type IGenericErrorResponse = {
+export type TGenericErrorResponse = {
   success?: boolean;
   statusCode: number;
   message: string;
-  errorSources: IGenericErrorMessage[];
+  errorSources: TGenericErrorMessage[];
 };
 
-export type IGenericErrorMessage = {
+export type TGenericErrorMessage = {
   path: string | number;
   message: string;
 };
@@ -114,7 +114,7 @@ export type TOpinion = {
   opinion: string;
 };
 
-export interface IItem {
+export type TItem = {
   label: string;
   value: string | number;
-}
+};

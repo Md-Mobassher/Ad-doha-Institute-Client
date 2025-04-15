@@ -1,4 +1,4 @@
-import { IItem } from "@/type";
+import { TItem } from "@/type";
 import {
   MenuItem,
   SxProps,
@@ -19,7 +19,7 @@ interface ITextField {
   required?: boolean;
   fullWidth?: boolean;
   sx?: SxProps;
-  items?: IItem[];
+  items?: TItem[];
   isMulti?: boolean;
   onChange?: (e: any) => void;
 }

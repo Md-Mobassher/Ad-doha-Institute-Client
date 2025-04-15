@@ -6,7 +6,7 @@ import DohaSelectField from "@/components/form/DohaSelectField";
 import DohaContainer from "@/components/ui/DohaContainer";
 import PageTitle from "@/components/ui/PageTitle";
 import { paymentMethodOptions } from "@/constant/global";
-import { IItem } from "@/type";
+import { TItem } from "@/type";
 import {
   Box,
   Button,
@@ -239,7 +239,7 @@ const PaymentPage = () => {
                 <DohaSelectField
                   label="Payment Method"
                   fullWidth={true}
-                  items={paymentMethodOptions as IItem[]}
+                  items={paymentMethodOptions as TItem[]}
                   name="paymentMethod"
                   required
                 />

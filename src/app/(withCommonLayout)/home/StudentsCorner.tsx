@@ -1,7 +1,7 @@
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import DohaContainer from "@/components/ui/DohaContainer";
-import { IDepartment } from "@/type";
+import { TDepartment } from "@/type";
 import Title from "@/components/ui/Title";
 
 const StudentsCornerSection: React.FC = async () => {
@@ -14,7 +14,7 @@ const StudentsCornerSection: React.FC = async () => {
     }
   );
   const { data } = await res.json();
-  const departments = (data as IDepartment[]) || [];
+  const departments = (data as TDepartment[]) || [];
   return (
     <Box
       sx={{
@@ -48,7 +48,7 @@ const StudentsCornerSection: React.FC = async () => {
             }}
           >
             {departments &&
-              departments?.map((department: IDepartment) => (
+              departments?.map((department: TDepartment) => (
                 <Grid
                   key={department?._id}
                   {...{ xs: 6, sm: 4, md: 2.4, lg: 2.4, xl: 2.4 }}

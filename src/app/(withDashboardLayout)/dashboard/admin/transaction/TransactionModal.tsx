@@ -4,34 +4,41 @@ import DohaSelectField from "@/components/form/DohaSelectField";
 import { Button, CircularProgress, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { IItem } from "@/type";
+import { TItem, TCourse } from "@/type";
 import DohaModal from "@/components/shared/DohaModal/DohaModal";
 
 import { useGetAllOfferedCoursesQuery } from "@/redux/features/admin/offeredCourseManagementApi";
 import { useGetAllStudentsQuery } from "@/redux/features/admin/studentManagementApi";
-import { useCreateTransactionByAdminMutation } from "@/redux/features/admin/transactionManagementApi";
+import {
+  useCreateTransactionByAdminMutation,
+  useUpdateTransactionMutation,
+} from "@/redux/features/admin/transactionManagementApi";
 import DohaInput from "@/components/form/DohaInput";
 import { paymentMethodOptions, paymentStatusOptions } from "@/constant/global";
 import { useState } from "react";
+import SubmitButton from "@/components/common/SubmitButton";
 
 type TProps = {
+  data?: any;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const CreateTransactionModal = ({ open, setOpen }: TProps) => {
+const TransactionModal = ({ open, setOpen, data }: TProps) => {
   const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
-  const { data: offeredCourseData, isLoading: offeredCourseLoading } =
-    useGetAllOfferedCoursesQuery({});
-  const { data: studentData, isLoading: facultyLoading } =
-    useGetAllStudentsQuery({});
-  const [createTransaction, { isLoading: creating }] =
+  const { data: offeredCourse } = useGetAllOfferedCoursesQuery({});
+  const { data: studentData } = useGetAllStudentsQuery({});
+  const [createTransaction, { isLoading: isCreating }] =
     useCreateTransactionByAdminMutation();
+  const [updateTransaction, { isLoading: isUpdating }] =
+    useUpdateTransactionMutation();
 
-  const offeredCourses = offeredCourseData?.offeredCourses?.map((course) => ({
-    label: course?.course?.courseName + " " + "(ব্যাচ-" + course?.batch + ")",
-    value: course?._id,
-  }));
+  const offeredCourses = offeredCourse?.data?.offeredCourses?.map(
+    (course: TCourse) => ({
+      label: course?.course?.courseName + " " + "(ব্যাচ-" + course?.batch + ")",
+      value: course?._id,
+    })
+  );
   const students = studentData?.students?.map((student) => ({
     label: student?.fullName,
     value: student?._id,
@@ -73,14 +80,18 @@ const CreateTransactionModal = ({ open, setOpen }: TProps) => {
   };
 
   return (
-    <DohaModal open={open} setOpen={setOpen} title="Create Transaction">
+    <DohaModal
+      open={open}
+      setOpen={setOpen}
+      title={`${data ? "Update Transaction" : "Create Transaction"}`}
+    >
       <DohaForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
         <Grid container spacing={3} my={1}>
           <Grid item lg={12} md={12} sm={12} xs={12}>
             <DohaSelectField
               label="Offered Course"
               fullWidth={true}
-              items={offeredCourses as IItem[]}
+              items={offeredCourses as TItem[]}
               name="offeredCourse"
               required
               onChange={handleCourseChange}
@@ -99,7 +110,7 @@ const CreateTransactionModal = ({ open, setOpen }: TProps) => {
             <DohaSelectField
               label="Student"
               fullWidth={true}
-              items={students as IItem[]}
+              items={students as TItem[]}
               name="studentId"
               required
             />
@@ -126,7 +137,7 @@ const CreateTransactionModal = ({ open, setOpen }: TProps) => {
             <DohaSelectField
               label="Payment Method"
               fullWidth={true}
-              items={paymentMethodOptions as IItem[]}
+              items={paymentMethodOptions as TItem[]}
               name="paymentMethod"
               required
             />
@@ -135,36 +146,20 @@ const CreateTransactionModal = ({ open, setOpen }: TProps) => {
             <DohaSelectField
               label="Payment Status"
               fullWidth={true}
-              items={paymentStatusOptions as IItem[]}
+              items={paymentStatusOptions as TItem[]}
               name="paymentStatus"
               required
             />
           </Grid>
         </Grid>
-        {creating ? (
-          <Button
-            disabled
-            fullWidth
-            sx={{
-              margin: "10px 0px",
-            }}
-          >
-            <CircularProgress thickness={6} />;
-          </Button>
-        ) : (
-          <Button
-            sx={{
-              margin: "10px 0px",
-            }}
-            fullWidth
-            type="submit"
-          >
-            Create Transaction
-          </Button>
-        )}
+        <SubmitButton
+          label="Transaction"
+          loading={isCreating || isUpdating}
+          data={data}
+        />
       </DohaForm>
     </DohaModal>
   );
 };
 
-export default CreateTransactionModal;
+export default TransactionModal;

@@ -1,6 +1,6 @@
 import { baseApi } from "@/redux/api/baseApi";
 import { tagTypes } from "@/redux/tag-Types";
-import { IMeta, ITransaction } from "@/type";
+import { TMeta, ITransaction } from "@/type";
 
 const transactionApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

@@ -1,5 +1,5 @@
 import { authAccessKey, authRefreshKey } from "@/constant/authkey";
-import { IGenericErrorResponse } from "@/type";
+import { TGenericErrorResponse } from "@/type";
 import { getCookie, removeCookie } from "@/utils/cookieHelper";
 import axios from "axios";
 import { toast } from "sonner";
@@ -63,7 +63,7 @@ instance.interceptors.response.use(
       duration: 4000,
     });
 
-    const responseObject: IGenericErrorResponse = {
+    const responseObject: TGenericErrorResponse = {
       success: false,
       statusCode: error?.response?.data?.statusCode || 500,
       message: error?.response?.data?.message || "Something went wrong!!!",

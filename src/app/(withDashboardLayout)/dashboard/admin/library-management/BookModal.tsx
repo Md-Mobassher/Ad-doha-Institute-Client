@@ -15,7 +15,7 @@ import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import DohaDatePicker from "@/components/form/DohaDatePicker";
 import { FormatOptions, LanguageOptions } from "@/constant/global";
-import { TAuthor, IItem, TBookcategory } from "@/type";
+import { TAuthor, TItem, TBookcategory } from "@/type";
 import SubmitButton from "@/components/common/SubmitButton";
 
 type TProps = {
@@ -51,7 +51,6 @@ const BookModal = ({ open, setOpen, data }: TProps) => {
         }
       }
       delete values.file;
-      console.log(values);
       if (data) {
         const id = data._id;
         const updatedData = {
@@ -70,9 +69,8 @@ const BookModal = ({ open, setOpen, data }: TProps) => {
           format: values.format || "Ebook",
         };
 
-        console.log("update", updatedData);
         result = await updateBook({ id, updatedData }).unwrap();
-        console.log("edit", result);
+        // console.log("edit", result);
         if (result?.success) {
           toast.success(result?.message || "Book Updated Successfully!!!");
         }
@@ -143,7 +141,7 @@ const BookModal = ({ open, setOpen, data }: TProps) => {
             <DohaSelectField
               label="Category"
               fullWidth={true}
-              items={categories as IItem[] | []}
+              items={categories as TItem[] | []}
               name="category"
               required
             />
@@ -152,7 +150,7 @@ const BookModal = ({ open, setOpen, data }: TProps) => {
             <DohaSelectField
               label="Authors"
               fullWidth={true}
-              items={authors as IItem[]}
+              items={authors as TItem[]}
               name="authors"
               isMulti={true}
               required
@@ -207,7 +205,7 @@ const BookModal = ({ open, setOpen, data }: TProps) => {
             <DohaSelectField
               label="Language"
               fullWidth={true}
-              items={LanguageOptions as IItem[] | []}
+              items={LanguageOptions as TItem[] | []}
               name="language"
             />
           </Grid>
@@ -223,7 +221,7 @@ const BookModal = ({ open, setOpen, data }: TProps) => {
             <DohaSelectField
               label="Format"
               fullWidth={true}
-              items={FormatOptions as IItem[] | []}
+              items={FormatOptions as TItem[] | []}
               name="format"
             />
           </Grid>

@@ -13,15 +13,16 @@ import {
   useDeleteAcademicDepartmentMutation,
   useGetAllAcademicDepartmentsQuery,
 } from "@/redux/features/admin/departmentManagementApi";
-import CreateDepartmentModal from "./components/CreateDepartmentModal";
+import DepartmentModal from "./DepartmentModal";
 import Image from "next/image";
 import DeleteModal from "@/components/common/DeletModal";
+import EditDeleteButton from "@/components/common/EditDeleteButton";
 
 const DepartmentManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [deleteId, setDeleteId] = useState<string>("");
+  const [selectedData, setSelectedData] = useState<any>({});
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
     page: 0,
     pageSize: 25,
@@ -30,7 +31,6 @@ const DepartmentManagementPage = () => {
     page: paginationModel.page + 1,
     limit: paginationModel.pageSize,
   };
-
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
@@ -40,17 +40,18 @@ const DepartmentManagementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
+  // mutation
   const { data: academicDepartments, isLoading } =
     useGetAllAcademicDepartmentsQuery({ ...query });
   const [deleteAcademicDepartment, { isLoading: isDeleting }] =
     useDeleteAcademicDepartmentMutation();
 
+  // handle delete
   const handleDelete = async () => {
-    // console.log(deleteId);
     try {
-      const res = await deleteAcademicDepartment(deleteId).unwrap();
+      const res = await deleteAcademicDepartment(selectedData?._id).unwrap();
       // console.log(res);
-      if (res.success) {
+      if (res?.success) {
         toast.success(
           res?.message || "Academic Department deleted successfully!!!"
         );
@@ -58,9 +59,28 @@ const DepartmentManagementPage = () => {
         toast.error(res?.message || "Failed to delete Academic Department!!!");
       }
     } catch (err: any) {
-      toast.error(err.message || "Failed to delete Academic Department!!!");
       // console.error(err.message);
+      toast.error(err?.message || "Failed to delete Academic Department!!!");
     }
+  };
+
+  // Add Modal Open
+  const openAddModal = () => {
+    setSelectedData(null);
+    setIsModalOpen(true);
+  };
+
+  // Edit Modal Open
+  const openEditModal = (data: any) => {
+    console.log(data);
+    setSelectedData(data);
+    setIsModalOpen(true);
+  };
+
+  // Delete Modal Open
+  const openDeleteModal = (data: any) => {
+    setDeleteModalOpen(true);
+    setSelectedData(data);
   };
 
   const columns: GridColDef[] = [
@@ -110,24 +130,10 @@ const DepartmentManagementPage = () => {
       align: "center",
       renderCell: ({ row }) => {
         return (
-          <Box>
-            <IconButton
-              onClick={() => {
-                setDeleteModalOpen(true);
-                setDeleteId(row._id);
-              }}
-              aria-label="delete"
-            >
-              <DeleteIcon sx={{ color: "red" }} />
-            </IconButton>
-            <Link
-              href={`/dashboard/admin/department-management/edit/${row._id}`}
-            >
-              <IconButton aria-label="delete">
-                <EditIcon />
-              </IconButton>
-            </Link>
-          </Box>
+          <EditDeleteButton
+            onEdit={() => openEditModal(row)}
+            onDelete={() => openDeleteModal(row)}
+          />
         );
       },
     },
@@ -141,10 +147,12 @@ const DepartmentManagementPage = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => setIsModalOpen(true)}>
-          Create New Department
-        </Button>
-        <CreateDepartmentModal open={isModalOpen} setOpen={setIsModalOpen} />
+        <Button onClick={() => openAddModal()}>Create New Department</Button>
+        <DepartmentModal
+          open={isModalOpen}
+          setOpen={setIsModalOpen}
+          data={selectedData}
+        />
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"

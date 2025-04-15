@@ -11,18 +11,19 @@ import LoadingPage from "@/app/loading";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
 import DeleteModal from "@/components/common/DeletModal";
-import CreateEnrolledCourseModal from "./components/CreateEnrolledCourseModal";
+import EnrolledCourseModal from "./EnrolledCourseModal";
 import {
   useDeleteEnrolledCourseMutation,
   useGetAllEnrolledCoursesQuery,
 } from "@/redux/features/admin/enrolledCourseManagementApi";
 import { toast } from "sonner";
+import EditDeleteButton from "@/components/common/EditDeleteButton";
 
 const EnrolledCourse = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [deleteId, setDeleteId] = useState<string>("");
+  const [selectedData, setSelectedData] = useState<any>({});
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
     page: 0,
     pageSize: 25,
@@ -31,7 +32,6 @@ const EnrolledCourse = () => {
     page: paginationModel.page + 1,
     limit: paginationModel.pageSize,
   };
-
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
@@ -41,25 +41,49 @@ const EnrolledCourse = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  const { data, isLoading } = useGetAllEnrolledCoursesQuery({ ...query });
-  const [deleteCourse] = useDeleteEnrolledCourseMutation();
-  if (!data) {
-    <p>No Data Found</p>;
-  }
-  const enrolledCourses = data?.EnrolledCourses;
-  const meta = data?.meta;
-  const handleDelete = async () => {
-    // console.log(id);
-    try {
-      const res = await deleteCourse(deleteId).unwrap();
+  // mutation
+  const { data: enrolledCourses, isLoading } = useGetAllEnrolledCoursesQuery({
+    ...query,
+  });
+  const [deleteCourse, { isLoading: isDeleting }] =
+    useDeleteEnrolledCourseMutation();
 
-      console.log(res);
-      if (res?.data === null) {
-        toast.success("Enrolled Course deleted successfully!!!");
+  // delete
+  const handleDelete = async () => {
+    try {
+      const res = await deleteCourse(selectedData?._id).unwrap();
+      // console.log(res);
+      if (res?.success) {
+        toast.success(
+          res?.message || "Enrolled Course deleted successfully!!!"
+        );
+        setSelectedData(null);
+      } else {
+        toast.error(res.message || "Failed to delete Enrolled Course!!!");
       }
     } catch (err: any) {
-      toast.error(err || "Failed to Delete Enrolled Course!!!");
+      toast.error(err.message || "Failed to delete Enrolled Course!!!");
+      setSelectedData(null);
     }
+  };
+
+  // Add Modal Open
+  const openAddModal = () => {
+    setSelectedData(null);
+    setIsModalOpen(true);
+  };
+
+  // Edit Modal Open
+  const openEditModal = (data: any) => {
+    console.log(data);
+    setSelectedData(data);
+    setIsModalOpen(true);
+  };
+
+  // Delete Modal Open
+  const openDeleteModal = (data: any) => {
+    setDeleteModalOpen(true);
+    setSelectedData(data);
   };
 
   const columns: GridColDef[] = [
@@ -160,22 +184,10 @@ const EnrolledCourse = () => {
       align: "center",
       renderCell: ({ row }) => {
         return (
-          <Box>
-            <IconButton
-              onClick={() => {
-                setDeleteModalOpen(true);
-                setDeleteId(row?._id);
-              }}
-              aria-label="delete"
-            >
-              <DeleteIcon sx={{ color: "red" }} />
-            </IconButton>
-            <Link href={`/dashboard/admin/enrolled-course/edit/${row._id}`}>
-              <IconButton aria-label="delete">
-                <EditIcon />
-              </IconButton>
-            </Link>
-          </Box>
+          <EditDeleteButton
+            onEdit={() => openEditModal(row)}
+            onDelete={() => openDeleteModal(row)}
+          />
         );
       },
     },
@@ -189,42 +201,36 @@ const EnrolledCourse = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => setIsModalOpen(true)}>
-          Create Enrolled Course
-        </Button>
-        <CreateEnrolledCourseModal
-          open={isModalOpen}
-          setOpen={setIsModalOpen}
-        />
+        <Button onClick={() => openAddModal()}>Create Enrolled Course</Button>
+        <EnrolledCourseModal open={isModalOpen} setOpen={setIsModalOpen} />
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"
           placeholder="Search Course"
         />
       </Stack>
-      {!isLoading ? (
-        <Box
-          my={2}
-          sx={{
-            overflow: "auto",
-          }}
-        >
-          <DataGrid
-            rows={enrolledCourses}
-            columns={columns}
-            getRowId={(row) => row._id}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            rowCount={meta?.total || 0}
-            paginationMode="server"
-            loading={isLoading}
-            pageSizeOptions={[25, 50, 100]}
-          />
-        </Box>
-      ) : (
-        <LoadingPage />
-      )}
+
+      <Box
+        my={2}
+        sx={{
+          overflow: "auto",
+        }}
+      >
+        <DataGrid
+          rows={enrolledCourses?.data || []}
+          columns={columns}
+          getRowId={(row) => row._id}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          rowCount={enrolledCourses?.meta?.total || 0}
+          paginationMode="server"
+          loading={isLoading || isDeleting}
+          pageSizeOptions={[25, 50, 100]}
+        />
+      </Box>
+
       <DeleteModal
+        loading={isDeleting}
         open={deleteModalOpen}
         setOpen={setDeleteModalOpen}
         onDeleteConfirm={handleDelete}

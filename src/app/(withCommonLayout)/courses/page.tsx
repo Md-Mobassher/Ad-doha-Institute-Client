@@ -3,7 +3,7 @@ import LoadingPage from "@/app/loading";
 import DohaContainer from "@/components/ui/DohaContainer";
 import Title from "@/components/ui/Title";
 import { useDebounced } from "@/redux/hooks";
-import { IDepartment, IOfferedCourse, TCourse } from "@/type";
+import { TDepartment, TOfferedCourse, TCourse } from "@/type";
 import { Delete } from "@mui/icons-material";
 import {
   Box,
@@ -154,7 +154,7 @@ const CoursePage = () => {
                 <Divider />
                 <ul className="space-y-1 mt-3 max-h-[250px] overflow-y-auto mb-4">
                   {departments &&
-                    departments?.data?.map((department: IDepartment) => (
+                    departments?.data?.map((department: TDepartment) => (
                       <li key={department?._id} className="flex items-center">
                         <Radio
                           size="medium"
@@ -214,7 +214,7 @@ const CoursePage = () => {
               <Divider />
               <ul className="space-y-1 mt-3 max-h-[250px] overflow-y-auto mb-4">
                 {departments &&
-                  departments?.data?.map((department: IDepartment) => (
+                  departments?.data?.map((department: TDepartment) => (
                     <li key={department._id} className="flex items-center">
                       <Radio
                         size="medium"
@@ -250,7 +250,7 @@ const CoursePage = () => {
           <main className="flex-1">
             {courses && courses?.length > 0 ? (
               <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 min-h-[300px]">
-                {courses?.data?.map((course: IOfferedCourse) => (
+                {courses?.data?.map((course: TOfferedCourse) => (
                   <Card
                     key={course?._id}
                     sx={{

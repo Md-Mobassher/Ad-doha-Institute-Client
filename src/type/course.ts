@@ -1,5 +1,5 @@
 import { TTeacher } from "./common";
-import { IDepartment } from "./department";
+import { TDepartment } from "./department";
 
 export interface TCourse {
   _id: string;
@@ -25,9 +25,9 @@ export interface TCourse {
   __v?: number;
 }
 
-export interface IOfferedCourse {
+export interface TOfferedCourse {
   _id?: string;
-  academicDepartment: IDepartment;
+  academicDepartment: TDepartment;
   course: TCourse;
   batch: string;
   faculty: TTeacher;
@@ -41,7 +41,7 @@ export interface IOfferedCourse {
   updatedAt?: string;
 }
 
-export type IEnrolledCourse = {
+export type TEnrolledCourse = {
   _id?: string;
   academicDepartment: string;
   offeredCourse: string;

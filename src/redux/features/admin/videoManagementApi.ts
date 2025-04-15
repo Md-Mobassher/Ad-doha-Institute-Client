@@ -1,6 +1,6 @@
 import { baseApi } from "../../api/baseApi";
 import { tagTypes } from "../../tag-Types";
-import { IMeta } from "../../../type/common";
+import { TMeta } from "../../../type/common";
 import { IVideo } from "@/type";
 
 const videosApi = baseApi.injectEndpoints({
