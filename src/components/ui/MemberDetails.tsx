@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { TTeacher } from "@/type";
+import { TOpinion, TTeacher } from "@/type";
 import { Box, Stack } from "@mui/material";
 import CardTitle from "./CardTitle";
 import CardSubTitle from "./CardSubTitle";
 import Details from "./Details";
 
 interface MemberDetailsProps {
-  member: TTeacher | null;
+  member: TTeacher | TOpinion | null;
 }
 
 const MemberDetails = ({ member }: MemberDetailsProps) => {

@@ -4,7 +4,7 @@ import DohaSelectField from "@/components/form/DohaSelectField";
 import { Button, CircularProgress, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { TItem, TCourse } from "@/type";
+import { TItem, TCourse, TOfferedCourse, TStudent } from "@/type";
 import DohaModal from "@/components/shared/DohaModal/DohaModal";
 
 import { useGetAllOfferedCoursesQuery } from "@/redux/features/admin/offeredCourseManagementApi";
@@ -34,12 +34,12 @@ const TransactionModal = ({ open, setOpen, data }: TProps) => {
     useUpdateTransactionMutation();
 
   const offeredCourses = offeredCourse?.data?.offeredCourses?.map(
-    (course: TCourse) => ({
+    (course: TOfferedCourse) => ({
       label: course?.course?.courseName + " " + "(ব্যাচ-" + course?.batch + ")",
       value: course?._id,
     })
   );
-  const students = studentData?.students?.map((student) => ({
+  const students = studentData?.students?.map((student: TStudent) => ({
     label: student?.fullName,
     value: student?._id,
   }));

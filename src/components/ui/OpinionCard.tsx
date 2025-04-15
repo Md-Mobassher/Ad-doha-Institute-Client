@@ -4,18 +4,20 @@ import Image from "next/image";
 import CardTitle from "@/components/ui/CardTitle";
 import CardSubTitle from "@/components/ui/CardSubTitle";
 import Details from "@/components/ui/Details";
-import { TTeacher } from "@/type";
+import { TOpinion, TTeacher } from "@/type";
 import { useState } from "react";
 import DohaModal from "../shared/DohaModal/DohaModal";
 import MemberDetails from "./MemberDetails";
 
 interface OpinionCardProps {
-  member: TTeacher;
+  member: TOpinion;
 }
 
 const OpinionCard = ({ member }: OpinionCardProps) => {
   const [viewDetails, setViewDetails] = useState<boolean>(false);
-  const [selectedMember, setSelectedMember] = useState<TTeacher | null>(null);
+  const [selectedMember, setSelectedMember] = useState<
+    TTeacher | TOpinion | null
+  >(null);
 
   const handleCloseModal = () => {
     setSelectedMember(null);

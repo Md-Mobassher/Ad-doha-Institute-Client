@@ -106,14 +106,6 @@ export type TTeacher = {
   navigate?: string;
 };
 
-export type TOpinion = {
-  _id: string;
-  name: string;
-  designation: string;
-  image: any;
-  opinion: string;
-};
-
 export type TItem = {
   label: string;
   value: string | number;

@@ -28,7 +28,7 @@ const Opinions = ({ opinions }: OpinionProps) => {
         className="mySwiper"
       >
         {opinions.length > 0 ? (
-          opinions.map((opinion) => (
+          opinions?.map((opinion) => (
             <SwiperSlide key={opinion?._id}>
               <MemberCard member={opinion} />
             </SwiperSlide>
