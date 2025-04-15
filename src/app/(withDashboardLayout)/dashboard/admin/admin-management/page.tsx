@@ -1,14 +1,10 @@
 "use client";
 
-import { Avatar, Button, IconButton, Stack, TextField } from "@mui/material";
+import { Avatar, Button, Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import AdminModal from "./components/AdminModal";
+import AdminModal from "./AdminModal";
 import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import Link from "next/link";
-import LoadingPage from "@/app/loading";
 import { toast } from "sonner";
 import {
   useDeleteAdminMutation,
@@ -16,12 +12,14 @@ import {
 } from "@/redux/features/admin/adminManagementApi";
 import { useDebounced } from "@/redux/hooks";
 import DeleteModal from "@/components/common/DeletModal";
+import EditDeleteButton from "@/components/common/EditDeleteButton";
+import avatar from "@/assets/avatar.webp";
 
 const AdminManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [deleteId, setDeleteId] = useState<string>("");
+  const [selectedData, setSelectedData] = useState<any>({});
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
     page: 0,
     pageSize: 25,
@@ -34,25 +32,48 @@ const AdminManagementPage = () => {
     searchQuery: searchTerm,
     delay: 600,
   });
+
   if (!!debouncedTerm) {
     query["searchTerm"] = searchTerm;
   }
+
+  // mutation
   const { data: admins, isLoading } = useGetAllAdminQuery({ ...query });
-  const [deleteAdmin] = useDeleteAdminMutation();
+  const [deleteAdmin, { isLoading: isDeleting }] = useDeleteAdminMutation();
 
-  // console.log(data);
-
+  // handle delete
   const handleDelete = async () => {
     try {
-      const res = await deleteAdmin(deleteId).unwrap();
+      const res = await deleteAdmin(selectedData?._id).unwrap();
       // console.log(res);
-      if (res === null) {
-        toast.success("Admin deleted successfully!!!");
+      if (res?.success) {
+        toast.success(res?.message || "Admin deleted successfully!!!");
+      } else {
+        toast.error(res?.message || "Failed to delete Admin!!!");
       }
     } catch (err: any) {
-      toast.error(err.message || "Failed to delete Admin!!!");
       // console.error(err.message);
+      toast.error(err?.message || "Failed to delete Admin!!!");
     }
+  };
+
+  // Add Modal Open
+  const openAddModal = () => {
+    setSelectedData(null);
+    setIsModalOpen(true);
+  };
+
+  // Edit Modal Open
+  const openEditModal = (data: any) => {
+    console.log(data);
+    setSelectedData(data);
+    setIsModalOpen(true);
+  };
+
+  // Delete Modal Open
+  const openDeleteModal = (data: any) => {
+    setDeleteModalOpen(true);
+    setSelectedData(data);
   };
 
   const columns: GridColDef[] = [
@@ -67,7 +88,7 @@ const AdminManagementPage = () => {
               marginTop: "5px",
             }}
           >
-            <Avatar alt="profile image" src={row.profileImg} />;
+            <Avatar alt="profile image" src={row?.profileImg || avatar} />;
           </Box>
         );
       },
@@ -90,25 +111,10 @@ const AdminManagementPage = () => {
             {row.id === "A-0001" ? (
               <></>
             ) : (
-              <>
-                {" "}
-                <IconButton
-                  onClick={() => {
-                    setDeleteModalOpen(true);
-                    setDeleteId(row._id);
-                  }}
-                  aria-label="delete"
-                >
-                  <DeleteIcon sx={{ color: "red" }} />
-                </IconButton>
-                <Link
-                  href={`/dashboard/admin/admin-management/edit/${row._id}`}
-                >
-                  <IconButton aria-label="delete">
-                    <EditIcon />
-                  </IconButton>
-                </Link>
-              </>
+              <EditDeleteButton
+                onEdit={() => openEditModal(row)}
+                onDelete={() => openDeleteModal(row)}
+              />
             )}
           </Box>
         );
@@ -118,47 +124,49 @@ const AdminManagementPage = () => {
 
   return (
     <Box>
-      <DeleteModal
-        open={deleteModalOpen}
-        setOpen={setDeleteModalOpen}
-        onDeleteConfirm={handleDelete}
-      />
-
       <Stack
         direction="row"
         justifyContent="space-between"
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => setIsModalOpen(true)}>Create New Admin</Button>
-        <AdminModal open={isModalOpen} setOpen={setIsModalOpen} />
+        <Button onClick={() => openAddModal()}>Create Admin</Button>
+        <AdminModal
+          open={isModalOpen}
+          setOpen={setIsModalOpen}
+          data={selectedData}
+        />
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"
           placeholder="Search Admin"
         />
       </Stack>
-      {!isLoading ? (
-        <Box
-          my={2}
-          sx={{
-            overflow: "auto",
-          }}
-        >
-          <DataGrid
-            rows={admins?.data}
-            columns={columns}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            rowCount={admins?.meta?.total || 0}
-            paginationMode="server"
-            loading={isLoading}
-            pageSizeOptions={[25, 50, 100]}
-          />
-        </Box>
-      ) : (
-        <LoadingPage />
-      )}
+
+      <Box
+        my={2}
+        sx={{
+          overflow: "auto",
+        }}
+      >
+        <DataGrid
+          rows={admins?.data}
+          columns={columns}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          rowCount={admins?.meta?.total || 0}
+          paginationMode="server"
+          loading={isLoading || isDeleting}
+          pageSizeOptions={[25, 50, 100]}
+        />
+      </Box>
+
+      <DeleteModal
+        loading={isDeleting}
+        open={deleteModalOpen}
+        setOpen={setDeleteModalOpen}
+        onDeleteConfirm={handleDelete}
+      />
     </Box>
   );
 };

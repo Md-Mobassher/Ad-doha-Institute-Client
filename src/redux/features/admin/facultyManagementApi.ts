@@ -7,7 +7,6 @@ const facultiesApi = baseApi.injectEndpoints({
       query: (data) => ({
         url: "/users/create-faculty",
         method: "POST",
-        contentType: "multipart/form-data",
         data,
       }),
       invalidatesTags: [tagTypes.faculty],
@@ -45,11 +44,11 @@ const facultiesApi = baseApi.injectEndpoints({
     }),
 
     updateFaculty: build.mutation({
-      query: (data) => {
+      query: ({ id, updatedData }) => {
         return {
-          url: `/faculties/${data.id}`,
+          url: `/faculties/${id}`,
           method: "PATCH",
-          data: data.values,
+          data: updatedData,
         };
       },
       invalidatesTags: [tagTypes.faculty],

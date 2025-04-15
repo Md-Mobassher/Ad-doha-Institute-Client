@@ -46,10 +46,10 @@ const studentsApi = baseApi.injectEndpoints({
     }),
 
     updateStudent: build.mutation({
-      query: ({ id, values }) => ({
+      query: ({ id, updatedData }) => ({
         url: `/${URL}/${id}`,
         method: "PATCH",
-        data: values,
+        data: updatedData,
       }),
       invalidatesTags: [tagTypes.student],
     }),

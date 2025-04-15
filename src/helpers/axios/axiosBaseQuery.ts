@@ -35,7 +35,7 @@ export const axiosBaseQuery =
       return { data: result?.data };
     } catch (axiosError) {
       const err = axiosError as AxiosError;
-
+      // console.log(err);
       // Ensure the error matches the expected shape
       return { error: err };
     }

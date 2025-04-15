@@ -63,8 +63,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.rewrite(new URL(`/dashboard/${role}`, request.url));
   }
 
-  // Check access permission
+  if (pathname === "/dashboard/change-password") {
+    return NextResponse.next(); // ✅ Allow access
+  }
+
   if (role && roleBasedPrivateRoutes[role]) {
+    // Check access permission
     const allowedRoutes = roleBasedPrivateRoutes[role];
     const isMatch = allowedRoutes.some((route) => pathname.match(route));
 

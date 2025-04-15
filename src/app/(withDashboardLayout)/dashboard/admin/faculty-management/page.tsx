@@ -1,27 +1,24 @@
 "use client";
 
-import { Avatar, Button, IconButton, Stack, TextField } from "@mui/material";
+import { Avatar, Button, Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import Link from "next/link";
-import LoadingPage from "@/app/loading";
 import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
 import {
   useDeleteFacultyMutation,
   useGetAllFacultyQuery,
 } from "@/redux/features/admin/facultyManagementApi";
-import CreateFacultyModal from "./components/FacultyModal";
+import FacultyModal from "./FacultyModal";
 import DeleteModal from "@/components/common/DeletModal";
+import EditDeleteButton from "@/components/common/EditDeleteButton";
 
 const FacultyManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [deleteId, setDeleteId] = useState<string>("");
+  const [selectedData, setSelectedData] = useState<any>({});
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
     page: 0,
     pageSize: 25,
@@ -30,8 +27,6 @@ const FacultyManagementPage = () => {
     page: paginationModel.page + 1,
     limit: paginationModel.pageSize,
   };
-  // console.log(searchTerm);
-
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
@@ -41,22 +36,43 @@ const FacultyManagementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  /* mutation */
+  // mutation
   const { data: faculties, isLoading } = useGetAllFacultyQuery({ ...query });
-  const [deleteFaculty] = useDeleteFacultyMutation();
+  const [deleteFaculty, { isLoading: isDeleting }] = useDeleteFacultyMutation();
 
+  // handle delete
   const handleDelete = async () => {
-    // console.log(id);
     try {
-      const res = await deleteFaculty(deleteId).unwrap();
-
+      const res = await deleteFaculty(selectedData?._id).unwrap();
       // console.log(res);
-      if (res?.id) {
-        toast.success("Faculty deleted successfully!!!");
+      if (res?.success) {
+        toast.success(res?.message || "Student deleted successfully!!!");
+      } else {
+        toast.error(res?.message || "Failed to delete Student!!!");
       }
     } catch (err: any) {
-      console.error(err.message);
+      // console.error(err.message);
+      toast.error(err?.message || "Failed to delete Student!!!");
     }
+  };
+
+  // Add Modal Open
+  const openAddModal = () => {
+    setSelectedData(null);
+    setIsModalOpen(true);
+  };
+
+  // Edit Modal Open
+  const openEditModal = (data: any) => {
+    console.log(data);
+    setSelectedData(data);
+    setIsModalOpen(true);
+  };
+
+  // Delete Modal Open
+  const openDeleteModal = (data: any) => {
+    setDeleteModalOpen(true);
+    setSelectedData(data);
   };
 
   const columns: GridColDef[] = [
@@ -90,22 +106,10 @@ const FacultyManagementPage = () => {
       align: "center",
       renderCell: ({ row }) => {
         return (
-          <Box>
-            <IconButton
-              onClick={() => {
-                setDeleteModalOpen(true);
-                setDeleteId(row?._id);
-              }}
-              aria-label="delete"
-            >
-              <DeleteIcon sx={{ color: "red" }} />
-            </IconButton>
-            <Link href={`/dashboard/admin/faculty-management/edit/${row._id}`}>
-              <IconButton aria-label="delete">
-                <EditIcon />
-              </IconButton>
-            </Link>
-          </Box>
+          <EditDeleteButton
+            onEdit={() => openEditModal(row)}
+            onDelete={() => openDeleteModal(row)}
+          />
         );
       },
     },
@@ -119,36 +123,39 @@ const FacultyManagementPage = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => setIsModalOpen(true)}>Create New Faculty</Button>
-        <CreateFacultyModal open={isModalOpen} setOpen={setIsModalOpen} />
+        <Button onClick={() => openAddModal()}>Create Faculty</Button>
+        <FacultyModal
+          open={isModalOpen}
+          setOpen={setIsModalOpen}
+          data={selectedData}
+        />
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"
           placeholder="Search Faculty"
         />
       </Stack>
-      {!isLoading ? (
-        <Box
-          my={2}
-          sx={{
-            overflow: "auto",
-          }}
-        >
-          <DataGrid
-            rows={faculties?.data || []}
-            columns={columns}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            rowCount={faculties?.meta?.total || 0}
-            paginationMode="server"
-            loading={isLoading}
-            pageSizeOptions={[25, 50, 100]}
-          />
-        </Box>
-      ) : (
-        <LoadingPage />
-      )}
+
+      <Box
+        my={2}
+        sx={{
+          overflow: "auto",
+        }}
+      >
+        <DataGrid
+          rows={faculties?.data || []}
+          columns={columns}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          rowCount={faculties?.meta?.total || 0}
+          paginationMode="server"
+          loading={isLoading || isDeleting}
+          pageSizeOptions={[25, 50, 100]}
+        />
+      </Box>
+
       <DeleteModal
+        loading={isDeleting}
         open={deleteModalOpen}
         setOpen={setDeleteModalOpen}
         onDeleteConfirm={handleDelete}

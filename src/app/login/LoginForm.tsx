@@ -46,10 +46,10 @@ const LoginForm = () => {
   const handleLogin = async (values: FieldValues) => {
     try {
       const result = await loginUser(values).unwrap();
-
+      // console.log(result);
       // Check for success correctly
       if (result?.success) {
-        toast.success(result?.message);
+        toast.success(result?.message || "User login successfull!!!");
 
         // Extract the access token correctly
         const accessToken = result.data.accessToken;
@@ -61,11 +61,9 @@ const LoginForm = () => {
 
         // Reset form & Navigate
         router.push("/dashboard");
-      } else {
-        toast.error(result?.message);
       }
     } catch (err: any) {
-      console.error("login error", err);
+      // console.error("login error", err);
       toast.error(err?.message);
     }
   };

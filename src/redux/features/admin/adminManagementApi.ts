@@ -44,11 +44,11 @@ const adminsApi = baseApi.injectEndpoints({
     }),
 
     updateAdmin: build.mutation({
-      query: (data) => {
+      query: ({ id, updatedData }) => {
         return {
-          url: `/admins/${data.id}`,
+          url: `/admins/${id}`,
           method: "PATCH",
-          data: data.values,
+          data: updatedData,
         };
       },
       invalidatesTags: [tagTypes.admin, tagTypes.user],

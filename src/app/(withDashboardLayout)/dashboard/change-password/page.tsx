@@ -25,7 +25,7 @@ const ChangePassword = () => {
     // console.log(values);
     try {
       const res = await changePassword(values);
-      // console.log(res);
+      console.log(res);
 
       if (res?.data?._id) {
         logoutUser(router);

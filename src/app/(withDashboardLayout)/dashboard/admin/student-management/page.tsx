@@ -7,21 +7,21 @@ import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Link from "next/link";
-import LoadingPage from "@/app/loading";
 import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
 import {
   useDeleteStudentMutation,
   useGetAllStudentsQuery,
 } from "@/redux/features/admin/studentManagementApi";
-import CreateStudentModal from "./components/StudentModal";
+import StudentModal from "./StudentModal";
 import DeleteModal from "@/components/common/DeletModal";
+import EditDeleteButton from "@/components/common/EditDeleteButton";
 
 const StudentManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [deleteId, setDeleteId] = useState<string>("");
+  const [selectedData, setSelectedData] = useState<any>({});
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
     page: 0,
     pageSize: 25,
@@ -30,7 +30,6 @@ const StudentManagementPage = () => {
     page: paginationModel.page + 1,
     limit: paginationModel.pageSize,
   };
-
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
@@ -44,18 +43,39 @@ const StudentManagementPage = () => {
   const { data: students, isLoading } = useGetAllStudentsQuery({ ...query });
   const [deleteStudent, { isLoading: isDeleting }] = useDeleteStudentMutation();
 
+  // handle delete
   const handleDelete = async () => {
-    // console.log(id);
     try {
-      const res = await deleteStudent(deleteId).unwrap();
-
+      const res = await deleteStudent(selectedData?._id).unwrap();
       // console.log(res);
       if (res?.success) {
         toast.success(res?.message || "Student deleted successfully!!!");
+      } else {
+        toast.error(res?.message || "Failed to delete Student!!!");
       }
     } catch (err: any) {
-      console.error(err.message);
+      // console.error(err.message);
+      toast.error(err?.message || "Failed to delete Student!!!");
     }
+  };
+
+  // Add Modal Open
+  const openAddModal = () => {
+    setSelectedData(null);
+    setIsModalOpen(true);
+  };
+
+  // Edit Modal Open
+  const openEditModal = (data: any) => {
+    console.log(data);
+    setSelectedData(data);
+    setIsModalOpen(true);
+  };
+
+  // Delete Modal Open
+  const openDeleteModal = (data: any) => {
+    setDeleteModalOpen(true);
+    setSelectedData(data);
   };
 
   const columns: GridColDef[] = [
@@ -89,22 +109,10 @@ const StudentManagementPage = () => {
       align: "center",
       renderCell: ({ row }) => {
         return (
-          <Box>
-            <IconButton
-              onClick={() => {
-                setDeleteModalOpen(true);
-                setDeleteId(row?._id);
-              }}
-              aria-label="delete"
-            >
-              <DeleteIcon sx={{ color: "red" }} />
-            </IconButton>
-            <Link href={`/dashboard/admin/student-management/edit/${row._id}`}>
-              <IconButton aria-label="delete">
-                <EditIcon />
-              </IconButton>
-            </Link>
-          </Box>
+          <EditDeleteButton
+            onEdit={() => openEditModal(row)}
+            onDelete={() => openDeleteModal(row)}
+          />
         );
       },
     },
@@ -118,8 +126,12 @@ const StudentManagementPage = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => setIsModalOpen(true)}>Create New Student</Button>
-        <CreateStudentModal open={isModalOpen} setOpen={setIsModalOpen} />
+        <Button onClick={() => openAddModal()}>Create Student</Button>
+        <StudentModal
+          open={isModalOpen}
+          setOpen={setIsModalOpen}
+          data={selectedData}
+        />
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"

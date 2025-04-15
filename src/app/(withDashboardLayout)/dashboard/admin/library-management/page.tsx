@@ -42,9 +42,11 @@ const BookManagementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
+  // mutation
   const { data: books, isLoading } = useGetAllBooksQuery({ ...query });
   const [deleteBook, { isLoading: isDeleting }] = useDeleteBookMutation();
 
+  // handle delete
   const handleDelete = async () => {
     try {
       const res = await deleteBook(selectedData?._id).unwrap();
