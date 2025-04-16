@@ -40,7 +40,7 @@ export default async function RootLayout({
 
   return (
     <Providers>
-      <html lang={locale} data-theme={"light"} suppressHydrationWarning>
+      <html lang={locale} data-theme={"light"} suppressHydrationWarning={true}>
         <body className={`${hindSiliguri.className}`}>
           <NextIntlClientProvider locale={locale} messages={messages}>
             <AppRouterCacheProvider>{children}</AppRouterCacheProvider>

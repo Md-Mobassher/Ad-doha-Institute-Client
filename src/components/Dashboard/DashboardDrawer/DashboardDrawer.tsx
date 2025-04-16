@@ -13,7 +13,10 @@ import SideBar from "../SideBar/SideBar";
 import { Avatar, Badge, Stack } from "@mui/material";
 import AccountMenu from "../AccountMenu/AccountMenu";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import { useGetMYProfileQuery } from "@/redux/features/myProfile";
+import { useGetMYProfileQuery } from "@/redux/features/myProfile/myProfile";
+import { useAppDispatch } from "@/redux/hooks";
+import { setProfile } from "@/redux/features/myProfile/profileSlice";
+import { useEffect } from "react";
 
 const drawerWidth = 220;
 
@@ -24,6 +27,7 @@ export default function DashboardDrawer({
 }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
+  const dispatch = useAppDispatch();
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -41,6 +45,12 @@ export default function DashboardDrawer({
   };
 
   const { data, isLoading } = useGetMYProfileQuery({});
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setProfile({ profile: data?.data }));
+    }
+  }, [dispatch, data]);
 
   return (
     <Box sx={{ display: "flex" }}>

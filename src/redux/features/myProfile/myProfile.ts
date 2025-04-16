@@ -1,5 +1,5 @@
-import { baseApi } from "../api/baseApi";
-import { tagTypes } from "../tag-Types";
+import { baseApi } from "../../api/baseApi";
+import { tagTypes } from "../../tag-Types";
 
 export const profileAPi = baseApi.injectEndpoints({
   endpoints: (build) => ({
