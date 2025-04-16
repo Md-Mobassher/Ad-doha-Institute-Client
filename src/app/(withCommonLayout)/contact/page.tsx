@@ -1,31 +1,29 @@
 import DohaContainer from "@/components/ui/DohaContainer";
 import PageTitle from "@/components/ui/PageTitle";
-import { contactData } from "@/data/contact";
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import Image from "next/image";
+import ContactForm from "./ContactForm";
+import { useTranslations } from "next-intl";
 
 const ContactPage = () => {
+  const t = useTranslations("ContactPage");
+  const contactData = t.raw("contactData") as any[];
   return (
     <Box>
-      <PageTitle title="যোগাযোগ" />
+      <PageTitle title={t("pageTitle")} />
 
       <DohaContainer>
-        <Box className="lg:flex md:flex justify-between lg:gap-10 gap-5">
-          <Box className=" border border-gray-300 hover:border-primary rounded-lg shadow-md lg:p-5 px-2 py-5 lg:w-[50%] md:w-[50%] w-full h-[405px]">
-            <iframe
-              src="https://docs.google.com/forms/d/e/1FAIpQLSd4tswcZxcjBGtyiCwfpBQz0PmKX72rL9z82TGW-yjmiivqaw/viewform?embedded=true"
-              className="w-full h-full"
-            >
-              Loading…
-            </iframe>
+        <Box className="flex flex-col gap-10 justify-center items-center">
+          <Box className=" border border-gray-300 hover:border-primary rounded-lg shadow-md lg:p-8 md:p-6 p-5  md:max-w-3xl w-full">
+            <ContactForm />
           </Box>
-          <Box className=" lg:w-[50%] md:w-[50%] w-full lg:mt-0 mt-5">
+          <Box className="flex lg:flex-row md:flex-row flex-col max-w-6xl  gap-5">
             {contactData?.map((data) => (
               <Box
                 key={data.id}
-                className="flex justify-start items-center gap-5 mb-5 border border-gray-300 hover:border-primary rounded-lg shadow-md p-5"
+                className="flex flex-1 gap-5 justify-start items-center mb-5 border border-gray-300 hover:border-primary rounded-lg shadow-md p-5"
               >
-                <Box className="w-[15%]">
+                <Box className="w-[60px]">
                   <Image
                     src={data.image}
                     alt={data.title}

@@ -248,7 +248,7 @@ const CoursePage = () => {
 
           {/* Content */}
           <main className="flex-1">
-            {courses && courses?.length > 0 ? (
+            {courses && courses?.data?.length > 0 ? (
               <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 min-h-[300px]">
                 {courses?.data?.map((course: TOfferedCourse) => (
                   <Card

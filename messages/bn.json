@@ -254,6 +254,39 @@
     "image": "/images/donation/dan.jpg",
     "methodTitle": "দান-সদাকাহ পাঠানোর মাধ্যম"
   },
+  "ContactPage": {
+    "metaTitle": "যোগাযোগ | আদ-দোহা ইনস্টিটিউট",
+    "metaDescription": "আদ-দোহা ইনস্টিটিউট এর যোগাযোগ করুন পাতায় স্বাগতম।",
+    "pageTitle": "যোগাযোগ",
+    "contactData": [
+      {
+        "id": "1",
+        "title": "ঠিকানা",
+        "details": "ভিশন ভিলেজ, হাজি আউয়াল মার্কেট, ভাকুর্তা, সাভার, ঢাকা ",
+        "image": "/images/logo/location.png"
+      },
+      {
+        "id": "2",
+        "title": "মোবাইল নাম্বার",
+        "details": "+88 01916-016099",
+        "image": "/images/logo/call.webp"
+      },
+      {
+        "id": "3",
+        "title": "ইমেইল",
+        "details": "addohainstitution@gmail.com",
+        "image": "/images/logo/email.png"
+      }
+    ],
+    "contactForm": {
+      "name": "নাম",
+      "email": "ইমেইল",
+      "phone": "ফোন নাম্বার",
+      "subject": "বিষয়",
+      "message": "বার্তা",
+      "button": "সাবমিট"
+    }
+  },
   "Footer": {
     "title": "সাবস্ক্রাইব করুন",
     "subTitle": "সর্বশেষ খবর বা আপডেট পেতে এখনই সাবস্ক্রাইব করুন",

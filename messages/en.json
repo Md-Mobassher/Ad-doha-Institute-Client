@@ -256,6 +256,39 @@
     "image": "/images/donation/dan.jpg",
     "methodTitle": "Methods of sending donations"
   },
+  "ContactPage": {
+    "metaTitle": "Contact | Ad-Doha Institute",
+    "metaDescription": "Welcome to the contact page of Ad-Doha Institute.",
+    "pageTitle": "Contact",
+    "contactData": [
+      {
+        "id": "1",
+        "title": "Address",
+        "details": "Vision Village, Haji Auwal Market, Bhakurta, Savar, Dhaka",
+        "image": "/images/logo/location.png"
+      },
+      {
+        "id": "2",
+        "title": "Mobile Number",
+        "details": "+88 01916-016099",
+        "image": "/images/logo/call.webp"
+      },
+      {
+        "id": "3",
+        "title": "Email",
+        "details": "addohainstitution@gmail.com",
+        "image": "/images/logo/email.png"
+      }
+    ],
+    "contactForm": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "subject": "Subject",
+      "message": "Message",
+      "button": "Submit"
+    }
+  },
   "Footer": {
     "title": "Subscribe",
     "subTitle": "Subscribe now to get the latest news or updates",
