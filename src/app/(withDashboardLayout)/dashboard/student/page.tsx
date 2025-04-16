@@ -1,9 +1,11 @@
-const StudentDashboard = () => {
+import StudentDashboard from "./profile/components/StudentDashboard";
+
+const StudentDashboardPage = () => {
   return (
-    <div>
-      <h1>This is Student Dashboard Page component</h1>
-    </div>
+    <>
+      <StudentDashboard />
+    </>
   );
 };
 
-export default StudentDashboard;
+export default StudentDashboardPage;

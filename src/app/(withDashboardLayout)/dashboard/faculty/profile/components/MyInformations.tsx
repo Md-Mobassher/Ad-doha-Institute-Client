@@ -11,10 +11,10 @@ const StyledInformationBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const FacultyInformation = ({ data }: any) => {
-  console.log(data);
+const MyInformation = ({ data }: any) => {
+  // console.log(data);
   return (
-    <>
+    <Box px={3}>
       <Typography variant="h5" color="primary.main" mb={2}>
         Personal Information
       </Typography>
@@ -93,8 +93,8 @@ const FacultyInformation = ({ data }: any) => {
           <Typography>{data?.permanentAddress}</Typography>
         </StyledInformationBox>
       </Stack>
-    </>
+    </Box>
   );
 };
 
-export default FacultyInformation;
+export default MyInformation;

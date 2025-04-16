@@ -4,6 +4,24 @@ import { Box, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import ContactForm from "./ContactForm";
 import { useTranslations } from "next-intl";
+import { Metadata } from "next";
+import { getMessages } from "next-intl/server";
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const messages = await getMessages({ locale });
+  const title = messages?.ContactPage?.metaTitle;
+  const description = messages?.ContactPage?.metaDescription;
+
+  return {
+    title,
+    description,
+  };
+}
 
 const ContactPage = () => {
   const t = useTranslations("ContactPage");

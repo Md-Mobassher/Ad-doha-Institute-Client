@@ -1,45 +1,31 @@
-"use client";
-
-import LoadingPage from "@/app/loading";
-import DohaContainer from "@/components/ui/DohaContainer";
 import PageTitle from "@/components/ui/PageTitle";
-import { useGetAllVideosQuery } from "@/redux/features/admin/videoManagementApi";
-import { IVideo } from "@/type";
-import { Box } from "@mui/material";
+import VideoComponent from "./VideoComponent";
+import { Metadata } from "next";
+import { getMessages, getTranslations } from "next-intl/server";
 
-const VideoPages = () => {
-  const { data, isLoading } = useGetAllVideosQuery({});
+type Props = {
+  params: Promise<{ locale: string }>;
+};
 
-  if (isLoading) {
-    return <LoadingPage />;
-  }
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const messages = await getMessages({ locale });
+  const title = messages?.VideoPage?.metaTitle;
+  const description = messages?.VideoPage?.metaDescription;
 
-  const videosData = data?.videos;
+  return {
+    title,
+    description,
+  };
+}
+
+const VideoPages = async () => {
+  const t = await getTranslations("VideoPage");
 
   return (
     <>
-      <PageTitle title="ভিডিও সমূহ" />
-
-      <DohaContainer>
-        <Box className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-7 md:gap-6 gap-5">
-          {videosData?.map((video: IVideo) => (
-            <Box
-              className="flex justify-center border hover:border-primary hover:shadow-xl shadow"
-              key={video._id}
-            >
-              <iframe
-                width="620"
-                height="300"
-                src={video.url}
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              ></iframe>
-            </Box>
-          ))}
-        </Box>
-      </DohaContainer>
+      <PageTitle title={t("pageTitle")} />
+      <VideoComponent />
     </>
   );
 };

@@ -12,7 +12,7 @@ import {
   useUpdateMYProfileMutation,
 } from "@/redux/features/myProfile";
 import AutoFileUploader from "@/components/form/AutoFileUploader";
-import StudentInformation from "./components/StudentInformations";
+import MyInformation from "./components/MyInformations";
 import LoadingPage from "@/app/loading";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { toast } from "sonner";
@@ -20,10 +20,9 @@ import { toast } from "sonner";
 const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data, isLoading } = useGetMYProfileQuery(undefined);
+  const { data: myprofile, isLoading } = useGetMYProfileQuery(undefined);
   const [updateMYProfile, { isLoading: updating }] =
     useUpdateMYProfileMutation();
-  // console.log(data);
 
   const handleUpdateImage = async (file: File) => {
     // console.log(file);
@@ -38,7 +37,7 @@ const Profile = () => {
     try {
       const res = await updateMYProfile(data).unwrap();
       // console.log(res);
-      if (res?._id) {
+      if (res?.success) {
         toast.success("Profile photo updated successfully!!!");
       }
     } catch (err: any) {
@@ -55,10 +54,10 @@ const Profile = () => {
       <ProfileUpdateModal
         open={isModalOpen}
         setOpen={setIsModalOpen}
-        id={data?._id}
+        id={myprofile?.data?._id}
       />
-      <Container sx={{ mt: 4 }}>
-        <Grid container spacing={4}>
+      <Container sx={{ mt: 3 }}>
+        <Grid container justifyContent={"space-between"}>
           <Grid xs={12} md={4}>
             <Box
               sx={{
@@ -69,12 +68,12 @@ const Profile = () => {
                 border: "1px solid green",
               }}
             >
-              {data?.profileImg ? (
+              {myprofile?.data?.profileImg ? (
                 <Image
-                  height={450}
+                  height={400}
                   width={400}
-                  src={data?.profileImg}
-                  alt={data?.fullName || "User Photo"}
+                  src={myprofile?.data?.profileImg}
+                  alt={myprofile?.data?.fullName || "User Photo"}
                 />
               ) : (
                 <PersonIcon
@@ -115,7 +114,7 @@ const Profile = () => {
             </Button>
           </Grid>
           <Grid xs={12} md={8}>
-            <StudentInformation data={data} />
+            <MyInformation data={myprofile?.data} />
           </Grid>
         </Grid>
       </Container>

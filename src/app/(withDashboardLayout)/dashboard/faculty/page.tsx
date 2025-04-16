@@ -1,9 +1,11 @@
-const FacultyDashboard = () => {
+import FacultyDashboard from "./profile/components/FacultyDashboard";
+
+const FacultyDashboardPage = () => {
   return (
-    <div>
-      <h1>Faculty Dashboard</h1>
-    </div>
+    <>
+      <FacultyDashboard />
+    </>
   );
 };
 
-export default FacultyDashboard;
+export default FacultyDashboardPage;

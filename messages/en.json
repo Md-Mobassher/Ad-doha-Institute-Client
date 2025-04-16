@@ -256,6 +256,26 @@
     "image": "/images/donation/dan.jpg",
     "methodTitle": "Methods of sending donations"
   },
+  "BookPage": {
+    "metaTitle": "Books | Ad-Doha Institute",
+    "metaDescription": "Welcome to the books page of Ad-Doha Institute.",
+    "pageTitle": "Books"
+  },
+  "GalleryPage": {
+    "metaTitle": "Photos | Ad-Doha Institute",
+    "metaDescription": "Welcome to the photo gallery page of Ad-Doha Institute.",
+    "pageTitle": "Photos"
+  },
+  "BlogPage": {
+    "metaTitle": "Blog | Ad-Doha Institute",
+    "metaDescription": "Welcome to the blog page of Ad-Doha Institute.",
+    "pageTitle": "Blog"
+  },
+  "VideoPage": {
+    "metaTitle": "Videos | Ad-Doha Institute",
+    "metaDescription": "Welcome to the video page of Ad-Doha Institute.",
+    "pageTitle": "Videos"
+  },
   "ContactPage": {
     "metaTitle": "Contact | Ad-Doha Institute",
     "metaDescription": "Welcome to the contact page of Ad-Doha Institute.",

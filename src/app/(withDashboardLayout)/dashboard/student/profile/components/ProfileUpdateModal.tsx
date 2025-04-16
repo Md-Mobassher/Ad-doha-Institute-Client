@@ -24,7 +24,7 @@ type TProps = {
 };
 
 const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
-  const { data, refetch } = useGetMYProfileQuery(id);
+  const { data: myprofile } = useGetMYProfileQuery(id);
   const [updateMyProfile, { isLoading }] = useUpdateMYProfileMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
@@ -35,9 +35,8 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
       const res = await updateMyProfile(values).unwrap();
       console.log(res);
 
-      if (res?._id) {
+      if (res?.success) {
         toast.success(res.message || "Profile Updated Successfully!!!");
-        await refetch();
         setOpen(false);
       }
     } catch (error) {
@@ -47,26 +46,29 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
 
   const defaultValues = {
     name: {
-      firstName: data?.name?.firstName || "",
-      middleName: data?.name?.middleName || "",
-      lastName: data?.name?.lastName || "",
+      firstName: myprofile?.data?.name?.firstName || "",
+      lastName: myprofile?.data?.name?.lastName || "",
     },
-    designation: data?.designation || "",
-    email: data?.email || "",
-    gender: data?.gender || "",
-    dateOfBirth: dayjs(data?.dateOfBirth) || "",
-    contactNo: data?.contactNo || "",
-    emergencyContactNo: data?.emergencyContactNo || "",
-    bloodGroup: data?.bloodGroup || "",
-    presentAddress: data?.presentAddress || "",
-    permanentAddress: data?.permanentAddress || "",
+    designation: myprofile?.data?.designation || "",
+    email: myprofile?.data?.email || "",
+    gender: myprofile?.data?.gender || "",
+    dateOfBirth: dayjs(myprofile?.data?.dateOfBirth) || "",
+    contactNo: myprofile?.data?.contactNo || "",
+    emergencyContactNo: myprofile?.data?.emergencyContactNo || "",
+    bloodGroup: myprofile?.data?.bloodGroup || "",
+    presentAddress: myprofile?.data?.presentAddress || "",
+    permanentAddress: myprofile?.data?.permanentAddress || "",
   };
 
   return (
-    <DohaFullScreenModal open={open} setOpen={setOpen} title="Update Profile">
+    <DohaFullScreenModal
+      open={open}
+      setOpen={setOpen}
+      title={`Update Profile (ID: ${myprofile?.data?.id})`}
+    >
       <DohaForm
         onSubmit={handleFormSubmit}
-        defaultValues={data && defaultValues}
+        defaultValues={myprofile && defaultValues}
       >
         <Grid container spacing={3} my={1}>
           <Grid item lg={4} md={6} sm={6} xs={12}>
@@ -78,15 +80,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               required
             />
           </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <DohaInput
-              label="Middle Name"
-              fullWidth={true}
-              type="text"
-              name="name.middleName"
-              required
-            />
-          </Grid>
+
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <DohaInput
               label="Last Name"

@@ -44,62 +44,77 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           icon: DashboardIcon,
         },
         {
-          title: "Admin Management",
+          title: "Admin ",
           path: `${role}/admin`,
           icon: AdminPanelSettingsIcon,
         },
         {
-          title: "Faculty Management",
+          title: "Faculty ",
           path: `${role}/faculty`,
           icon: GroupIcon,
         },
         {
-          title: "Student Management",
+          title: "Student ",
           path: `${role}/student`,
           icon: GroupsIcon,
         },
         {
-          title: "Department Management",
+          title: "Department ",
           path: `${role}/department`,
           icon: WorkspacesIcon,
         },
         {
-          title: "Course Management",
+          title: "Course ",
           path: `${role}/course`,
           icon: AutoStoriesIcon,
         },
         {
-          title: "Teacher Management",
+          title: "Offered Course",
+          path: `${role}/offered-course`,
+          icon: AutoStoriesIcon,
+        },
+        {
+          title: "Enrolled Course",
+          path: `${role}/enrolled-course`,
+          icon: AutoStoriesIcon,
+        },
+        {
+          title: "Transaction",
+          path: `${role}/transaction`,
+          icon: Money,
+        },
+        {
+          title: "Teacher ",
           path: `${role}/teacher`,
           icon: PeopleAltIcon,
         },
         {
-          title: "Advisory Committee Management",
+          title: "Advisory Committee ",
           path: `${role}/advisory-committee`,
           icon: PeopleOutlineIcon,
         },
         {
-          title: "Opinion Management",
+          title: "Opinion ",
           path: `${role}/opinion`,
           icon: CommentIcon,
         },
         {
-          title: "Author Management",
+          title: "Author ",
           path: `${role}/author`,
           icon: LibraryBooksIcon,
         },
         {
-          title: "Book Category Management",
+          title: "Book Category ",
           path: `${role}/book-category`,
           icon: LibraryBooksIcon,
         },
         {
-          title: "Library Management",
+          title: "Library ",
           path: `${role}/library`,
           icon: LibraryBooksIcon,
         },
         {
-          title: "Video Management",
+          title: "Video ",
           path: `${role}/video`,
           icon: OndemandVideoIcon,
         },
@@ -231,7 +246,7 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
         {
           title: "Student",
           path: `${role}/student`,
-          icon: CalendarMonthIcon,
+          icon: GroupsIcon,
         },
         {
           title: "Courses",
