@@ -1,20 +1,20 @@
 "use client";
 
-import { Button, Stack, TextField } from "@mui/material";
+import { Avatar, Button, Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
 import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
 import {
-  useDeleteVideoMutation,
-  useGetAllVideosQuery,
-} from "@/redux/features/admin/videoManagementApi";
-import VideoModal from "./VideoModal";
+  useDeleteFacultyMutation,
+  useGetAllFacultyQuery,
+} from "@/redux/features/admin/facultyManagementApi";
+import FacultyModal from "./FacultyModal";
 import DeleteModal from "@/components/common/DeletModal";
 import EditDeleteButton from "@/components/common/EditDeleteButton";
 
-const VideoManagementPage = () => {
+const FacultyManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -36,22 +36,23 @@ const VideoManagementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  const { data: videos, isLoading } = useGetAllVideosQuery({ ...query });
-  const [deleteVideo, { isLoading: isDeleting }] = useDeleteVideoMutation();
+  // mutation
+  const { data: faculties, isLoading } = useGetAllFacultyQuery({ ...query });
+  const [deleteFaculty, { isLoading: isDeleting }] = useDeleteFacultyMutation();
 
+  // handle delete
   const handleDelete = async () => {
     try {
-      const res = await deleteVideo(selectedData?._id).unwrap();
+      const res = await deleteFaculty(selectedData?._id).unwrap();
       // console.log(res);
       if (res?.success) {
-        toast.success(res?.message || "Video deleted successfully!!!");
-        setSelectedData(null);
+        toast.success(res?.message || "Student deleted successfully!!!");
       } else {
-        toast.error(res.message || "Failed to delete Video!!!");
+        toast.error(res?.message || "Failed to delete Student!!!");
       }
     } catch (err: any) {
-      toast.error(err.message || "Failed to delete Video!!!");
-      setSelectedData(null);
+      // console.error(err.message);
+      toast.error(err?.message || "Failed to delete Student!!!");
     }
   };
 
@@ -63,6 +64,7 @@ const VideoManagementPage = () => {
 
   // Edit Modal Open
   const openEditModal = (data: any) => {
+    console.log(data);
     setSelectedData(data);
     setIsModalOpen(true);
   };
@@ -74,13 +76,32 @@ const VideoManagementPage = () => {
   };
 
   const columns: GridColDef[] = [
-    { field: "title", headerName: "Video Title", flex: 1 },
-    { field: "position", headerName: "Position", width: 100, flex: 1 },
-    { field: "url", headerName: "Video Url", flex: 1 },
+    {
+      field: "profileImg",
+      headerName: "Image",
+      width: 70,
+      renderCell: ({ row }) => {
+        return (
+          <Box
+            sx={{
+              marginTop: "5px",
+            }}
+          >
+            <Avatar alt="profile image" src={row.profileImg} />;
+          </Box>
+        );
+      },
+    },
+    { field: "fullName", headerName: "Name", flex: 1 },
+    { field: "id", headerName: "ID", width: 100 },
+    { field: "email", headerName: "Email", flex: 1 },
+    { field: "contactNo", headerName: "Contact No", flex: 1 },
+    { field: "gender", headerName: "Gender" },
+    { field: "presentAddress", headerName: "Address", flex: 1 },
     {
       field: "action",
       headerName: "Action",
-      flex: 1,
+      width: 100,
       headerAlign: "center",
       align: "center",
       renderCell: ({ row }) => {
@@ -102,8 +123,8 @@ const VideoManagementPage = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => openAddModal()}>Create Video</Button>
-        <VideoModal
+        <Button onClick={() => openAddModal()}>Create Faculty</Button>
+        <FacultyModal
           open={isModalOpen}
           setOpen={setIsModalOpen}
           data={selectedData}
@@ -111,7 +132,7 @@ const VideoManagementPage = () => {
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"
-          placeholder="Search Video"
+          placeholder="Search Faculty"
         />
       </Stack>
 
@@ -122,12 +143,11 @@ const VideoManagementPage = () => {
         }}
       >
         <DataGrid
-          rows={videos?.data || []}
+          rows={faculties?.data || []}
           columns={columns}
-          getRowId={(row) => row._id}
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
-          rowCount={videos?.meta?.total || 0}
+          rowCount={faculties?.meta?.total || 0}
           paginationMode="server"
           loading={isLoading || isDeleting}
           pageSizeOptions={[25, 50, 100]}
@@ -144,4 +164,4 @@ const VideoManagementPage = () => {
   );
 };
 
-export default VideoManagementPage;
+export default FacultyManagementPage;

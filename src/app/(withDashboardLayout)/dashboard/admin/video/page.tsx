@@ -1,24 +1,20 @@
 "use client";
 
-import { Button, IconButton, Stack, TextField } from "@mui/material";
+import { Button, Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import Link from "next/link";
-import LoadingPage from "@/app/loading";
 import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
-import DeleteModal from "@/components/common/DeletModal";
 import {
-  useDeleteBookcategoryMutation,
-  useGetAllBookcategorysQuery,
-} from "@/redux/features/admin/bookCategoryManagementApi";
-import BookCategoryModal from "./BookCategoryModal";
+  useDeleteVideoMutation,
+  useGetAllVideosQuery,
+} from "@/redux/features/admin/videoManagementApi";
+import VideoModal from "./VideoModal";
+import DeleteModal from "@/components/common/DeletModal";
 import EditDeleteButton from "@/components/common/EditDeleteButton";
 
-const BookCategoryManagementPage = () => {
+const VideoManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -40,23 +36,21 @@ const BookCategoryManagementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  const { data: bookCategories, isLoading } =
-    useGetAllBookcategorysQuery(query);
-  const [deleteBookCategory, { isLoading: isDeleting }] =
-    useDeleteBookcategoryMutation();
+  const { data: videos, isLoading } = useGetAllVideosQuery({ ...query });
+  const [deleteVideo, { isLoading: isDeleting }] = useDeleteVideoMutation();
 
   const handleDelete = async () => {
     try {
-      const res = await deleteBookCategory(selectedData?._id).unwrap();
+      const res = await deleteVideo(selectedData?._id).unwrap();
       // console.log(res);
       if (res?.success) {
-        toast.success(res?.message || "BookCategory deleted successfully!!!");
+        toast.success(res?.message || "Video deleted successfully!!!");
         setSelectedData(null);
       } else {
-        toast.error(res.message || "Failed to delete BookCategory!!!");
+        toast.error(res.message || "Failed to delete Video!!!");
       }
     } catch (err: any) {
-      toast.error(err.message || "Failed to delete BookCategory!!!");
+      toast.error(err.message || "Failed to delete Video!!!");
       setSelectedData(null);
     }
   };
@@ -80,20 +74,29 @@ const BookCategoryManagementPage = () => {
   };
 
   const columns: GridColDef[] = [
-    { field: "categoryName", headerName: "Book Category Name", flex: 1 },
-    { field: "_id", headerName: "ID", flex: 1 },
+    { field: "title", headerName: "Video Title", flex: 1 },
+    {
+      field: "position",
+      headerName: "Position",
+      width: 200,
+      align: "center",
+      headerAlign: "center",
+    },
+    { field: "url", headerName: "Video Url", flex: 1 },
     {
       field: "action",
       headerName: "Action",
-      flex: 1,
+      width: 150,
       headerAlign: "center",
       align: "center",
-      renderCell: ({ row }) => (
-        <EditDeleteButton
-          onEdit={() => openEditModal(row)}
-          onDelete={() => openDeleteModal(row)}
-        />
-      ),
+      renderCell: ({ row }) => {
+        return (
+          <EditDeleteButton
+            onEdit={() => openEditModal(row)}
+            onDelete={() => openDeleteModal(row)}
+          />
+        );
+      },
     },
   ];
 
@@ -105,8 +108,8 @@ const BookCategoryManagementPage = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => openAddModal()}>Create Book Category</Button>
-        <BookCategoryModal
+        <Button onClick={() => openAddModal()}>Create Video</Button>
+        <VideoModal
           open={isModalOpen}
           setOpen={setIsModalOpen}
           data={selectedData}
@@ -114,18 +117,23 @@ const BookCategoryManagementPage = () => {
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"
-          placeholder="Search BookCategory"
+          placeholder="Search Video"
         />
       </Stack>
 
-      <Box my={2} sx={{ overflow: "auto" }}>
+      <Box
+        my={2}
+        sx={{
+          overflow: "auto",
+        }}
+      >
         <DataGrid
-          rows={bookCategories?.data}
+          rows={videos?.data || []}
           columns={columns}
           getRowId={(row) => row._id}
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
-          rowCount={bookCategories?.meta?.total || 0}
+          rowCount={videos?.meta?.total || 0}
           paginationMode="server"
           loading={isLoading || isDeleting}
           pageSizeOptions={[25, 50, 100]}
@@ -142,4 +150,4 @@ const BookCategoryManagementPage = () => {
   );
 };
 
-export default BookCategoryManagementPage;
+export default VideoManagementPage;

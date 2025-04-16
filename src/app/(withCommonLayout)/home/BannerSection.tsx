@@ -5,18 +5,11 @@ import Image from "next/image";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import banner1 from "@/assets/banner/Slide -1.jpg";
-import banner2 from "@/assets/banner/Slide -2.jpg";
-import banner3 from "@/assets/banner/Slide -3.jpg";
-import banner4 from "@/assets/banner/Slide -4.jpg";
-
-const slides = [
-  { imageUrl: banner1 },
-  { imageUrl: banner2 },
-  { imageUrl: banner3 },
-  { imageUrl: banner4 },
-];
+import { useGetAllBannerQuery } from "@/redux/features/admin/bannerManagementApi";
+import { TBanner } from "@/type";
 
 const BannerSection = () => {
+  const { data: banners, isLoading } = useGetAllBannerQuery({});
   return (
     <Box
       sx={{
@@ -54,21 +47,37 @@ const BannerSection = () => {
           modules={[Autoplay, Pagination]}
           className="w-full  object-contain rounded-lg mySwiper"
         >
-          {slides.map((slide, index: number) => (
-            <SwiperSlide
-              key={index}
-              virtualIndex={index}
-              className="w-full mb-10"
-            >
-              <Image
-                src={slide.imageUrl}
-                alt={`Slide ${index + 1}`}
-                className="rounded-md w-full"
-                width={1200}
-                height={560}
-              />
-            </SwiperSlide>
-          ))}
+          {isLoading ? (
+            <>
+              <SwiperSlide className="w-full mb-10">
+                <Image
+                  src={banner1}
+                  alt={`Slide 1`}
+                  className="rounded-md w-full"
+                  width={1200}
+                  height={560}
+                />
+              </SwiperSlide>
+            </>
+          ) : (
+            <>
+              {banners?.data?.map((slide: TBanner, index: number) => (
+                <SwiperSlide
+                  key={slide._id}
+                  virtualIndex={index}
+                  className="w-full mb-10"
+                >
+                  <Image
+                    src={slide.image}
+                    alt={slide.title || `Slide ${index + 1}`}
+                    className="rounded-md w-full"
+                    width={1200}
+                    height={560}
+                  />
+                </SwiperSlide>
+              ))}
+            </>
+          )}
         </Swiper>
       </Container>
     </Box>

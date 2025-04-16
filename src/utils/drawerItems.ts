@@ -16,7 +16,8 @@ import CommentIcon from "@mui/icons-material/Comment";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import WorkspacesIcon from "@mui/icons-material/Workspaces";
-import { Money } from "@mui/icons-material";
+import { ContactMail, Image, Money } from "@mui/icons-material";
+import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 
 export const drawerItems = (role: UserRole): DrawerItem[] => {
   const roleMenus: DrawerItem[] = [];
@@ -44,63 +45,78 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
         },
         {
           title: "Admin Management",
-          path: `${role}/admin-management`,
+          path: `${role}/admin`,
           icon: AdminPanelSettingsIcon,
         },
         {
           title: "Faculty Management",
-          path: `${role}/faculty-management`,
+          path: `${role}/faculty`,
           icon: GroupIcon,
         },
         {
           title: "Student Management",
-          path: `${role}/student-management`,
+          path: `${role}/student`,
           icon: GroupsIcon,
         },
         {
           title: "Department Management",
-          path: `${role}/department-management`,
+          path: `${role}/department`,
           icon: WorkspacesIcon,
         },
         {
           title: "Course Management",
-          path: `${role}/course-management`,
+          path: `${role}/course`,
           icon: AutoStoriesIcon,
         },
         {
           title: "Teacher Management",
-          path: `${role}/teacher-management`,
+          path: `${role}/teacher`,
           icon: PeopleAltIcon,
         },
         {
           title: "Advisory Committee Management",
-          path: `${role}/advisory-committee-management`,
+          path: `${role}/advisory-committee`,
           icon: PeopleOutlineIcon,
         },
         {
           title: "Opinion Management",
-          path: `${role}/opinion-management`,
+          path: `${role}/opinion`,
           icon: CommentIcon,
         },
         {
           title: "Author Management",
-          path: `${role}/author-management`,
+          path: `${role}/author`,
           icon: LibraryBooksIcon,
         },
         {
           title: "Book Category Management",
-          path: `${role}/book-category-management`,
+          path: `${role}/book-category`,
           icon: LibraryBooksIcon,
         },
         {
           title: "Library Management",
-          path: `${role}/library-management`,
+          path: `${role}/library`,
           icon: LibraryBooksIcon,
         },
         {
           title: "Video Management",
-          path: `${role}/video-management`,
+          path: `${role}/video`,
           icon: OndemandVideoIcon,
+        },
+        {
+          title: "Banner ",
+          path: `${role}/banner`,
+          icon: Image,
+        },
+        {
+          title: "Subscription ",
+          path: `${role}/subscription`,
+          icon: SubscriptionsIcon,
+        },
+        {
+          title: "Contact ",
+          path: `${role}/contact`,
+          icon: ContactMail,
         }
       );
       break;
@@ -114,27 +130,27 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
         },
         {
           title: "Admin ",
-          path: `${role}/admin-management`,
+          path: `${role}/admin`,
           icon: AdminPanelSettingsIcon,
         },
         {
           title: "Faculty ",
-          path: `${role}/faculty-management`,
+          path: `${role}/faculty`,
           icon: GroupIcon,
         },
         {
           title: "Student ",
-          path: `${role}/student-management`,
+          path: `${role}/student`,
           icon: GroupsIcon,
         },
         {
           title: "Department ",
-          path: `${role}/department-management`,
+          path: `${role}/department`,
           icon: WorkspacesIcon,
         },
         {
           title: "Course ",
-          path: `${role}/course-management`,
+          path: `${role}/course`,
           icon: AutoStoriesIcon,
         },
         {
@@ -154,38 +170,53 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
         },
         {
           title: "Teacher ",
-          path: `${role}/teacher-management`,
+          path: `${role}/teacher`,
           icon: PeopleAltIcon,
         },
         {
           title: "Advisory Committee ",
-          path: `${role}/advisory-committee-management`,
+          path: `${role}/advisory-committee`,
           icon: PeopleOutlineIcon,
         },
         {
           title: "Opinion ",
-          path: `${role}/opinion-management`,
+          path: `${role}/opinion`,
           icon: CommentIcon,
         },
         {
           title: "Author ",
-          path: `${role}/author-management`,
+          path: `${role}/author`,
           icon: LibraryBooksIcon,
         },
         {
           title: "Book Category ",
-          path: `${role}/book-category-management`,
+          path: `${role}/book-category`,
           icon: LibraryBooksIcon,
         },
         {
           title: "Library ",
-          path: `${role}/library-management`,
+          path: `${role}/library`,
           icon: LibraryBooksIcon,
         },
         {
           title: "Video ",
-          path: `${role}/video-management`,
+          path: `${role}/video`,
           icon: OndemandVideoIcon,
+        },
+        {
+          title: "Banner ",
+          path: `${role}/banner`,
+          icon: Image,
+        },
+        {
+          title: "Subscription ",
+          path: `${role}/subscription`,
+          icon: SubscriptionsIcon,
+        },
+        {
+          title: "Contact ",
+          path: `${role}/contact`,
+          icon: ContactMail,
         }
       );
       break;

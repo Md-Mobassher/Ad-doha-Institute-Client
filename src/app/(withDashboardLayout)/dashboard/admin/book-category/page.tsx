@@ -1,21 +1,20 @@
 "use client";
 
-import { Avatar, Button, Stack, TextField } from "@mui/material";
+import { Button, Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import AdminModal from "./AdminModal";
 import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
 import { toast } from "sonner";
-import {
-  useDeleteAdminMutation,
-  useGetAllAdminQuery,
-} from "@/redux/features/admin/adminManagementApi";
 import { useDebounced } from "@/redux/hooks";
 import DeleteModal from "@/components/common/DeletModal";
+import {
+  useDeleteBookcategoryMutation,
+  useGetAllBookcategorysQuery,
+} from "@/redux/features/admin/bookCategoryManagementApi";
+import BookCategoryModal from "./BookCategoryModal";
 import EditDeleteButton from "@/components/common/EditDeleteButton";
-import avatar from "@/assets/avatar.webp";
 
-const AdminManagementPage = () => {
+const BookCategoryManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -37,23 +36,24 @@ const AdminManagementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  // mutation
-  const { data: admins, isLoading } = useGetAllAdminQuery({ ...query });
-  const [deleteAdmin, { isLoading: isDeleting }] = useDeleteAdminMutation();
+  const { data: bookCategories, isLoading } =
+    useGetAllBookcategorysQuery(query);
+  const [deleteBookCategory, { isLoading: isDeleting }] =
+    useDeleteBookcategoryMutation();
 
-  // handle delete
   const handleDelete = async () => {
     try {
-      const res = await deleteAdmin(selectedData?._id).unwrap();
+      const res = await deleteBookCategory(selectedData?._id).unwrap();
       // console.log(res);
       if (res?.success) {
-        toast.success(res?.message || "Admin deleted successfully!!!");
+        toast.success(res?.message || "BookCategory deleted successfully!!!");
+        setSelectedData(null);
       } else {
-        toast.error(res?.message || "Failed to delete Admin!!!");
+        toast.error(res.message || "Failed to delete BookCategory!!!");
       }
     } catch (err: any) {
-      // console.error(err.message);
-      toast.error(err?.message || "Failed to delete Admin!!!");
+      toast.error(err.message || "Failed to delete BookCategory!!!");
+      setSelectedData(null);
     }
   };
 
@@ -65,7 +65,6 @@ const AdminManagementPage = () => {
 
   // Edit Modal Open
   const openEditModal = (data: any) => {
-    console.log(data);
     setSelectedData(data);
     setIsModalOpen(true);
   };
@@ -77,48 +76,20 @@ const AdminManagementPage = () => {
   };
 
   const columns: GridColDef[] = [
-    {
-      field: "profileImg",
-      headerName: "Image",
-      width: 70,
-      renderCell: ({ row }) => {
-        return (
-          <Box
-            sx={{
-              marginTop: "5px",
-            }}
-          >
-            <Avatar alt="profile image" src={row?.profileImg || avatar} />;
-          </Box>
-        );
-      },
-    },
-    { field: "fullName", headerName: "Name", flex: 1 },
-    { field: "id", headerName: "ID" },
-    { field: "email", headerName: "Email", flex: 1 },
-    { field: "contactNo", headerName: "Contact No" },
-    { field: "gender", headerName: "Gender" },
-    { field: "presentAddress", headerName: "Address" },
+    { field: "categoryName", headerName: "Book Category Name", flex: 1 },
+    { field: "_id", headerName: "ID", flex: 1 },
     {
       field: "action",
       headerName: "Action",
-      flex: 1,
+      width: 150,
       headerAlign: "center",
       align: "center",
-      renderCell: ({ row }) => {
-        return (
-          <Box>
-            {row.id === "A-0001" ? (
-              <></>
-            ) : (
-              <EditDeleteButton
-                onEdit={() => openEditModal(row)}
-                onDelete={() => openDeleteModal(row)}
-              />
-            )}
-          </Box>
-        );
-      },
+      renderCell: ({ row }) => (
+        <EditDeleteButton
+          onEdit={() => openEditModal(row)}
+          onDelete={() => openDeleteModal(row)}
+        />
+      ),
     },
   ];
 
@@ -130,8 +101,8 @@ const AdminManagementPage = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => openAddModal()}>Create Admin</Button>
-        <AdminModal
+        <Button onClick={() => openAddModal()}>Create Book Category</Button>
+        <BookCategoryModal
           open={isModalOpen}
           setOpen={setIsModalOpen}
           data={selectedData}
@@ -139,22 +110,18 @@ const AdminManagementPage = () => {
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"
-          placeholder="Search Admin"
+          placeholder="Search BookCategory"
         />
       </Stack>
 
-      <Box
-        my={2}
-        sx={{
-          overflow: "auto",
-        }}
-      >
+      <Box my={2} sx={{ overflow: "auto" }}>
         <DataGrid
-          rows={admins?.data}
+          rows={bookCategories?.data}
           columns={columns}
+          getRowId={(row) => row._id}
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
-          rowCount={admins?.meta?.total || 0}
+          rowCount={bookCategories?.meta?.total || 0}
           paginationMode="server"
           loading={isLoading || isDeleting}
           pageSizeOptions={[25, 50, 100]}
@@ -171,4 +138,4 @@ const AdminManagementPage = () => {
   );
 };
 
-export default AdminManagementPage;
+export default BookCategoryManagementPage;

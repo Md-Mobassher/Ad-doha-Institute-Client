@@ -10,17 +10,15 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
 import {
-  useDeleteBookMutation,
-  useGetAllBooksQuery,
-} from "@/redux/features/admin/bookManagementApi";
+  useDeleteAcademicDepartmentMutation,
+  useGetAllAcademicDepartmentsQuery,
+} from "@/redux/features/admin/departmentManagementApi";
+import DepartmentModal from "./DepartmentModal";
 import Image from "next/image";
-import BookModal from "./BookModal";
 import DeleteModal from "@/components/common/DeletModal";
-import NorthEastIcon from "@mui/icons-material/NorthEast";
-import avatar from "@/assets/avatar.webp";
 import EditDeleteButton from "@/components/common/EditDeleteButton";
 
-const BookManagementPage = () => {
+const DepartmentManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -43,22 +41,26 @@ const BookManagementPage = () => {
   }
 
   // mutation
-  const { data: books, isLoading } = useGetAllBooksQuery({ ...query });
-  const [deleteBook, { isLoading: isDeleting }] = useDeleteBookMutation();
+  const { data: academicDepartments, isLoading } =
+    useGetAllAcademicDepartmentsQuery({ ...query });
+  const [deleteAcademicDepartment, { isLoading: isDeleting }] =
+    useDeleteAcademicDepartmentMutation();
 
   // handle delete
   const handleDelete = async () => {
     try {
-      const res = await deleteBook(selectedData?._id).unwrap();
+      const res = await deleteAcademicDepartment(selectedData?._id).unwrap();
       // console.log(res);
       if (res?.success) {
-        toast.success(res?.message || "Book deleted successfully!!!");
+        toast.success(
+          res?.message || "Academic Department deleted successfully!!!"
+        );
       } else {
-        toast.error(res?.message || "Failed to delete book!!!");
+        toast.error(res?.message || "Failed to delete Academic Department!!!");
       }
     } catch (err: any) {
       // console.error(err.message);
-      toast.error(err?.message || "Failed to delete book!!!");
+      toast.error(err?.message || "Failed to delete Academic Department!!!");
     }
   };
 
@@ -85,42 +87,45 @@ const BookManagementPage = () => {
     {
       field: "image",
       headerName: "Image",
-      width: 100,
+      width: 150,
       renderCell: ({ row }) => {
         return (
           <Box
             sx={{
-              marginTop: "2px",
-              marginBottom: "2px",
+              margin: "3px",
+              display: "flex",
+              justifyContent: "start",
+              alignItems: "center",
+              borderRadius: "5px",
             }}
           >
             {row?.image ? (
-              <Image alt="Image" src={row?.image} width={50} height={50} />
+              <Image
+                alt="Department image"
+                src={row?.image}
+                width={50}
+                height={50}
+              />
             ) : (
-              <Image alt="Image" src={avatar} width={50} height={50} />
+              <Image
+                alt="Department image"
+                src={
+                  "https://res.cloudinary.com/dvt8faj0s/image/upload/v1732036461/pngtree-no-image_wgj8uf.jpg"
+                }
+                width={50}
+                height={50}
+              />
             )}
           </Box>
         );
       },
     },
-    { field: "title", headerName: "Title", flex: 1 },
-
-    {
-      field: "url",
-      headerName: "Url",
-      width: 70,
-      renderCell: ({ row }) => {
-        return (
-          <Link href={row.url}>
-            <NorthEastIcon className="hover:text-green-500" />
-          </Link>
-        );
-      },
-    },
+    { field: "name", headerName: "Department Name", flex: 1 },
+    { field: "position", headerName: "Position", width: 100, flex: 1 },
     {
       field: "action",
       headerName: "Action",
-      flex: 1,
+      width: 150,
       headerAlign: "center",
       align: "center",
       renderCell: ({ row }) => {
@@ -142,8 +147,8 @@ const BookManagementPage = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => openAddModal()}>Create Book</Button>
-        <BookModal
+        <Button onClick={() => openAddModal()}>Create New Department</Button>
+        <DepartmentModal
           open={isModalOpen}
           setOpen={setIsModalOpen}
           data={selectedData}
@@ -151,9 +156,10 @@ const BookManagementPage = () => {
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"
-          placeholder="Search Book"
+          placeholder="Search"
         />
       </Stack>
+
       <Box
         my={2}
         sx={{
@@ -161,12 +167,12 @@ const BookManagementPage = () => {
         }}
       >
         <DataGrid
-          rows={books?.data || []}
+          rows={academicDepartments?.data || []}
           columns={columns}
           getRowId={(row) => row._id}
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
-          rowCount={books?.meta?.total || 0}
+          rowCount={academicDepartments?.meta?.total || 0}
           paginationMode="server"
           loading={isLoading || isDeleting}
           pageSizeOptions={[25, 50, 100]}
@@ -183,4 +189,4 @@ const BookManagementPage = () => {
   );
 };
 
-export default BookManagementPage;
+export default DepartmentManagementPage;

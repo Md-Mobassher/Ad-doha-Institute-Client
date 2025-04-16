@@ -21,11 +21,11 @@ type TParamsProps = {
 const CourseDetailsPage = ({ params }: TParamsProps) => {
   const unwrappedParams = use(params);
 
-  const { data, isLoading, refetch } = useGetSingleCourseQuery(
+  const { data, isLoading } = useGetSingleCourseQuery(
     unwrappedParams?.courseId
   );
 
-  const courseData = (data as TCourse) || {};
+  const courseData = (data?.data as TCourse) || {};
 
   if (!courseData) {
     return <p>No Service Found</p>;

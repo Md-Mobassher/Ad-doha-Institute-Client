@@ -5,6 +5,7 @@ import { Call, Email } from "@mui/icons-material";
 import {
   Box,
   Button,
+  CircularProgress,
   Container,
   Divider,
   Grid2,
@@ -18,12 +19,44 @@ import NearMeIcon from "@mui/icons-material/NearMe";
 import { FaArrowRight, FaFacebook, FaYoutube } from "react-icons/fa";
 import SubTitle from "@/components/ui/SubTitle";
 import { useTranslations } from "next-intl";
+import { useCreateSubscribeMutation } from "@/redux/features/admin/subscribeManagementApi";
+import { toast } from "sonner";
+import { useState } from "react";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
   const t = useTranslations("Footer");
 
-  const handleSubscribe = async (value: FieldValues) => {
-    console.log(value);
+  const [createSubscribe, { isLoading }] = useCreateSubscribeMutation();
+
+  const handleSubscribe = async () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email) {
+      toast.error("Email is required.");
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    const data = {
+      email: email,
+    };
+
+    try {
+      const result = await createSubscribe(data).unwrap();
+      if (result?.success) {
+        toast.success(result?.message || "Successfully subscribed!");
+        setEmail("");
+      } else {
+        setEmail("");
+      }
+    } catch (err: any) {
+      toast.error(err?.message || "Something went wrong!");
+      setEmail("");
+    }
   };
 
   return (
@@ -48,46 +81,80 @@ const Footer = () => {
         >
           <Title title={t("title")} />
           <SubTitle title={t("subTitle")} />
+
           <Box
             mt={2}
             display="flex"
             justifyContent="space-between "
             alignItems="center"
             gap={2}
-            className="lg:w-[500px] w-full  rounded-full border border-green-800 p-2 bg-white"
+            className="lg:w-[500px] md:w-[400px] w-full  rounded-full border border-green-800 p-2 bg-white"
           >
             <input
               type="email"
               className=" px-6 border-0 focus:outline-none w-[80%]"
               name="email"
+              value={email}
               placeholder={t("inputPlaceholder")}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <Button
-              onClick={handleSubscribe}
-              sx={{
-                borderRadius: "50px",
-                backgroundColor: "primary.main",
-                color: "secondary.main",
-                border: "2px solid #0F473C",
-                px: "16px",
-                py: "5px",
-                textSizeAdjust: "auto",
-                ":hover": {
-                  backgroundColor: "primary.main",
-                  color: "secondary.main",
-                },
-                fontSize: {
-                  lg: "16px",
-                  md: "16px",
-                  sm: "16px",
-                  xs: "15px",
-                },
-                fontWeight: 600,
-              }}
-            >
-              {t("btnTitle")}
-              <FaArrowRight className=" ml-2" />
-            </Button>
+            <div className="flex justify-between gap-6">
+              {isLoading ? (
+                <Button
+                  onClick={handleSubscribe}
+                  disabled
+                  sx={{
+                    borderRadius: "50px",
+                    backgroundColor: "primary.main",
+                    color: "secondary.main",
+                    border: "2px solid #0F473C",
+                    px: "16px",
+                    py: "5px",
+                    textSizeAdjust: "auto",
+                    ":hover": {
+                      backgroundColor: "primary.main",
+                      color: "secondary.main",
+                    },
+                    fontSize: {
+                      lg: "16px",
+                      md: "16px",
+                      sm: "16px",
+                      xs: "15px",
+                    },
+                    fontWeight: 600,
+                  }}
+                >
+                  {t("btnTitle")} <CircularProgress />;
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleSubscribe}
+                  sx={{
+                    borderRadius: "50px",
+                    backgroundColor: "primary.main",
+                    color: "secondary.main",
+                    border: "2px solid #0F473C",
+                    px: "16px",
+                    py: "5px",
+                    textSizeAdjust: "auto",
+                    ":hover": {
+                      backgroundColor: "primary.main",
+                      color: "secondary.main",
+                    },
+                    fontSize: {
+                      lg: "16px",
+                      md: "16px",
+                      sm: "16px",
+                      xs: "15px",
+                    },
+                    fontWeight: 600,
+                  }}
+                >
+                  {t("btnTitle")}
+                  <FaArrowRight className=" ml-2" />
+                </Button>
+              )}
+            </div>
           </Box>
         </Stack>
       </Container>

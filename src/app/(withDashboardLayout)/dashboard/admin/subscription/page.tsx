@@ -1,24 +1,24 @@
 "use client";
 
-import { Button, IconButton, Stack, TextField } from "@mui/material";
+import { Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import Link from "next/link";
 import { toast } from "sonner";
 import { useDebounced } from "@/redux/hooks";
-import {
-  useDeleteAcademicDepartmentMutation,
-  useGetAllAcademicDepartmentsQuery,
-} from "@/redux/features/admin/departmentManagementApi";
-import DepartmentModal from "./DepartmentModal";
-import Image from "next/image";
+import SubscribeModal from "./SubscribeModal";
 import DeleteModal from "@/components/common/DeletModal";
 import EditDeleteButton from "@/components/common/EditDeleteButton";
+import {
+  useDeleteContactMutation,
+  useGetAllContactsQuery,
+} from "@/redux/features/admin/contactManagementApi";
+import {
+  useDeleteSubscribeMutation,
+  useGetAllSubscribeQuery,
+} from "@/redux/features/admin/subscribeManagementApi";
 
-const DepartmentManagementPage = () => {
+const SubscribePage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -40,39 +40,34 @@ const DepartmentManagementPage = () => {
     query["searchTerm"] = searchTerm;
   }
 
-  // mutation
-  const { data: academicDepartments, isLoading } =
-    useGetAllAcademicDepartmentsQuery({ ...query });
-  const [deleteAcademicDepartment, { isLoading: isDeleting }] =
-    useDeleteAcademicDepartmentMutation();
+  const { data: subscribes, isLoading } = useGetAllSubscribeQuery({ ...query });
+  const [deleteSubscribe, { isLoading: isDeleting }] =
+    useDeleteSubscribeMutation();
 
-  // handle delete
   const handleDelete = async () => {
     try {
-      const res = await deleteAcademicDepartment(selectedData?._id).unwrap();
+      const res = await deleteSubscribe(selectedData?._id).unwrap();
       // console.log(res);
       if (res?.success) {
-        toast.success(
-          res?.message || "Academic Department deleted successfully!!!"
-        );
+        toast.success(res?.message || "Subscription deleted successfully!!!");
+        setSelectedData(null);
       } else {
-        toast.error(res?.message || "Failed to delete Academic Department!!!");
+        toast.error(res.message || "Failed to delete Subscription!!!");
       }
     } catch (err: any) {
-      // console.error(err.message);
-      toast.error(err?.message || "Failed to delete Academic Department!!!");
+      toast.error(err.message || "Failed to delete Subscription!!!");
+      setSelectedData(null);
     }
   };
 
   // Add Modal Open
-  const openAddModal = () => {
-    setSelectedData(null);
-    setIsModalOpen(true);
-  };
+  // const openAddModal = () => {
+  //   setSelectedData(null);
+  //   setIsModalOpen(true);
+  // };
 
   // Edit Modal Open
-  const openEditModal = (data: any) => {
-    console.log(data);
+  const openViewModal = (data: any) => {
     setSelectedData(data);
     setIsModalOpen(true);
   };
@@ -85,53 +80,24 @@ const DepartmentManagementPage = () => {
 
   const columns: GridColDef[] = [
     {
-      field: "image",
-      headerName: "Image",
-      width: 150,
+      field: "email",
+      headerName: "Subscription Email",
+      flex: 1,
       renderCell: ({ row }) => {
-        return (
-          <Box
-            sx={{
-              margin: "3px",
-              display: "flex",
-              justifyContent: "start",
-              alignItems: "center",
-              borderRadius: "5px",
-            }}
-          >
-            {row?.image ? (
-              <Image
-                alt="Department image"
-                src={row?.image}
-                width={50}
-                height={50}
-              />
-            ) : (
-              <Image
-                alt="Department image"
-                src={
-                  "https://res.cloudinary.com/dvt8faj0s/image/upload/v1732036461/pngtree-no-image_wgj8uf.jpg"
-                }
-                width={50}
-                height={50}
-              />
-            )}
-          </Box>
-        );
+        return <p>{row?.email || "---"}</p>;
       },
     },
-    { field: "name", headerName: "Department Name", flex: 1 },
-    { field: "position", headerName: "Position", width: 100, flex: 1 },
+
     {
       field: "action",
       headerName: "Action",
-      flex: 1,
+      width: 150,
       headerAlign: "center",
       align: "center",
       renderCell: ({ row }) => {
         return (
           <EditDeleteButton
-            onEdit={() => openEditModal(row)}
+            onView={() => openViewModal(row)}
             onDelete={() => openDeleteModal(row)}
           />
         );
@@ -147,8 +113,8 @@ const DepartmentManagementPage = () => {
         alignItems="center"
         mt={1}
       >
-        <Button onClick={() => openAddModal()}>Create New Department</Button>
-        <DepartmentModal
+        {/* <Button onClick={() => openAddModal()}>Create Banner</Button> */}
+        <SubscribeModal
           open={isModalOpen}
           setOpen={setIsModalOpen}
           data={selectedData}
@@ -167,12 +133,12 @@ const DepartmentManagementPage = () => {
         }}
       >
         <DataGrid
-          rows={academicDepartments?.data || []}
+          rows={subscribes?.data || []}
           columns={columns}
           getRowId={(row) => row._id}
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
-          rowCount={academicDepartments?.meta?.total || 0}
+          rowCount={subscribes?.meta?.total || 0}
           paginationMode="server"
           loading={isLoading || isDeleting}
           pageSizeOptions={[25, 50, 100]}
@@ -189,4 +155,4 @@ const DepartmentManagementPage = () => {
   );
 };
 
-export default DepartmentManagementPage;
+export default SubscribePage;

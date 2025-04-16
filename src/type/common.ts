@@ -110,3 +110,11 @@ export type TItem = {
   label: string;
   value: string | number;
 };
+
+export type TBanner = {
+  _id: string;
+  title?: string;
+  subTitle?: string;
+  image: string;
+  position: number;
+};
