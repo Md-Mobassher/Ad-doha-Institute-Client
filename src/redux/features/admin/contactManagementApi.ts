@@ -1,7 +1,7 @@
 import { baseApi } from "@/redux/api/baseApi";
 import { tagTypes } from "@/redux/tag-Types";
 
-const URL = "/contact";
+const URL = "contact";
 
 const contactsApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

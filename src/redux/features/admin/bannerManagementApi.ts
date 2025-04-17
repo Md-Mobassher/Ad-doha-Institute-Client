@@ -1,7 +1,7 @@
 import { baseApi } from "@/redux/api/baseApi";
 import { tagTypes } from "@/redux/tag-Types";
 
-const URL = "/banner";
+const URL = "banner";
 
 const bannerApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

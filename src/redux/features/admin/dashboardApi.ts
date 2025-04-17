@@ -1,7 +1,7 @@
 import { baseApi } from "@/redux/api/baseApi";
 import { tagTypes } from "@/redux/tag-Types";
 
-const URL = "/dashboard";
+const URL = "dashboard";
 
 const dashboardApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

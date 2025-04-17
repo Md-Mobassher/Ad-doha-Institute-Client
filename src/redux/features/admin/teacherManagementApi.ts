@@ -1,7 +1,5 @@
 import { baseApi } from "../../api/baseApi";
 import { tagTypes } from "../../tag-Types";
-import { TMeta } from "../../../type/common";
-import { TDepartment } from "@/type";
 
 const teachersApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -20,12 +18,7 @@ const teachersApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      // transformResponse: (response: IDepartment[], meta: IMeta) => {
-      //   return {
-      //     departments: response,
-      //     meta,
-      //   };
-      // },
+
       providesTags: [tagTypes.teacher],
     }),
 

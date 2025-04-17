@@ -1,7 +1,7 @@
 import { baseApi } from "@/redux/api/baseApi";
 import { tagTypes } from "@/redux/tag-Types";
 
-const URL = "/subscribe";
+const URL = "subscribe";
 
 const subscribeApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -20,12 +20,7 @@ const subscribeApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      // transformResponse: (response: TContact[], meta: IMeta) => {
-      //   return {
-      //     contacts: response,
-      //     meta,
-      //   };
-      // },
+
       providesTags: [tagTypes.subscribe],
     }),
 

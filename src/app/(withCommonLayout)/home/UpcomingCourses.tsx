@@ -4,7 +4,6 @@ import Title from "@/components/ui/Title";
 import { Box, Stack } from "@mui/material";
 import { getTranslations } from "next-intl/server";
 import Courses from "./Courses";
-import LoadingPage from "@/app/loading";
 
 const UpcomingCourses = async () => {
   const res = await fetch(
@@ -22,7 +21,7 @@ const UpcomingCourses = async () => {
   }
 
   const { data } = await res.json();
-  console.log(data);
+  // console.log(data);
 
   const t = await getTranslations("HomePage");
 
@@ -39,7 +38,7 @@ const UpcomingCourses = async () => {
       </Stack>
 
       <Box mt={4}>
-        <Courses courses={data?.map((item: any) => item.course)} />
+        <Courses courses={data && data?.map((item: any) => item.course)} />
       </Box>
     </DohaContainer>
   );
