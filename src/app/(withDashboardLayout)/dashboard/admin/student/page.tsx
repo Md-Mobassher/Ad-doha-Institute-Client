@@ -1,6 +1,13 @@
 "use client";
 
-import { Avatar, Button, IconButton, Stack, TextField } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Chip,
+  IconButton,
+  Stack,
+  TextField,
+} from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { DataGrid, GridColDef, GridPaginationModel } from "@mui/x-data-grid";
@@ -16,6 +23,8 @@ import {
 import StudentModal from "./StudentModal";
 import DeleteModal from "@/components/common/DeletModal";
 import EditDeleteButton from "@/components/common/EditDeleteButton";
+import StatusChip from "@/components/common/StatusChip";
+import { useUpdateUserStatusMutation } from "@/redux/features/myProfile/userApi";
 
 const StudentManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -42,6 +51,8 @@ const StudentManagementPage = () => {
   // mutation
   const { data: students, isLoading } = useGetAllStudentsQuery({ ...query });
   const [deleteStudent, { isLoading: isDeleting }] = useDeleteStudentMutation();
+  const [changeStatus, { isLoading: isStatusChanging }] =
+    useUpdateUserStatusMutation();
 
   // handle delete
   const handleDelete = async () => {
@@ -59,6 +70,23 @@ const StudentManagementPage = () => {
     }
   };
 
+  // change status
+  const handleStatusUpdate = async (id: string, newStatus: string) => {
+    const updatedData = {
+      status: newStatus,
+    };
+    try {
+      const res = await changeStatus({ id, updatedData }).unwrap();
+      if (res.success) {
+        toast.success(res.message || "Status updated successfully");
+      } else {
+        toast.error(res.message || "Failed to update status");
+      }
+    } catch (err: any) {
+      toast.error(err.message || "Something went wrong");
+    }
+  };
+
   // Add Modal Open
   const openAddModal = () => {
     setSelectedData(null);
@@ -67,7 +95,6 @@ const StudentManagementPage = () => {
 
   // Edit Modal Open
   const openEditModal = (data: any) => {
-    console.log(data);
     setSelectedData(data);
     setIsModalOpen(true);
   };
@@ -100,7 +127,22 @@ const StudentManagementPage = () => {
     { field: "email", headerName: "Email", flex: 1 },
     { field: "contactNo", headerName: "Contact No", flex: 1 },
     { field: "gender", headerName: "Gender" },
-    { field: "presentAddress", headerName: "Address", flex: 1 },
+    {
+      field: "user.status",
+      headerName: "Status",
+      width: 100,
+      headerAlign: "center",
+      align: "center",
+      renderCell: ({ row }) => (
+        <StatusChip
+          status={row?.user?.status}
+          onChangeStatus={(newStatus) => {
+            setSelectedData(row);
+            handleStatusUpdate(row?.user?._id, newStatus);
+          }}
+        />
+      ),
+    },
     {
       field: "action",
       headerName: "Action",
@@ -152,7 +194,7 @@ const StudentManagementPage = () => {
           onPaginationModelChange={setPaginationModel}
           rowCount={students?.meta?.total || 0}
           paginationMode="server"
-          loading={isLoading || isDeleting}
+          loading={isLoading || isDeleting || isStatusChanging}
           pageSizeOptions={[25, 50, 100]}
         />
       </Box>

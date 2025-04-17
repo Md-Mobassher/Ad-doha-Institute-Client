@@ -1,23 +1,22 @@
 "use client";
 
-import DohaDatePicker from "@/components/form/DohaDatePicker";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
-import DohaSelectField from "@/components/form/DohaSelectField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FieldValues } from "react-hook-form";
-import { dateFormatter } from "@/utils/dateFormatter";
 import { toast } from "sonner";
-import { userLogin } from "@/services/actions/userLogin";
-import { storeUserInfo } from "@/services/auth.services";
-import { registerStudent } from "@/services/actions/registerStudent";
 import { useRouter } from "next/navigation";
 import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import Link from "next/link";
-import dayjs from "dayjs";
-import { BloodGroupOptions, genderOptions } from "@/constant/global";
-import { useState } from "react";
+import { useCreateStudentMutation } from "@/redux/features/admin/studentManagementApi";
+import { useUserLoginMutation } from "@/redux/features/auth/authApi";
+import { useAppDispatch } from "@/redux/hooks";
+import { jwtDecode } from "jwt-decode";
+import { TUser } from "@/utils/tokenHelper";
+import { setUser } from "@/redux/features/auth/authSlice";
+import { setCookie } from "@/utils/cookieHelper";
+import { authRefreshKey } from "@/constant/authkey";
 
 export const nameValidationSchema = z.object({
   firstName: z.string().min(1, "Please enter your first name!"),
@@ -25,8 +24,10 @@ export const nameValidationSchema = z.object({
 });
 
 export const validationSchema = z.object({
-  name: nameValidationSchema,
-  email: z.string().email("Please enter a valid email address!"),
+  student: z.object({
+    name: nameValidationSchema,
+    email: z.string().email("Please enter a valid email address!"),
+  }),
   password: z
     .string()
     .min(6, "Must be at least 6 characters")
@@ -37,38 +38,50 @@ export const validationSchema = z.object({
 });
 
 export const defaultValues = {
-  name: {
-    firstName: "",
-    lastName: "",
-  },
-  email: "",
   password: "",
+  student: {
+    name: {
+      firstName: "",
+      lastName: "",
+    },
+    email: "",
+  },
 };
 
 const RegisterForm = () => {
-  const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const [createStudent, { isLoading }] = useCreateStudentMutation();
+  const [loginUser, { isLoading: isLogin }] = useUserLoginMutation();
+  const dispatch = useAppDispatch();
+
   const router = useRouter();
 
   const handleRegister = async (values: FieldValues) => {
-    setIsLoading(true);
     try {
-      const res = await registerStudent(values);
-      // console.log(res);
-      if (res?.data?.id) {
-        setIsLoading(false);
-        toast.success(res?.message);
-        const result = await userLogin({
+      const res = await createStudent(values).unwrap();
+      console.log(res);
+      if (res?.success) {
+        toast.success(res?.message || "Registration Successfull!!");
+        const result = await loginUser({
           password: values.password,
           email: values.student.email,
-        });
-        if (result?.data?.accessToken) {
-          storeUserInfo({ accessToken: result?.data?.accessToken });
+        }).unwrap();
+        if (result?.success) {
+          toast.success(result?.message || "User login successfull!!!");
+          // Extract the access token correctly
+          const accessToken = result.data.accessToken;
+          const decodedToken = jwtDecode(accessToken) as TUser;
+
+          // Store user in Redux correctly
+          dispatch(setUser({ user: decodedToken, token: accessToken }));
+          setCookie(authRefreshKey, result?.data?.refreshToken, 30);
+
+          // Reset form & Navigate
           router.push("/dashboard");
         }
       }
     } catch (err: any) {
       console.error(err.message);
-      setIsLoading(false);
+      toast.error(err?.message);
     }
   };
 
@@ -85,7 +98,7 @@ const RegisterForm = () => {
               label="First Name"
               fullWidth={true}
               type="text"
-              name="name.firstName"
+              name="student.name.firstName"
             />
           </Grid>
           <Grid item md={6} sm={6} xs={12}>
@@ -93,12 +106,12 @@ const RegisterForm = () => {
               label="Last Name"
               type="text"
               fullWidth={true}
-              name="name.lastName"
+              name="student.name.lastName"
             />
           </Grid>
           <Grid item md={6} sm={6} xs={12}>
             <DohaInput
-              name="email"
+              name="student.email"
               label="Email"
               type="email"
               fullWidth={true}
@@ -124,7 +137,7 @@ const RegisterForm = () => {
           Forgot Password?
         </Typography>
 
-        {isLoading ? (
+        {isLoading || isLogin ? (
           <Button
             disabled
             fullWidth

@@ -39,7 +39,7 @@ const LoginFormTitle = ({ title }: { title?: string }) => {
           >
             Ad-Doha Institute
           </Typography>
-          <Typography component="p" fontWeight={600}>
+          <Typography component="p" fontWeight={500}>
             An educational, research, preaching and service institution
           </Typography>
         </Link>

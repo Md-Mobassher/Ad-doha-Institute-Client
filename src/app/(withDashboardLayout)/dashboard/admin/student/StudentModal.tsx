@@ -4,7 +4,12 @@ import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
 import DohaSelectField from "@/components/form/DohaSelectField";
 import DohaFullScreenModal from "@/components/shared/DohaModal/DohaFullScreenModal";
-import { BloodGroupOptions, genderOptions } from "@/constant/global";
+import {
+  BloodGroupOptions,
+  deletedOption,
+  genderOptions,
+  statusOption,
+} from "@/constant/global";
 import {
   useCreateStudentMutation,
   useUpdateStudentMutation,
@@ -12,6 +17,7 @@ import {
 import { cleanPayload } from "@/utils/cleanPayload";
 import { dateFormatter } from "@/utils/dateFormatter";
 import { Grid } from "@mui/material";
+import { useEffect, useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -22,20 +28,24 @@ type TProps = {
 };
 
 const StudentModal = ({ open, setOpen, data }: TProps) => {
+  const [loading, setLoading] = useState(true);
   const [createStudent, { isLoading: isCreating }] = useCreateStudentMutation();
   const [updateStudent, { isLoading: isUpdating }] = useUpdateStudentMutation();
-
+  console.log("data", data);
   const handleFormSubmit = async (values: FieldValues) => {
     try {
       let result;
+      if (values.user) {
+        delete values.user;
+      }
+      values.student.dateOfBirth = values.student.dateOfBirth
+        ? dateFormatter(values.student.dateOfBirth)
+        : "";
 
       if (data) {
         const id = data._id;
         const updatedData = cleanPayload(values);
-        // console.log("cleanData", cleanedData);
-        values.student.dateOfBirth = values.student.dateOfBirth
-          ? dateFormatter(values.student.dateOfBirth)
-          : "";
+        // console.log("cleanData", updatedData);
 
         result = await updateStudent({ id, updatedData }).unwrap();
         // console.log("edit", result);
@@ -44,10 +54,7 @@ const StudentModal = ({ open, setOpen, data }: TProps) => {
         }
       } else {
         const cleanedData = cleanPayload(values);
-        // console.log("cleanData", cleanedData);
-        values.student.dateOfBirth = values.student.dateOfBirth
-          ? dateFormatter(values.student.dateOfBirth)
-          : "";
+
         result = await createStudent(cleanedData).unwrap();
         // console.log("add", result);
         if (result?.success) {
@@ -61,8 +68,14 @@ const StudentModal = ({ open, setOpen, data }: TProps) => {
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
   const defaultValues = {
     password: data ? data?.password : "",
+    status: data ? data?.user?.status : "",
     student: {
       name: {
         firstName: data ? data?.name?.firstName : "",

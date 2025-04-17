@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Button, Stack, TextField } from "@mui/material";
+import { Avatar, Button, Chip, Stack, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import AdminModal from "./AdminModal";
@@ -14,6 +14,8 @@ import { useDebounced } from "@/redux/hooks";
 import DeleteModal from "@/components/common/DeletModal";
 import EditDeleteButton from "@/components/common/EditDeleteButton";
 import avatar from "@/assets/avatar.webp";
+import StatusChip from "@/components/common/StatusChip";
+import { useUpdateUserStatusMutation } from "@/redux/features/myProfile/userApi";
 
 const AdminManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -40,6 +42,8 @@ const AdminManagementPage = () => {
   // mutation
   const { data: admins, isLoading } = useGetAllAdminQuery({ ...query });
   const [deleteAdmin, { isLoading: isDeleting }] = useDeleteAdminMutation();
+  const [changeStatus, { isLoading: isStatusChanging }] =
+    useUpdateUserStatusMutation();
 
   // handle delete
   const handleDelete = async () => {
@@ -54,6 +58,23 @@ const AdminManagementPage = () => {
     } catch (err: any) {
       // console.error(err.message);
       toast.error(err?.message || "Failed to delete Admin!!!");
+    }
+  };
+
+  // change status
+  const handleStatusUpdate = async (id: string, newStatus: string) => {
+    const updatedData = {
+      status: newStatus,
+    };
+    try {
+      const res = await changeStatus({ id, updatedData }).unwrap();
+      if (res.success) {
+        toast.success(res.message || "Status updated successfully");
+      } else {
+        toast.error(res.message || "Failed to update status");
+      }
+    } catch (err: any) {
+      toast.error(err.message || "Something went wrong");
     }
   };
 
@@ -98,7 +119,37 @@ const AdminManagementPage = () => {
     { field: "email", headerName: "Email", flex: 1 },
     { field: "contactNo", headerName: "Contact No" },
     { field: "gender", headerName: "Gender" },
-    { field: "presentAddress", headerName: "Address" },
+    {
+      field: "user.status",
+      headerName: "Status",
+      width: 100,
+      headerAlign: "center",
+      align: "center",
+      renderCell: ({ row }) => (
+        <Box>
+          {row.id === "A-0001" ? (
+            <Chip
+              label={
+                row.user.status === "in-progress" ? "Active" : row.user.status
+              }
+              variant="outlined"
+              sx={{
+                color: "white",
+                backgroundColor: "green",
+              }}
+            />
+          ) : (
+            <StatusChip
+              status={row?.user?.status}
+              onChangeStatus={(newStatus) => {
+                setSelectedData(row);
+                handleStatusUpdate(row?.user?._id, newStatus);
+              }}
+            />
+          )}
+        </Box>
+      ),
+    },
     {
       field: "action",
       headerName: "Action",
@@ -156,7 +207,7 @@ const AdminManagementPage = () => {
           onPaginationModelChange={setPaginationModel}
           rowCount={admins?.meta?.total || 0}
           paginationMode="server"
-          loading={isLoading || isDeleting}
+          loading={isLoading || isDeleting || isStatusChanging}
           pageSizeOptions={[25, 50, 100]}
         />
       </Box>

@@ -15,7 +15,7 @@ import { toast } from "sonner";
 import {
   useGetMYProfileQuery,
   useUpdateMYProfileMutation,
-} from "@/redux/features/myProfile/myProfile";
+} from "@/redux/features/myProfile/userApi";
 
 type TProps = {
   open: boolean;

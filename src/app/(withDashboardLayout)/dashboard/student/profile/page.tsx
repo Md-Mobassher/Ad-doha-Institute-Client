@@ -10,7 +10,7 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import {
   useGetMYProfileQuery,
   useUpdateMYProfileMutation,
-} from "@/redux/features/myProfile/myProfile";
+} from "@/redux/features/myProfile/userApi";
 import AutoFileUploader from "@/components/form/AutoFileUploader";
 import MyInformation from "./components/MyInformations";
 import LoadingPage from "@/app/loading";

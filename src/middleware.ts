@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { authAccessKey, authRefreshKey } from "./constant/authkey";
 
-const AuthRoutes = ["/login", "/register"];
+const AuthRoutes = ["/login", "/register", "/verify"];
 const roleBasedPrivateRoutes = {
   super_admin: [/^\/dashboard\/super_admin(?:\/.*)?$/],
   admin: [/^\/dashboard\/admin(?:\/.*)?$/],

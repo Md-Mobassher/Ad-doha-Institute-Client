@@ -4,6 +4,18 @@ export const genderOptions = genders.map((item) => ({
   label: item,
 }));
 
+export const status = ["Pending", "In-Progress", "Blocked"];
+export const statusOption = status.map((item) => ({
+  value: item.toLowerCase(),
+  label: item,
+}));
+
+export const deleted = ["True", "False"];
+export const deletedOption = deleted.map((item) => ({
+  value: item.toLowerCase(),
+  label: item,
+}));
+
 export const BloodGroup = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 export const BloodGroupOptions = BloodGroup.map((item) => ({
   value: item,

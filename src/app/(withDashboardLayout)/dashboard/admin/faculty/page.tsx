@@ -13,6 +13,8 @@ import {
 import FacultyModal from "./FacultyModal";
 import DeleteModal from "@/components/common/DeletModal";
 import EditDeleteButton from "@/components/common/EditDeleteButton";
+import StatusChip from "@/components/common/StatusChip";
+import { useUpdateUserStatusMutation } from "@/redux/features/myProfile/userApi";
 
 const FacultyManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -39,6 +41,8 @@ const FacultyManagementPage = () => {
   // mutation
   const { data: faculties, isLoading } = useGetAllFacultyQuery({ ...query });
   const [deleteFaculty, { isLoading: isDeleting }] = useDeleteFacultyMutation();
+  const [changeStatus, { isLoading: isStatusChanging }] =
+    useUpdateUserStatusMutation();
 
   // handle delete
   const handleDelete = async () => {
@@ -53,6 +57,23 @@ const FacultyManagementPage = () => {
     } catch (err: any) {
       // console.error(err.message);
       toast.error(err?.message || "Failed to delete Student!!!");
+    }
+  };
+
+  // change status
+  const handleStatusUpdate = async (id: string, newStatus: string) => {
+    const updatedData = {
+      status: newStatus,
+    };
+    try {
+      const res = await changeStatus({ id, updatedData }).unwrap();
+      if (res.success) {
+        toast.success(res.message || "Status updated successfully");
+      } else {
+        toast.error(res.message || "Failed to update status");
+      }
+    } catch (err: any) {
+      toast.error(err.message || "Something went wrong");
     }
   };
 
@@ -97,7 +118,22 @@ const FacultyManagementPage = () => {
     { field: "email", headerName: "Email", flex: 1 },
     { field: "contactNo", headerName: "Contact No", flex: 1 },
     { field: "gender", headerName: "Gender" },
-    { field: "presentAddress", headerName: "Address", flex: 1 },
+    {
+      field: "user.status",
+      headerName: "Status",
+      width: 100,
+      headerAlign: "center",
+      align: "center",
+      renderCell: ({ row }) => (
+        <StatusChip
+          status={row?.user?.status}
+          onChangeStatus={(newStatus) => {
+            setSelectedData(row);
+            handleStatusUpdate(row?.user?._id, newStatus);
+          }}
+        />
+      ),
+    },
     {
       field: "action",
       headerName: "Action",
@@ -149,7 +185,7 @@ const FacultyManagementPage = () => {
           onPaginationModelChange={setPaginationModel}
           rowCount={faculties?.meta?.total || 0}
           paginationMode="server"
-          loading={isLoading || isDeleting}
+          loading={isLoading || isDeleting || isStatusChanging}
           pageSizeOptions={[25, 50, 100]}
         />
       </Box>

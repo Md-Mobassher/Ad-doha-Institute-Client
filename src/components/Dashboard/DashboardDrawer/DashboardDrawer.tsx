@@ -13,7 +13,7 @@ import SideBar from "../SideBar/SideBar";
 import { Avatar, Badge, Stack } from "@mui/material";
 import AccountMenu from "../AccountMenu/AccountMenu";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import { useGetMYProfileQuery } from "@/redux/features/myProfile/myProfile";
+import { useGetMYProfileQuery } from "@/redux/features/myProfile/userApi";
 import { useAppDispatch } from "@/redux/hooks";
 import { setProfile } from "@/redux/features/myProfile/profileSlice";
 import { useEffect } from "react";

@@ -1,5 +1,5 @@
 "use client";
-import { useGetMYProfileQuery } from "@/redux/features/myProfile/myProfile";
+import { useGetMYProfileQuery } from "@/redux/features/myProfile/userApi";
 import {
   Card,
   CardContent,
