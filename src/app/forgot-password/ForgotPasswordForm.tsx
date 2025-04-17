@@ -30,20 +30,17 @@ const ForgotPasswordForm = () => {
 
   const handleForgotPass = async (values: FieldValues) => {
     try {
-      const res = await forgotPass(values);
-      console.log(res.data);
-      if (res?.data?.success) {
-        toast.success(
-          res?.data?.message || "Password reset link sent to your email"
-        );
-        router.push("/reset-password");
+      const res = await forgotPass(values).unwrap();
+      if (res?.success) {
+        toast.success(res?.message || "Password reset link sent to your email");
+        router.push("/");
       } else {
-        toast.error(res?.data?.message);
+        toast.error(res?.message);
         router.push("/");
         // console.log(res);
       }
     } catch (err: any) {
-      console.error(err.message);
+      // console.error(err.message);
       toast.error(err?.message || "Something went wrong!!");
     }
   };

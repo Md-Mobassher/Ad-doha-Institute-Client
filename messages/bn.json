@@ -65,7 +65,12 @@
         }
       ]
     },
-    "courseSec": {
+    "upcomingCourseSec": {
+      "title": "আসন্ন কোর্সসমূহ",
+      "subTitle": "এক-নজরে দেখে নিন আমাদের আসন্ন কোর্সগুলো",
+      "btnTitle": "রেজিস্টার"
+    },
+    "popularCourseSec": {
       "title": "জনপ্রিয় কোর্সসমূহ",
       "subTitle": "এক-নজরে দেখে নিন আমাদের বাছাইকৃত কোর্সগুলো",
       "btnTitle": "রেজিস্টার"

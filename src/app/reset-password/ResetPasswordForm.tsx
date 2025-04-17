@@ -1,20 +1,9 @@
 "use client";
 import DohaForm from "@/components/form/DohaForm";
 import DohaInput from "@/components/form/DohaInput";
-import {
-  useForgotPasswordMutation,
-  useResetPasswordMutation,
-} from "@/redux/features/auth/authApi";
+import { useResetPasswordMutation } from "@/redux/features/auth/authApi";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Grid,
-  Grid2,
-  Typography,
-} from "@mui/material";
-import axios from "axios";
+import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
@@ -43,38 +32,26 @@ const ResetPasswordForm = () => {
   }, [email, token, router]);
 
   const handleResetPass = async (values: FieldValues) => {
+    const resetData = {
+      email: email,
+      newPassword: values.newPassword,
+    };
     try {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_SERVER_API}/auth/reset-password`,
-        { email: email, newPassword: values.newPassword },
-        {
-          headers: { Authorization: `${token}` },
-        }
-      );
+      const res = await resetPass({ resetData, token }).unwrap();
       console.log(res);
-      if (res?.data?.success) {
-        toast.success(res?.data?.message || "Password reset successful");
-        router.push("/");
+      if (res?.success) {
+        toast.success(res?.message || "Password reset successful");
+        router.push("/login");
       } else {
-        toast.error(res?.data?.message || "Password reset failed");
+        toast.error(res?.message || "Password reset failed");
         router.push("/");
       }
-      // const res = await resetPass(values);
-      // if (res?.data?.success) {
-      //   toast.success(
-      //     res?.data?.message || "Password reset link sent to your email"
-      //   );
-      //   router.push("/reset-password");
-      // } else {
-      //   toast.error(res?.data?.message);
-      //   router.push("/");
-      //   // console.log(res);
-      // }
     } catch (err: any) {
-      console.error(err.message);
+      // console.error(err.message);
       toast.error(err?.message || "Something went wrong!!");
     }
   };
+
   const defaultValues = {
     email: email || "",
     newPassword: "",

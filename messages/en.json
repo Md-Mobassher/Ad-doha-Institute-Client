@@ -66,9 +66,14 @@
         }
       ]
     },
-    "courseSec": {
+    "upcomingCourseSec": {
+      "title": "Upcoming Courses",
+      "subTitle": "Take a look at our Upcoming Courses",
+      "btnTitle": "Register"
+    },
+    "popularCourseSec": {
       "title": "Popular Courses",
-      "subTitle": "Take a look at our selected courses at a glance",
+      "subTitle": "Take a look at our Featured Courses",
       "btnTitle": "Register"
     },
     "departmentSec": {

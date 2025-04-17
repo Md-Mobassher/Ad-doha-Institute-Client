@@ -52,4 +52,7 @@ body {
   border-bottom-right-radius: 5px;
 }
 
+.swiper-pagination {
+  margin-top: 50px;
+}
 /* tiptapTextEditor.css */
