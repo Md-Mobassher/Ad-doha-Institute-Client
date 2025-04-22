@@ -13,6 +13,9 @@ const LoadingPage = () => {
         sm: 320,
         xs: 300,
       }}
+      sx={{
+        backgroundColor: "transparent",
+      }}
     >
       <Typography
         component="h1"
