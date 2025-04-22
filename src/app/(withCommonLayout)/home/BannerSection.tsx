@@ -5,11 +5,11 @@ import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import banner1 from "@/assets/banner/Slide -1.jpg";
 import { TBanner } from "@/type";
+import { useGetAllBannerQuery } from "@/redux/features/admin/bannerManagementApi";
 
-type BannerSectionProps = {
-  data: TBanner[];
-};
-const BannerSection = ({ data }: BannerSectionProps) => {
+const BannerSection = () => {
+  const { data: banners, isLoading } = useGetAllBannerQuery({});
+
   return (
     <Box
       sx={{
@@ -47,9 +47,21 @@ const BannerSection = ({ data }: BannerSectionProps) => {
           modules={[Autoplay, Pagination]}
           className="w-full  object-contain rounded-lg mySwiper"
         >
-          {data.length > 0 ? (
+          {isLoading ? (
             <>
-              {data?.map((slide: TBanner, index: number) => (
+              <SwiperSlide className="w-full mb-10">
+                <Image
+                  src={banner1}
+                  alt={`Slide 1`}
+                  className="rounded-md w-full"
+                  width={1200}
+                  height={560}
+                />
+              </SwiperSlide>
+            </>
+          ) : (
+            <>
+              {banners?.data?.map((slide: TBanner, index: number) => (
                 <SwiperSlide
                   key={slide._id}
                   virtualIndex={index}
@@ -64,18 +76,6 @@ const BannerSection = ({ data }: BannerSectionProps) => {
                   />
                 </SwiperSlide>
               ))}
-            </>
-          ) : (
-            <>
-              <SwiperSlide className="w-full mb-10">
-                <Image
-                  src={banner1}
-                  alt={`Slide 1`}
-                  className="rounded-md w-full"
-                  width={1200}
-                  height={560}
-                />
-              </SwiperSlide>
             </>
           )}
         </Swiper>

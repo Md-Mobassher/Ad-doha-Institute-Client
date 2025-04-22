@@ -31,17 +31,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const HomePage = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/banner`, {
-    next: {
-      revalidate: 30,
-    },
-  });
-
-  const { data } = (await res.json()) || null;
-
   return (
     <Box>
-      <BannerSection data={data} />
+      <BannerSection />
       <AboutSection />
       <ProjectsSection />
       <UpcomingCourses />
