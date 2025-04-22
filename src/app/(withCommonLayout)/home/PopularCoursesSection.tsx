@@ -6,15 +6,21 @@ import { getTranslations } from "next-intl/server";
 import Courses from "./Courses";
 
 const PopularCoursesSection = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/courses`,
-    {
-      next: {
-        revalidate: 30,
-      },
-    }
-  );
-  const { data } = await res.json();
+  let data = [];
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/courses`,
+      {
+        next: {
+          revalidate: 30,
+        },
+      }
+    );
+    const { data: coursesData } = await res.json();
+    data = coursesData || []; // Safe fallback in case of no data
+  } catch (error) {
+    console.error("Error fetching courses:", error);
+  }
 
   const t = await getTranslations("HomePage");
 

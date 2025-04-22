@@ -8,17 +8,23 @@ import { getTranslations } from "next-intl/server";
 const TeachersPanel = async () => {
   const t = await getTranslations("HomePage");
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/teachers`,
-    {
-      next: {
-        revalidate: 30,
-      },
-    }
-  );
-  const { data } = await res.json();
-  // console.log(data);
-  const teachers = (data as TTeacher[]) || [];
+  let teachers: TTeacher[] = [];
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/teachers`,
+      {
+        next: {
+          revalidate: 30,
+        },
+      }
+    );
+    const data = await res.json();
+    // console.log(data);
+    teachers = (data?.data as TTeacher[]) || []; // Safe fallback in case of no data
+  } catch (error) {
+    console.error("Error fetching teachers:", error);
+    // You can set a fallback message or empty array here
+  }
 
   return (
     <Box sx={{ backgroundColor: "info.main" }}>
@@ -32,6 +38,7 @@ const TeachersPanel = async () => {
           <Title title={t("teachersSec.title")} />
         </Stack>
 
+        {/* Render Teachers component with a fallback if no teachers are found */}
         <Teachers teachers={teachers} />
       </DohaContainer>
     </Box>

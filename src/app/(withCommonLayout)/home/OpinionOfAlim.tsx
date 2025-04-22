@@ -7,17 +7,30 @@ import { getTranslations } from "next-intl/server";
 
 const OpinionOfAlim = async () => {
   const t = await getTranslations("HomePage");
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/opinions`,
-    {
-      next: {
-        revalidate: 30,
-      },
+  let opinions: TOpinion[] = [];
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/opinions`,
+      {
+        next: {
+          revalidate: 30,
+        },
+      }
+    );
+
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("Fetch failed:", res.status, text);
+      throw new Error("Failed to fetch opinions");
     }
-  );
-  const { data } = await res.json();
-  // console.log(data);
-  const opinions = (data as TOpinion[]) || [];
+
+    const json = await res.json();
+    opinions = json?.data || [];
+  } catch (error) {
+    console.error("Error loading opinions:", error);
+  }
+
   return (
     <Box>
       <DohaContainer>

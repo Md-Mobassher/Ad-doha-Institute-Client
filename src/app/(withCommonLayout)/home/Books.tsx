@@ -10,7 +10,7 @@ import Link from "next/link";
 const Books = () => {
   const { data, isLoading } = useGetAllBooksQuery({});
 
-  const booksData = data?.books || [];
+  const booksData = data?.data || [];
 
   return (
     <Box sx={{ flexGrow: 1, p: 2 }}>

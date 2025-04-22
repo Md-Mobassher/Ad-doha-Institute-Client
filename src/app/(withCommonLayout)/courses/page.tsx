@@ -27,7 +27,6 @@ import DohaButton from "@/components/ui/DohaButton";
 import CoursePrice from "./components/CoursePrice";
 import NotMatch from "@/components/ui/NotMatch";
 import { useGetAllOfferedCoursesQuery } from "@/redux/features/admin/offeredCourseManagementApi";
-import { useGetAllCoursesQuery } from "@/redux/features/admin/courseManagementApi";
 
 const CoursePage = () => {
   const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false);
