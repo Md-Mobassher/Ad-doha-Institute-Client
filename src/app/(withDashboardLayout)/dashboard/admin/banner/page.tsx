@@ -64,10 +64,10 @@ const BannerManagementPage = () => {
   };
 
   // Edit Modal Open
-  // const openEditModal = (data: any) => {
-  //   setSelectedData(data);
-  //   setIsModalOpen(true);
-  // };
+  const openEditModal = (data: any) => {
+    setSelectedData(data);
+    setIsModalOpen(true);
+  };
 
   // Delete Modal Open
   const openDeleteModal = (data: any) => {
@@ -126,7 +126,7 @@ const BannerManagementPage = () => {
       renderCell: ({ row }) => {
         return (
           <EditDeleteButton
-            // onEdit={() => openEditModal(row)}
+            onEdit={() => openEditModal(row)}
             onDelete={() => openDeleteModal(row)}
           />
         );

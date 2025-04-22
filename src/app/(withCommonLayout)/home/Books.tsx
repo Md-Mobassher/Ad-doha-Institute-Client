@@ -10,10 +10,6 @@ import Link from "next/link";
 const Books = () => {
   const { data, isLoading } = useGetAllBooksQuery({});
 
-  if (isLoading) {
-    return <LoadingPage />;
-  }
-
   const booksData = data?.books || [];
 
   return (
@@ -33,44 +29,48 @@ const Books = () => {
           },
         }}
       >
-        {booksData?.slice(0, 6)?.map((book: TBook) => (
-          <Grid
-            key={book?._id}
-            {...{ xs: 6, sm: 6, md: 3, lg: 2, xl: 2 }}
-            minHeight={160}
-          >
-            <Box className=" flex flex-col items-center text-center p-3 bg-white">
-              <Link
-                href={book?.url}
-                target="_blank"
-                className=" hover:scale-105 transition-all duration-300"
-              >
-                <Image
-                  src={book?.image}
-                  alt={book?.title}
-                  width={200}
-                  height={300}
-                  className="pb-5 "
-                />
-                <Divider />
-                <Typography
-                  component="p"
-                  sx={{
-                    color: "primary.main",
-                    boxShadow: "none",
-                    fontSize: "16px",
-                    fontWeight: 600,
-                    px: "10px",
-                    mt: "10px",
-                    textAlign: "center",
-                  }}
+        {isLoading ? (
+          <LoadingPage />
+        ) : (
+          booksData?.slice(0, 6)?.map((book: TBook) => (
+            <Grid
+              key={book?._id}
+              {...{ xs: 6, sm: 6, md: 3, lg: 2, xl: 2 }}
+              minHeight={160}
+            >
+              <Box className=" flex flex-col items-center text-center p-3 bg-white">
+                <Link
+                  href={book?.url}
+                  target="_blank"
+                  className=" hover:scale-105 transition-all duration-300"
                 >
-                  {book.title}
-                </Typography>
-              </Link>
-            </Box>
-          </Grid>
-        ))}
+                  <Image
+                    src={book?.image}
+                    alt={book?.title}
+                    width={200}
+                    height={300}
+                    className="pb-5 "
+                  />
+                  <Divider />
+                  <Typography
+                    component="p"
+                    sx={{
+                      color: "primary.main",
+                      boxShadow: "none",
+                      fontSize: "16px",
+                      fontWeight: 600,
+                      px: "10px",
+                      mt: "10px",
+                      textAlign: "center",
+                    }}
+                  >
+                    {book.title}
+                  </Typography>
+                </Link>
+              </Box>
+            </Grid>
+          ))
+        )}
       </Grid>
     </Box>
   );

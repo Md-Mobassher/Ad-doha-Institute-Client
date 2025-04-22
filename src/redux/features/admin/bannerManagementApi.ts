@@ -29,6 +29,15 @@ const bannerApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.banner],
     }),
 
+    updateBanner: build.mutation({
+      query: ({ id, updatedData }) => ({
+        url: `/${URL}/${id}`,
+        method: "PATCH",
+        data: updatedData,
+      }),
+      invalidatesTags: [tagTypes.banner],
+    }),
+
     deleteBanner: build.mutation({
       query: (id) => ({
         url: `/${URL}/${id}`,
@@ -43,4 +52,5 @@ export const {
   useCreateBannerMutation,
   useGetAllBannerQuery,
   useDeleteBannerMutation,
+  useUpdateBannerMutation,
 } = bannerApi;

@@ -178,11 +178,11 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           path: `${role}/enrolled-course`,
           icon: AutoStoriesIcon,
         },
-        {
-          title: "Transaction",
-          path: `${role}/transaction`,
-          icon: Money,
-        },
+        // {
+        //   title: "Transaction",
+        //   path: `${role}/transaction`,
+        //   icon: Money,
+        // },
         {
           title: "Teacher ",
           path: `${role}/teacher`,
