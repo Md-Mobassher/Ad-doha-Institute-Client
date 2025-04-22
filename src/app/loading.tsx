@@ -3,6 +3,7 @@ import { Box, Stack, Typography } from "@mui/material";
 const LoadingPage = () => {
   return (
     <Stack
+      width={"100%"}
       justifyContent="center"
       alignItems="center"
       direction="row"
@@ -18,30 +19,30 @@ const LoadingPage = () => {
         variant="h1"
         sx={{
           fontSize: {
-            lg: "80px",
-            md: "70px",
-            sm: "60px",
-            xs: "50px",
+            lg: "60px",
+            md: "50px",
+            sm: "40px",
+            xs: "30px",
           },
-          fontWeight: 800,
+          fontWeight: 700,
           color: "primary.main",
         }}
       >
         L
       </Typography>
-      <Box className="lg:size-14 md:size-12 size-10 border-8 border-dashed rounded-full animate-spin mt-2 border-red-500"></Box>
+      <Box className="lg:size-12 md:size-10 size-8 border-8 border-dashed rounded-full animate-spin mt-2 border-red-500"></Box>
 
       <Typography
         component="h1"
         variant="h1"
         sx={{
           fontSize: {
-            lg: "80px",
-            md: "70px",
-            sm: "60px",
-            xs: "50px",
+            lg: "60px",
+            md: "50px",
+            sm: "40px",
+            xs: "30px",
           },
-          fontWeight: 800,
+          fontWeight: 700,
           color: "primary.main",
         }}
       >
