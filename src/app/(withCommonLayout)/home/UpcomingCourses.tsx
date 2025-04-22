@@ -19,8 +19,11 @@ const UpcomingCourses = async () => {
     console.error("API error:", errorText);
     throw new Error("Failed to fetch data");
   }
-
-  const { data } = await res.json();
+  console.log(
+    "Fetching from:",
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/offered-courses?status=UPCOMING`
+  );
+  const data = await res.json();
   // console.log(data);
 
   const t = await getTranslations("HomePage");
@@ -38,7 +41,11 @@ const UpcomingCourses = async () => {
       </Stack>
 
       <Box mt={4}>
-        <Courses courses={data && data?.map((item: any) => item.course)} />
+        {data?.data?.length > 0 && (
+          <Courses
+            courses={data && data?.data?.map((item: any) => item.course)}
+          />
+        )}
       </Box>
     </DohaContainer>
   );

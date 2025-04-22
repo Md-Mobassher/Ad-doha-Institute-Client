@@ -37,7 +37,6 @@ const VideosSection = async () => {
 
   return (
     <DohaContainer>
-      {errorMessage && <Alert severity="error">{errorMessage}</Alert>}{" "}
       {/* Display error message if any */}
       <Stack
         direction="row"
@@ -56,7 +55,7 @@ const VideosSection = async () => {
       {videos.length > 0 ? (
         <Videos videos={videos} />
       ) : (
-        <p>No videos available at the moment.</p> // Display a message if no videos are available
+        <p className="text-center">No videos available at the moment.</p> // Display a message if no videos are available
       )}
     </DohaContainer>
   );
